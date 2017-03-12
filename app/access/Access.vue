@@ -54,7 +54,7 @@ component =
     tab:
       name: 'access'
       icon: 'verified_user'
-      title: 'access'
+      title: 'Доступ'
     params:
       tab:
         type: 'tabs'

@@ -1,6 +1,6 @@
 <template lang="jade">
 md-toolbar
-  h1.md-title Toolbar
+  h1.md-title(v-if="$store.state.tab") {{$store.state.tab.title}}
 </template>
 
 <script lang="coffee">

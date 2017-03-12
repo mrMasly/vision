@@ -8,6 +8,7 @@ window.Store = store = new Vuex.Store
   state:
     routes: []
     tabs: []
+    tab: null
   mutations:
     addRoute: (state, route) ->
       Router.configure (r) ->
@@ -21,7 +22,9 @@ window.Store = store = new Vuex.Store
       _route = _.find state.routes, name: route.name
       state.tabs = _.map state.tabs, (tab) ->
         tab.active = tab.name is _route.tab
+        state.tab = tab if tab.active
         return tab
+
     rememberTab: (state, route) ->
       path = route.path
       _route = _.find state.routes, name: route.name
