@@ -4,7 +4,7 @@ import _ from 'lodash'
 Plugin = {}
 
 component = ->
-  children = Meteor.vue.$children[0].$children
+  children = Meteor.app.$children[0].$children
   _.find children, _name: '<Dialogs>'
 
 Plugin.install = (vue, options) ->
