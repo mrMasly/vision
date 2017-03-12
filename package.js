@@ -40,8 +40,6 @@ Package.registerBuildPlugin({
 });
 
 
-
-
 Package.onUse(function(api) {
   api.versionsFrom('1.4.3.1');
   api.use('akryum:vue-component');
@@ -63,9 +61,9 @@ Package.onUse(function(api) {
     'files/icon.png'
   ], 'client');
 
-  api.addFiles('common.coffee', ['client', 'server']);
-  api.addFiles('client.coffee', 'client');
-  api.addFiles('server.coffee', 'server');
+  api.addFiles('settings/common/index.coffee', ['client', 'server']);
+  api.addFiles('settings/client/index.coffee', 'client');
+  api.addFiles('settings/server/index.coffee', 'server');
 
 
 });
