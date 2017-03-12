@@ -9,7 +9,10 @@ checkNpmVersions
   "animate.css": '3.*'
   "jquery": "3.*"
   "moment": "2.*"
-
+  "babel-runtime": "6.*"
+  "bcrypt": '1.*'
+  "croppie": "2.*"
+  "dropzone": "4.*"
 
 
 , 'mrmasly:vision'
