@@ -11,5 +11,3 @@ import '../../collections/index.coffee'
 import '../../directives/index.coffee'
 import '../../plugins/index.coffee'
 import './startup.coffee'
-
-# import '../../app/access/Access.vue'

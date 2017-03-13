@@ -3,8 +3,18 @@ import './Users.coffee'
 import './Avatars.coffee'
 
 
+
+
 FS.Collection::_find = FS.Collection::find
 FS.Collection::find = (selector={}, options={}) ->
+
+  setUrls = _.debounce (doc) ->
+    stores = {}
+    for store of @storesLookup
+      stores[store] = "/cfs/files/#{@name}/#{doc._id}/#{doc.original.name}?store=#{store}"
+    doc.store = stores
+    doc.ready = yes
+  , 200
 
   # если указаны поля - добавляем поля, которые нужны для формирования url
   if options.fields?
@@ -16,17 +26,10 @@ FS.Collection::find = (selector={}, options={}) ->
     # копируем пользовательскую функцию transform
     transform = options.transform
 
-    setUrls = _.debounce (doc) ->
-      stores = {}
-      for store of @storesLookup
-        stores[store] = "/cfs/files/#{@name}/#{doc._id}/#{doc.original.name}?store=#{store}"
-      doc.store = stores
-    , 100
     # назначаем новую transform
     options.transform = (doc) =>
       doc.store = {}
-      for store of @storesLookup
-        doc.store[store] = "/cfs/files/#{@name}/#{doc._id}/#{doc.original.name}?store=#{store}"
+      setUrls.call @, doc
       # выполняем пользовательскую transform
       doc = transform doc if transform
       return doc
@@ -37,7 +40,13 @@ FS.Collection::find = (selector={}, options={}) ->
 FS.Collection::_findOne = FS.Collection::findOne
 FS.Collection::findOne = (selector={}, options={}) ->
 
-
+  setUrls = _.debounce (doc) ->
+    stores = {}
+    for store of @storesLookup
+      stores[store] = "/cfs/files/#{@name}/#{doc._id}/#{doc.original.name}?store=#{store}"
+    doc.store = stores
+    doc.ready = yes
+  , 200
 
   # если указаны поля - добавляем поля, которые нужны для формирования url
   if options.fields?
@@ -48,13 +57,6 @@ FS.Collection::findOne = (selector={}, options={}) ->
 
     # копируем пользовательскую функцию transform
     transform = options.transform
-
-    setUrls = _.debounce (doc) ->
-      stores = {}
-      for store of @storesLookup
-        stores[store] = "/cfs/files/#{@name}/#{doc._id}/#{doc.original.name}?store=#{store}"
-      doc.store = stores
-    , 500
 
     # назначаем новую transform
     options.transform = (doc) =>

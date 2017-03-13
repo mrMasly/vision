@@ -1,9 +1,9 @@
 <template lang="jade">
-.flex-gt-sm-25.flex-xs-100.flex-sm-50.layout-padding
+.flex-xs-100.flex-sm-50.flex-md-33.flex-gt-md-25.layout-padding
   md-card
     md-card-header
       md-avatar
-        img(v-bind:src="img.store.xs" v-if="img")
+        img(v-bind:src="img.store['50x50']" v-if="img")
       md-card-header-text
         .md-subheading {{user.profile.name}}
         .md-caption {{user.username}}
