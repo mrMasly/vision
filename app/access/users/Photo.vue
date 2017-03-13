@@ -1,7 +1,8 @@
 <template lang="jade">
 .layout-fill.layout-column.photo
   md-toolbar
-    h2.md-title(v-once) 123
+    h2.md-title
+      span(v-if="user" v-once) Фото пользователя {{user.profile.name}}
     .flex
     md-button.md-icon-button(@click.native="close")
       md-icon close
@@ -30,6 +31,8 @@ component =
     file: null
   meteor:
     server: '../server'
+    data:
+      user: -> Mongo.Users.findOne @id
   methods:
     close: -> @$emit 'close'
     save: ->
