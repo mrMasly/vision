@@ -45,6 +45,9 @@ component =
   props:
     img: String
     file: File
+    ratio:
+      type: Number
+      default: 1
     type:
       type: String
       default: 'square' # circle
@@ -55,14 +58,25 @@ component =
         cb file
     start: ->
       w = $(@$refs.div).width()
-      h = $(@$refs.div).height()
-      min = if w < h then w else h
-      size = min * 0.7
-      size = _.round size, -1
+      h = $(@$refs.div).height() - 40
+      maxW = w * 0.8
+      maxH = h * 0.8
+
+      # пробуем брать ширину
+      width = maxW
+      height = width / @ratio
+      if height > maxH
+        height = maxH
+        width = height * @ratio
+      #
+      #
+      # min = if w < h then w else h
+      # size = min * 0.7
+      # size = _.round size, -1
       @crop = new Croppie @$refs.img,
         viewport:
-          width: size
-          height: size
+          width: width
+          height: height
           type: @type
       setTimeout =>
         @display = yes
