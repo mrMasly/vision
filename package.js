@@ -55,6 +55,9 @@ Package.onUse(function(api) {
   api.use('cfs:filesystem');
   api.use('cfs:graphicsmagick');
 
+  api.use('zimme:collection-behaviours');
+  api.use('random');
+
   api.mainModule('settings/npm.coffee', 'server');
 
   api.addAssets([
