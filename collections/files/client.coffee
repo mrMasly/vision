@@ -3,18 +3,19 @@ upload = (file, name, cb) ->
   reader = new FileReader
   reader.onload = =>
     Meteor.call '__file__upload__', file.name, reader.result, name, (err, res) =>
-      console.log res
       cb err, res
-
-        # doc[data.field] = original: res.original
-        # if data.stores?
-        #   for store of data.stores
-        #     doc[data.field][store] = res[store]
-        # @collection._insert doc, cb
-
   reader.readAsBinaryString file
 
 CollectionBehaviours.define 'files', (data) ->
+
+  # изменям url
+  defaultTransform = @collection._transform
+  @collection._transform = (doc) ->
+    if doc[data.field]?
+      for store, url of doc[data.field]
+        doc[data.field][store] = "#{data.url}/#{url}"
+    if defaultTransform then defaultTransform doc else doc
+
 
   @collection._insert = @collection.insert
   @collection.insert = (doc, cb) =>
@@ -33,13 +34,3 @@ CollectionBehaviours.define 'files', (data) ->
         if err then return cb err
         modifer.$set[data.field] = res
         @collection._update selector, modifer, callback
-      # reader = new FileReader
-      # reader.onload = =>
-      #   Meteor.call '__file__upload__', file.name, reader.result, @collection._name, (err, res) =>
-      #     unless err
-      #       modifer.$set[data.field] = original: res.original
-      #       if data.stores?
-      #         for store of data.stores
-      #           modifer.$set[data.field][store] = res[store]
-      #       @collection._update selector, modifer, callback
-      # reader.readAsBinaryString file

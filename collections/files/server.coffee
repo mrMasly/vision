@@ -48,7 +48,7 @@ Meteor.methods
       # проходимся по каждому хранилищу
       res = {}
       for name, action of stores
-        res[name] = "#{url}/#{name}.#{ext}"
+        res[name] = "#{id}/#{name}.#{ext}"
         filename = "#{dir}/#{name}.#{ext}"
         unless action?
           return done "error write #{filename}" unless write filename, binary
@@ -65,11 +65,12 @@ CollectionBehaviours.define 'files', (data) ->
     dir: data.dir
     url: data.url
     stores: data.stores
-  WebApp.connectHandlers.use data.url, (req, res, next) ->
-    filename = req.originalUrl.replace data.url, data.dir
-    img = fs.readFile filename, (err, binary) ->
-      if err
-        res.writeHead(404)
-      else
-        res.writeHead 200, 'Content-Type': 'image/jpeg'
-        res.end binary, 'binary'
+  if data.url.indexOf('//') is -1
+    WebApp.connectHandlers.use data.url, (req, res, next) ->
+      filename = req.originalUrl.replace data.url, data.dir
+      img = fs.readFile filename, (err, binary) ->
+        if err
+          res.writeHead(404)
+        else
+          res.writeHead 200, 'Content-Type': 'image/jpeg'
+          res.end binary, 'binary'
