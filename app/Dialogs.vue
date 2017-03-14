@@ -29,6 +29,7 @@
 import _ from 'lodash'
 component =
   name: 'dialogs'
+
   data: ->
     confirm:
       title: null
@@ -54,6 +55,9 @@ component =
       no: null
 
   created: ->
+    @$store.commit 'linkComponent',
+      component: @
+      id: 'dialogs'
     @default =
       confirm: _.clone @confirm
       alert: _.clone @alert

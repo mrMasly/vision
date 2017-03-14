@@ -9,6 +9,7 @@ window.Store = store = new Vuex.Store
     routes: []
     tabs: []
     tab: null
+    components: {}
   mutations:
     addRoute: (state, route) ->
       Router.configure (r) ->
@@ -37,4 +38,6 @@ window.Store = store = new Vuex.Store
       tabs.push tab
       state.tabs = tabs
 
+    linkComponent: (state, data) ->
+      state.components[data.id] = data.component
 export default store

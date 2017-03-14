@@ -3,20 +3,16 @@ import _ from 'lodash'
 
 Plugin = {}
 
-component = ->
-  children = Meteor.app.$children[0].$children
-  _.find children, _name: '<Dialogs>'
-
 Plugin.install = (vue, options) ->
 
   vue.mixin
     methods:
       $alert: (args...) ->
-        component().openAlert args...
+        @$store.state.components.dialogs.openAlert args...
       $confirm: (args...) ->
-        component().openConfirm args...
+        @$store.state.components.dialogs.openConfirm args...
       $prompt: (args...) ->
-        component().openPrompt args...
+        @$store.state.components.dialogs.openPrompt args...
 
 
 Vue.use Plugin
