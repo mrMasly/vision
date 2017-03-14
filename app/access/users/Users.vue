@@ -21,7 +21,6 @@ component =
     subscribe:
       users: []
       groups: []
-      avatars: []
     data:
       users: -> Mongo.Users.find()
 

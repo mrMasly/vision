@@ -46,14 +46,11 @@ Package.onUse(function(api) {
 
   api.use('coffeescript');
   api.use('ecmascript');
+  api.use('webapp');
   api.use('mongo', ['client', 'server'])
   api.use('tmeasday:check-npm-versions');
   api.use('fourseven:scss@4.5.0');
   api.use('stylus');
-
-  api.use('cfs:standard-packages');
-  api.use('cfs:filesystem');
-  api.use('cfs:graphicsmagick');
 
   api.use('zimme:collection-behaviours');
   api.use('random');

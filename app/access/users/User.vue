@@ -3,7 +3,7 @@
   md-card
     md-card-header
       md-avatar
-        img(v-bind:src="img.store['50x50']" v-if="img")
+        img(v-bind:src="user.photo.xs" v-if="user.photo")
       md-card-header-text
         .md-subheading {{user.profile.name}}
         .md-caption {{user.username}}
@@ -53,7 +53,6 @@ component =
     server: '../server'
     data:
       groups: -> Mongo.Users.Groups.find _id: $in: @user.groups
-      img: -> Mongo.Avatars.findOne user: @user._id
   props:
     user:
       type: Object

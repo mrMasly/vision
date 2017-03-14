@@ -18,9 +18,6 @@
 
 <script lang="coffee">
 
-# import Croppie from './Croppie.vue'
-# import Dropzone from './Dropzone.vue'
-
 component =
   module: module
   name: 'photo'
@@ -37,11 +34,8 @@ component =
     close: -> @$emit 'close'
     save: ->
       @$refs.croppie.get (file) =>
-        file = new FS.File file
-        file.user = @id
-        @$call 'removeUserPhoto', @id, (err, res) =>
-          unless err?
-            Mongo.Avatars.insert file, (err, res) => do @close
+        Mongo.Users.update @user._id, {$set: photo: file}, (err, res) =>
+          do @close
     add: (@file) ->
 return component
 </script>
@@ -55,9 +49,7 @@ return component
   height 500px
   max-height 100%
 .md-dialog-content
-  // text-align center
   padding 10px
 img
   height 100%
-  // display none
 </style>

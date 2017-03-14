@@ -11,8 +11,6 @@ Meteor.publish module, 'users', ->
 Meteor.publish module, 'user', (id) ->
   Mongo.Users.find(id)
 
-Meteor.publish module, 'avatars', (id) ->
-  Mongo.Avatars.find user: $exists: yes
 
 Meteor.publish module, 'groups', () ->
   Mongo.Users.Groups.find()
