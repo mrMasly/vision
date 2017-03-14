@@ -25,6 +25,8 @@ CollectionBehaviours.define 'files', (data) ->
         if err then return cb err
         doc[data.field] = res
         @collection._insert doc, cb
+    else
+      @collection._insert doc, cb
 
   @collection._update = @collection.update
   @collection.update = (selector, modifer, callback) =>
@@ -34,3 +36,5 @@ CollectionBehaviours.define 'files', (data) ->
         if err then return cb err
         modifer.$set[data.field] = res
         @collection._update selector, modifer, callback
+    else
+      @collection._update selector, modifer, callback
