@@ -29,10 +29,10 @@ setTimeout =>
   # modules = _.union Module.children, Meteor.__attachedModules
   for mod in modules
     # получаем имя модуля
-    if mod.id.indexOf('vision/components/') + 1
-      mod.name = 'vision/' + mod.id.split('vision/components/')[1]
-    else if mod.id.indexOf('/components/') + 1
-      mod.name = 'app/' + mod.id.split('/components/')[1]
+    if mod.id.indexOf('vision/app/') + 1
+      mod.name = 'vision/' + mod.id.split('vision/app/')[1]
+    else if mod.id.indexOf('/app/') + 1
+      mod.name = 'app/' + mod.id.split('/app/')[1]
 
     unless mod.name?
       mod.access = -> yes

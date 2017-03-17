@@ -26,10 +26,13 @@ Meteor.startup ->
     router: router.start()
     store: store
     metaInfo: metaInfo
+  Meteor.app.startup = ->
+    Meteor.subscribe '--users--groups--', ->
+      Meteor.app.$mount 'app'
   Meteor.login = new Vue
     render: (h) -> h Login
     metaInfo: _metaInfo
 
 
-  if Meteor.userId() then Meteor.app.$mount 'app'
+  if Meteor.userId() then Meteor.app.startup()
   else Meteor.login.$mount 'app'

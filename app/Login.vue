@@ -33,7 +33,7 @@ component =
           Meteor.login.$destroy()
           $(@$refs.div).remove()
           $('body').prepend '<app></app>'
-          Meteor.app.$mount 'app'
+          Meteor.app.startup()
 
 
 
