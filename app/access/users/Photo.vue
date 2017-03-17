@@ -1,9 +1,8 @@
 <template lang="jade">
 .layout-fill.layout-column.photo
-  md-toolbar
-    h2.md-title
+  md-toolbar.layout-row
+    h2.md-title.flex
       span(v-if="user" v-once) Фото пользователя {{user.profile.name}}
-    .flex
     md-button.md-icon-button(@click.native="close")
       md-icon close
   md-dialog-content.flex
