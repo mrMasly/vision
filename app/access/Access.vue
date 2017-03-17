@@ -36,7 +36,6 @@ component =
     search: 'access/user'
   methods:
     close: ->
-      @$route.params.id = null
       @$router.push
         name: @$route.name
         params: tab: @$route.params.tab

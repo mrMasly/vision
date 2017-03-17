@@ -67,9 +67,11 @@ mounted = ->
       else if options.type is 'dialog'
         ref.$on 'close', (e) ->
           route = _.clone $route
-          if route.params[param]?
+          if Meteor.app.$route.params[param]?
             route.params[param] = null
             $router.push route
+          
+          
         ref.$on 'open', ->
           setTimeout =>
             ref.$el.focus()
@@ -112,7 +114,8 @@ update = ($route, routes, next, $router, $refs) ->
       ref.setActiveTab tab
     else if options.type is 'dialog'
       if $route.params[param]? then ref.open()
-      else try ref.close()
+      else
+        ref.close()
 
 
 Plugin.install = (vue, options) ->
