@@ -43,10 +43,6 @@ component =
     user: profile: null
     groups: []
     title: null
-  beforeRouteEnter: (to, from, next) ->
-    setTimeout =>
-      do next
-    , 3000
   methods:
     close: ->
       @$emit 'close'

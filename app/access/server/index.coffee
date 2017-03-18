@@ -3,8 +3,6 @@ import removeUserPhoto from './remove-user-photo.coffee'
 import saveGroup from './save-group.coffee'
 import {removeUser, removeGroup} from './remove.coffee'
 
-module.access = -> yes
-
 Meteor.publish module, 'users', ->
   Mongo.Users.find()
 

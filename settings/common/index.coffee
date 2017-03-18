@@ -1,2 +1,1 @@
-import './attach.coffee'
-import './access.coffee'
+import './modules.coffee'

@@ -1,7 +1,5 @@
 import { normalize } from 'path'
 
-Module = module.parent
-
 __modules = {}
 
 Meteor._publish = Meteor.publish
@@ -12,10 +10,11 @@ Meteor.publish = (mod, name, args...) ->
     name = mod
     Meteor._publish name, args...
   else
+    Meteor.registerModule mod
     cb = args.pop()
     _name = mod.id
-      .replace '/node_modules/meteor/mrmasly:vision/components', 'vision'
-      .replace '/components/', 'app/'
+      .replace '/node_modules/meteor/mrmasly:vision/app', 'vision'
+      .replace '/app/', 'app/'
       .replace '/index.coffee.js', ''
       .replace '.js', ''
       .replace '.coffee', ''

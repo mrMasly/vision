@@ -9,12 +9,14 @@ Meteor.methods = (mod, methods) ->
   unless methods?
     Meteor._methods mod
   else
+    # регистрируем модуль
+    Meteor.registerModule mod
     for method, cb of methods
       do =>
         cb1 = cb
         _name = mod.id
-          .replace '/node_modules/meteor/mrmasly:vision/components', 'vision'
-          .replace '/components/', 'app/'
+          .replace '/node_modules/meteor/mrmasly:vision/app', 'vision'
+          .replace '/app/', 'app/'
           .replace '/index.coffee.js', ''
           .replace '.js', ''
           .replace '.coffee', ''

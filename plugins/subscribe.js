@@ -165,10 +165,12 @@ Plugin = {
             if (this.$options.meteor.server) {
               let server = this.$options.meteor.server
               let module = this.$options.module
+              // регистрируем модуль
+              // Meteor.registerModule(module);
               let name = args.shift();
               let _name = resolve(dirname(module.id), server)
-                .replace('/node_modules/meteor/mrmasly:vision/components', 'vision')
-                .replace('/components/', 'app/')
+                .replace('/node_modules/meteor/mrmasly:vision/app', 'vision')
+                .replace('/app/', 'app/')
                 .replace('/index.coffee.js', '')
                 .replace('.js', '')
                 .replace('.coffee', '')
