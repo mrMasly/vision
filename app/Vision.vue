@@ -6,12 +6,14 @@
 
   Navigation
   Dialogs
+  Toasts
 </template>
 
 <script lang="coffee">
 import Navigation from './Navigation.vue'
 import Toolbar from './Toolbar.vue'
 import Dialogs from './Dialogs.vue'
+import Toasts from './Toasts.vue'
 
 return {
   components: { Navigation, Toolbar, Dialogs }
