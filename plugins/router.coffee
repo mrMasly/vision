@@ -9,18 +9,16 @@ Meteor.startup ->
     else break
   for mod in Module.children
     continue if mod.id.indexOf('.vue') is -1
-    # console.log mod.exports.default
     component = mod.exports.default
     unless component.module?
       throw new Error "component #{component.name} - don't defined module"
-
-    # console.log component
 
     continue unless component.route?
     route = component.route
     if route.tab
       if _.isObject route.tab
         route.tab.route ?= name: route.name
+        route.tab.module ?= mod
         Store.commit 'addTab', route.tab
         route.tab = route.tab.name
     Store.commit 'addRoute',
@@ -70,8 +68,8 @@ mounted = ->
           if Meteor.app.$route.params[param]?
             route.params[param] = null
             $router.push route
-          
-          
+
+
         ref.$on 'open', ->
           setTimeout =>
             ref.$el.focus()

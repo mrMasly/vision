@@ -59,6 +59,7 @@ Meteor.registerModule = (module) ->
 
   # доступ к модулю
   module.access = (userId) ->
+    userId ?= Meteor.userId()
     return no unless userId
     user = Meteor.users.findOne _id: userId,
       fields:

@@ -1,7 +1,7 @@
 <template lang="jade">
 md-bottom-bar
   md-bottom-bar-item(
-    v-for="tab in $store.state.tabs" key="tab.name"
+    v-for="tab in tabs" key="tab.name"
     v-bind:md-icon="tab.icon"
     v-bind:md-active="tab.active"
     @click.native="click(tab)") {{tab.title}}
@@ -13,13 +13,14 @@ md-bottom-bar
 component =
   name: 'Sidenav'
   data: ->
-    name: '123'
-    name2: 'side'
+    tabs: []
   methods:
     click: (tab) ->
-      # console.log tab.route
       @$router.push tab.route
   created: ->
+    for tab in @$store.state.tabs
+      Meteor.registerModule tab.module
+      @tabs.push tab if tab.module.access()
     @$router.beforeEach (to, from, next) =>
       @$store.commit 'selectTab', to
       @$store.commit 'rememberTab', from

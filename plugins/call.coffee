@@ -7,6 +7,7 @@ Plugin.install = (vue, options) ->
 
   vue.mixin
     created: () ->
+      # console.log @$options.module
       if @$options.module
         Meteor.registerModule @$options.module
     methods:
@@ -21,7 +22,6 @@ Plugin.install = (vue, options) ->
             .replace('.coffee', '')
           name = "#{_name}--method--#{name}"
           args.unshift(name)
-        # console.log args
         Meteor.call args...
 
 Vue.use Plugin
