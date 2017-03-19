@@ -23,6 +23,15 @@ component =
       id: 'toasts'
     @default = _.clone @toast
   data: ->
+    audios:
+      applause: '/packages/mrmasly_vision/files/audio/applause.mp3'
+      fanfar: '/packages/mrmasly_vision/files/audio/fanfar.mp3'
+      fanfar1: '/packages/mrmasly_vision/files/audio/fanfar1.mp3'
+      fanfar2: '/packages/mrmasly_vision/files/audio/fanfar2.mp3'
+      ifeelgood: '/packages/mrmasly_vision/files/audio/ifeelgood.mp3'
+      message: '/packages/mrmasly_vision/files/audio/message.wav'
+      notification: '/packages/mrmasly_vision/files/audio/notification.mp3'
+    audio: {}
     queue: []
     default: null
     toast:
@@ -43,6 +52,12 @@ component =
       type = data.type ? 'top'
       data.position ?= "#{type} right"
       data[key] ?= val for key, val of @default
+      # аудио
+      if data.audio?
+        audio = @audios[data.audio] if data.audio.indexOf('/') is -1
+        if audio?
+          @audio[audio] ?= new Audio audio
+          data.audio = @audio[audio]
       data.cb ?= cb
       @queue.push data
       do @tick
@@ -56,17 +71,16 @@ component =
       @toast = toast
       @queue = queue
       do @$refs.toast.open
+      do toast.audio.play if toast.audio?
     # при закрытии
     onClose: ->
       @_opened = no
+      if @toast.audio?
+        do @toast.audio.pause
+        @toast.audio.currentTime = 0
       setTimeout =>
         do @tick
       , 300
-
-
-
-
-
 
 
 return component

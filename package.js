@@ -58,6 +58,13 @@ Package.onUse(function(api) {
   api.mainModule('settings/npm.coffee', 'server');
 
   api.addAssets([
+    'files/audio/applause.mp3',
+    'files/audio/fanfar.mp3',
+    'files/audio/fanfar1.mp3',
+    'files/audio/fanfar2.mp3',
+    'files/audio/ifeelgood.mp3',
+    'files/audio/message.wav',
+    'files/audio/notification.mp3',
     'files/icon.png'
   ], 'client');
 
@@ -65,8 +72,8 @@ Package.onUse(function(api) {
   api.addFiles('settings/common/index.coffee', ['client', 'server']);
   api.addFiles('settings/client/index.coffee', 'client');
   api.addFiles('settings/server/index.coffee', 'server');
-  
-  
+
+
 
 
 });
