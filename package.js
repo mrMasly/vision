@@ -1,9 +1,19 @@
 Package.describe({
   name: 'mrmasly:vision',
-  version: '0.1.0',
+  version: '0.1.1',
   summary: 'Vision app',
   git: 'https://github.com/mrMasly/vision',
   documentation: 'README.md'
+});
+
+Package.registerBuildPlugin({
+  name: "compileCoffeescript",
+  use: ['caching-compiler', 'ecmascript'],
+  sources: ['build/coffeescript/compile.js'],
+  npmDependencies: {
+    "coffee-script": "1.12.4",
+    "source-map": "0.5.6"
+  }
 });
 
 /*
@@ -83,7 +93,7 @@ Package.onUse(function(api) {
   api.use('akryum:vue-component-dev-client@0.2.5');
   api.use('akryum:vue-router2@0.1.0');
 
-  api.use('coffeescript@1.12.3_1');
+  // api.use('coffeescript@1.12.3_1');
   api.use('ecmascript@0.6.3');
   api.use('webapp@1.3.14');
   api.use('mongo@1.1.16', ['client', 'server'])
