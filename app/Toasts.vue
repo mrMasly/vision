@@ -1,22 +1,13 @@
 <template lang="jade">
 .toasts
-
-  md-snackbar(md-position="top right" ref="top" v-bind:md-duration="top.duration"
-  @click.native="top.click")
-    md-button.md-icon-button.close(@click.native.prevent.stop="top.close")
+  md-snackbar(v-bind:md-position="toast.position" ref="toast" v-bind:md-duration="toast.duration"
+  @click.native="click" @close="onClose")
+    md-button.md-icon-button.close(@click.native.prevent.stop="close")
       md-icon close
     .layout-column.has-ripple
       md-ink-ripple
-      .title.md-Subheading(v-if="top.title") {{top.title}}
-      .text.md-body(v-if="top.text") {{top.text}}
-
-  md-snackbar(md-position="bottom right" ref="bottom" v-bind:md-duration="bottom.duration"
-  @click.native="bottom.click")
-    md-button.md-icon-button.close(@click.native.prevent.stop="bottom.close")
-      md-icon close
-    .layout-column
-      .title.md-Subheading(v-if="bottom.title") {{bottom.title}}
-      .text.md-body(v-if="bottom.text") {{bottom.text}}
+      .title.md-Subheading(v-if="toast.title") {{toast.title}}
+      .text.md-body(v-if="toast.text") {{toast.text}}
 </template>
 
 <script lang="coffee">
@@ -30,34 +21,53 @@ component =
     @$store.commit 'linkComponent',
       component: @
       id: 'toasts'
-    @default =
-      top: _.clone @top
-      bottom: _.clone @bottom
+    @default = _.clone @toast
   data: ->
+    queue: []
     default: null
-    top:
+    toast:
       duration: 5000
       text: null
       title: null
       cb: null
-      click: => do @top.cb if @top.cb
-      close: (e) => do @$refs.top.close
-    bottom:
-      duration: 5000
-      text: null
-      title: null
-      cb: null
-      click: => do @top.cb if @top.cb
-      close: (e) => do @$refs.bottom.close
+    click: =>
+      if @toast.cb?
+        do @toast.cb
+      else
+        do @close
+    close: (e) => do @$refs.toast.close
   methods:
-    open: (data, cb) ->
+    # добавить уведомление в очередь
+    add: (data, cb) ->
       data = text: data unless _.isObject data
       type = data.type ? 'top'
-      for key, val of @default[type]
-        data[key] ?= val
+      data.position ?= "#{type} right"
+      data[key] ?= val for key, val of @default
       data.cb ?= cb
-      @[type] = data
-      do @$refs[type].open
+      @queue.push data
+      do @tick
+    # запускает первое уведомление в очереди
+    tick: ->
+      if _.isEmpty @queue then return
+      if @_opened then return
+      else @_opened = yes
+      queue = _.clone @queue
+      toast = queue.shift()
+      @toast = toast
+      @queue = queue
+      do @$refs.toast.open
+    # при закрытии
+    onClose: ->
+      @_opened = no
+      setTimeout =>
+        do @tick
+      , 300
+
+
+
+
+
+
 
 return component
 </script>
