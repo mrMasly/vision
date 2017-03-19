@@ -1,7 +1,7 @@
 
-import {Router, nativeScrollBehavior} from 'meteor/akryum:vue-router2';
+import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2'
 
-router = new Router
+router = new RouterFactory
   mode: 'history'
   scrollBehavior: nativeScrollBehavior
 

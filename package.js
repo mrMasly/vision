@@ -39,6 +39,7 @@ Package.registerBuildPlugin({
 Package.onUse(function(api) {
   api.versionsFrom('1.4.3.1');
   api.use('akryum:vue-component@0.8.9');
+  api.use('akryum:vue-router2@0.1.0');
 
   api.use('coffeescript@1.12.3_1');
   api.use('ecmascript@0.6.3');

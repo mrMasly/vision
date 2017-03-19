@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import _ from 'lodash'
-
+import { RouterFactory } from 'meteor/akryum:vue-router2'
 Vue.use(Vuex)
 
 window.Store = store = new Vuex.Store
@@ -12,7 +12,7 @@ window.Store = store = new Vuex.Store
     components: {}
   mutations:
     addRoute: (state, route) ->
-      Router.configure (r) ->
+      RouterFactory.configure (r) ->
         r.addRoute
           path: route.path
           component: route.component

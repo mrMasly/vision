@@ -23,7 +23,7 @@ Meteor.startup ->
   _metaInfo.title = 'Войдите'
   Meteor.app = new Vue
     render: (h) -> h Vision
-    router: router.start()
+    router: router.create()
     store: store
     metaInfo: metaInfo
   Meteor.app.startup = ->
