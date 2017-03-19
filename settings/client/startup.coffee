@@ -19,6 +19,7 @@ metaInfo =
 
 
 Meteor.startup ->
+  $('body').prepend '<app></app>'
   _metaInfo = _.clone metaInfo
   _metaInfo.title = 'Войдите'
   Meteor.app = new Vue
