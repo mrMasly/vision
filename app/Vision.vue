@@ -1,7 +1,7 @@
 <template lang="jade">
 .layout.layout-column.layout-fill#vision
   Toolbar
-  .flex
+  .flex.relative
     router-view
 
   Navigation
