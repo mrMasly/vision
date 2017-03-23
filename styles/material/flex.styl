@@ -1,0 +1,39 @@
+sizes = xs gt-xs sm gt-sm md gt-md lg gt-lg xl
+procs = 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100
+
+for num in sizes
+  if num is 'xs'
+    min = 0px
+    max = 599px
+  else if num is 'gt-xs'
+    min = 600px
+    max = 5000px
+  else if num is 'sm'
+    min = 600px
+    max = 959px
+  else if num is 'gt-sm'
+    min = 960px
+    max = 5000px
+  else if num is 'md'
+    min = 960px
+    max = 1279px
+  else if num is 'gt-md'
+    min = 1280px
+    max = 5000px
+  else if num is 'lg'
+    min = 1280px
+    max = 1919px
+  else if num is 'gt-lg'
+    min = 1920px
+    max = 5000px
+  else if num is 'xl'
+    min = 1920px
+    max = 5000px
+
+  @media (max-width: max) and (min-width: min)
+    .flex-{num}
+      flex: 1 1 auto
+    for proc in procs
+      .flex-{num}-{proc}
+        flex: 1 1 (proc)% !important
+        -webkit-flex: 1 1 (proc)% !important
