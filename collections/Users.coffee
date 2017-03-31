@@ -8,7 +8,7 @@ Mongo.Users.allow
 
 Mongo.Users.attachBehaviour 'files',
   field: 'photo'
-  dir: Meteor.root+'/../files/users'
+  dir: '../files/users'
   url: '/files/users'
   stores:
     xs: [50, 50]

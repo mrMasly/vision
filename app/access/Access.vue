@@ -1,6 +1,6 @@
 <template lang="jade">
-.layout-fill.relative
-  md-tabs.md-transparent.layout-fill.absolute(md-right ref="tabs")
+.fx-fill.relative
+  md-tabs.md-transparent.fx-fill.fx-absolute(md-right ref="tabs")
     md-tab(md-label="Пользователи")
       Users
     md-tab(md-label="Группы")
@@ -50,6 +50,7 @@ component =
   route:
     path: '/access/:tab?/:id?'
     name: 'access'
+    title: 'Доступ'
     tab:
       name: 'access'
       icon: 'verified_user'

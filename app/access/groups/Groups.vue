@@ -1,5 +1,5 @@
 <template lang="jade">
-.layout-fill.layout-row.layout-wrap
+.fx-fill.fx-row.fx-wrap
   Group(v-for="group in groups" v-bind:group="group")
 </template>
 

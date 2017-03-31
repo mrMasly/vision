@@ -1,5 +1,5 @@
 <template lang="jade">
-.layout-fill.layout-column.layout-align-center-center(ref="div")
+.fx-fill.fx-column.fx-center-center(ref="div")
   md-card
     md-card-header
       .md-title Войдите
@@ -29,11 +29,7 @@ component =
       Meteor.loginWithPassword @username, @password, (err, res) =>
         @password = ''
         if err then @error = "Неверное имя пользователя или пароль"
-        else
-          Meteor.login.$destroy()
-          $(@$refs.div).remove()
-          $('body').prepend '<app></app>'
-          Meteor.app.startup()
+        else @$emit 'login'
 
 
 

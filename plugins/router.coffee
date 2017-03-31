@@ -1,31 +1,31 @@
 import Vue from 'vue'
 import _ from 'lodash'
-import $ from 'jquery'
+# import $ from 'jquery'
 
-Meteor.startup ->
-  Module = module.parent
-  while true
-    if Module.parent then Module = Module.parent
-    else break
-  for mod in Module.children
-    continue if mod.id.indexOf('.vue') is -1
-    component = mod.exports.default
-    unless component.module?
-      throw new Error "component #{component.name} - don't defined module"
-
-    continue unless component.route?
-    route = component.route
-    if route.tab
-      if _.isObject route.tab
-        route.tab.route ?= name: route.name
-        route.tab.module ?= mod
-        Store.commit 'addTab', route.tab
-        route.tab = route.tab.name
-    Store.commit 'addRoute',
-      path: route.path
-      name: route.name
-      tab: route.tab
-      component: component
+# Meteor.startup ->
+#   Module = module.parent
+#   while true
+#     if Module.parent then Module = Module.parent
+#     else break
+#   for mod in Module.children
+#     continue if mod.id.indexOf('.vue') is -1
+#     component = mod.exports.default
+#     unless component.module?
+#       throw new Error "component #{component.name} - don't defined module"
+#
+#     continue unless component.route?
+#     route = component.route
+#     if route.tab
+#       if _.isObject route.tab
+#         route.tab.route ?= name: route.name
+#         route.tab.module ?= mod
+#         Store.commit 'addTab', route.tab
+#         route.tab = route.tab.name
+#     Store.commit 'addRoute',
+#       path: route.path
+#       name: route.name
+#       tab: route.tab
+#       component: component
 
 Plugin = {}
 
@@ -65,7 +65,7 @@ mounted = ->
       else if options.type is 'dialog'
         ref.$on 'close', (e) ->
           route = _.clone $route
-          if Meteor.app.$route.params[param]?
+          if Meteor.Vue.$route.params[param]?
             route.params[param] = null
             $router.push route
 

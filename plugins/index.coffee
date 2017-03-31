@@ -1,4 +1,4 @@
-import './router.coffee'
-import './call.coffee'
-import './subscribe.js'
+# import './call.coffee'
+# import './subscribe.js'
 import './dialogs.coffee'
+import './router.coffee'

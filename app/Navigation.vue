@@ -17,27 +17,45 @@ component =
   data: ->
     tabs: []
   methods:
+    # при клике на таб
     click: (tab) ->
       @$router.push tab.route
+    # запоминть роут таба
+    rememberTabRoute: (route) ->
+      path = route.path
+      route = _.find @$router.options.routes, name: route.name
+      return unless route.tab?
+      tabName = if _.isObject route.tab then route.tab.name else route.tab
+      tab = _.find @tabs, name: tabName
+      tab.route = path: path
+    # сделать нужный таб выбранным
+    selectTab: (route) ->
+      route = _.find @$router.options.routes, name: route.name
+      return unless route.tab?
+      tabName = if _.isObject route.tab then route.tab.name else route.tab
+      for tab in @tabs
+        if tab.name is tabName
+          tab.active = yes
+        else
+          tab.active = no
+
   created: ->
-    for tab in @$store.state.tabs
-      Meteor.registerModule tab.module
-      @tabs.push tab if tab.module.access()
-      
+
+    # получаем все табы
+    for route in @$router.options.routes
+      if _.isObject(route.tab) and route.module? and route.module.access()
+        tab = _.clone route.tab
+        tab.active ?= no
+        tab.route ?= name: route.name
+        @tabs.push tab
+
+    # при смене роута
     @$router.beforeEach (to, from, next) =>
-
-      # проверям доступность нового адреаса
-      nextRoute = _.find @$store.state.routes, name: to.name
-      module = nextRoute?.component?.module
-      if module? and module.access?
-        if module.access() is no
-          # дуступ закрыт
-          return @$router.push path: from.path
-
-      @$store.commit 'selectTab', to
-      @$store.commit 'rememberTab', from
+      @rememberTabRoute from
+      @selectTab to
       do next
-    @$store.commit 'selectTab', @$route
+
+    @selectTab @$route
 
 
 return component
@@ -47,4 +65,6 @@ return component
 .sidenav
   width 60px
   flex none
+.md-bottom-bar
+  z-index 2
 </style>

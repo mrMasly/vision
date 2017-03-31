@@ -5,7 +5,7 @@ div.layout-fill(v-bind:class="{ hidden: !display }" ref="div")
 
 <script lang="coffee">
 
-import Croppie from 'croppie'
+# import Croppie from 'croppie'
 import _ from 'lodash'
 
 dataURLtoFile = (dataurl, filename) ->
@@ -44,7 +44,8 @@ component =
     format: 'png'
   props:
     img: String
-    file: File
+    file:
+      required: yes
     ratio:
       type: Number
       default: 1

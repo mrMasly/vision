@@ -1,7 +1,7 @@
 <template lang="jade">
-.layout-fill.layout-column.user
+.fx-fill.fx-column.user
   md-toolbar
-    h2.md-title.flex(v-once) {{title || user.profile.name}}
+    h2.md-title.fx-flex(v-once) {{title || user.profile.name}}
     md-button.md-icon-button(@click.native="close")
       md-icon close
   md-dialog-content.flex.overflow
