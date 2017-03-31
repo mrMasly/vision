@@ -27,6 +27,7 @@ component =
       return unless route.tab?
       tabName = if _.isObject route.tab then route.tab.name else route.tab
       tab = _.find @tabs, name: tabName
+      return unless tab?
       tab.route = path: path
     # сделать нужный таб выбранным
     selectTab: (route) ->
@@ -67,4 +68,5 @@ return component
   flex none
 .md-bottom-bar
   z-index 2
+  position relative !important
 </style>

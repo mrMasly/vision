@@ -47,7 +47,7 @@ modules-runtime@0.7.9
 mongo@1.1.16
 mongo-id@1.0.6
 mrmasly:files@0.0.3
-mrmasly:vision@0.2.0
+mrmasly:vision@0.2.1
 mrmasly:vue@0.1.1
 npm-mongo@2.2.24
 observe-sequence@1.0.16
