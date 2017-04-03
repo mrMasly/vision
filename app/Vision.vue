@@ -4,7 +4,8 @@
   template(v-else-if="$subReady.user")
     Toolbar
     .fx-flex.fx-relative
-      router-view
+      keep-alive(v-bind:include="/-alive/")
+        router-view
     Navigation
     Dialogs
     Toasts
@@ -17,7 +18,7 @@ import Toolbar from './Toolbar.vue'
 import Dialogs from './Dialogs.vue'
 import Toasts from './Toasts.vue'
 import Login from './Login.vue'
-
+import _ from 'lodash'
 module.access = -> yes
 
 return {
@@ -43,14 +44,9 @@ return {
     subscribe:
       user: []
   methods:
-    login: ->
-      @userId = Meteor.userId()
-
-  crated: ->
+    login: -> @userId = Meteor.userId()
+  created: ->
     do @login
-
-
-
 }
 
 </script>
