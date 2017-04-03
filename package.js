@@ -22,6 +22,9 @@ Package.onUse(function(api) {
   api.use('zimme:collection-behaviours@1.1.3');
   api.use('random@1.0.10');
 
+  api.use('accounts-base@1.2.15');
+  api.use('accounts-password@1.3.4');
+
   api.use('mrmasly:vue@0.1.1');
   api.use('mrmasly:files@0.0.3');
 
