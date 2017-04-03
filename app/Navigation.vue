@@ -22,6 +22,8 @@ component =
       @$router.push tab.route
     # запоминть роут таба
     rememberTabRoute: (route) ->
+      return unless route?
+      return unless route.name?
       path = route.path
       route = _.find @$router.options.routes, name: route.name
       return unless route.tab?

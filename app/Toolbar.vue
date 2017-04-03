@@ -1,5 +1,5 @@
 <template lang="jade">
-md-toolbar.md-whiteframe.md-whiteframe-4dp
+md-toolbar.md-whiteframe.md-whiteframe-2dp
   h1.md-title {{title}}
 </template>
 
