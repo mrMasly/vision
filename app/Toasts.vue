@@ -4,7 +4,7 @@
   @click.native="click" @close="onClose")
     md-button.md-icon-button.close(@click.native.prevent.stop="close")
       md-icon close
-    .layout-column.has-ripple
+    .l-column.has-ripple
       md-ink-ripple
       .title.md-Subheading(v-if="toast.title") {{toast.title}}
       .text.md-body(v-if="toast.text") {{toast.text}}
@@ -87,7 +87,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.layout-column > div
+.l-column > div
   width 100%
   &:first-child
     width calc(100% - 50px)

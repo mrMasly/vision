@@ -1,11 +1,11 @@
 <template lang="jade">
-.layout-fill.layout-column.photo
-  md-toolbar.layout-row
-    h2.md-title.flex
+.l-fill.l-column.photo
+  md-toolbar.l-row
+    h2.md-title.l-flex
       span(v-if="user" v-once) Фото пользователя {{user.profile.name}}
     md-button.md-icon-button(@click.native="close")
       md-icon close
-  md-dialog-content.flex
+  md-dialog-content.l-flex
     dropzone(url="https://httpbin.org/post" v-on:add="add" v-if="!file")
     croppie(ref="croppie" v-bind:file="file" type="circle" v-else)
   md-dialog-actions

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mrmasly:vision',
-  version: '0.2.4',
+  version: '0.2.5',
   summary: 'Vision app',
   git: 'https://github.com/mrMasly/vision',
   documentation: 'README.md'
@@ -15,10 +15,10 @@ Package.onUse(function(api) {
 
   api.use('ecmascript@0.6.3');
   api.use('webapp@1.3.14');
-  api.use('mongo@1.1.16', ['client', 'server'])
+  api.use('mongo@1.1.16', ['client', 'server']);
   api.use('tmeasday:check-npm-versions@0.3.1');
   api.use('stylus@2.513.9');
-  api.use('meteorhacks:async@1.0.0')
+  api.use('meteorhacks:async@1.0.0');
   api.use('zimme:collection-behaviours@1.1.3');
   api.use('random@1.0.10');
 

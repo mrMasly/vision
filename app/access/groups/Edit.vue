@@ -1,10 +1,10 @@
 <template lang="jade">
-.fx-fill.fx-column.user
+.l-fill.l-column.user
   md-toolbar
-    h2.md-title.fx-flex(v-once) {{title || group.name}}
+    h2.md-title.l-flex(v-once) {{title || group.name}}
     md-button.md-icon-button(@click.native="close")
       md-icon close
-  md-dialog-content.flex.overflow
+  md-dialog-content.l-flex.overflow
     md-input-container
       label id группы
       md-input(type="text" v-model="group._id" v-bind:disabled="id!=='new'")

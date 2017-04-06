@@ -1,5 +1,5 @@
 <template lang="jade">
-.fx-fill.fx-column.fx-center-center(ref="div")
+.l-fill.l-column.l-center-center(ref="div")
   md-card
     md-card-header
       .md-title Войдите

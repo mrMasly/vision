@@ -1,9 +1,9 @@
 <template lang="jade">
-.fx-column.fx-fill.fx-absolute#vision
+.l-column.l-fill.l-absolute#vision
   Login(v-if="!userId" @login="login")
   template(v-else-if="$subReady.user")
     Toolbar
-    .fx-flex.fx-relative
+    .l-flex.l-relative
       keep-alive(v-bind:include="/-alive/")
         router-view
     Navigation

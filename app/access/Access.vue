@@ -1,6 +1,6 @@
 <template lang="jade">
-.fx-fill.relative
-  md-tabs.md-transparent.fx-fill.fx-absolute(md-right ref="tabs")
+.l-fill.relative
+  md-tabs.md-transparent.l-fill.l-absolute(md-right ref="tabs")
     md-tab(md-label="Пользователи")
       Users
     md-tab(md-label="Группы")

@@ -1,5 +1,5 @@
 <template lang="jade">
-.fx-fill.fx-row.fx-wrap(v-if="ready")
+.l-fill.l-row.l-wrap(v-if="ready")
   User(v-for="user in users" v-bind:user="user" v-bind:groups="groups")
 </template>
 

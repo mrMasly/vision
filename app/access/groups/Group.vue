@@ -1,5 +1,5 @@
 <template lang="jade">
-.fx-padding.fx-25.md-33.sm-50.xs-100
+.l-padding.l-25.md-33.sm-50.xs-100
   md-card
     md-card-header
       md-avatar
