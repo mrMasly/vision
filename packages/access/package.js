@@ -9,7 +9,6 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.4.3.1');
 
-  api.use('mrmasly:vision');
   api.use('akryum:npm-check@0.0.2');
   api.use('coffeescript@1.12.3_1');
   api.use('ecmascript@0.6.3');
