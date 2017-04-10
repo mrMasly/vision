@@ -1,0 +1,83 @@
+module.exports = (task) ->
+
+  today = moment().startOf('day').toDate()
+
+  task.repeat.every ?= 1
+
+  # находим первую дату
+  date = moment(task.repeat.date.start)
+
+  amount = switch task.repeat.type
+    when 'day' then 90
+    when 'week' then 180
+    when 'month' then 365
+
+  # массив для результата
+  days = []
+
+  # массив для дней, чтобы считать "каждые 1/2/3/4/5 дней/недель/месяцев"
+  arr = []
+
+  # date - moment
+  add = (date) ->
+    start = task.repeat.date.start
+    start = today if today > start
+    toDate = date.toDate()
+    if toDate >= start
+      if task.repeat.date.end is null or toDate <= task.repeat.date.end
+        days.push date.format('YYYY-MM-DD')
+
+  # проверяет подходит ли день
+  check = ->
+
+    switch task.repeat?.type
+      when 'day'
+        day = date.format('YYYY-MM-DD')
+        arr.push day unless day in arr
+        if (arr.length-1) % task.repeat.every is 0
+          add date
+
+      when 'week'
+        week = moment(date.format('YYYY-MM-DD')).startOf('week').format('L')
+        arr.push week unless week in arr
+        if (arr.length-1) % task.repeat.every is 0
+          if date.day()-1 in task.repeat.week
+            add date
+      when 'month'
+        month = moment(date.format('YYYY-MM-DD')).startOf('month').format('L')
+        arr.push month unless month in arr
+        if (arr.length-1) % task.repeat.every is 0
+          # если повторение по определенным дням месяца
+          if task.repeat.month.type is 'month'
+            day = date.date()
+            if 'last' in task.repeat.month.monthDays
+              if date.format('YYYY-MM-DD') is moment(date.toDate()).endOf('month').format('YYYY-MM-DD')
+                add date
+            if day in task.repeat.month.monthDays
+              add date
+          # если повторение по определенным дням недели
+          else if task.repeat.month.type is 'week'
+            # console.log task.repeat.month.weekDay
+            day = _.toNumber date.format('e')
+            # проверим что это тот день недели что нужен
+            if day is task.repeat.month.weekDay
+              switch task.repeat.month.index
+                when 'first'
+                  add date if moment(date.toDate()).subtract(1, 'week').startOf('month').format('L') isnt month
+                when 'second'
+                  add date if moment(date.toDate()).subtract(2, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(1, 'week').startOf('month').format('L') is month
+                when 'third'
+                  add date if moment(date.toDate()).subtract(3, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(2, 'week').startOf('month').format('L') is month
+                when 'fourth'
+                  add date if moment(date.toDate()).subtract(4, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(3, 'week').startOf('month').format('L') is month
+                when 'last'
+                  add date if moment(date.toDate()).add(1, 'week').startOf('month').format('L') isnt month
+
+
+  do check
+  for i in [0..amount]
+    date.add(1, 'day'); do check
+
+  # console.log days
+
+  return days
