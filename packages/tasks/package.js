@@ -24,10 +24,8 @@ Package.onUse(function(api) {
 
   api.use('mrmasly:vue@0.1.4');
 
-  api.addFiles([
-    'collections/index.coffee'
-  ], ['client', 'server']);
-  api.addFiles('Tasks.vue', 'client');
-  api.addFiles('server/index.coffee', 'server');
+
+  api.addFiles('client.coffee', 'client');
+  api.addFiles('server.coffee', 'server');
 
 });
