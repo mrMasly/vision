@@ -2,16 +2,18 @@
 div.l-fill.l-row.l-absolute
   Sidenav
   md-divider
-  .l-flex 123
+  DataTasks.l-flex
 
 </template>
 
 <script lang="coffee">
 
 import Sidenav from './sidenav/Sidenav.vue'
+import DataTasks from './data/Data.vue'
+# import Add from './add/Add.vue'
 component =
   name: 'tasks'
-  components: { Sidenav }
+  components: { Sidenav, DataTasks }
   route:
     path: '/tasks/:tab?'
     name: 'tasks'
