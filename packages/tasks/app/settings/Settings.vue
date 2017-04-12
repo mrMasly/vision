@@ -1,11 +1,12 @@
 <template lang="jade">
-main.md-whiteframe-2dp.l-padding
-  Dates(:task="task")
-  Priority(:task="task")
-  Users(:task="task")
-  .l-row.actions
-    md-button.l-50.md-raised(@click.native="close") Отмена
-    md-button.l-50.md-raised(@click.native="save") Сохранить
+.l-column
+  .l-padding
+    Dates(:task="task")
+    Priority(:task="task")
+    Users(:task="task")
+  .l-row.actions.l-end
+    md-button.md-primary(@click.native="close") Отмена
+    md-button.md-primary(@click.native="save") Сохранить
 </template>
 
 <script lang="coffee">
@@ -16,36 +17,16 @@ import Tags from './Tags.vue'
 component =
   name: 'settings'
   components: { Dates, Priority, Users, Tags }
-  data: ->
-    task:
-      date: moment().toDate()
-      priority: 1
-      users: [Meteor.userId()]
-      tags: []
-      repeat:
-        type: 'week'
-        date:
-          start: null
-          end: null
-        toggle: no
-        week: []
-        month:
-          type: 'month'
-          index: 'first'
-          weekDay: 0
-          monthDays: []
-    display: yes
+  props:
+    task: Object
   methods:
     close: -> @$emit 'close'
     save: ->
-      @task.date = moment(@date+' '+@time).toDate()
+      do @close
 return component
 </script>
 
 <style lang="stylus" scoped>
-main
-  width 300px
-  height auto
 .md-divider
   margin 8px 0
 </style>

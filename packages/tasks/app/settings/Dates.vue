@@ -1,7 +1,7 @@
 <template lang="jade">
 div
   .l-row
-    md-button.md-icon-button(v-for="button in buttons"
+    md-button.md-icon-button.l-flex(v-for="button in buttons"
     @click.native="select(button.name)",
     :class="[{'md-primary': (button.name == selected)}]")
       md-icon {{button.icon}}
@@ -94,6 +94,9 @@ return component
 <style lang="stylus" scoped>
 .md-button
   margin 1px
+  min-width 34px
+  min-height 34px
+  height 34px
 .date
   text-align center
   margin 8px 0
