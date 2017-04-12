@@ -1,11 +1,8 @@
 <template lang="jade">
 main.md-whiteframe-2dp.l-padding
   Dates(:task="task")
-  md-divider
   Priority(:task="task")
-  md-divider
   Users(:task="task")
-  //- Tags(:task="task")
   .l-row.actions
     md-button.l-50.md-raised(@click.native="close") Отмена
     md-button.l-50.md-raised(@click.native="save") Сохранить
@@ -25,6 +22,17 @@ component =
       priority: 1
       users: [Meteor.userId()]
       tags: []
+      repeat:
+        date:
+          start: null
+          end: null
+        toggle: no
+        week: []
+        month:
+          type: 'month'
+          index: 'first'
+          weekDay: 0
+          monthDays: []
     display: yes
   methods:
     close: -> @$emit 'close'
@@ -35,7 +43,7 @@ return component
 
 <style lang="stylus" scoped>
 main
-  width 310px
+  width 300px
   height auto
 .md-divider
   margin 8px 0

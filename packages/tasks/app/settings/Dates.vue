@@ -6,23 +6,30 @@ div
     :class="[{'md-primary': (button.name == selected)}]")
       md-icon {{button.icon}}
       md-tooltip {{button.name}}
-  .date
-    input(v-if="chose" type="date" v-model="date" @change="change")
+
+  Repeat(v-if="repeat", :task="task")
+  .date(v-else)
+    md-input-container(v-if="chose")
+      md-input(type="date" v-model="date" @change="change")
     div(v-else-if="selected==='Входящие'") Входящие
     div(v-else-if="selected==='Когда-нибудь'") Когда-нибудь
     div(v-else) {{selected}}, {{date | moment('D MMM YYYY')}}
-  .time(v-if="needTime")
-    input(type="time")
+  .time.l-column(v-if="needTime")
+    template(v-if="time==null")
+      md-button(@click.native="time='00:00'") Указать время
+    md-input-container(v-else)
+      label Время
+      md-input(type="time" v-model="time" @change="change")
 
 
 </template>
 
 <script lang="coffee">
-# import Repeat from './repeat/Repeat.vue'
+import Repeat from './repeat/Repeat.vue'
 
 component =
   name: 'dates'
-  # components: { Repeat }
+  components: { Repeat }
   props:
     task: Object
   created: ->
@@ -51,8 +58,12 @@ component =
         else if name is 'Через неделю' then @date = moment().add(7, 'day').format("YYYY-MM-DD")
         else if name is 'Когда-нибудь' then @date = moment(Date.MAX).format('YYYY-MM-DD')
       do @change
-    change: ->
-      @task.date = moment(@date).toDate()
+    change: -> @$nextTick ->
+      @time = null if _.isEmpty @time
+      if @time?
+        @task.date = moment(@date+' '+@time).toDate()
+      else
+        @task.date = moment(@date).toDate()
       if @chose then @selected = 'Выбрать'; return
       if @repeat then @selected = 'Повторять'; return
       # если совпадает дата с датой, указанной в кнопке
@@ -84,22 +95,13 @@ return component
 .md-button
   margin 1px
 .date
-.time
   text-align center
-  margin 8px
+  margin 8px 0
   height 32px
-  & > div
-    padding-top 5px
-input
-  text-align center
-  font-size 14px
-  width 100%
-  display block
-  border solid 1px #aaa
-  border-radius 4px
-  padding 4px
-  box-shadow none
-  outline none
+  .md-input-container
+    padding-top 0
+    height 32px
+    min-height 32px
 .actions
   .md-button
     margin 8px
