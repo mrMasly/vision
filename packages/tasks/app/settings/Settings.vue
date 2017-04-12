@@ -5,6 +5,7 @@ main.md-whiteframe-2dp.l-padding
   Priority(:task="task")
   md-divider
   Users(:task="task")
+  Tags(:task="task")
   .l-row.actions
     md-button.l-50.md-raised(@click.native="close") Отмена
     md-button.l-50.md-raised(@click.native="save") Сохранить
@@ -14,13 +15,16 @@ main.md-whiteframe-2dp.l-padding
 import Dates from './Dates.vue'
 import Priority from './Priority.vue'
 import Users from './Users.vue'
+import Tags from './Tags.vue'
 component =
   name: 'settings'
-  components: { Dates, Priority, Users }
+  components: { Dates, Priority, Users, Tags }
   data: ->
     task:
       date: moment().toDate()
       priority: 1
+      users: [Meteor.userId()]
+      tags: []
     display: yes
   methods:
     close: -> @$emit 'close'
@@ -31,7 +35,7 @@ return component
 
 <style lang="stylus" scoped>
 main
-  width auto
+  width 310px
   height auto
 .md-divider
   margin 8px 0

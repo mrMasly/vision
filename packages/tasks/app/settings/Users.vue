@@ -2,17 +2,26 @@
 .l-column
   md-input-container
     label Исполнитель
-    md-select(v-model="task.users" multiple)
+    md-select(v-model="task.users" multiple='')
+      md-select-search(v-model="search")
       md-option(v-for="user in users", :value="user._id") {{user.profile.name}}
 </template>
 
 <script lang="coffee">
+import _ from 'lodash'
 component =
   name: 'users'
+  data: ->
+    search: ''
   props:
     task: Object
-  created: ->
-    @task.users ?= [Meteor.userId()]
+  computed:
+    users: ->
+      console.log @search
+      _.filter @_users, (i) =>
+        i.profile.name.toLowerCase().indexOf(@search.toLowerCase())+1
+  # watch:
+  #   'task.users': (u) -> console.log u
   meteor:
     server:
       publish:
@@ -22,7 +31,7 @@ component =
     subscribe:
       users: []
     data:
-      users: -> Mongo.Users.find()
+      _users: -> Mongo.Users.find()
 return component
 </script>
 

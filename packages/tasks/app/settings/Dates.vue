@@ -52,6 +52,7 @@ component =
         else if name is 'Когда-нибудь' then @date = moment(Date.MAX).format('YYYY-MM-DD')
       do @change
     change: ->
+      @task.date = moment(@date).toDate()
       if @chose then @selected = 'Выбрать'; return
       if @repeat then @selected = 'Повторять'; return
       # если совпадает дата с датой, указанной в кнопке

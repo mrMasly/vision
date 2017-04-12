@@ -1,6 +1,6 @@
 <template lang="jade">
 .l-column
-  md-toolbar.md-transparent.md-dense.md-whiteframe-1dp
+  .toolbar.md-transparent.md-whiteframe-1dp
     Add.l-flex
 </template>
 
@@ -14,6 +14,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-// .md-toolbar
-//   padding 0 10px
+.toolbar
+  padding 0 8px
+  height 48px
 </style>

@@ -45,6 +45,7 @@ main
   height 50px
   margin 0
   border-bottom solid 1px rgba(0,0,0,.12)
+  background-color #fff
 input
   margin-left 7px
   border none
