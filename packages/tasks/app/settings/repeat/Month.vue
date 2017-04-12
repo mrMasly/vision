@@ -1,6 +1,6 @@
 <template lang="jade">
-md-tabs.md-transparent(md-centered)
-  md-tab(md-label="Дни месяца")
+md-tabs.md-transparent(md-centered @change="change")
+  md-tab(md-label="Дни месяца", :md-active="task.repeat.month.type === 'month'")
     .l-column(style="padding-top:8px")
       .l-row.l-start(v-for="one in month")
         md-button.md-primary(v-for="day in one",
@@ -8,7 +8,7 @@ md-tabs.md-transparent(md-centered)
           @click.native="addMonthDay(day)")
           span(v-if="day=='last'") Последний
           span(v-else) {{day}}
-  md-tab(md-label="Дни недели")
+  md-tab(md-label="Дни недели", :md-active="task.repeat.month.type === 'week'")
     .l-row.l-space-between
       md-input-container.l-45
         label Каждый
@@ -52,6 +52,10 @@ component =
       else
         @task.repeat.month.monthDays.push day
       @task.repeat.month.monthDays = _.sortBy @task.repeat.month.monthDays, (i) -> i
+    change: (index) ->
+      @task.repeat.month.type = switch index
+        when 0 then 'month'
+        when 1 then 'week'
 
 return component
 </script>

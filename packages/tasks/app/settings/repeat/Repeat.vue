@@ -1,10 +1,10 @@
 <template lang="jade">
 div
-  md-tabs.md-transparent(md-centered)
-    md-tab(md-label="День")
-    md-tab(md-label="Неделя")
+  md-tabs.md-transparent(md-centered @change="change")
+    md-tab(md-label="День", :md-active="task.repeat.type === 'day'")
+    md-tab(md-label="Неделя", :md-active="task.repeat.type === 'week'")
       Week(:task="task")
-    md-tab(md-label="Месяц")
+    md-tab(md-label="Месяц", :md-active="task.repeat.type === 'month'")
       Month(:task="task")
   Dates(:task="task")
 
@@ -21,6 +21,13 @@ component =
   components: { Week, Month, Dates }
   props:
     task: Object
+  methods:
+    change: (index) ->
+      @task.repeat.type = switch index
+        when 0 then 'day'
+        when 1 then 'week'
+        when 2 then 'month'
+
 
 
 

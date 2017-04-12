@@ -23,6 +23,7 @@ component =
       users: [Meteor.userId()]
       tags: []
       repeat:
+        type: 'week'
         date:
           start: null
           end: null
