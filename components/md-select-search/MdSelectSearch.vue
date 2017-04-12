@@ -20,9 +20,6 @@ component =
     change: ->
       @$emit 'input', @val
       @$emit 'change', @val
-      # setTimeout =>
-      #
-      # , 100
     next: ->
       console.log 'next'
   mounted: ->

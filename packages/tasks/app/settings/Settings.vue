@@ -5,7 +5,7 @@ main.md-whiteframe-2dp.l-padding
   Priority(:task="task")
   md-divider
   Users(:task="task")
-  Tags(:task="task")
+  //- Tags(:task="task")
   .l-row.actions
     md-button.l-50.md-raised(@click.native="close") Отмена
     md-button.l-50.md-raised(@click.native="save") Сохранить

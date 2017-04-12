@@ -17,11 +17,8 @@ component =
     task: Object
   computed:
     users: ->
-      console.log @search
       _.filter @_users, (i) =>
         i.profile.name.toLowerCase().indexOf(@search.toLowerCase())+1
-  # watch:
-  #   'task.users': (u) -> console.log u
   meteor:
     server:
       publish:
