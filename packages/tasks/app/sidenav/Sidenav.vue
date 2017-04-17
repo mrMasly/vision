@@ -14,9 +14,6 @@ import Groups from './Groups.vue'
 component =
   name: 'sidenav'
   components: { User, Groups }
-  created: ->
-    unless @$route.params.tab?
-      @$router.push params: tab: 'today'
 
 return component
 </script>

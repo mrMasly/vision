@@ -2,7 +2,7 @@
 .l-padding
   md-input-container
     label Пользователь
-    md-select(v-model="user")
+    md-select(v-model="$store.state.vision.tasks.user")
       md-select-search(v-model="search")
       md-option(v-for="user in users", :value="user._id") {{user.profile.name}}
 

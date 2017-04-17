@@ -56,7 +56,6 @@ return component
   height 48px
   padding-right 0
 input
-  height 100%
   font-size 16px
   border none
   outline none

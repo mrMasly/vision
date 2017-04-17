@@ -1,7 +1,7 @@
 <template lang="jade">
 md-list
   md-list-item.has-ripple(v-for="group in groups"
-  @click.native="go(group)",
+  @click.native="select(group)",
   :class="[($route.params.tab === group.name) ? 'active': '']")
     md-ink-ripple
     md-icon {{group.icon}}
@@ -23,8 +23,14 @@ component =
       {icon: 'repeat', title: 'Повторяющиеся', name: 'repeat'}
       {icon: 'check_box', title: 'Выполненные', name: 'done'}
     ]
+  created: ->
+    unless @$route.params.tab?
+      @$router.push params: tab: 'today'
+    else
+      @$store.commit 'vision/tasks/setGroup', @$route.params.tab
   methods:
-    go: (group) ->
+    select: (group) ->
+      @$store.commit 'vision/tasks/setGroup', group.name
       @$router.push params: tab: group.name
 
 return component
