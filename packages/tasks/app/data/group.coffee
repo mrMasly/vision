@@ -6,7 +6,6 @@ module.exports = () ->
   user = Meteor.Store.state.vision.tasks.user
   options = Meteor.Store.state.vision.tasks.options
 
-
   if group is 'inbox'
     lists.push name: 'Входящие', index: 1, match:
       date: null
@@ -101,9 +100,8 @@ module.exports = () ->
         {title: $regex: query, $options: 'i'}
         {tags: $regex: query, $options: 'i'}
       ]
-
   # если не разделять по группам
-  unless options.group
+  unless 'group' in options
     $or = []
     for list in lists
       $or.push list.match
@@ -113,7 +111,7 @@ module.exports = () ->
     lists.push done if done?
 
   # если выделить отдельно задачи от других пользователей
-  if options.users
+  if 'users' in options
     $or = []
     for list in lists
       continue if list.match.done or list.match.justNow is yes
@@ -125,7 +123,7 @@ module.exports = () ->
       lists.push name: 'От других пользователей', index: 0, open: yes, match: $or: $or
 
   # если нужно отдельно выделить важные
-  if options.priority
+  if 'priority' in options
     $or = []
     for list in lists
       continue if list.match.done or list.match.justNow is yes
@@ -143,4 +141,10 @@ module.exports = () ->
   #     match.
   #     $or.push match
   #     list.match.priority = $ne: 3
+
+  list.size = 0 for list in lists
+  list.open ?= yes for list in lists
+
+  lists = _.sortBy lists, ['index']
+
   return lists
