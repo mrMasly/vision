@@ -141,6 +141,8 @@ return component
   letter-spacing 0.2px
   color #777
   transition background-color .2s linear
+  .dz-message
+    text-align center
   &:hover
     background-color #F6F6F6
   i

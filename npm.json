@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@mrmasly/layout": "^0.2.0",
+    "@mrmasly/layout": "^0.2.1",
     "vue": "^2.2.6",
     "vue-meta": "^0.5.5",
     "vue-router": "^2.3.1",

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mrmasly:vision',
-  version: '0.3.1',
+  version: '0.3.2',
   summary: 'Vision app',
   git: 'https://github.com/mrMasly/vision',
   documentation: 'README.md'
