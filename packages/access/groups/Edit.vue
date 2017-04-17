@@ -1,5 +1,5 @@
 <template lang="jade">
-.l-fill.l-column.user
+.l-fill.l-column.group
   md-toolbar
     h2.md-title.l-flex(v-once) {{title || group.name}}
     md-button.md-icon-button(@click.native="close")
@@ -55,6 +55,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.user
+.group
   width 700px
+  max-width 100%
 </style>

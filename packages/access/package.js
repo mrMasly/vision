@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mrmasly:vision-access',
-  version: '0.0.1',
+  version: '0.0.2',
   summary: 'Vision access',
   git: 'https://github.com/mrMasly/vision',
   documentation: 'README.md'

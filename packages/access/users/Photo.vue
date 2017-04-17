@@ -1,13 +1,15 @@
 <template lang="jade">
 .l-fill.l-column.photo
   md-toolbar.l-row
-    h2.md-title.l-flex
-      span(v-if="user" v-once) Фото пользователя {{user.profile.name}}
+    .md-title.l-flex Фото пользователя {{user.profile.name}}
+    //- h2.md-title.l-flex
+    //-   span(v-if="user" v-once) Фото пользователя {{user.profile.name}}
     md-button.md-icon-button(@click.native="close")
       md-icon close
   md-dialog-content.l-flex
-    dropzone(url="https://httpbin.org/post" v-on:add="add" v-if="!file")
-    croppie(ref="croppie" v-bind:file="file" type="circle" v-else)
+    .l-absolute.content
+      dropzone(url="https://httpbin.org/post" v-on:add="add" v-if="!file")
+      croppie(ref="croppie" v-bind:file="file" type="circle" v-else)
   md-dialog-actions
     md-button.md-primary(@click.native="close") Отмена
     md-button.md-primary(@click.native="save") Сохранить
@@ -51,4 +53,7 @@ return component
   padding 10px
 img
   height 100%
+.content
+  width calc(100% - 20px)
+  height calc(100% - 20px)
 </style>

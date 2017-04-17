@@ -61,17 +61,8 @@ component =
 return component
 </script>
 
-<style lang="stylus">
-@media (max-width: 600px)
-  .md-dialog
-    max-width 100%
-    max-height 100%
-  .fullscreen > .md-dialog
-    width 100%
-    height 100%
-</style>
-
 <style lang="stylus" scoped>
 .user
   width 700px
+  max-width 100%
 </style>
