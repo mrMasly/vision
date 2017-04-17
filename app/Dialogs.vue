@@ -55,7 +55,7 @@ component =
       no: null
 
   created: ->
-    @$store.commit 'linkComponent',
+    @$store.commit 'vision/linkComponent',
       component: @
       id: 'dialogs'
     @default =

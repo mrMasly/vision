@@ -20,6 +20,6 @@ Vue.material.registerTheme 'default',
 import '@mrmasly/layout'
 
 
-import '../store/index.coffee'
+import './store.coffee'
 import '../styles/material/index.styl'
 import '../plugins/index.coffee'

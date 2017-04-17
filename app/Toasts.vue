@@ -18,7 +18,7 @@ component =
   module: module
   name: 'Toasts'
   created: ->
-    @$store.commit 'linkComponent',
+    @$store.commit 'vision/linkComponent',
       component: @
       id: 'toasts'
     @default = _.clone @toast
