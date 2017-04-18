@@ -1,0 +1,62 @@
+<template lang="jade">
+.sub.l-row.l-start-start
+  md-checkbox(v-model="sub.done")
+  textarea.l-flex(v-model="sub.title"
+  @keydown="$emit('keydown', index, $event)"
+  rows="1" ref="text")
+  //- md-button.md-icon-button.md-mini
+
+  .remove.has-ripple.l-relative(@click="remove")
+    md-ink-ripple
+    md-icon close
+</template>
+
+<script lang="coffee">
+import autosize from 'autosize'
+component =
+  name: 'subb'
+  props:
+    sub: Object
+    index: Number
+  mounted: -> @$nextTick ->
+    autosize @$refs.text
+  beforeDestroy: ->
+    autosize.destroy @$refs.text
+  methods:
+    remove: -> @$emit 'remove', @index
+
+return component
+</script>
+
+<style lang="stylus" scoped>
+.md-checkbox
+  margin 2px
+  overflow hidden
+.title
+  margin-left 4px
+.md-input-container
+  min-height 30px !important
+  margin 0
+  padding-top 0
+  margin-top -1px
+  margin-bottom -5px
+  margin-left 4px
+  &:after
+    display none
+textarea
+  margin-top 1px
+  border none
+  outline none
+  box-shadow none
+  font-size 1em
+  resize none
+.remove
+  opacity .3
+  cursor pointer
+  border-radius 50% !important
+  overflow hidden
+  user-select none
+  transition opacity .1s
+  &:hover
+    opacity .8
+</style>

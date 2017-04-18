@@ -1,12 +1,14 @@
 <template lang="jade">
 div
-  div(v-for="task in tasks") {{task.title}}
+  Task(v-for="task in tasks", :task="task")
 </template>
 
 <script lang="coffee">
 import _ from 'lodash'
+import Task from './Task.vue'
 component =
   name: 'group'
+  components: { Task }
   props:
     group: Object
   created: ->
