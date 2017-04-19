@@ -23,16 +23,5 @@ import '@mrmasly/layout'
 import './store.coffee'
 import '../styles/material/index.styl'
 import '../plugins/index.coffee'
-
-
-import numeral from 'numeral'
-import moment from 'moment'
-Vue.filter 'numeral', (text, format='0,0') ->
-  numeral(text).format format
-
-Vue.filter 'moment', (text, format='D MMM YYYY', fromFormat) ->
-  if fromFormat?
-    date = moment text, fromFormat
-  else
-    date = moment text
-  return date.format format
+import '../components/index.coffee'
+import '../filters/index.coffee'
