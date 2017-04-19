@@ -4,13 +4,16 @@
   md-checkbox(v-model="task.done")
   //- md-button.done(@click.native.stop="done")
 
-  .link.l-flex.l-row.l-start-center.has-ripple(@click="open" @contextmenu.prevent="settings")
+  .link.l-flex.l-row.l-start-center.has-ripple(@click="open"
+  @contextmenu.prevent="settings")
     md-ink-ripple
     .title.l-flex {{task.title}}
     .time(:style="{color: time.color}") {{time.text}}
+
 </template>
 
 <script lang="coffee">
+import Settings from '../settings/Settings.vue'
 component =
   name: 'task'
   data: ->
@@ -59,7 +62,9 @@ component =
     open: ->
       @$router.push params: { id: @task._id }
     settings: (e) ->
-      console.log e
+      @$refs.panel.open
+
+      # @$panel.open Settings,
 return component
 </script>
 

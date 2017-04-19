@@ -1,17 +1,17 @@
 <template lang="jade">
-.toolbar.l-row.l-fill.l-start-center
+.toolbar.l-row.l-fill.l-start-center(ref="toolbar")
   input.l-flex(placeholder="Добавить задачу"
   v-model="task.title"
   @keydown.enter="save")
 
-  md-menu(md-size="5" ref="menu")
-    md-button.md-icon-button.md-primary(md-menu-trigger)
-      md-icon settings
-    md-menu-content
-      Settings.settings(@close="$refs.menu.close()", :task="task")
+  md-button.md-icon-button.md-primary(@click.native="$refs.panel.open")
+    md-icon settings
 
   md-button.md-icon-button.md-primary(@click.native="save")
     md-icon check
+
+  v-panel(ref="panel" align="toolbar" x="end" y="after" alive)
+    Settings.settings(@close="$refs.panel.close()", :task="task")
 
 </template>
 
@@ -54,7 +54,7 @@ return component
 <style lang="stylus" scoped>
 .toolbar
   height 48px
-  padding-right 0
+  padding 0 0 0 8px
 input
   font-size 16px
   border none

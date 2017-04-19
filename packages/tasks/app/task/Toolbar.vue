@@ -1,14 +1,15 @@
 <template lang="jade">
-.toolbar.l-row.l-start-center.md-whiteframe-1dp
+.toolbar.l-row.l-start-center.md-whiteframe-1dp(ref="toolbar")
   md-checkbox(v-model="task.done")
   .l-flex
-  md-menu(md-size="5" ref="menu")
-    md-button.md-icon-button.md-primary(md-menu-trigger)
-      md-icon settings
-    md-menu-content
-      Settings.settings(@close="$refs.menu.close()", :task="task")
+  md-button.md-icon-button.md-primary(@click.native="$refs.panel.open")
+    md-icon settings
+
   md-button.md-icon-button.md-primary(@click.native="close")
     md-icon close
+
+  v-panel(ref="panel" align="toolbar" x="end" y="after" alive)
+    Settings.settings(@close="$refs.panel.close()", :task="task")
 </template>
 
 <script lang="coffee">
