@@ -22,6 +22,13 @@ component =
   methods:
     close: -> @$emit 'close'
     save: ->
+      if @task._id
+        Mongo.Tasks.update @task._id, $set:
+          date: @task.date
+          time: @task.time
+          priority: @task.priority
+          repeat: @task.repeat
+      @$emit 'save'
       do @close
 return component
 </script>

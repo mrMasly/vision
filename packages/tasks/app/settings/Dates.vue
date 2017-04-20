@@ -72,10 +72,11 @@ component =
           @selected = button.name
           return
       @selected = 'Выбрать'
+      @chose = yes
 
   data: ->
     date: moment(@task.date).format('YYYY-MM-DD')
-    time: moment(@task.date).format('HH:mm')
+    time: @task.time
     chose: no
     selected: null
     repeat: no

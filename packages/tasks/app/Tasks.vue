@@ -28,8 +28,6 @@ component =
   components: { Sidenav, DataTasks, Task }
   methods:
     close: -> @$router.push params: { id: null }
-  mounted: ->
-    @$refs.left.open()
   watch:
     '$route.params.id': (id) ->
       return unless @$refs.right?

@@ -11,7 +11,7 @@
     md-icon check
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive)
-    Settings.settings(@close="$refs.panel.close()", :task="task")
+    Settings.settings(@close="$refs.panel.close()", :task="task", @save="save")
 
 </template>
 
