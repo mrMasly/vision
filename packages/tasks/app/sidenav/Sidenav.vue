@@ -23,7 +23,4 @@ main
   width 270px
 .md-toolbar
   z-index 2
-
-
-
 </style>

@@ -1,7 +1,8 @@
 <template lang="jade">
 .l-relative
   .l-column.l-absolute.l-fill
-    .toolbar.md-transparent.md-whiteframe-1dp
+    .toolbar.md-transparent.md-whiteframe-1dp.l-row.l-start-center
+      slot(name="sidenav-toggle")
       Add.l-flex
     .md-content.l-flex.l-column
       Options.options
@@ -42,6 +43,7 @@ return component
 .toolbar
   z-index 2
   height 48px
+  min-height 48px
 .options
   height 56px
   min-height 56px

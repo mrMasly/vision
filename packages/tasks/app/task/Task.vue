@@ -1,5 +1,5 @@
 <template lang="jade">
-.l-fill
+main.l-fill
   .task(v-if="$subReady.task")
     Toolbar(:task="task" @close="close")
     Heading(:task="task")
@@ -37,4 +37,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
+main
+  width 350px
+  max-width 100%
 </style>
