@@ -1,0 +1,101 @@
+<template lang="jade">
+.v-select(ref="select" @click="open")
+  .v-select-label(:class="[labelClass]") {{label}}
+  .v-select-value(v-if="!multiple") {{title}}
+  .v-select-value(v-else)
+    div(v-for="one in title") {{one}}
+  v-panel(ref="panel" align="select" x="start" y="start" alive)
+    v-select-panel(ref="selectPanel" @close="close" @change="change",
+    :style="{width: width}", :multiple="multiple", :value="value")
+      slot
+</template>
+
+<script lang="coffee">
+import _ from 'lodash'
+import vSelectPanel from './v-select-panel.vue'
+component =
+  name: 'v-select'
+  components: { vSelectPanel }
+  data: ->
+    width: null
+    title: null
+  computed:
+    labelClass: ->
+      if _.isEmpty @value then 'md-placeholder'
+      else 'md-caption'
+
+  props:
+    value:
+      required: yes
+    multiple: [String, Boolean]
+    label: String
+  methods:
+    open: ->
+      @width = $(@$refs.select).width()+'px'
+      @$refs.panel.open()
+      @$nextTick =>
+        @$refs.selectPanel.open()
+    close: ->
+      @$refs.panel.close()
+    update: ->
+      children = _.get @, '$children[0].$children[0].$children'
+      if @multiple
+        @title = []
+        for child in children
+          if child.value in @value
+            @title.push $(child.$el).text()
+      else
+        @title = null
+        for child in children
+          if child.value is @value
+            @title = $(child.$el).text()
+    change: (value) ->
+      @$emit 'input', value
+      @$emit 'change', value
+      @$nextTick ->
+        do @update
+
+return component
+</script>
+
+<style lang="stylus" scoped>
+.v-select
+  cursor pointer
+  width 100%
+  position relative
+  height auto
+.v-select-value
+  display block
+  width 100%
+  position relative
+  top 15px
+  min-height 25px
+  line-height 20px
+  font-size 16px
+  border-bottom solid 1px rgba(0, 0, 0, .15)
+  &:hover
+    &:after
+      color rgba(0, 0, 0, .54)
+  &:after
+    color rgba(0, 0, 0, .38)
+    margin-top 2px
+    position absolute
+    top 50%
+    right 0
+    transform translateY(-50%) scaleY(.45) scaleX(.85)
+    transition all .15s linear
+    content "\25BC"
+    box-sizing inherit
+  & > div
+    line-height 20px
+
+.v-select-label
+  position absolute
+  &.md-placeholder
+    top 15px
+    font-size 16px
+    color rgba(0,0,0,.54)
+  &.md-caption
+    top -8px
+
+</style>
