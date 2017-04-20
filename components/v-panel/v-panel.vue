@@ -17,6 +17,7 @@ component =
   props: ['align', 'x', 'y', 'alive']
   data: ->
     isOpen: no
+    e: null
     style:
       top: 0
       left: 0
@@ -36,10 +37,12 @@ component =
       @$emit 'close'
     open: (e) ->
       @isOpen = yes
+      @e = e
       @$nextTick =>
         do @position
         @style.opacity = 1
       @$emit 'open'
+
     position: position
   beforeDestroy: ->
     $(@$el).remove()

@@ -35,6 +35,22 @@ module.exports = ->
     @style.width = 'auto'
     @style.height = 'auto'
 
+  else if @e
+    if @e.pageX < (win.width/2)
+      @style.left = @e.pageX
+      @style.top = @e.pageY
+    else
+      @style.left = @e.pageX - position.width
+      @style.top = @e.pageY
+    position.left = @style.left
+    position.top = @style.top
+    @style.left += 'px'
+    @style.top += 'px'
+    @style.width = 'auto'
+    @style.height = 'auto'
+
+
+
   # ширина больше окна
   if position.width > win.width
     @style.left = '0px'
