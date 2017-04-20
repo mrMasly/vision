@@ -4,24 +4,33 @@
     .toolbar.md-transparent.md-whiteframe-1dp
       Add.l-flex
     .md-content.l-flex.l-column
-      Options
+      Options.options
       Groups.l-flex(:groups="groups")
+
+  v-panel(ref="panel")
+    Settings(@close="$refs.panel.close()", :task="task")
+
 </template>
 
 <script lang="coffee">
 import Add from '../add/Add.vue'
 import Options from './Options.vue'
 import getGroups from './group.coffee'
+import Settings from '../settings/Settings.vue'
 component =
   name: 'data-tasks'
-  components: { Add, Options }
+  components: { Add, Options, Settings }
   data: ->
     groups: []
+    task: null
   created: ->
     do @update
   methods:
     update: ->
       @groups = getGroups()
+    settings: (task, e) ->
+      @task = task
+      @$refs.panel.open e
   watch:
     '$store.state.vision.tasks.options': -> do @update
     '$store.state.vision.tasks.group': -> do @update
@@ -32,6 +41,8 @@ return component
 <style lang="stylus" scoped>
 .toolbar
   z-index 2
-  // padding 0 8px
   height 48px
+.options
+  height 56px
+  min-height 56px
 </style>

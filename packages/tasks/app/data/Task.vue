@@ -1,14 +1,15 @@
 <template lang="jade">
 
-.l-row.l-relative.task.l-start-center
+.l-row.l-relative.task.l-start-center.has-ripple(@click="open"
+  @contextmenu.prevent="settings")
   md-checkbox(v-model="task.done")
+  md-ink-ripple
   //- md-button.done(@click.native.stop="done")
 
-  .link.l-flex.l-row.l-start-center.has-ripple(@click="open"
-  @contextmenu.prevent="settings")
-    md-ink-ripple
-    .title.l-flex {{task.title}}
-    .time(:style="{color: time.color}") {{time.text}}
+  //- .link.l-flex.has-ripple()
+    //- md-ink-ripple
+  .title.l-flex {{task.title}}
+  .time(:style="{color: time.color}") {{time.text}}
 
 </template>
 
@@ -62,9 +63,8 @@ component =
     open: ->
       @$router.push params: { id: @task._id }
     settings: (e) ->
-      @$refs.panel.open
+      @$parent.$parent.$parent.settings @task, e
 
-      # @$panel.open Settings,
 return component
 </script>
 
@@ -73,6 +73,7 @@ return component
 h = 30px
 
 .task
+  cursor pointer
   height h
   padding 0 10px
   overflow hidden
@@ -95,4 +96,12 @@ h = 30px
   min-width 40px
   width 45px
   margin 0
+.title
+  overflow hidden
+  white-space nowrap
+  text-overflow ellipsis
+.time
+  margin-left 10px
+  white-space nowrap
+  text-align right
 </style>
