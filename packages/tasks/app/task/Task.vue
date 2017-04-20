@@ -1,6 +1,6 @@
 <template lang="jade">
 main.l-fill(@keydown.meta="keydown")
-  .task(v-if="$subReady.task")
+  .task(v-if="$subReady.task && task")
     Toolbar(:task="task" @close="close")
     Heading(:task="task")
     Subs(:task="task")
@@ -41,7 +41,6 @@ component =
         do @save; do e.preventDefault
       else if e.code is 'KeyD'
         do @remove; do e.preventDefault
-
     save: (e) ->
       Mongo.Tasks.update @task._id, $set:
         title: @task.title
@@ -63,7 +62,9 @@ component =
       task: -> [@id]
     task:
       params: -> @id
-      update: (id) -> Mongo.Tasks.findOne @id
+      update: (id) ->
+        task = Mongo.Tasks.findOne @id
+        return task
 
 return component
 </script>
