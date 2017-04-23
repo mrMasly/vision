@@ -1,6 +1,6 @@
 <template lang="jade">
 .v-select-panel(@keydown="keydown" @click="click")
-  .search.l-row.l-padding
+  .search.l-row.l-padding(v-if="searching")
     md-button.md-icon-button.md-mini(@click.native="deselect")
       md-icon clear_all
     input.l-flex(ref="search" placeholder="Поиск" @keyup="filter" v-model="search")
@@ -28,7 +28,7 @@ component =
         @val = []
     else
       @val = _.clone @value
-  props: [ 'multiple', 'value' ]
+  props: [ 'multiple', 'value', 'searching' ]
   watch:
     val: ->
       for child in @$children
@@ -43,7 +43,7 @@ component =
       @options[i].focus = yes if @options[i]?
     open: ->
       do @filter
-      @$refs.search.focus()
+      @$refs.search.focus() if @$refs.search?
     keydown: (e) ->
       if e.code is 'ArrowDown'
         do @next; do e.preventDefault

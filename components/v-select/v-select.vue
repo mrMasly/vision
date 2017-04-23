@@ -6,7 +6,7 @@
     div(v-for="one in title") {{one}}
   v-panel(ref="panel" align="select" x="start" y="start" alive)
     v-select-panel(ref="selectPanel" @close="close" @change="change",
-    :style="{width: width}", :multiple="multiple", :value="value")
+    :style="{width: width}", :multiple="multiple", :value="value", :searching="searching")
       slot
 </template>
 
@@ -19,16 +19,21 @@ component =
   data: ->
     width: null
     title: null
+    searching: !!@search
   computed:
     labelClass: ->
       if _.isEmpty @value then 'md-placeholder'
       else 'md-caption'
+  mounted: ->
+    @$nextTick ->
+      do @update
 
   props:
     value:
       required: yes
     multiple: [String, Boolean]
     label: String
+    search: [String, Boolean]
   methods:
     open: ->
       @width = $(@$refs.select).width()+'px'
@@ -39,6 +44,7 @@ component =
       @$refs.panel.close()
     update: ->
       children = _.get @, '$children[0].$children[0].$children'
+      return unless children
       if @multiple
         @title = []
         for child in children
@@ -64,15 +70,18 @@ return component
   width 100%
   position relative
   height auto
+  box-sizing border-box
+  padding-top 20px
+  margin 8px 0
 .v-select-value
   display block
   width 100%
   position relative
-  top 15px
   min-height 25px
   line-height 20px
   font-size 16px
   border-bottom solid 1px rgba(0, 0, 0, .15)
+  box-sizing border-box
   &:hover
     &:after
       color rgba(0, 0, 0, .54)
@@ -86,16 +95,14 @@ return component
     transition all .15s linear
     content "\25BC"
     box-sizing inherit
-  & > div
-    line-height 20px
 
 .v-select-label
   position absolute
   &.md-placeholder
-    top 15px
+    top 20px
     font-size 16px
     color rgba(0,0,0,.54)
   &.md-caption
-    top -8px
+    top 0px
 
 </style>
