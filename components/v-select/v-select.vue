@@ -27,7 +27,18 @@ component =
   mounted: ->
     @$nextTick ->
       do @update
-
+  created: ->
+    if @multiple
+      if _.isEmpty @value
+        value = []
+      else if not _.isArray @value
+        value = [@value]
+    else
+      if _.isArray @value
+        value = @value[0]
+    if value
+      @$emit 'input', value
+      @$emit 'change', value
   props:
     value:
       required: yes
@@ -44,7 +55,7 @@ component =
       @$refs.panel.close()
     update: ->
       children = _.get @, '$children[0].$children[0].$children'
-      return unless children
+      return unless children?
       if @multiple
         @title = []
         for child in children
