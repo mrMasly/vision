@@ -6,7 +6,7 @@
     div(v-for="one in title") {{one}}
   v-panel(ref="panel" align="select" x="start" y="start" alive)
     v-select-panel(ref="selectPanel" @close="close" @change="change",
-    :style="{width: width}", :multiple="multiple", :value="value", :searching="searching")
+    :style="{minWidth: style.width, maxHeight: style.height}", :multiple="multiple", :value="value", :searching="searching")
       slot
 </template>
 
@@ -17,7 +17,9 @@ component =
   name: 'v-select'
   components: { vSelectPanel }
   data: ->
-    width: null
+    style:
+      width: null
+      height: null
     title: null
     searching: !!@search
   computed:
@@ -28,8 +30,12 @@ component =
     @$nextTick ->
       do @update
   created: ->
+    if @height
+      @style.height = _.toString @height
+      @style.height = @style.height+'px' if @style.height.indexOf('px') is -1
+
     if @multiple
-      if _.isEmpty @value
+      unless @value?
         value = []
       else if not _.isArray @value
         value = [@value]
@@ -45,9 +51,10 @@ component =
     multiple: [String, Boolean]
     label: String
     search: [String, Boolean]
+    height: [String, Number]
   methods:
     open: ->
-      @width = $(@$refs.select).width()+'px'
+      @style.width = $(@$refs.select).width()+'px'
       @$refs.panel.open()
       @$nextTick =>
         @$refs.selectPanel.open()

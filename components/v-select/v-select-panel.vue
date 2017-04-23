@@ -1,5 +1,5 @@
 <template lang="jade">
-.v-select-panel(@keydown="keydown" @click="click")
+.v-select-panel.l-column(@keydown="keydown" @click="click")
   .search.l-row.l-padding(v-if="searching")
     md-button.md-icon-button.md-mini(@click.native="deselect")
       md-icon clear_all
@@ -7,7 +7,7 @@
     md-button.md-icon-button.md-mini(@click.native="clear")
       md-icon close
   md-divider
-  .content
+  .content.l-flex.l-scroll
     slot(@select="select", :multiple="multiple")
 </template>
 
@@ -123,6 +123,9 @@ return component
 </script>
 
 <style lang="stylus" scoped>
+.search
+  height 56px !important
+  min-height 56px !important
 .v-select-panel
   z-index 999
   background-color #fff
