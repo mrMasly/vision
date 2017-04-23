@@ -3,7 +3,9 @@ import Vue from 'vue'
 $layout = {}
 resize = ->
   width = window.innerWidth
+  height = window.innerHeight
   $layout.width = width
+  $layout.height = height
   $layout.xs = width < 600
   $layout.sm = 600 <= width < 960
   $layout.md = 960 <= width < 1280
