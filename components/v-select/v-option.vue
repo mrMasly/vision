@@ -44,6 +44,7 @@ return component
 <style lang="stylus" scoped>
 height = 35px
 .v-option
+  user-select none
   position relative
   cursor pointer
   font-size 16px
