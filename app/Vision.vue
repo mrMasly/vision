@@ -2,11 +2,11 @@
 .l-column.l-fill.l-absolute#vision
   Login(v-if="!userId" @login="login")
   template(v-else-if="$subReady.user")
-    Toolbar
+    Toolbar.no-print
     .l-flex.l-relative
       keep-alive(v-bind:include="/-alive/")
         router-view
-    Navigation
+    Navigation.no-print
     Dialogs
     Toasts
 
@@ -63,4 +63,8 @@ body
   width 100%
   height 100%
   overflow hidden
+
+@media print
+  .no-print
+    display none
 </style>
