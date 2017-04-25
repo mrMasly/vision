@@ -2,11 +2,11 @@
 .md-panel(v-show="isOpen")
   template(v-if="alive")
     .backdrop(@click="close" v-show="isOpen")
-    .md-panel-container.md-whiteframe-2dp(:style="style" ref="container" v-show="isOpen")
+    .md-panel-container.md-whiteframe-2dp(ref="container" v-show="isOpen")
       slot
   template(v-else)
     .backdrop(@click="close" v-if="isOpen")
-    .md-panel-container.md-whiteframe-2dp(:style="style" ref="container" v-if="isOpen")
+    .md-panel-container.md-whiteframe-2dp(ref="container" v-if="isOpen")
       slot
 </template>
 
@@ -23,14 +23,15 @@ component =
       left: 0
       width: 'auto'
       height: 'auto'
-      opacity: 0
     interval: null
   mounted: ->
     $(@$el).appendTo 'body'
     @interval = setInterval (=> do @position), 1000
   methods:
+    opacity: (val) ->
+      $(@$refs.container).css opacity: val
     close: ->
-      @style.opacity = 0
+      @opacity 0
       setTimeout =>
         @isOpen = no
       , 200
@@ -40,7 +41,7 @@ component =
       @e = e
       @$nextTick =>
         do @position
-        @style.opacity = 1
+        @opacity 1
       @$emit 'open'
 
     position: position
@@ -52,6 +53,8 @@ return component
 
 <style lang="stylus" scoped>
 .md-panel
+  top 0
+  left 0
   position fixed
   width 100%
   height 100%
@@ -63,6 +66,7 @@ return component
   width 100%
   height 100%
 .md-panel-container
+  opacity 0
   position absolute
   background-color #fff
   transition opacity .2s

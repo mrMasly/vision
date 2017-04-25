@@ -30,8 +30,8 @@ module.exports = ->
       when 'after' then parent.top + parent.height + 1
     position.left = @style.left
     position.top = @style.top
-    @style.left += 'px'
-    @style.top += 'px'
+    # @style.left += 'px'
+    # @style.top += 'px'
     @style.width = 'auto'
     @style.height = 'auto'
 
@@ -44,8 +44,8 @@ module.exports = ->
       @style.top = @e.pageY
     position.left = @style.left
     position.top = @style.top
-    @style.left += 'px'
-    @style.top += 'px'
+    # @style.left += 'px'
+    # @style.top += 'px'
     @style.width = 'auto'
     @style.height = 'auto'
 
@@ -76,3 +76,5 @@ module.exports = ->
   else if position.top + position.height > win.height
     @style.top = (win.height - position.height) + 'px'
     @style.height = 'auto'
+
+  container.css @style
