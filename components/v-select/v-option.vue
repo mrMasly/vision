@@ -71,6 +71,7 @@ height = 35px
   padding 0 16px
   display block
   transition background-color .1s
+  white-space nowrap
   &.focus
     background-color rgba(0, 0, 0, 0.1)
 .md-checkbox

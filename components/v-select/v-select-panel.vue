@@ -32,9 +32,6 @@ component =
   props: [ 'multiple', 'value', 'searching' ]
   watch:
     search: -> do @filter
-  #   val: ->
-  #     for child in @$children
-  #       do child.update if child.update?
   mounted: ->
     do @filter
     @$nextTick ->
@@ -45,28 +42,24 @@ component =
     focus: (index, scroll=no) ->
       @focused = index
       key = @$slots.visible[index]?.key
-      for option in @options
+      for option in @$refs.scroller.$children
         option.focus = option.$vnode.key is key
       if scroll
         @$refs.scroller.scrollKey key
     open: ->
-      # @$nextTick -> @$refs.scroller.scroll yes
       do @filter
       @$refs.search.focus() if @$refs.search?
       $(document).off 'keydown', @keydown
       $(document).on 'keydown', @keydown
     close: ->
-      console.log 'close'
-      # @$emit 'change', @val
-      # $(document).off 'keydown', @keydown
-      @$emit 'close'
+      $(document).off 'keydown', @keydown
     keydown: (e) ->
       if e.key is 'ArrowDown'
         do @next; do e.preventDefault
       else if e.key is 'ArrowUp'
         do @prev; do e.preventDefault
       else if e.key is 'Escape'
-        do @close; do e.preventDefault
+        @$emit 'close'; do e.preventDefault
       else if e.key is 'Enter'
         do e.preventDefault
         if @focused?
@@ -99,6 +92,9 @@ component =
         do @$forceUpdate
         @$nextTick ->
           @$refs.scroller.onScroll yes
+          setTimeout =>
+            @focus 0
+
         return
 
       getText = (children) ->
@@ -125,6 +121,9 @@ component =
       do @$forceUpdate
       @$nextTick ->
         @$refs.scroller.onScroll yes
+        setTimeout =>
+          @focus 0
+
 
     select: (value) ->
       if @multiple
@@ -132,22 +131,19 @@ component =
           @val = _.without @val, value
         else
           @val.push value
-        # @$emit 'change', @val
       else
         @val = value
-        # @$emit 'change', @val
-        do @close
+        @$emit 'close'
     clear: ->
       @search = ''
       @filter()
     deselect: ->
       if @multiple
         @val = []
-        @$emit 'change', @val
+        do @filter
       else
         @val = null
-        @$emit 'change', @val
-        do @close
+        @$emit 'close'
 
 return component
 </script>
@@ -165,10 +161,10 @@ input
   border none
   font-size 1em
   margin-left 3px
-.content > *:first-child
-  margin-top 8px
-.content > *:last-child
-  margin-bottom 8px
+// .content > *:first-child
+//   margin-top 8px
+// .content > *:last-child
+//   margin-bottom 8px
 
 .md-button
   margin 0 !important

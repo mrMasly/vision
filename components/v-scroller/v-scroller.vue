@@ -26,9 +26,13 @@ component =
       @$slots.visible = @$slots.default[0..10]
     do @$forceUpdate
   mounted: ->
+    # console.log 'mounted'
     @$nextTick ->
       do @onScroll
       do @$forceUpdate
+      setTimeout =>
+        do @onScroll
+        do @$forceUpdate
   methods:
     update: (start) ->
       return unless @$slots.default?

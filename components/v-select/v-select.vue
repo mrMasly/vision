@@ -58,20 +58,23 @@ component =
     label: String
     search: [String, Boolean]
     height: [String, Number]
+    width: [String, Number]
   methods:
     open: ->
-      @style.width = $(@$refs.select).width()+'px'
+      if @width?
+        @style.width = @width+'px'
+      else
+        @style.width = $(@$refs.select).width()+'px'
       @$refs.panel.open()
       @$nextTick =>
         @$refs.selectPanel.open()
     close: ->
+      @$refs.selectPanel.close()
       value = @$refs.selectPanel.val
       @$emit 'input', value
       @$emit 'change', value
-
-    # closePanel: ->
-    #   @$refs.panel.close()
     update: ->
+      return unless @$slots.default?
       getText = (children) ->
         return null unless children?
         text = ''
