@@ -1,14 +1,15 @@
 <template lang="jade">
-.v-select-panel.l-column(@keydown="keydown" @click="click")
+.v-select-panel.l-column(@click="click")
   .search.l-row.l-padding(v-if="searching")
     md-button.md-icon-button.md-mini(@click.native="deselect")
       md-icon clear_all
-    input.l-flex(ref="search" placeholder="Поиск" @keyup="filter" v-model="search")
+    input.l-flex(ref="search" placeholder="Поиск" v-model="search")
     md-button.md-icon-button.md-mini(@click.native="clear")
       md-icon close
   md-divider
-  .content.l-flex.l-scroll
-    slot(@select="select", :multiple="multiple")
+  v-scroller.content.l-flex(ref="scroller")
+    slot(name="visible")
+
 </template>
 
 <script lang="coffee">
@@ -30,83 +31,112 @@ component =
       @val = _.clone @value
   props: [ 'multiple', 'value', 'searching' ]
   watch:
-    val: ->
-      for child in @$children
-        do child.update if child.update?
+    search: -> do @filter
+  #   val: ->
+  #     for child in @$children
+  #       do child.update if child.update?
+  mounted: ->
+    do @filter
+    @$nextTick ->
+      @options = @$refs.scroller.$children
   methods:
     click: -> @$nextTick ->
       @$refs.search.focus() if @$refs.search?
-    focus: (focused) ->
-      @focused = focused if focused?
-      i = @focused
-      option.focus = no for option in @options
-      @options[i].focus = yes if @options[i]?
+    focus: (index, scroll=no) ->
+      @focused = index
+      key = @$slots.visible[index]?.key
+      for option in @options
+        option.focus = option.$vnode.key is key
+      if scroll
+        @$refs.scroller.scrollKey key
     open: ->
+      # @$nextTick -> @$refs.scroller.scroll yes
       do @filter
       @$refs.search.focus() if @$refs.search?
+      $(document).off 'keydown', @keydown
+      $(document).on 'keydown', @keydown
+    close: ->
+      console.log 'close'
+      # @$emit 'change', @val
+      # $(document).off 'keydown', @keydown
+      @$emit 'close'
     keydown: (e) ->
-      if e.code is 'ArrowDown'
+      if e.key is 'ArrowDown'
         do @next; do e.preventDefault
-      else if e.code is 'ArrowUp'
+      else if e.key is 'ArrowUp'
         do @prev; do e.preventDefault
-      else if e.code is 'Escape'
-        @$emit 'close'; do e.preventDefault
-      else if e.code is 'Enter'
+      else if e.key is 'Escape'
+        do @close; do e.preventDefault
+      else if e.key is 'Enter'
         do e.preventDefault
         if @focused?
           option = _.find @options, focus: yes
           do option.select if option?
     next: ->
-      if @options.length
+      if @$slots.visible.length
         unless @focused?
-          @focused = 0
-        else if @focused is @options.length-1
-          @focused = null
+          index = 0
+        else if @focused is @$slots.visible.length
+          index = null
         else
-          @focused += 1
+          index = @focused + 1
       else
-        @focused = null
-      do @focus
+        index = null
+      @focus index, yes
     prev: ->
-      if @options.length
+      if @$slots.visible.length
         unless @focused?
-          @focused = @options.length-1
+          index = @$slots.visible.length-1
         else if @focused is 0
-          @focused = null
+          index = null
         else
-          @focused -= 1
-      else @focused = null
-      do @focus
+          index = @focused - 1
+      else index = null
+      @focus index, yes
     filter: ->
-      @options = []
-      options = _.filter @$children, (child) -> $(child.$el).is('.v-option')
-      options = _.map options, (option) -> option
-      for option in options
-        if @search.length is ''
-          option.show = yes
-          @options.push option
-        else if $(option.$el).text().toLowerCase().indexOf(@search.toLowerCase())+1
-          option.show = yes
-          @options.push option
-        else
-          option.show = no
-          option.focus = no
+      if _.isEmpty @search
+        @$slots.visible = _.clone @$slots.default
+        do @$forceUpdate
+        @$nextTick ->
+          @$refs.scroller.onScroll yes
+        return
 
-      if @search isnt @_search
-        @_search = @search
-        @focused = 0
-        do @focus
+      getText = (children) ->
+        return null unless children?
+        text = ''
+        for child in children
+          if child.children
+            subtext = getText child.children
+            text += subtext if subtext?
+          text += child.text if child.text?
+        return text
+
+      slots = []
+      find = @search.toLowerCase()
+      for option in @$slots.default
+        search = _.get option, 'componentOptions.propsData.search'
+        unless search?
+          search = getText _.get option, 'componentOptions.children'
+        search = _.toLower _.toString search
+        if search.indexOf(find)+1
+          slots.push option
+
+      @$slots.visible = slots
+      do @$forceUpdate
+      @$nextTick ->
+        @$refs.scroller.onScroll yes
+
     select: (value) ->
       if @multiple
         if value in @val
           @val = _.without @val, value
         else
           @val.push value
-        @$emit 'change', @val
+        # @$emit 'change', @val
       else
         @val = value
-        @$emit 'change', @val
-        @$emit 'close'
+        # @$emit 'change', @val
+        do @close
     clear: ->
       @search = ''
       @filter()
@@ -117,7 +147,7 @@ component =
       else
         @val = null
         @$emit 'change', @val
-        @$emit 'close'
+        do @close
 
 return component
 </script>

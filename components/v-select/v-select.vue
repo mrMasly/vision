@@ -4,9 +4,12 @@
   .v-select-value(v-if="!multiple") {{title}}
   .v-select-value(v-else)
     div(v-for="one in title") {{one}}
-  v-panel(ref="panel" align="select" x="start" y="start" alive)
-    v-select-panel(ref="selectPanel" @close="close" @change="change",
-    :style="{minWidth: style.width, maxHeight: style.height}", :multiple="multiple", :value="value", :searching="searching")
+  //- .v-select-value
+  //-   slot(name="selected")
+  v-panel(ref="panel" align="select" x="start" y="start" @close="close")
+    v-select-panel(ref="selectPanel" @change="change",
+    :style="{minWidth: style.width, maxHeight: style.height}",
+    :multiple="multiple", :value="value", :searching="searching", @close="$refs.panel.close()")
       slot
 </template>
 
@@ -24,8 +27,11 @@ component =
     searching: !!@search
   computed:
     labelClass: ->
-      if _.isEmpty @value then 'md-placeholder'
+      value = if _.isNumber(@value) then String(@value) else @value
+      if _.isEmpty value then 'md-placeholder'
       else 'md-caption'
+  watch:
+    value: -> do @update
   mounted: ->
     @$nextTick ->
       do @update
@@ -59,20 +65,38 @@ component =
       @$nextTick =>
         @$refs.selectPanel.open()
     close: ->
-      @$refs.panel.close()
+      value = @$refs.selectPanel.val
+      @$emit 'input', value
+      @$emit 'change', value
+
+    # closePanel: ->
+    #   @$refs.panel.close()
     update: ->
-      children = _.get @, '$children[0].$children[0].$children'
-      return unless children?
-      if @multiple
-        @title = []
+      getText = (children) ->
+        return null unless children?
+        text = ''
         for child in children
-          if child.value in @value
-            @title.push $(child.$el).text()
-      else
-        @title = null
-        for child in children
-          if child.value is @value
-            @title = $(child.$el).text()
+          if child.children
+            subtext = getText child.children
+            text += subtext if subtext?
+          text += child.text if child.text?
+        return text
+
+      # slots = []
+      @title = if @multiple then [] else null
+      for option in @$slots.default
+        val = _.get option, 'componentOptions.propsData.value'
+        if @multiple
+          if val in @value
+            @title.push getText option.componentOptions.children
+            # console.log text
+            # slots.push option
+        else
+          if val is @value
+            # slots.push option
+            @title = getText option.componentOptions.children
+      # @$slots.selected = slots
+      do @$forceUpdate
     change: (value) ->
       @$emit 'input', value
       @$emit 'change', value
@@ -81,6 +105,8 @@ component =
 
 return component
 </script>
+
+
 
 <style lang="stylus" scoped>
 .v-select

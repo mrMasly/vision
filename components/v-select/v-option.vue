@@ -1,8 +1,8 @@
 <template lang="jade">
-.v-option(:class="[{focus: focus}]" v-show="show" @click="select" @mouseover="mouseover")
+.v-option(:class="[{focus: focus}]" v-show="show" @click="select" @mousemove="mousemove")
   .has-ripple
-    md-ink-ripple
-    .l-row.l-start-center(v-if="$parent.multiple")
+    md-ink-ripple(v-if="panel")
+    .l-row.l-start-center(v-if="panel && panel.multiple")
       md-checkbox(v-model="checked")
       slot.l-flex
     div(v-else, :class="[{checked: checked}]")
@@ -10,34 +10,52 @@
 </template>
 
 <script lang="coffee">
+import _ from 'lodash'
 component =
   name: 'v-option'
   data: ->
     focus: no
     show: yes
     checked: no
+    panel: null
   props:
     value:
       required: yes
     multiple: [String, Boolean]
+    search: [String, Number, Array]
   created: ->
+
+  mounted: ->
+    do @getPanel
     do @update
   methods:
+    getPanel: ->
+      return if $(@$parent.$el).is('.v-select')
+      parent = @
+      for i in [0..10]
+        return null unless parent?
+        if parent.$el? and $(parent.$el).is('.v-select-panel')
+          @panel = parent
+          break
+        else
+          parent = parent.$parent
     update: ->
-      if @$parent.multiple
-        @checked = @value in @$parent.val
+      return unless @panel
+      if @panel.multiple
+        @checked = @value in @panel.val
       else
-        @checked = @value is @$parent.val
+        @checked = @value is @panel.val
     select: ->
-      @$parent.select @value
-    mouseover: ->
-      @$emit 'focus'
-      options = _.filter @$parent.$children, (c) -> $(c.$el).is('.v-option') and c.show
-      index = 0
-      for option in options
-        break if option._uid is @_uid
-        index++
-      @$parent.focus index
+      return unless @panel
+      @panel.select @value
+      @checked = not @checked
+    mousemove: ->
+      return if @focus
+      return unless @panel
+      key = @$vnode.key
+      options = @$parent.$slots.default
+      index = _.findIndex options, key: key
+      @panel.focus index
 return component
 </script>
 
