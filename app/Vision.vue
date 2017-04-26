@@ -5,7 +5,7 @@
     Toolbar.no-print
     .l-flex.l-relative
       keep-alive(v-bind:include="/-alive/")
-        router-view
+        router-view.l-fill.l-absolute
     Navigation.no-print
     Dialogs
     Toasts

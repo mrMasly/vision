@@ -40,6 +40,7 @@ component =
     click: -> @$nextTick ->
       @$refs.search.focus() if @$refs.search?
     focus: (index, scroll=no) ->
+      return unless _.get @$slots, 'default.length'
       @focused = index
       key = @$slots.visible[index]?.key
       for option in @$refs.scroller.$children
@@ -87,6 +88,7 @@ component =
       else index = null
       @focus index, yes
     filter: ->
+      return unless _.get @$slots, 'default.length'
       if _.isEmpty @search
         @$slots.visible = _.clone @$slots.default
         do @$forceUpdate
