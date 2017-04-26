@@ -20,6 +20,7 @@ component =
     end: 0
     blockSize: 0
     blockHeight: 0
+    interval: null
   created: ->
     @itemHeight = _.toNumber(@height)
     if @$slots.default?
@@ -33,6 +34,12 @@ component =
       setTimeout =>
         do @onScroll
         do @$forceUpdate
+    @interval = setInterval =>
+      unless @$slots.visible?
+        @onScroll yes
+    , 500
+  beforeDestroy: ->
+    clearInterval @interval
   methods:
     update: (start) ->
       return unless @$slots.default?
@@ -55,7 +62,8 @@ component =
     updateParams: ->
       return unless @$slots.default?
       height = _.get @$slots, 'visible[0].elm.offsetHeight'
-      @height = height if height?
+      # console.log height
+      @height = height if height
       @blockSize = _.ceil @$el.offsetHeight / @height
       @blockHeight = @blockSize * @height
       @end = @start + @blockSize - 1
