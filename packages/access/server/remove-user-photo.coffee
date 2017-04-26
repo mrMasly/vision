@@ -1,7 +1,6 @@
 
 
 export default (userId) ->
-  async = Async.runSync (done) ->
+  do Meteor.wrapAsync (done) ->
     Mongo.Avatars.remove {user: userId}, (err, res) ->
       do done
-  return async.result

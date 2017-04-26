@@ -2,13 +2,12 @@ import _ from 'lodash'
 
 export default (user) ->
 
-  async = Async.runSync (done) ->
+  do Meteor.wrapAsync (done) ->
 
     if user._id then make = update
     else make = insert
     make user, done
 
-  return async.result
 
 
 update = (user, done) ->

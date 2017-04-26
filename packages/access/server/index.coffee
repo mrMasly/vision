@@ -9,7 +9,6 @@ Meteor.publish module, 'users', ->
 Meteor.publish module, 'user', (id) ->
   Mongo.Users.find(id)
 
-
 Meteor.publish module, 'groups', () ->
   Mongo.Users.Groups.find()
 

@@ -14,10 +14,8 @@
     md-input-container
       label Пароль
       md-input(type="text" v-model="user.password")
-    md-input-container
-      label Группы
-      md-select(v-model="user.groups" multiple)
-        md-option(v-bind:value="group._id" v-for="group in groups") {{group.name}}
+    v-select(v-model="user.groups" multiple search label="Группы")
+      v-option(:value="group._id" v-for="group in groups", :key="group._id") {{group.name}}
   md-dialog-actions
     md-button.md-primary(@click.native="close") Отмена
     md-button.md-primary(@click.native="save") Сохранить
