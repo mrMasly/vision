@@ -26,7 +26,7 @@ component =
     interval: null
   mounted: ->
     $(@$el).appendTo 'body'
-    @interval = setInterval (=> do @position), 1000
+    # @interval = setInterval (=> do @position), 1000
   methods:
     opacity: (val) ->
       $(@$refs.container).css opacity: val
