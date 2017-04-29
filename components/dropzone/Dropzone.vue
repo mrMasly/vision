@@ -77,7 +77,7 @@ component =
   mounted: ->
     if @$isServer
       return
-    Dropzone = require('dropzone')
+    Dropzone = require('dropzone/index.js')
     Dropzone.autoDiscover = false
     element = @$refs.dropzone
     if !@useCustomDropzoneOptions

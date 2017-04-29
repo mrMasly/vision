@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import _ from 'lodash'
 Vue.use(Vuex)
 
-Meteor.Store = window.Store = new Vuex.Store
+Meteor.Store = new Vuex.Store
   modules:
     vision:
       namespaced: yes

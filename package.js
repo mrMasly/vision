@@ -6,9 +6,24 @@ Package.describe({
   documentation: 'README.md'
 });
 
+Package.registerBuildPlugin({
+  name: 'theme-compiler',
+  use: ['ecmascript', 'caching-compiler'],
+  sources: [
+    'build/theme.js'
+  ],
+  npmDependencies: {
+    stylus: "https://github.com/meteor/stylus/tarball/bb47a357d132ca843718c63998eb37b90013a449", // fork of 0.54.5
+    nib: "1.1.2",
+    "autoprefixer-stylus": "0.9.4"
+  }
+})
+
+
 
 Package.onUse(function(api) {
   api.versionsFrom('1.4.3.1');
+  api.use('isobuild:compiler-plugin@1.0.0')
 
   api.use('akryum:npm-check@0.0.2');
   api.use('coffeescript@1.12.3_1');
@@ -17,7 +32,7 @@ Package.onUse(function(api) {
   api.use('webapp@1.3.14');
   api.use('mongo@1.1.16', ['client', 'server']);
   api.use('tmeasday:check-npm-versions@0.3.1');
-  api.use('stylus@2.513.9');
+  api.use('stylus@2.513.9', ['client', 'server']);
   api.use('meteorhacks:async@1.0.0');
   api.use('zimme:collection-behaviours@1.1.3');
   api.use('random@1.0.10');
@@ -38,6 +53,11 @@ Package.onUse(function(api) {
     'files/audio/notification.mp3',
     'files/icon.png'
   ], 'client');
+
+
+  api.addFiles([
+    'styles/index.styl'
+  ]);
 
   api.addFiles('main/common.coffee', ['client', 'server']);
   api.addFiles('main/client.coffee', 'client');

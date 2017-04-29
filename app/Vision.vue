@@ -1,5 +1,5 @@
 <template lang="jade">
-.l-column.l-fill.l-absolute#vision
+//- .l-column.l-fill.l-absolute#vision
   Login(v-if="!userId" @login="login")
   template(v-else-if="$subReady.user")
     Toolbar.no-print
@@ -9,7 +9,7 @@
     Navigation.no-print
     Dialogs
     Toasts
-
+router-view.l-fill.l-absolute
 </template>
 
 <script lang="coffee">

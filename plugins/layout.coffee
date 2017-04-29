@@ -2,8 +2,12 @@ import Vue from 'vue'
 
 $layout = {}
 resize = ->
-  width = window.innerWidth
-  height = window.innerHeight
+  if Meteor.isClient
+    width = window.innerWidth
+    height = window.innerHeight
+  else
+    width = 1280
+    height = 720
   $layout.width = width
   $layout.height = height
   $layout.xs = width < 600
@@ -15,7 +19,8 @@ resize = ->
   $layout.gsm = width >= 960
   $layout.gmd = width >= 1280
   $layout.glg = width >= 1620
-window.addEventListener 'resize', resize
+if Meteor.isClient
+  window.addEventListener 'resize', resize
 do resize
 
 Plugin = {}
