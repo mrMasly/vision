@@ -1,0 +1,36 @@
+default-size = 24px
+
+icon-size(size)
+  width size
+  min-width size
+  height size
+  min-height size
+  font-size size
+.v-icon
+  icon-size 24px
+  margin auto
+  display inline-flex
+  align-items center
+  fill currentColor
+  text-rendering optimizeLegibility
+  vertical-align middle
+
+  &.v-size-2x
+    icon-size(default-size * 2)
+
+  &.v-size-3x
+    icon-size(default-size * 3)
+
+  &.v-size-4x
+    icon-size(default-size * 4)
+
+  &.v-size-5x
+    icon-size(default-size * 5)
+
+  svg
+    width 100%
+    height 100%
+
+img.v-icon
+  user-select none
+  -webkit-user-drag none

@@ -1,0 +1,42 @@
+.THEME_NAME
+  &.v-checkbox
+    &.v-checked
+      .v-checkbox-container
+        background-color ACCENT-COLOR
+        border-color ACCENT-COLOR
+        &:after
+          border-color ACCENT-CONTRAST
+
+    .v-ink-ripple
+      color ACCENT-COLOR
+    .v-ripple
+      opacity .26;
+
+    &.v-primary
+      &.v-checked
+        .v-checkbox-container
+          background-color PRIMARY-COLOR
+          border-color PRIMARY-COLOR
+          &:after
+            border-color PRIMARY-CONTRAST
+      .v-ink-ripple
+        color PRIMARY-COLOR
+
+    &.v-warn
+      &.v-checked
+        .v-checkbox-container
+          background-color WARN-COLOR
+          border-color WARN-COLOR
+          &:after
+            border-color WARN-CONTRAST
+      .v-ink-ripple
+        color WARN-COLOR
+
+    &.v-disabled
+      &.v-checked
+        .v-checkbox-container
+          background-color rgba(#000, .26);
+          border-color transparent;
+      &:not(.v-checked)
+        .v-checkbox-container
+          border-color rgba(#000, .26);
