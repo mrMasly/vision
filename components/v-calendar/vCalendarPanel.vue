@@ -10,14 +10,14 @@
       input(type="date" v-model="selected[1]")
 
   .l-row.l-center
-    md-button.md-primary(@click.native="subYear")
-      md-icon fast_rewind
-    md-button.md-primary(@click.native="subMonth")
-      md-icon chevron_left
-    md-button.md-primary(@click.native="addMonth")
-      md-icon chevron_right
-    md-button.md-primary(@click.native="addYear")
-      md-icon fast_forward
+    v-button.v-primary(@click.native="subYear")
+      v-icon fast_rewind
+    v-button.v-primary(@click.native="subMonth")
+      v-icon chevron_left
+    v-button.v-primary(@click.native="addMonth")
+      v-icon chevron_right
+    v-button.v-primary(@click.native="addYear")
+      v-icon fast_forward
   Monthes(:date="date" @select="select", :period="period", :selected="selected", :value="value", @getDate="getDate")
 
   slot.switch(name="period")
@@ -44,7 +44,6 @@ component =
     else
       @selected = moment(@value).format('YYYY-MM-DD')
     do @getDate
-
   props: ['value', 'period']
   watch:
     selected: ->
@@ -81,43 +80,3 @@ component =
 
 return component
 </script>
-
-<style lang="stylus" scoped>
-.month
-  margin 8px
-.month-button
-  min-width 40px
-  width 40px
-  padding 0
-  &:first-child
-    > .md-icon
-      position absolute
-      bottom 10px
-      left 10px
-  &:last-child
-    > .md-icon
-      position absolute
-      top 10px
-      left 10px
-input
-  // width 125px
-  text-align center
-  font-size 16px
-  word-spacing 12px !important
-  border none
-  outline none
-  box-shadow none
-  &::-webkit-inner-spin-button
-  &::-webkit-calendar-picker-indicator
-    display none
-    -webkit-appearance none
-.inputs
-  margin-top 18px
-.switch
-  position absolute
-  top 10px
-  right 10px
-.span
-  display inline-block
-  margin-left 16px
-</style>

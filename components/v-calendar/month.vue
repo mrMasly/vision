@@ -1,6 +1,6 @@
 <template lang="jade">
 .month
-  md-button.title(@click.native="selectMonth") {{date | moment('MMMM YYYY')}}
+  v-button.title(@click.native="selectMonth") {{date | moment('MMMM YYYY')}}
   table
     thead
       tr
