@@ -1,0 +1,57 @@
+.THEME_NAME
+  &.v-button:not([disabled])
+
+    &.v-raised
+      &:not(.v-icon-button)
+        color BACKGROUND-CONTRAST
+        background-color BACKGROUND-COLOR
+        &:hover
+          background-color BACKGROUND-COLOR-200
+      &.v-icon-button:not(.v-raised)
+        color BACKGROUND-CONTRAST
+
+    &.v-fab
+      color ACCENT-CONTRAST
+      background-color ACCENT-COLOR
+      &:hover
+        background-color ACCENT-COLOR-600
+      &.v-clean
+        color BACKGROUND-CONTRAST
+        background-color BACKGROUND-COLOR
+        &:hover
+          background-color BACKGROUND-COLOR-200
+
+    &.v-primary
+      &:not(.v-icon-button)
+        color PRIMARY-COLOR
+      &.v-raised
+      &.v-fab
+        background-color PRIMARY-COLOR
+        color PRIMARY-CONTRAST
+        &:hover
+          background-color PRIMARY-COLOR-600
+      &.v-icon-button:not(.v-raised)
+        color PRIMARY-COLOR
+
+    &.v-accent
+      &:not(.v-icon-button)
+        color ACCENT-COLOR
+      &.v-raised
+        background-color ACCENT-COLOR
+        color ACCENT-CONTRAST
+        &:hover
+          background-color ACCENT-COLOR-600
+      &.v-icon-button:not(.v-raised)
+        color ACCENT-COLOR
+
+    &.v-warn
+      &:not(.v-icon-button)
+        color WARN-COLOR
+      &.v-raised
+      &.v-fab
+        background-color WARN-COLOR
+        color WARN-CONTRAST
+        &:hover
+          background-color WARN-COLOR-600
+      &.v-icon-button:not(.v-raised)
+        color WARN-COLOR
