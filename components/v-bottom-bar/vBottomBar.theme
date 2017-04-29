@@ -1,0 +1,62 @@
+.THEME_NAME
+  &.v-bottom-bar
+    &.v-fixed
+      background-color: BACKGROUND-COLOR
+
+      .v-bottom-bar-item
+        color: BACKGROUND-CONTRAST-0.54
+        &:hover:not([disabled]):not(.v-active)
+          color: BACKGROUND-CONTRAST-0.87
+        &.v-active
+          color: PRIMARY-COLOR
+
+      &.v-accent
+        .v-bottom-bar-item
+          &.v-active
+            color: ACCENT-COLOR
+      &.v-warn
+        .v-bottom-bar-item
+          &.v-active
+            color: WARN-COLOR
+      &.v-transparent
+        .v-bottom-bar-item
+          &.v-active
+            color: BACKGROUND-CONTRAST
+
+    &.v-shift
+      background-color: PRIMARY-COLOR
+      color: PRIMARY-CONTRAST
+
+      .v-bottom-bar-item
+        color: PRIMARY-CONTRAST-0.54
+        &:hover:not([disabled]):not(.v-active)
+          color: PRIMARY-CONTRAST-0.87
+        &.v-active
+          color: PRIMARY-CONTRAST
+
+      &.v-accent
+        background-color: ACCENT-COLOR
+        .v-bottom-bar-item
+          color: ACCENT-CONTRAST-0.54
+          &:hover:not([disabled]):not(.v-active)
+            color: ACCENT-CONTRAST-0.87
+          &.v-active
+            color: ACCENT-CONTRAST
+
+      &.v-warn
+        background-color: WARN-COLOR
+        .v-bottom-bar-item
+          color: WARN-CONTRAST-0.54
+          &:hover:not([disabled]):not(.v-active)
+            color: WARN-CONTRAST-0.87
+          &.v-active
+            color: WARN-CONTRAST
+
+      &.v-transparent
+        background-color: transparent
+        .v-bottom-bar-item
+          color: BACKGROUND-CONTRAST-0.54
+          &:hover:not([disabled]):not(.v-active)
+            color: BACKGROUND-CONTRAST-0.87
+          &.v-active
+            color: BACKGROUND-CONTRAST
