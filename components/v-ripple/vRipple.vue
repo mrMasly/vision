@@ -194,31 +194,5 @@ material-leave-timing-function = cubic-bezier(.4, .0, 1, 1);
 material-leave = all material-leave-duration $material-leave-timing-function;
 
 
-.v-ink-ripple
-  pointer-events none
-  overflow hidden
-  position absolute
-  top 0
-  right 0
-  bottom 0
-  left 0
-  -webkit-mask-image radial-gradient(circle, white 100%, black 100%)
-  transition swift-ease-in
-.v-ripple
-  position absolute
-  background-color currentColor
-  border-radius 50%
-  opacity .2
-  transform scale(0) translateZ(0)
-  transition none
-  will-change background-color, opacity, transform, width, height, top, left
-  &.v-active
-    animation vripple 1s swift-ease-out-timing-function forwards
-    &.v-fadeout
-      opacity 0 !important
-      transition swift-ease-out
-      transition-duration .6s
-@keyframes vripple
-  to
-    transform scale(2.2) translateZ(0)
+
 </style>

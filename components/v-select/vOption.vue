@@ -1,12 +1,12 @@
 <template lang="jade">
 .v-option(:class="[{focus: focus}]" v-show="show" @click="select" @mousemove="mousemove")
-  .has-ripple
-    md-ink-ripple(v-if="panel")
-    .l-row.l-start-center(v-if="panel && panel.multiple")
-      md-checkbox(v-model="checked")
-      slot.l-flex
-    div(v-else, :class="[{checked: checked}]")
-      slot
+  //- .l-relative
+  v-ripple(v-if="panel")
+  .l-row.l-start-center(v-if="panel && panel.multiple")
+    v-checkbox(v-model="checked")
+    slot.l-flex
+  div(v-else, :class="[{checked: checked}]")
+    slot
 </template>
 
 <script lang="coffee">
@@ -58,25 +58,3 @@ component =
       @panel.focus index
 return component
 </script>
-
-<style lang="stylus" scoped>
-height = 35px
-.v-option
-  user-select none
-  position relative
-  cursor pointer
-  font-size 16px
-  line-height height
-  height height
-  padding 0 16px
-  display block
-  transition background-color .1s
-  white-space nowrap
-  &.focus
-    background-color rgba(0, 0, 0, 0.1)
-.md-checkbox
-  margin 0
-  margin-right 12px
-.checked
-  color #2196f3
-</style>

@@ -15,7 +15,7 @@
 
 <script lang="coffee">
 import _ from 'lodash'
-import vSelectPanel from './v-select-panel.vue'
+import vSelectPanel from './vSelectPanel.vue'
 component =
   name: 'v-select'
   components: { vSelectPanel }
@@ -108,48 +108,3 @@ component =
 
 return component
 </script>
-
-
-
-<style lang="stylus" scoped>
-.v-select
-  cursor pointer
-  width 100%
-  position relative
-  height auto
-  box-sizing border-box
-  padding-top 20px
-  margin 8px 0
-.v-select-value
-  display block
-  width 100%
-  position relative
-  min-height 25px
-  line-height 20px
-  font-size 16px
-  border-bottom solid 1px rgba(0, 0, 0, .15)
-  box-sizing border-box
-  &:hover
-    &:after
-      color rgba(0, 0, 0, .54)
-  &:after
-    color rgba(0, 0, 0, .38)
-    margin-top 2px
-    position absolute
-    top 50%
-    right 0
-    transform translateY(-50%) scaleY(.45) scaleX(.85)
-    transition all .15s linear
-    content "\25BC"
-    box-sizing inherit
-
-.v-select-label
-  position absolute
-  &.md-placeholder
-    top 20px
-    font-size 16px
-    color rgba(0,0,0,.54)
-  &.md-caption
-    top 0px
-
-</style>

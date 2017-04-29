@@ -1,12 +1,12 @@
 <template lang="jade">
-.md-panel(v-show="isOpen")
+.v-panel(v-show="isOpen")
   template(v-if="alive")
     .backdrop(@click="close" v-show="isOpen")
-    .md-panel-container.md-whiteframe-2dp(ref="container" v-show="isOpen")
+    .v-panel-container.v-shadow-2(ref="container" v-show="isOpen")
       slot
   template(v-else)
     .backdrop(@click="close" v-if="isOpen")
-    .md-panel-container.md-whiteframe-2dp(ref="container" v-if="isOpen")
+    .v-panel-container.v-shadow-2(ref="container" v-if="isOpen")
       slot
 </template>
 
@@ -50,24 +50,3 @@ component =
     clearInterval @interval
 return component
 </script>
-
-<style lang="stylus" scoped>
-.md-panel
-  top 0
-  left 0
-  position fixed
-  width 100%
-  height 100%
-  z-index 999
-.backdrop
-  position absolute
-  top 0
-  left 0
-  width 100%
-  height 100%
-.md-panel-container
-  opacity 0
-  position absolute
-  background-color #fff
-  transition opacity .2s
-</style>

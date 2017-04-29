@@ -1,3 +1,4 @@
 import Vue from 'vue'
-import vPanel from './v-panel.vue'
+import vPanel from './vPanel.vue'
+
 Vue.component 'v-panel', vPanel

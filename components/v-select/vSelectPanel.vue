@@ -1,12 +1,12 @@
 <template lang="jade">
 .v-select-panel.l-column(@click="click")
   .search.l-row.l-padding(v-if="searching")
-    md-button.md-icon-button.md-mini(@click.native="deselect")
-      md-icon clear_all
+    v-button.v-icon-button.v-mini(@click.native="deselect")
+      v-icon clear_all
     input.l-flex(ref="search" placeholder="Поиск" v-model="search")
-    md-button.md-icon-button.md-mini(@click.native="clear")
-      md-icon close
-  md-divider
+    v-button.v-icon-button.v-mini(@click.native="clear")
+      v-icon close
+  v-divider
   v-scroller.content.l-flex(ref="scroller")
     slot(name="visible")
 
@@ -149,25 +149,3 @@ component =
 
 return component
 </script>
-
-<style lang="stylus" scoped>
-.search
-  height 56px !important
-  min-height 56px !important
-.v-select-panel
-  z-index 999
-  background-color #fff
-input
-  outline none
-  box-shadow none
-  border none
-  font-size 1em
-  margin-left 3px
-// .content > *:first-child
-//   margin-top 8px
-// .content > *:last-child
-//   margin-bottom 8px
-
-.md-button
-  margin 0 !important
-</style>
