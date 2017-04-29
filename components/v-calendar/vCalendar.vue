@@ -11,7 +11,7 @@ div.v-calendar(ref="calendar" @click="open")
   v-panel(ref="panel" align="calendar" x="start" y="start" alive v-if="display")
     v-calendar-panel(:value="value", :period="period2" @change="change" ref="cPanel")
       //- .switch(slot="period")
-        md-switch(v-model="period2") Период
+        v-switch(v-model="period2") Период
 </template>
 
 <script lang="coffee">
@@ -50,8 +50,8 @@ component =
       @$emit 'change', value
   computed:
     labelClass: ->
-      if @period then 'md-caption'
-      else if @value? then 'md-caption'
-      else 'md-placeholder'
+      if @period then 'v-caption'
+      else if @value? then 'v-caption'
+      else 'v-placeholder'
 return component
 </script>

@@ -1,5 +1,5 @@
 <template lang="jade">
-a.md-bottom-bar-item(:href='href', :class='classes', :disabled='disabled', @click='setActive', v-if='href')
+a.v-bottom-bar-item(:href='href', :class='classes', :disabled='disabled', @click='setActive', v-if='href')
   v-icon(v-if='vIcon || vIconSrc || vIconset', :v-icon-src='vIconSrc', :v-iconset='vIconset') {{ vIcon }}
   v-ripple(:v-disabled='disabled')
     span.v-text
@@ -36,9 +36,9 @@ component =
       if active
         @$parent.setActive this
   mounted: ->
-    if !@$parent.$el.classList.contains('md-bottom-bar')
+    if !@$parent.$el.classList.contains('v-bottom-bar')
       @$destroy()
-      throw new Error('You should wrap the md-bottom-bar-item in a md-bottom-bar')
+      throw new Error('You should wrap the v-bottom-bar-item in a v-bottom-bar')
     if @mdActive
       @active = true
 

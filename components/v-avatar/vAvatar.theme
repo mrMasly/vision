@@ -1,22 +1,22 @@
 .THEME_NAME
-  &.md-avatar
-    &.md-primary
-      &.md-avatar-icon
+  &.v-avatar
+    &.v-primary
+      &.v-avatar-icon
         background-color: PRIMARY-COLOR
 
-        .md-icon
+        .v-icon
           color: PRIMARY-CONTRAST-0.99999
 
-    &.md-accent
-      &.md-avatar-icon
+    &.v-accent
+      &.v-avatar-icon
         background-color: ACCENT-COLOR
 
-        .md-icon
+        .v-icon
           color: ACCENT-CONTRAST-0.99999
 
-    &.md-warn
-      &.md-avatar-icon
+    &.v-warn
+      &.v-avatar-icon
         background-color: WARN-COLOR
 
-        .md-icon
+        .v-icon
           color: WARN-CONTRAST-0.99999

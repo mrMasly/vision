@@ -28,8 +28,8 @@ component =
   computed:
     labelClass: ->
       value = if _.isNumber(@value) then String(@value) else @value
-      if _.isEmpty value then 'md-placeholder'
-      else 'md-caption'
+      if _.isEmpty value then 'v-placeholder'
+      else 'v-caption'
   watch:
     value: -> do @update
   mounted: ->

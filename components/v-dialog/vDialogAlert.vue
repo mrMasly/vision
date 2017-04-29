@@ -1,10 +1,10 @@
 <template lang="jade">
-md-dialog.md-dialog-alert(ref='dialog', @close='fireCloseEvent()')
-  md-dialog-title(v-if='mdTitle') {{ mdTitle }}
-  md-dialog-content(v-if='mdContentHtml', v-html='mdContentHtml')
-  md-dialog-content(v-else='') {{ mdContent }}
-  md-dialog-actions
-    md-button.md-primary(@click.native='close()') {{ mdOkText }}
+v-dialog.v-dialog-alert(ref='dialog', @close='fireCloseEvent()')
+  v-dialog-title(v-if='mdTitle') {{ mdTitle }}
+  v-dialog-content(v-if='mdContentHtml', v-html='mdContentHtml')
+  v-dialog-content(v-else='') {{ mdContent }}
+  v-dialog-actions
+    v-button.v-primary(@click.native='close()') {{ mdOkText }}
 </template>
 
 <script lang="coffee">
@@ -33,7 +33,7 @@ component =
       @$refs.dialog.close()
   mounted: ->
     if !@mdContent and !@mdContentHtml
-      throw new Error('Missing md-content or md-content-html attributes')
+      throw new Error('Missing v-content or v-content-html attributes')
 
 return component
 </script>

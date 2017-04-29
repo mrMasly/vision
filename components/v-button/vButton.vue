@@ -8,7 +8,7 @@ a.v-button(:class='[themeClass]', :href='href', :disabled='disabled', :target='t
 </template>
 
 <script lang="coffee">
-import theme from '../../theme/mixin.js';
+import theme from '../../theme/mixin.js'
 component =
   name: 'v-button'
   props:
