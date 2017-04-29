@@ -1,0 +1,42 @@
+.THEME_NAME
+  toolbar-spec(main-color, second-color, third-color)
+    background-color main-color
+    color second-color
+
+    .v-input-container
+      &.v-input-focused
+        input,
+        textarea
+          color second-color
+          text-shadow 0 0 0 second-color
+
+        label,
+        .v-icon:not(.v-icon-delete)
+          color second-color
+
+      &:after
+        background-color second-color
+
+      input,
+      textarea
+        color second-color
+        text-shadow 0 0 0 second-color
+
+        &::-webkit-input-placeholder
+          color third-color
+
+      label,
+      .v-icon:not(.v-icon-delete)
+        color second-color
+
+  &.v-toolbar
+    toolbar-spec(PRIMARY-COLOR, PRIMARY-CONTRAST, PRIMARY-CONTRAST-0.54)
+
+    &.v-accent
+      toolbar-spec(ACCENT-COLOR, ACCENT-CONTRAST, ACCENT-CONTRAST-0.54)
+
+    &.v-warn
+      toolbar-spec(WARN-COLOR, WARN-CONTRAST, WARN-CONTRAST-0.54)
+
+    &.v-transparent
+      toolbar-spec(transparent, BACKGROUND-CONTRAST, BACKGROUND-CONTRAST-0.54)

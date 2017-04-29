@@ -1,0 +1,85 @@
+@import '../../styles/variables.styl'
+
+.v-toolbar
+  min-height 64px
+  padding 0 8px
+  display flex
+  align-items center
+  align-content center
+  flex-flow row wrap
+  position relative
+  transition swift-ease-out
+  transform translate3D(0, 0, 0)
+
+  &.v-dense
+    min-height 48px
+    &.v-medium
+      min-height 72px
+    &.v-large
+      min-height 96px
+    .v-toolbar-container
+      height 48px
+
+  &.v-medium
+    min-height 88px
+    .v-toolbar-container:nth-child(2)
+      .v-title:first-child
+        margin-left 56px
+
+  &.v-large
+    min-height 128px
+    align-content inherit
+    .v-toolbar-container:nth-child(2)
+      .v-title:first-child
+        margin-left 56px
+
+  &.v-account-header
+    min-height 164px
+    .v-ink-ripple
+      color #fff
+    .v-list-item-container
+      &:hover:not([disabled])
+        background-color rgba(#fff, .12)
+    .v-avatar-list
+      margin 16px 0 8px
+      .v-list-item-container
+        align-items flex-start
+      .v-avatar + .v-avatar
+        margin-left 16px
+
+  .v-toolbar-container
+    width 100%
+    height 64px
+    display flex
+    align-items center
+    align-self flex-start
+    > .v-button
+      &:first-child
+        margin-left 0
+        margin-right 16px
+      + .v-button
+        margin-left 0
+
+  > .v-button
+    &:first-child
+      margin-left 0
+      margin-right 16px
+    + .v-button
+      margin-left 0
+
+  .v-button:hover
+    &:not([disabled]):not(.v-raised):not(.v-icon-button):not(.v-fab)
+      background-color rgba(#fff, .1)
+  .v-title
+    margin 0
+    font-size 20px
+    font-weight 400
+    &:first-child
+      margin-left 8px
+    + .v-input-container
+      margin-left 24px
+
+  .v-list
+    padding 0
+    margin 0 -8px
+    flex 1
