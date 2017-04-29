@@ -1,0 +1,205 @@
+@import '../../styles/variables.styl'
+@import '../../styles/mixins.styl'
+
+card-radius = 2px
+
+.v-card
+  overflow auto
+  display flex
+  flex-direction column
+  position relative
+  z-index 1
+  border-radius card-radius
+  box-shadow material-shadow-2dp
+
+  &.v-with-hover
+    cursor pointer
+    transition swift-ease-out
+    transition-property box-shadow
+    &:hover
+      z-index 2
+      box-shadow material-shadow-8dp
+
+  .v-card-media
+    position relative
+    &.v-16-9
+      image-aspect-ratio(16, 9)
+    &.v-4-3
+      image-aspect-ratio(4, 3)
+    &.v-1-1
+      image-aspect-ratio(1, 1)
+    + .v-card-header
+      padding-top 24px
+    + .v-card-content:last-child
+      padding-bottom 16px
+    img
+      width 100%
+
+  .v-card-header
+    padding 16px
+    &:first-child
+      > .v-title:first-child,
+      > .v-card-header-text > .v-title:first-child
+        margin-top 8px
+    &:last-child
+      margin-bottom 8px
+    &.v-card-header-flex
+      display flex
+      justify-content space-between
+    + .v-card-content
+      padding-top 0
+    + .v-card-actions:not(:last-child)
+      padding 0 8px
+    .v-avatar
+      margin-right 16px
+      float left
+      ~ .v-title
+        font-size 14px
+      ~ .v-title
+      ~ .v-subhead
+        font-weight 500
+        line-height 20px
+    .v-button
+      margin 0
+      &:last-child
+        margin-right -4px
+      + .v-button
+        margin-left 8px
+    .v-card-header-text
+      flex 1
+    .v-card-media
+      size 80px
+      width size
+      flex 0 0 size
+      height size
+      margin-left 16px
+      &.v-medium
+        size 120px
+        width size
+        flex 0 0 size
+        height size
+      &.v-big
+        size 160px
+        width size
+        flex 0 0 size
+        height size
+
+  .v-subhead
+  .v-title
+  .v-subheading
+    margin 0
+    font-weight 400
+
+  .v-subhead
+    opacity .54
+    font-size 14px
+    letter-spacing .01em
+    line-height 20px
+    + .v-title
+      margin-top 4px
+
+  .v-title
+    font-size 24px
+    letter-spacing 0
+    line-height 32px
+  .v-card-media-actions
+    padding 16px
+    display flex
+    justify-content space-between
+    .v-card-media
+      size 240px
+      max-width size
+      max-height size
+      flex 1
+    .v-card-actions
+      margin-left 16px
+      flex-direction column
+      justify-content flex-start
+      align-items center
+
+      .v-button + .v-button
+        margin 8px 0 0
+
+  .v-card-content
+    padding 16px
+    font-size 14px
+    line-height 22px
+
+    &:last-child
+      padding-bottom 24px
+
+  .v-card-actions
+    padding 8px
+    display flex
+    justify-content flex-end
+    align-items center
+    .v-button
+      margin 0
+      &:first-child
+        margin-left 0
+      &:last-child
+        margin-right 0
+      + .v-button
+        margin-left 4px
+
+  .v-card-area
+    position relative
+  > .v-card-area:not(:last-child)
+    position relative
+    &:after
+      height 1px
+      position absolute
+      bottom 0
+      content " "
+    &:not(.v-inset):after
+      right 0
+      left 0
+    &.v-inset:after
+      right 16px
+      left 16px
+
+  .v-card-media-cover
+    position relative
+    color #fff
+    &.v-text-scrim
+      .v-card-backdrop
+        position absolute
+        top 0
+        right 0
+        bottom 0
+        left 0
+        z-index 1
+    .v-card-area
+      position absolute
+      right 0
+      bottom 0
+      left 0
+      z-index 2
+    .v-card-header + .v-card-actions
+      padding-top 0
+    .v-subhead
+      opacity 1
+
+  .v-card-expand
+    overflow hidden
+    &.v-active
+      [v-expand-trigger]
+        transform rotateZ(180deg) translate3D(0, 0, 0)
+      .v-card-content
+        margin-top 0 !important
+        opacity 1
+    .v-card-actions
+      padding-top 0
+      position relative
+      z-index 2
+    [v-expand-trigger]
+      transition swift-ease-out
+      will-change transform
+    .v-card-content
+      padding-top 4px
+      position relative
+      z-index 1
+      opacity 0
+      transform translate3D(0, 0, 0)
+      transition swift-ease-out
+      will-change margin

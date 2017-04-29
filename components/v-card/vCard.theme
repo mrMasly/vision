@@ -1,0 +1,66 @@
+.THEME_NAME
+  card-spec(main-color, second-color, second-color-hue, third-color)
+    background-color main-color
+    color second-color
+
+    .v-card-header,
+    .v-card-actions
+      .v-icon-button:not(.v-primary):not(.v-warn):not(.v-accent)
+        .v-icon
+          color second-color-hue
+
+    .v-input-container
+      &.v-input-focused
+        input,
+        textarea
+          color second-color
+          text-shadow 0 0 0 second-color
+        label
+        .v-icon:not(.v-icon-delete)
+          color second-color
+      &:after
+        background-color second-color
+      input
+      textarea
+        color second-color
+        text-shadow 0 0 0 second-color
+        &::-webkit-input-placeholder
+          color third-color
+      label
+      .v-icon:not(.v-icon-delete)
+        color second-color
+
+  &.v-card
+    background-color BACKGROUND-COLOR
+
+    &.v-primary
+      card-spec(PRIMARY-COLOR, PRIMARY-CONTRAST, PRIMARY-CONTRAST-0.87, PRIMARY-CONTRAST-0.54)
+
+    &.v-accent
+      card-spec(ACCENT-COLOR, ACCENT-CONTRAST, ACCENT-CONTRAST-0.87, ACCENT-CONTRAST-0.54)
+
+    &.v-warn
+      card-spec(WARN-COLOR, WARN-CONTRAST, WARN-CONTRAST-0.87, WARN-CONTRAST-0.54)
+
+    .v-card-header,
+    .v-card-actions
+      .v-icon-button:not(.v-primary):not(.v-warn):not(.v-accent)
+        .v-icon
+          color BACKGROUND-CONTRAST-0.54
+
+    > .v-card-area
+      &:after
+        background-color BACKGROUND-CONTRAST-0.12
+
+    .v-card-media-cover
+      &.v-text-scrim
+        .v-backdrop
+          background linear-gradient(to bottom, BACKGROUND-CONTRAST-0.0 20%, BACKGROUND-CONTRAST-0.275 66%, BACKGROUND-CONTRAST-0.55 100%)
+
+      &.v-solid
+        .v-card-area
+          background-color BACKGROUND-CONTRAST-0.4
+
+    .v-card-expand
+      .v-card-actions
+        background-color BACKGROUND-COLOR
