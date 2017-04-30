@@ -1,6 +1,6 @@
 <template lang="jade">
-md-toolbar.md-whiteframe.md-whiteframe-2dp
-  h1.md-title {{title}}
+v-toolbar.v-whiteframe.v-whiteframe-2dp
+  h1.v-title {{title}}
 </template>
 
 <script lang="coffee">
@@ -27,6 +27,6 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-toolbar
+.v-toolbar
   z-index 2
 </style>

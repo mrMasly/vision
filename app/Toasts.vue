@@ -1,13 +1,13 @@
 <template lang="jade">
 .toasts
-  md-snackbar(v-bind:md-position="toast.position" ref="toast" v-bind:md-duration="toast.duration"
-  @click.native="click" @close="onClose")
-    md-button.md-icon-button.close(@click.native.prevent.stop="close")
-      md-icon close
-    .l-column.has-ripple
-      md-ink-ripple
-      .title.md-Subheading(v-if="toast.title") {{toast.title}}
-      .text.md-body(v-if="toast.text") {{toast.text}}
+  v-snackbar(:v-position="toast.position" ref="toast", :v-duration="toast.duration"
+    @click.native="click" @close="onClose")
+    v-button.v-icon-button.close(@click.native.prevent.stop="close")
+      v-icon close
+    .l-column
+      v-ripple
+      .title.v-Subheading(v-if="toast.title") {{toast.title}}
+      .text.v-body(v-if="toast.text") {{toast.text}}
 </template>
 
 <script lang="coffee">

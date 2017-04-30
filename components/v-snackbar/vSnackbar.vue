@@ -1,5 +1,5 @@
 <template lang="jade">
-.v-snackbar(:class='[themeClass, classes]', :id='snackbarId', @mouseenter='pauseTimeout', @mouseleave='resumeTimeout')
+.v-snackbar(:class='[themeClass, classes]', :id='snackbarId', @mouseenter='pauseTimeout', @mouseleave='resumeTimeout' v-show="mounted")
   .v-snackbar-container(ref='container')
     .v-snackbar-content
       slot
@@ -29,20 +29,22 @@ component =
     snackbarElement: {}
     directionClass: null
     closeTimeout: null
+    mounted: no
   computed: classes: ->
     cssClasses = 'v-active': @active
     @directionClass = @vPosition.replace(RegExp(' ', 'g'), '-')
     cssClasses['v-position-' + @directionClass] = true
     cssClasses
-  watch: active: (_active) ->
-    directionClass = 'v-has-toast-' + @directionClass
-    toastClass = 'v-has-toast'
-    if _active
-      document.body.classList.add directionClass
-      document.body.classList.add toastClass
-    else
-      document.body.classList.remove directionClass
-      document.body.classList.remove toastClass
+  watch:
+    active: (_active) ->
+      directionClass = 'v-has-toast-' + @directionClass
+      toastClass = 'v-has-toast'
+      if _active
+        document.body.classList.add directionClass
+        document.body.classList.add toastClass
+      else
+        document.body.classList.remove directionClass
+        document.body.classList.remove toastClass
   methods:
     removeElement: ->
       if document.body.contains(@snackbarElement)
@@ -83,12 +85,13 @@ component =
       @timeoutStartedAt = Date.now()
       @closeTimeout = window.setTimeout(@close, @pendingDuration)
   mounted: ->
-    _this2 = this
+    @mounted = yes
     @$nextTick ->
-      _this2.snackbarElement = _this2.$el
-      _this2.snackbarElement.parentNode.removeChild _this2.snackbarElement
-      _this2.timeoutStartedAt = 0
-      _this2.pendingDuration = _this2.vDuration
+      @snackbarElement = @$el
+      @snackbarElement.parentNode.removeChild @snackbarElement
+      @timeoutStartedAt = 0
+      @pendingDuration = @vDuration
+
   beforeDestroy: ->
     window.clearTimeout @closeTimeout
     @removeElement()

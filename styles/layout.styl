@@ -1,0 +1,151 @@
+procs = 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 33 66
+orders = -20 -19 -18 -17 -16 -15 -14 -13 -12 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+posx = start end center space-between space-around
+posy = start end center baseline stretch
+*
+  box-sizing border-box
+
+func(size)
+
+  .{size}-padding
+    padding 8px
+  .{size}-margin
+    margin 8px
+  .{size}-fill
+    width 100%
+    height 100%
+    min-height 100%
+    margin 0
+
+  .{size}-absolute
+    position absolute
+  .{size}-relative
+    position relative
+  .{size}-fixed
+    position fixed
+  .{size}-static
+    position static
+  .{size}-scroll
+    overflow auto
+  .{size}-scroll-x
+    overflow-x auto
+  .{size}-scroll-y
+    overflow-y auto
+  .{size}-hidden
+    overflow hidden
+
+
+
+
+  // flex-align
+  for pos1 in posx
+    if pos1 is 'start'
+      flexpos1 = flex-start
+    else if pos1 is 'end'
+      flexpos1 = flex-end
+    else
+      flexpos1 = pos1
+    .{size}-{pos1}
+      justify-content flexpos1
+    for pos2 in posy
+      if pos2 is 'start'
+        flexpos2 = flex-start
+      else if pos2 is 'end'
+        flexpos2 = flex-end
+      else
+        flexpos2 = pos2
+      .{size}-{pos1}-{pos2}
+        justify-content flexpos1
+        align-items flexpos2
+        align-content flexpos2
+
+  // флекс-контрейнер
+  .{size}-row
+    display flex
+    flex-direction row
+  .{size}-column
+    display flex
+    flex-direction column
+  .{size}-wrap
+    flex-wrap wrap
+  .{size}-nowrap
+    flex-wrap nowrap
+  // hide-show
+  .{size}-hide
+    display none
+
+  // флекс-элементы
+  .{size}-flex // без размера
+    flex 1 1 auto
+  unless size is l
+    .l-row > .{size}-flex
+      min-width 0
+    .l-column > .{size}-flex
+      min-height 0
+  .{size}-row > .{size}-flex
+    min-width 0
+  .{size}-column > .{size}-flex
+    min-height 0
+
+
+  for proc in procs
+    if proc is 33
+      // _proc = calc(100% / 3)
+      _proc = 33.33%
+    else if proc is 66
+      // _proc = calc(200% / 3)
+      _proc = 66.66%
+    else
+      _proc = proc+'%'
+    .{size}-{proc} // с размером
+      flex 1 1 (_proc)
+    unless size is l
+      .l-row > .{size}-{proc}
+        max-width (_proc)
+        max-height 100%
+      .l-column > .{size}-{proc}
+        max-height (_proc)
+        max-width 100%
+    .{size}-row > .{size}-{proc}
+      max-width (_proc)
+      max-height 100%
+    .{size}-column > .{size}-{proc}
+      max-height (_proc)
+      max-width 100%
+
+    unless size is l
+      .{size}-row > .{size}-{proc}
+        max-width (_proc)
+        max-height 100%
+      .{size}-column > .{size}-{proc}
+        max-height (_proc)
+        max-width 100%
+
+  // order
+  for pos in orders
+    .{size}-order-{pos}
+      order pos
+
+
+
+
+func('l')
+
+@media (max-width: 599px)
+  func 'xs'
+@media (min-width: 600px)
+  func 'gxs'
+@media (min-width: 600px) and (max-width: 959px)
+  func 'sm'
+@media (min-width: 960px)
+  func 'gsm'
+@media (min-width: 960px) and (max-width: 1279px)
+  func 'md'
+@media (min-width: 1280px)
+  func 'gmd'
+@media (min-width: 1280px) and (max-width: 1619px)
+  func 'lg'
+@media (min-width: 1620px)
+  func 'glg'
+@media (min-width: 1920px)
+  func 'xl'

@@ -2,14 +2,14 @@
 a.v-bottom-bar-item(:href='href', :class='classes', :disabled='disabled', @click='setActive', v-if='href')
   v-icon(v-if='vIcon || vIconSrc || vIconset', :v-icon-src='vIconSrc', :v-iconset='vIconset') {{ vIcon }}
   v-ripple(:v-disabled='disabled')
-    span.v-text
-      slot
+  span.v-text
+    slot
 
 button.v-bottom-bar-item(type='button', :class='classes', :disabled='disabled', @click='setActive', v-else='')
   v-icon(v-if='vIcon || vIconSrc || vIconset', :v-src='vIconSrc', :v-iconset='vIconset') {{ vIcon }}
   v-ripple(:v-disabled='disabled')
-    span.v-text
-      slot
+  span.v-text
+    slot
 </template>
 
 <script lang="coffee">

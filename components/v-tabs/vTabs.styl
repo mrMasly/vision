@@ -95,9 +95,19 @@ tab-max-width = 264px
     transform translate3d(0, 0, 0)
     transition transform swift-ease-out-duration swift-ease-out-timing-function
 
-  .v-tab
-    padding 16px
-    position absolute
-    top 0
-    left 0
-    right 0
+.v-tab
+  padding 16px
+  position absolute
+  top 0
+  left 0
+  right 0
+
+
+.v-tabs.l-fill
+  display flex
+  flex-direction column
+  .v-tabs-content
+    flex 1
+    background-color #f4f4f4
+  .v-tabs-wrapper
+    overflow auto

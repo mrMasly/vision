@@ -1,25 +1,25 @@
 <template lang="jade">
 .absolute
-  md-dialog-confirm(
-    v-bind:md-title="confirm.title"
-    v-bind:md-content-html="confirm.content"
-    v-bind:md-ok-text="confirm.ok"
-    v-bind:md-cancel-text="confirm.cancel"
+  v-dialog-confirm(
+    v-bind:v-title="confirm.title"
+    v-bind:v-content-html="confirm.content"
+    v-bind:v-ok-text="confirm.ok"
+    v-bind:v-cancel-text="confirm.cancel"
     @close="onCloseConfirm"
     ref="confirm")
-  md-dialog-alert(
-    v-bind:md-title="alert.title"
-    v-bind:md-content="alert.content"
-    v-bind:md-ok-text="alert.ok"
+  v-dialog-alert(
+    v-bind:v-title="alert.title"
+    v-bind:v-content="alert.content"
+    v-bind:v-ok-text="alert.ok"
     @close="onCloseAlert"
     ref="alert")
-  md-dialog-prompt(
-    v-bind:md-content="prompt.content"
-    v-bind:md-title="prompt.title"
-    v-bind:md-ok-text="prompt.ok"
-    v-bind:md-cancel-text="prompt.cancel"
+  v-dialog-prompt(
+    v-bind:v-content="prompt.content"
+    v-bind:v-title="prompt.title"
+    v-bind:v-ok-text="prompt.ok"
+    v-bind:v-cancel-text="prompt.cancel"
     v-bind:value="prompt.value"
-    v-bind:md-input-maxlength="prompt.max"
+    v-bind:v-input-maxlength="prompt.max"
     @close="onClosePrompt"
     @input="setVal"
     ref="prompt")

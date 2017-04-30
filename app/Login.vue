@@ -1,18 +1,18 @@
 <template lang="jade">
 .l-fill.l-column.l-center-center(ref="div")
-  md-card
-    md-card-header
-      .md-title Войдите
-    md-card-content
-      md-input-container
+  v-card
+    v-card-header
+      .v-title Войдите
+    v-card-content
+      v-input-container
         label Имя
-        md-input(v-model="username")
-      md-input-container(md-has-password v-bind:class="{ 'md-input-invalid': error }")
+        v-input(v-model="username")
+      v-input-container(v-has-password v-bind:class="{ 'v-input-invalid': error }")
         label Пароль
-        md-input(type="password" v-model="password" @change="error=''")
-        .md-error(v-if="error") {{error}}
-    md-card-actions
-      md-button.md-primary(@click.native="login") Войти
+        v-input(type="password" v-model="password" @change="error=''")
+        .v-error(v-if="error") {{error}}
+    v-card-actions
+      v-button.v-primary(@click.native="login") Войти
 
 </template>
 
@@ -37,6 +37,6 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-card
+.v-card
   width 300px
 </style>

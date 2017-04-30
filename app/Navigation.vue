@@ -1,9 +1,9 @@
 <template lang="jade">
-md-bottom-bar
-  md-bottom-bar-item(
+v-bottom-bar
+  v-bottom-bar-item(
     v-for="tab in tabs" key="tab.name"
-    v-bind:md-icon="tab.icon"
-    v-bind:md-active="tab.active"
+    v-bind:v-icon="tab.icon"
+    v-bind:v-active="tab.active"
     @click.native="click(tab)") {{tab.title}}
 
 </template>
@@ -68,7 +68,7 @@ return component
 .sidenav
   width 60px
   flex none
-.md-bottom-bar
+.v-bottom-bar
   z-index 2
   position relative !important
 </style>
