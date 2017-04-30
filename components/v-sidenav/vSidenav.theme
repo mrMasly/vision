@@ -1,0 +1,5 @@
+.THEME_NAME
+  &.v-sidenav
+    .v-sidenav-content
+      background-color: BACKGROUND-COLOR
+      color: BACKGROUND-CONTRAST

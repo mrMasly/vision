@@ -1,0 +1,52 @@
+@import '../../styles/variables.styl'
+
+.v-sidenav
+  &.v-left .v-sidenav-content
+    left 0
+    transform translate3D(-100%, 0, 0)
+
+  &.v-right .v-sidenav-content
+    right 0
+    transform translate3D(100%, 0, 0)
+
+  &.v-fixed
+    .v-sidenav-content,
+    .v-sidenav-backdrop
+      position fixed
+
+  .v-sidenav-content
+    width 304px
+    position absolute
+    top 0
+    bottom 0
+    z-index 100
+    pointer-events none
+    overflow auto
+    -webkit-overflow-scrolling touch
+    transition $swift-ease-out
+    transition-property transform
+    will-change transform
+
+  .v-backdrop
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    z-index 99
+    pointer-events none
+    background-color rgba(#000, .54)
+    opacity 0
+    transition $swift-ease-in-out
+    transition-property opacity
+    will-change opacity
+
+.v-sidenav.v-active
+  .v-sidenav-content
+    box-shadow $material-shadow-16dp
+    pointer-events auto
+    transform translate3D(0, 0, 0)
+
+  .v-sidenav-backdrop
+    opacity 1
+    pointer-events auto
