@@ -2,7 +2,7 @@
   &.v-switch
     &.v-checked
       .v-switch-container
-        background-color: ACCENT-COLOR-500-0.5
+        background-color: ACCENT-COLOR 500 0.5
       .v-switch-thumb
         background-color: ACCENT-COLOR
       .v-ink-ripple
@@ -12,7 +12,7 @@
 
     &.v-checked.v-primary
       .v-switch-container
-        background-color: PRIMARY-COLOR-500-0.5
+        background-color: PRIMARY-COLOR 500 0.5
       .v-switch-thumb
         background-color: PRIMARY-COLOR
       .v-ink-ripple
@@ -21,7 +21,7 @@
 
     &.v-checked.v-warn
       .v-switch-container
-        background-color: WARN-COLOR-500-0.5
+        background-color: WARN-COLOR 500 0.5
       .v-switch-thumb
         background-color: WARN-COLOR
       .v-ink-ripple

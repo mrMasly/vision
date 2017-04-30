@@ -5,18 +5,18 @@
         background-color: PRIMARY-COLOR
 
         .v-icon
-          color: PRIMARY-CONTRAST-0.99999
+          color: PRIMARY-CONTRAST 0.99999
 
     &.v-accent
       &.v-avatar-icon
         background-color: ACCENT-COLOR
 
         .v-icon
-          color: ACCENT-CONTRAST-0.99999
+          color: ACCENT-CONTRAST 0.99999
 
     &.v-warn
       &.v-avatar-icon
         background-color: WARN-COLOR
 
         .v-icon
-          color: WARN-CONTRAST-0.99999
+          color: WARN-CONTRAST 0.99999

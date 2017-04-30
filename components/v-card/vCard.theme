@@ -34,13 +34,13 @@
     background-color BACKGROUND-COLOR
 
     &.v-primary
-      card-spec(PRIMARY-COLOR, PRIMARY-CONTRAST, PRIMARY-CONTRAST-0.87, PRIMARY-CONTRAST-0.54)
+      card-spec(PRIMARY-COLOR, PRIMARY-CONTRAST, PRIMARY-CONTRAST 0.87, PRIMARY-CONTRAST 0.54)
 
     &.v-accent
-      card-spec(ACCENT-COLOR, ACCENT-CONTRAST, ACCENT-CONTRAST-0.87, ACCENT-CONTRAST-0.54)
+      card-spec(ACCENT-COLOR, ACCENT-CONTRAST, ACCENT-CONTRAST 0.87, ACCENT-CONTRAST 0.54)
 
     &.v-warn
-      card-spec(WARN-COLOR, WARN-CONTRAST, WARN-CONTRAST-0.87, WARN-CONTRAST-0.54)
+      card-spec(WARN-COLOR, WARN-CONTRAST, WARN-CONTRAST 0.87, WARN-CONTRAST 0.54)
 
     .v-card-header,
     .v-card-actions
@@ -55,11 +55,11 @@
     .v-card-media-cover
       &.v-text-scrim
         .v-backdrop
-          background linear-gradient(to bottom, BACKGROUND-CONTRAST-0.0 20%, BACKGROUND-CONTRAST-0.275 66%, BACKGROUND-CONTRAST-0.55 100%)
+          background linear-gradient(to bottom, BACKGROUND-CONTRAST 0.0 20%, BACKGROUND-CONTRAST 0.275 66%, BACKGROUND-CONTRAST 0.55 100%)
 
       &.v-solid
         .v-card-area
-          background-color BACKGROUND-CONTRAST-0.4
+          background-color BACKGROUND-CONTRAST 0.4
 
     .v-card-expand
       .v-card-actions

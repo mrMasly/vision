@@ -30,13 +30,13 @@
         color second-color
 
   &.v-toolbar
-    toolbar-spec(PRIMARY-COLOR, PRIMARY-CONTRAST, PRIMARY-CONTRAST-0.54)
+    toolbar-spec(PRIMARY-COLOR, PRIMARY-CONTRAST, PRIMARY-CONTRAST 0.54)
 
     &.v-accent
-      toolbar-spec(ACCENT-COLOR, ACCENT-CONTRAST, ACCENT-CONTRAST-0.54)
+      toolbar-spec(ACCENT-COLOR, ACCENT-CONTRAST, ACCENT-CONTRAST 0.54)
 
     &.v-warn
-      toolbar-spec(WARN-COLOR, WARN-CONTRAST, WARN-CONTRAST-0.54)
+      toolbar-spec(WARN-COLOR, WARN-CONTRAST, WARN-CONTRAST 0.54)
 
     &.v-transparent
-      toolbar-spec(transparent, BACKGROUND-CONTRAST, BACKGROUND-CONTRAST-0.54)
+      toolbar-spec(transparent, BACKGROUND-CONTRAST, BACKGROUND-CONTRAST 0.54)

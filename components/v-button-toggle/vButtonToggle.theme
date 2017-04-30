@@ -10,12 +10,12 @@
         content: " "
 
     .v-toggle
-      color: BACKGROUND-CONTRAST-0.54
-      background-color: BACKGROUND-CONTRAST-0.26
+      color: BACKGROUND-CONTRAST 0.54
+      background-color: BACKGROUND-CONTRAST 0.26
       &:hover:not([disabled])
-        background-color: BACKGROUND-CONTRAST-0.38
+        background-color: BACKGROUND-CONTRAST 0.38
       + .v-toggle:after
-        background-color: BACKGROUND-CONTRAST-0.12
+        background-color: BACKGROUND-CONTRAST 0.12
 
     &.v-primary .v-toggle
       color: PRIMARY-CONTRAST
@@ -23,7 +23,7 @@
       &:hover:not([disabled])
         background-color: PRIMARY-COLOR
       + .v-toggle:after
-        background-color: PRIMARY-COLOR-600
+        background-color: PRIMARY-COLOR 600
 
     &.v-accent .v-toggle
       color: ACCENT-CONTRAST
@@ -31,7 +31,7 @@
       &:hover:not([disabled])
         background-color: ACCENT-COLOR
       + .v-toggle:after
-        background-color: ACCENT-COLOR-600
+        background-color: ACCENT-COLOR 600
 
     &.v-warn .v-toggle
       color: WARN-CONTRAST
@@ -39,10 +39,10 @@
       &:hover:not([disabled])
         background-color: WARN-COLOR
       + .v-toggle:after
-        background-color: WARN-COLOR-600
+        background-color: WARN-COLOR 600
 
     [disabled]
       color: rgba(#000, .26)
       &.v-toggle
-        color: BACKGROUND-CONTRAST-0.2
+        color: BACKGROUND-CONTRAST 0.2
         background-color: rgba(#000, .26)

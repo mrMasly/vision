@@ -45,7 +45,7 @@ let registeredPrimaryColor = {};
 
 const parseStyle = (style, theme, name) => {
   VALID_THEME_TYPE.forEach((type) => {
-    style = style.replace(RegExp('(' + type.toUpperCase() + ')-(COLOR|CONTRAST)-?(A?\\d*)-?(\\d*\\.?\\d+)?', 'g'), (match, paletteType, colorType, hue, opacity) => {
+    style = style.replace(RegExp('(' + type.toUpperCase() + ')-(COLOR|CONTRAST)\\s?(A?\\d*)\\s?(\\d*\\.?\\d+)?', 'g'), (match, paletteType, colorType, hue, opacity) => {
       let color;
       let colorVariant = +hue === 0 ? 500 : hue;
 

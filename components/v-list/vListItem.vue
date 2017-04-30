@@ -51,7 +51,11 @@ component =
             return vListItemRouter
       vListItemDefault
 
-    createElement getItemComponent(), _extends({ props: props }, data), children
+    _data = props: props
+    _data[key] = val for key, val of data
+
+
+    createElement getItemComponent(), _data, children
 
 return component
 </script>

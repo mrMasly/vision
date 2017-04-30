@@ -4,6 +4,7 @@ span.v-tooltip(:class='classes', :style='style')
 </template>
 
 <script lang="coffee">
+import transitionEndEventName from '../../utils/transitionEndEventName.js'
 component =
   name: 'v-tooltip'
   props:
@@ -65,7 +66,7 @@ component =
       @leftPosition = cssPosition.left
     generateTooltipClasses: ->
       classes = []
-      [].concat(_toConsumableArray(@parentElement.classList)).forEach (cssClass) ->
+      [@parentElement.classList...].forEach (cssClass) ->
         if cssClass.indexOf('v-') >= 0 and cssClass != 'v-active'
           classes.push cssClass + '-tooltip'
       @parentClass = classes.join(' ')

@@ -1,8 +1,8 @@
 <template lang="jade">
 .v-tabs(:class='[themeClass, tabClasses]')
-  v-whiteframe.v-tabs-navigation(v-tag='nav', :v-elevation='vElevation', :class='navigationClasses', ref='tabNavigation')
+  nav.v-shadow.v-tabs-navigation(:class='navigationClasses', ref='tabNavigation')
     button.v-tab-header(v-for='header in tabList', :key='header.id', type='button', :class='getHeaderClass(header)', :disabled='header.disabled', @click='setActiveTab(header)', ref='tabHeader')
-      v-ink-ripple(:v-disabled='header.disabled')
+      v-ripple(:v-disabled='header.disabled')
       .v-tab-header-container
         v-icon(v-if='header.icon') {{ header.icon }}
         span(v-if='header.label') {{ header.label }}
@@ -54,9 +54,11 @@ component =
     indicatorClasses: ->
       toLeft = @lastIndicatorNumber > @activeTabNumber
       @lastIndicatorNumber = @activeTabNumber
+      return {
         'v-transition-off': @transitionOff
         'v-to-right': !toLeft
         'v-to-left': toLeft
+      }
   methods:
     getHeaderClass: (header) ->
       'v-active': @activeTab == header.id
@@ -105,23 +107,20 @@ component =
         tab.ref.left = width * index + 'px'
         index++
     calculateContentHeight: ->
-      _this = this
       @$nextTick ->
-        if Object.keys(_this.tabList).length
-          height = _this.tabList[_this.activeTab].ref.$el.offsetHeight
-          _this.contentHeight = height + 'px'
+        if Object.keys(@tabList).length
+          height = @tabList[@activeTab].ref.$el.offsetHeight
+          @contentHeight = height + 'px'
     calculatePosition: ->
-      _this2 = this
-      window.requestAnimationFrame ->
-        _this2.calculateIndicatorPos()
-        _this2.calculateTabsWidthAndPosition()
-        _this2.calculateContentHeight()
+      window.requestAnimationFrame =>
+        @calculateIndicatorPos()
+        @calculateTabsWidthAndPosition()
+        @calculateContentHeight()
     debounceTransition: ->
-      _this3 = this
       window.clearTimeout @transitionControl
-      @transitionControl = setTimeout((->
-        _this3.calculatePosition()
-        _this3.transitionOff = false
+      @transitionControl = setTimeout((=>
+        @calculatePosition()
+        @transitionOff = false
       ), 200)
     calculateOnWatch: ->
       @calculatePosition()
@@ -137,13 +136,12 @@ component =
       @calculatePosition()
       @$emit 'change', @activeTabNumber
   mounted: ->
-    _this4 = this
     @$nextTick ->
-      _this4.observeElementChanges()
-      window.addEventListener 'resize', _this4.calculateOnResize
-      if Object.keys(_this4.tabList).length and !_this4.activeTab
-        firstTab = Object.keys(_this4.tabList)[0]
-        _this4.setActiveTab _this4.tabList[firstTab]
+      @observeElementChanges()
+      window.addEventListener 'resize', @calculateOnResize
+      if Object.keys(@tabList).length and !@activeTab
+        firstTab = Object.keys(@tabList)[0]
+        @setActiveTab @tabList[firstTab]
   beforeDestroy: ->
     if @parentObserver
       @parentObserver.disconnect()

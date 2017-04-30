@@ -43,7 +43,7 @@
       .v-count,
       .v-icon:not(.v-icon-delete),
       ::-webkit-input-placeholder
-        color BACKGROUND-CONTRAST-0.38
+        color BACKGROUND-CONTRAST 0.38
 
     .v-icon:not(.v-icon-delete):after
       background BACKGROUND-COLOR

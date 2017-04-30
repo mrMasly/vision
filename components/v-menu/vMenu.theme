@@ -8,7 +8,7 @@
       &:focus,
       &.v-highlighted
         .v-button:not([disabled])
-          background-color: BACKGROUND-CONTRAST-0.12
+          background-color: BACKGROUND-CONTRAST 0.12
 
       &[disabled]
-        color: BACKGROUND-CONTRAST-0.38
+        color: BACKGROUND-CONTRAST 0.38

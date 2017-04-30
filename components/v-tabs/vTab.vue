@@ -11,15 +11,15 @@ component =
   name: 'v-tab'
   props:
     id: [String, Number]
-    vLabel: [String, Number]
-    vIcon: String
-    vActive: Boolean
-    vDisabled: Boolean
-    vTooltip: String
-    vTooltipDelay:
+    label: [String, Number]
+    icon: String
+    active: Boolean
+    disabled: Boolean
+    tooltip: String
+    tooltipDelay:
       type: String
       default: '0'
-    vTooltipDirection:
+    tooltipDirection:
       type: String
       default: 'bottom'
   data: ->
@@ -28,19 +28,19 @@ component =
     width: '0px'
     left: '0px'
   watch:
-    vActive: ->
+    active: ->
       @updateTabData()
-    vDisabled: ->
+    disabled: ->
       @updateTabData()
-    vIcon: ->
+    icon: ->
       @updateTabData()
-    vLabel: ->
+    label: ->
       @updateTabData()
-    vTooltip: ->
+    tooltip: ->
       @updateTabData()
-    vTooltipDelay: ->
+    tooltipDelay: ->
       @updateTabData()
-    vTooltipDirection: ->
+    tooltipDirection: ->
       @updateTabData()
   computed:
     styles: ->
@@ -49,13 +49,13 @@ component =
   methods:
     getTabData: ->
       id: @tabId
-      label: @vLabel
-      icon: @vIcon
-      active: @vActive
-      disabled: @vDisabled
-      tooltip: @vTooltip
-      tooltipDelay: @vTooltipDelay
-      tooltipDirection: @vTooltipDirection
+      label: @label
+      icon: @icon
+      active: @active
+      disabled: @disabled
+      tooltip: @tooltip
+      tooltipDelay: @tooltipDelay
+      tooltipDirection: @tooltipDirection
       ref: this
     updateTabData: ->
       @parentTabs.updateTab @getTabData()
@@ -66,7 +66,7 @@ component =
       throw new Error('You must wrap the v-tab in a v-tabs')
     @mounted = true
     @parentTabs.updateTab tabData
-    if @vActive
+    if @active
       @parentTabs.setActiveTab tabData
   beforeDestroy: ->
     @parentTabs.unregisterTab @getTabData()
