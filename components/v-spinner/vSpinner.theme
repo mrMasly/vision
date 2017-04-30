@@ -1,0 +1,12 @@
+.THEME_NAME
+  &.v-spinner
+    .v-spinner-path
+      stroke: PRIMARY-COLOR
+
+    &.v-accent
+      .v-spinner-path
+        stroke: ACCENT-COLOR
+
+    &.v-warn
+      .v-spinner-path
+        stroke: WARN-COLOR

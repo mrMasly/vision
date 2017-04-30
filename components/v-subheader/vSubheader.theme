@@ -1,0 +1,8 @@
+.THEME_NAME
+  &.v-subheader
+    &.v-primary
+      color: PRIMARY-COLOR
+    &.v-accent
+      color: ACCENT-COLOR
+    &.v-warn
+      color: WARN-COLOR
