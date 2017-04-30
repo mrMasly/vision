@@ -1,11 +1,11 @@
 <template lang="jade">
-.md-switch(:class='[themeClass, classes]')
-  .md-switch-container(@click='toggle($event)')
-    .md-switch-thumb(:style='styles')
+.v-switch(:class='[themeClass, classes]')
+  .v-switch-container(@click='toggle($event)')
+    .v-switch-thumb(:style='styles')
       input(type='checkbox', :name='name', :id='id', :disabled='disabled', :value='value')
-      button.md-switch-holder(:type='type')
-      md-ink-ripple(:md-disabled='disabled')
-  label.md-switch-label(:for='id || name', v-if='$slots.default')
+      button.v-switch-holder(:type='type')
+      v-ink-ripple(:v-disabled='disabled')
+  label.v-switch-label(:for='id || name', v-if='$slots.default')
     slot
 </template>
 
@@ -31,8 +31,8 @@ component =
     checked: @value
   computed:
     classes: ->
-      'md-checked': Boolean(@value)
-      'md-disabled': @disabled
+      'v-checked': Boolean(@value)
+      'v-disabled': @disabled
     styles: ->
       transform: 'translate3D(' + @leftPos + ', -50%, 0)'
   watch:
