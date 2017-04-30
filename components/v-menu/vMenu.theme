@@ -1,0 +1,14 @@
+.THEME_NAME
+  &.v-menu-content .v-list
+    background-color: BACKGROUND-COLOR
+    color: BACKGROUND-CONTRAST
+
+    .v-menu-item
+      &:hover,
+      &:focus,
+      &.v-highlighted
+        .v-button:not([disabled])
+          background-color: BACKGROUND-CONTRAST-0.12
+
+      &[disabled]
+        color: BACKGROUND-CONTRAST-0.38

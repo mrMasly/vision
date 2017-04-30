@@ -14,6 +14,7 @@
     "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.6",
     "moment": "^2.18.1",
-    "autosize": "^3.0.20"
+    "autosize": "^3.0.20",
+    "element.scrollintoviewifneeded-polyfill": "^1.0.1"
   }
 }
