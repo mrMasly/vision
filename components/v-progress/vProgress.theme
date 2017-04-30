@@ -1,0 +1,28 @@
+.THEME_NAME
+  &.v-progress
+    background-color PRIMARY-COLOR-0.38
+
+    &:not(.v-indeterminate) .v-progress-track
+      background-color PRIMARY-COLOR
+    .v-progress-track
+      &:after,
+      &:before
+        background-color PRIMARY-COLOR
+
+    &.v-accent
+      background-color ACCENT-COLOR-0.38
+      &:not(.v-indeterminate) .v-progress-track
+        background-color ACCENT-COLOR
+      .v-progress-track
+        &:after,
+        &:before
+          background-color ACCENT-COLOR
+
+    &.v-warn
+      background-color WARN-COLOR-0.38
+      &:not(.v-indeterminate) .v-progress-track
+        background-color WARN-COLOR
+      .v-progress-track
+        &:after,
+        &:before
+          background-color WARN-COLOR

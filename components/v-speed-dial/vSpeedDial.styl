@@ -1,0 +1,91 @@
+@import '../../styles/variables.styl'
+
+.v-speed-dial
+  display flex
+  flex-direction column-reverse
+  align-items center
+
+  &.v-direction-top
+    &.v-mode-fling
+      [v-fab-trigger] ~ .v-button
+        transform scale(.95) translate3D(0, 80%, 0)
+    [v-fab-trigger]
+      margin-top 8px
+      ~ .v-button
+        margin-bottom 16px
+
+  &.v-direction-right
+    flex-direction row
+    justify-content center
+    &.v-mode-fling
+      [v-fab-trigger] ~ .v-button
+        transform scale(.95) translate3D(-80%, 0, 0)
+    [v-fab-trigger]
+      margin-right 8px
+      ~ .v-button
+        margin-left 16px
+
+  &.v-direction-bottom
+    flex-direction column
+    &.v-mode-fling
+      [v-fab-trigger] ~ .v-button
+        transform scale(.95) translate3D(0, -80%, 0)
+    [v-fab-trigger]
+      margin-bottom 8px
+      ~ .v-button
+        margin-top 16px
+
+  &.v-direction-left
+    flex-direction row-reverse
+    justify-content center
+    &.v-mode-fling
+      [v-fab-trigger] ~ .v-button
+        transform scale(.95) translate3D(80%, 0, 0)
+    [v-fab-trigger]
+      margin-left 8px
+      ~ .v-button
+        margin-right 16px
+
+  &.v-mode-scale
+    [v-fab-trigger] ~ .v-button
+      transform scale(.6)
+
+  &.v-active
+    [v-fab-trigger]
+      ~ .v-button
+        opacity 1
+        pointer-events auto
+        transform translate3D(0, 0, 0) !important
+
+        for i in (1..10)
+          &:nth-child(i + 1)
+            transition-delay i * .05s
+      [v-icon-morph]
+        transform rotateZ(0)
+        opacity 1
+        + .v-icon
+          transform rotateZ(90deg) scale(.8)
+          opacity 0
+
+  .v-button
+    margin 0
+  [v-fab-trigger]
+    position relative
+    z-index 2
+    ~ .v-button
+      position relative
+      z-index 1
+      opacity 0
+      pointer-events none
+      transition swift-ease-out
+      for i in (1..10)
+        &:nth-last-child(i + 1)
+          transition-delay i * .05s
+
+  [v-icon-morph] + .v-icon
+  [v-icon-morph]
+    transition swift-ease-out
+
+  [v-icon-morph]
+    opacity 0
+    transform rotateZ(-90deg) scale(.8)
