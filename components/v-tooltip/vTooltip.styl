@@ -1,0 +1,62 @@
+@import '../../styles/variables.styl'
+
+tooltip-height =20px
+
+.v-tooltip
+  height tooltip-height
+  padding 0 8px
+  position fixed
+  z-index 200
+  pointer-events none
+  background-color rgba(#616161, .87)
+  border-radius 2px
+  opacity 0
+  transform-origin center top
+  transition swift-ease-out
+  transition-duration .3s
+  transition-delay 0s
+  color #fff
+  font-family font-roboto
+  font-size 10px
+  line-height tooltip-height
+  text-transform none
+  white-space nowrap
+
+  &.v-active
+    opacity 1
+    transition swift-ease-in
+    transition-duration .3s
+
+  &:not(.v-active)
+    transition-delay 0s !important
+
+  &.v-transition-off
+    transition none !important
+
+  &.v-tooltip-top
+    margin-top -14px
+    transform translate(-50%, 8px)
+
+    &.v-active
+      transform translate(-50%, 0)
+
+  &.v-tooltip-right
+    margin-left 14px
+    transform translate(-8px, 50%)
+
+    &.v-active
+      transform translate(0, 50%)
+
+  &.v-tooltip-bottom
+    margin-top 14px
+    transform translate(-50%, -8px)
+
+    &.v-active
+      transform translate(-50%, 0)
+
+  &.v-tooltip-left
+    margin-left -14px
+    transform translate(8px, 50%)
+
+    &.v-active
+      transform translate(0, 50%)
