@@ -1,42 +1,42 @@
 .THEME_NAME
-  &.md-list
+  &.v-list
     background-color BACKGROUND-COLOR
     color BACKGROUND-CONTRAST
 
-    &.md-transparent
+    &.v-transparent
       background-color transparent
       color inherit
 
-    .md-list-item
-      .router-link-active.md-list-item-container
+    .v-list-item
+      .router-link-active.v-list-item-container
         color PRIMARY-COLOR
 
-        > .md-icon
+        > .v-icon
           color PRIMARY-COLOR
 
-      &.md-primary
-        .md-list-item-container
+      &.v-primary
+        .v-list-item-container
           color PRIMARY-COLOR
 
-          > .md-icon
+          > .v-icon
             color PRIMARY-COLOR
 
-      &.md-accent
-        .md-list-item-container
+      &.v-accent
+        .v-list-item-container
           color ACCENT-COLOR
 
-          > .md-icon
+          > .v-icon
             color ACCENT-COLOR
 
-      &.md-warn
-        .md-list-item-container
+      &.v-warn
+        .v-list-item-container
           color WARN-COLOR
 
-          > .md-icon
+          > .v-icon
             color WARN-COLOR
 
-    .md-list-item-expand
-      .md-list-item-container
+    .v-list-item-expand
+      .v-list-item-container
         background-color BACKGROUND-COLOR
 
         &:hover,

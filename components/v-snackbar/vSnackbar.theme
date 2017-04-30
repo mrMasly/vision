@@ -1,5 +1,5 @@
 .THEME_NAME
-  .md-snackbar
-  &.md-snackbar
-    .md-ink-ripple
+  .v-snackbar
+  &.v-snackbar
+    .v-ink-ripple
       color #fff

@@ -1,20 +1,20 @@
 <template lang="jade">
 v-dialog.v-dialog-alert(ref='dialog', @close='fireCloseEvent()')
-  v-dialog-title(v-if='mdTitle') {{ mdTitle }}
-  v-dialog-content(v-if='mdContentHtml', v-html='mdContentHtml')
-  v-dialog-content(v-else='') {{ mdContent }}
+  v-dialog-title(v-if='vTitle') {{ vTitle }}
+  v-dialog-content(v-if='vContentHtml', v-html='vContentHtml')
+  v-dialog-content(v-else='') {{ vContent }}
   v-dialog-actions
-    v-button.v-primary(@click.native='close()') {{ mdOkText }}
+    v-button.v-primary(@click.native='close()') {{ vOkText }}
 </template>
 
 <script lang="coffee">
 component =
   name: 'vue-dialog-alert'
   props:
-    mdTitle: String
-    mdContent: String
-    mdContentHtml: String
-    mdOkText:
+    vTitle: String
+    vContent: String
+    vContentHtml: String
+    vOkText:
       type: String
       default: 'Ok'
   data: ->
@@ -32,7 +32,7 @@ component =
       @debounce = true
       @$refs.dialog.close()
   mounted: ->
-    if !@mdContent and !@mdContentHtml
+    if !@vContent and !@vContentHtml
       throw new Error('Missing v-content or v-content-html attributes')
 
 return component

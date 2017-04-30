@@ -1,5 +1,5 @@
 <template lang="jade">
-textarea.md-input(:value='value', :disabled='disabled', :required='required', :placeholder='placeholder', :maxlength='maxlength', @focus='onFocus', @blur='onBlur', @input='onInput')
+textarea.v-input(:value='value', :disabled='disabled', :required='required', :placeholder='placeholder', :maxlength='maxlength', @focus='onFocus', @blur='onBlur', @input='onInput')
 </template>
 
 <script lang="coffee">
@@ -14,10 +14,10 @@ component =
       @$nextTick -> autosize.update @$el
   mounted: ->
     @$nextTick ->
-      @parentContainer = getClosestVueParent(@$parent, 'md-input-container')
+      @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
       if !@parentContainer
         @$destroy()
-        throw new Error('You should wrap the md-textarea in a md-input-container')
+        throw new Error('You should wrap the v-textarea in a v-input-container')
       @setParentDisabled()
       @setParentRequired()
       @setParentPlaceholder()

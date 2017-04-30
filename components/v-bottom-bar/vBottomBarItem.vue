@@ -28,7 +28,7 @@ component =
     classes: ->
       'v-active': @active
   watch:
-    mdActive: (active) ->
+    vActive: (active) ->
       @setActive active
 
   methods:
@@ -39,7 +39,7 @@ component =
     if !@$parent.$el.classList.contains('v-bottom-bar')
       @$destroy()
       throw new Error('You should wrap the v-bottom-bar-item in a v-bottom-bar')
-    if @mdActive
+    if @vActive
       @active = true
 
 return component

@@ -1,6 +1,6 @@
 @import '../../styles/variables.styl'
 
-.md-list
+.v-list
   margin 0
   padding 8px 0
   display flex
@@ -8,111 +8,111 @@
   position relative
   list-style none
 
-  &.md-dense
+  &.v-dense
     padding 4px 0
 
-    .md-list-item
-      &.md-inset .md-list-item-container
+    .v-list-item
+      &.v-inset .v-list-item-container
         padding-left 72px
 
-      .md-list-item-container
+      .v-list-item-container
         min-height 40px
         font-size 13px
 
-        .md-avatar,
-        .md-list-action
+        .v-avatar,
+        .v-list-action
           &:first-child
             margin-right 24px
 
-    .md-avatar
+    .v-avatar
       width 32px
       min-width 32px
       height 32px
       min-height 32px
 
-    .md-list-item-expand
+    .v-list-item-expand
       min-height 40px
 
-  &.md-double-line
-    &.md-dense
-      .md-list-item
-        .md-list-item-container
+  &.v-double-line
+    &.v-dense
+      .v-list-item
+        .v-list-item-container
           min-height 60px
 
-        .md-avatar
+        .v-avatar
           width 36px
           min-width 36px
           height 36px
           min-height 36px
 
-          .md-avatar,
-          .md-list-action
+          .v-avatar,
+          .v-list-action
             &:first-child
               margin-right 20px
 
-      .md-list-text-container
+      .v-list-text-container
         > :nth-child(1)
           font-size 13px
 
         > :nth-child(2)
           font-size 13px
 
-    .md-list-item
-      .md-list-item-container
+    .v-list-item
+      .v-list-item-container
         min-height 72px
 
-  &.md-triple-line
-    &.md-dense
-      .md-list-item
-        .md-list-item-container
+  &.v-triple-line
+    &.v-dense
+      .v-list-item
+        .v-list-item-container
           min-height 76px
 
-        .md-avatar
+        .v-avatar
           width 36px
           min-width 36px
           height 36px
           min-height 36px
 
-          .md-avatar,
-          .md-list-action
+          .v-avatar,
+          .v-list-action
             &:first-child
               margin-right 20px
 
-      .md-list-text-container
+      .v-list-text-container
         > :nth-child(1)
           font-size 13px
 
         > :nth-child(2)
           font-size 13px
 
-    .md-list-item
-      .md-list-item-container
+    .v-list-item
+      .v-list-item-container
         min-height 88px
 
-    .md-avatar
+    .v-avatar
       margin 0
 
-  .md-subheader
-    &.md-inset
+  .v-subheader
+    &.v-inset
       padding-left 72px
 
-  > .md-subheader:first-of-type
+  > .v-subheader:first-of-type
     margin-top -8px
 
-.md-list-item
+.v-list-item
   height auto
   position relative
   z-index 2
 
-  &.md-disabled
+  &.v-disabled
     cursor default
     pointer-events none
 
-  &.md-inset
-    .md-list-item-container
+  &.v-inset
+    .v-list-item-container
       padding-left 72px
 
-  .md-button-ghost
+  .v-button-ghost
     width 100%
     margin 0
     position absolute
@@ -123,14 +123,14 @@
     z-index 1
     border-radius 0
 
-  .md-button:not(.md-button-ghost):not(.md-list-item-container)
+  .v-button:not(.v-button-ghost):not(.v-list-item-container)
     position relative
     z-index 2
 
-    .md-icon
+    .v-icon
       position relative
 
-  .md-list-item-container
+  .v-list-item-container
     min-height 48px
     margin 0
     padding 0 16px
@@ -148,45 +148,45 @@
     &:hover
       text-decoration none
 
-    > .md-icon:first-child
+    > .v-icon:first-child
       margin-right 32px
 
-    .md-avatar,
-    .md-list-action
+    .v-avatar,
+    .v-list-action
       &:first-child
         margin-right 16px
 
-    .md-list-action
+    .v-list-action
       margin 0 -10px 0 0
 
       &:nth-child(3)
         margin 0 -10px 0 16px
 
-  .md-divider
+  .v-divider
     position absolute
     bottom 0
     right 0
     left 0
 
-  .md-icon,
-  .md-avatar,
-  .md-list-action:first-child
+  .v-icon,
+  .v-avatar,
+  .v-list-action:first-child
     margin 0
 
     &:first-of-type + *
       flex 1 1 auto
 
-  .md-avatar
+  .v-avatar
     margin-top 8px
     margin-bottom 8px
 
-  .md-icon
+  .v-icon
     color rgba(#000, .54)
 
-  .md-ink-ripple
+  .v-ink-ripple
     border-radius 0
 
-.md-list-item-expand
+.v-list-item-expand
   min-height 48px
   flex-flow column wrap
   overflow hidden
@@ -208,7 +208,7 @@
   &:after
     bottom 0
 
-  &.md-active
+  &.v-active
     position relative
 
     &:before,
@@ -223,34 +223,34 @@
       &:after
         background none
 
-    &.md-active + .md-active:before
+    &.v-active + .v-active:before
       background none
 
-    > .md-list-item-container .md-list-expand-indicator
+    > .v-list-item-container .v-list-expand-indicator
       transform rotateZ(180deg) translate3D(0, 0, 0)
 
-    > .md-list-expand
+    > .v-list-expand
       margin-bottom 0 !important
 
-  .md-expansion-indicator,
-  .md-list-item-container,
-  .md-icon
+  .v-expansion-indicator,
+  .v-list-item-container,
+  .v-icon
     transition swift-ease-out
 
-  .md-list-expand
+  .v-list-expand
     position relative
     z-index 1
     transform translate3D(0, 0, 0)
     will-change margin-bottom
     transition swift-ease-in-out
 
-    &.md-transition-off
+    &.v-transition-off
       transition none !important
 
-    .md-list
+    .v-list
       padding 0
 
-.md-list-text-container
+.v-list-text-container
   display flex
   flex-flow column nowrap
   flex 1
