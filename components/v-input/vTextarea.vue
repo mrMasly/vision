@@ -1,0 +1,33 @@
+<template lang="jade">
+textarea.md-input(:value='value', :disabled='disabled', :required='required', :placeholder='placeholder', :maxlength='maxlength', @focus='onFocus', @blur='onBlur', @input='onInput')
+</template>
+
+<script lang="coffee">
+import autosize from 'autosize'
+import common from './common.js'
+import getClosestVueParent from '../../utils/getClosestVueParent.js'
+component =
+  name: 'v-textarea'
+  mixins: [ common ]
+  watch:
+    value: ->
+      @$nextTick -> autosize.update @$el
+  mounted: ->
+    @$nextTick ->
+      @parentContainer = getClosestVueParent(@$parent, 'md-input-container')
+      if !@parentContainer
+        @$destroy()
+        throw new Error('You should wrap the md-textarea in a md-input-container')
+      @setParentDisabled()
+      @setParentRequired()
+      @setParentPlaceholder()
+      @handleMaxLength()
+      @updateValues()
+      if !@$el.getAttribute('rows')
+        @$el.setAttribute 'rows', '1'
+      autosize @$el
+  beforeDestroy: ->
+    autosize.destroy @$el
+
+return component
+</script>

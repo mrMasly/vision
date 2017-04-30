@@ -1,0 +1,49 @@
+.THEME_NAME
+  &.v-input-container
+    &.v-input-invalid
+      &:after
+        background-color WARN-COLOR
+
+      label,
+      input,
+      textarea,
+      .v-error,
+      .v-count,
+      .v-icon:not(.v-icon-delete)
+        color WARN-COLOR
+
+    &.v-input-focused
+      &.v-input-inline
+        label
+          color rgba(#000, .54)
+
+      &.v-input-required
+        label:after
+          color WARN-COLOR
+
+      &:after
+        height 2px
+        background-color PRIMARY-COLOR
+
+      input,
+      textarea
+        color PRIMARY-COLOR
+        text-shadow 0 0 0 BACKGROUND-CONTRAST
+        -webkit-text-fill-color transparent
+
+      label,
+      .v-icon:not(.v-icon-delete)
+        color PRIMARY-COLOR
+
+    &.v-input-disabled
+      label,
+      input,
+      textarea,
+      .v-error,
+      .v-count,
+      .v-icon:not(.v-icon-delete),
+      ::-webkit-input-placeholder
+        color BACKGROUND-CONTRAST-0.38
+
+    .v-icon:not(.v-icon-delete):after
+      background BACKGROUND-COLOR
