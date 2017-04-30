@@ -3,7 +3,7 @@
   v-toolbar
     .v-counter
       span(ref='counter') {{ tableInstance.numberOfSelected }}
-      span {{ vSelectedLabel }}
+      span {{ selectedLabel }}
     slot
 </template>
 
@@ -13,7 +13,7 @@ import getClosestVueParent from '../../utils/getClosestVueParent.js'
 component =
   name: 'v-table-alternate-header'
   props:
-    vSelectedLabel:
+    selectedLabel:
       type: String
       default: 'selected'
   mixins: [ theme ]

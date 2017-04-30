@@ -2,7 +2,7 @@
 .v-dialog-container(:class='[themeClass, classes]', @keyup.esc.stop='closeOnEsc', tabindex='0')
   .v-dialog(ref='dialog', :style='styles', :class='dialogClasses')
     slot
-  v-backdrop.v-dialog-backdrop(:class='classes', v-if='vBackdrop', ref='backdrop', @close='vClickOutsideToClose && close()')
+  v-backdrop.v-dialog-backdrop(:class='classes', v-if='backdrop', ref='backdrop', @close='clickOutsideToClose && close()')
 </template>
 
 <script lang="coffee">
@@ -10,18 +10,18 @@ import theme from '../../theme/mixin.js';
 component =
   name: 'v-dialog'
   props:
-    vClickOutsideToClose:
+    clickOutsideToClose:
       type: Boolean
       default: true
-    vEscToClose:
+    escToClose:
       type: Boolean
       default: true
-    vBackdrop:
+    backdrop:
       type: Boolean
       default: true
-    vOpenFrom: String
-    vCloseTo: String
-    vFullscreen:
+    openFrom: String
+    closeTo: String
+    fullscreen:
       type: Boolean
       default: false
   mixins: [ theme ]
@@ -33,9 +33,9 @@ component =
     classes: ->
       'v-active': @active
     dialogClasses: ->
-      'v-fullscreen': @vFullscreen
+      'v-fullscreen': @fullscreen
       'v-transition-off': @transitionOff
-      'v-reference': @vOpenFrom or @vCloseTo
+      'v-reference': @openFrom or @closeTo
     styles: ->
       transform: @dialogTransform
   methods:
@@ -59,52 +59,43 @@ component =
         @dialogTransform = 'translate3D(' + distance.left + 'px, ' + distance.top + 'px, 0) scale(' + widthInScale + ', ' + heightInScale + ')'
       return
     open: ->
-      _this = this
       document.body.appendChild @dialogElement
       @transitionOff = true
-      @calculateDialogPos @vOpenFrom
-      window.setTimeout ->
-        _this.dialogElement.focus()
-        _this.transitionOff = false
-        _this.active = true
-        return
+      @calculateDialogPos @openFrom
+      window.setTimeout =>
+        @dialogElement.focus()
+        @transitionOff = false
+        @active = true
       @$emit 'open'
-      return
     closeOnEsc: ->
       if @vEscToClose
         @close()
-      return
     close: ->
-      _this2 = this
       if document.body.contains(@dialogElement)
         @$nextTick ->
 
-          cleanElement = ->
-            activeRipple = _this2.dialogElement.querySelector('.v-ripple.v-active')
+          cleanElement = =>
+            activeRipple = @dialogElement.querySelector('.v-ripple.v-active')
             if activeRipple
               activeRipple.classList.remove 'v-active'
-            _this2.dialogInnerElement.removeEventListener transitionEndEventName, cleanElement
-            document.body.removeChild _this2.dialogElement
-            _this2.dialogTransform = ''
-            return
+            @dialogInnerElement.removeEventListener transitionEndEventName, cleanElement
+            document.body.removeChild @dialogElement
+            @dialogTransform = ''
 
-          _this2.transitionOff = true
-          _this2.dialogTransform = ''
-          _this2.calculateDialogPos _this2.vCloseTo
-          setTimeout ->
-            _this2.transitionOff = false
-            _this2.active = false
-            _this2.dialogInnerElement.addEventListener transitionEndEventName, cleanElement
-            return
-          _this2.$emit 'close'
-          return
-      return
+          @transitionOff = true
+          @dialogTransform = ''
+          @calculateDialogPos @closeTo
+          setTimeout =>
+            @transitionOff = false
+            @active = false
+            @dialogInnerElement.addEventListener transitionEndEventName, cleanElement
+          @$emit 'close'
+
   mounted: ->
-    _this3 = this
     @$nextTick ->
-      _this3.dialogElement = _this3.$el
-      _this3.dialogInnerElement = _this3.$refs.dialog
-      _this3.removeDialog()
+      @dialogElement = @$el
+      @dialogInnerElement = @$refs.dialog
+      @removeDialog()
   beforeDestroy: ->
     @removeDialog()
 

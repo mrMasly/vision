@@ -1,9 +1,9 @@
 <template lang="jade">
 .v-chips(:class='[themeClass, classes]')
   v-input-container(@click.native='applyInputFocus')
-    v-chip(v-for='chip in selectedChips', :v-deletable='!vStatic', :disabled='disabled', @delete='deleteChip(chip)')
+    v-chip(v-for='chip in selectedChips', :v-deletable='!static', :disabled='disabled', @delete='deleteChip(chip)')
       slot(:value='chip')
-    v-input(v-show='!vStatic', v-model='currentChip', :type='vInputType', :placeholder='vInputPlaceholder', :id='inputId', :name='vInputName', :disabled='disabled', @keydown.native.delete='deleteLastChip', @keydown.native.prevent.enter='addChip', @keydown.native.prevent.186='addChip', tabindex='0', ref='input')
+    v-input(v-show='!static', v-model='currentChip', :type='inputType', :placeholder='inputPlaceholder', :id='inputId', :name='inputName', :disabled='disabled', @keydown.native.delete='deleteLastChip', @keydown.native.prevent.enter='addChip', @keydown.native.prevent.186='addChip', tabindex='0', ref='input')
 </template>
 
 <script lang="coffee">
@@ -13,34 +13,34 @@ component =
   props:
     value: Array
     disabled: Boolean
-    vInputId: String
-    vInputName: String
-    vInputPlaceholder: String
-    vInputType:
+    inputId: String
+    inputName: String
+    inputPlaceholder: String
+    inputType:
       type: String
       default: 'text'
-    vStatic: Boolean
-    vMax:
+    static: Boolean
+    max:
       type: Number
       default: Infinity
   mixins: [ theme ]
   data: ->
     currentChip: null
     selectedChips: @value
-    inputId: @vInputId or 'chips-' + Random.id()
+    inputId: @inputId or 'chips-' + Random.id()
   watch:
     value: (_value) ->
       @selectedChips = _value
   computed:
     classes: ->
-      'v-static': @vStatic
+      'v-static': @static
       'v-disabled': @disabled
   methods:
     applyInputFocus: ->
       @$nextTick ->
         @$refs.input.$el.focus()
     addChip: ->
-      if @currentChip and @selectedChips.length < @vMax
+      if @currentChip and @selectedChips.length < @max
         value = @currentChip.trim()
         if @selectedChips.indexOf(value) < 0
           @selectedChips.push value

@@ -1,10 +1,10 @@
 <template lang="jade">
 .v-table-edit(@keydown.esc='closeDialog')
   .v-table-edit-trigger(:class='triggerClasses', @click.stop='openDialog')
-    | {{ value || vPlaceholder }}
+    | {{ value || placeholder }}
   .v-table-dialog(:class='dialogClasses', ref='dialog')
     v-input-container
-      v-input(ref='input', :id='vId', :name='vName', :maxlength='vMaxlength', :value='value', :placeholder='vPlaceholder', @keydown.enter.native='confirmDialog')
+      v-input(ref='input', :id='id', :name='name', :maxlength='maxlength', :value='value', :placeholder='placeholder', @keydown.enter.native='confirmDialog')
 </template>
 
 <script lang="coffee">
@@ -12,11 +12,11 @@ component =
   name: 'v-table-edit'
   props:
     value: [String, Number]
-    vLarge: Boolean
-    vId: String
-    vName: String
-    vPlaceholder: String
-    vMaxlength: [Number, String]
+    large: Boolean
+    id: String
+    name: String
+    placeholder: String
+    maxlength: [Number, String]
   data: ->
     active: false
   computed:
@@ -24,7 +24,7 @@ component =
       'v-edited': @value
     dialogClasses: ->
       'v-active': @active
-      'v-large': @vLarge
+      'v-large': @large
     realValue: ->
       console.log @value
   methods:

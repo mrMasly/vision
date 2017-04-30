@@ -1,14 +1,14 @@
 <template lang="jade">
 v-dialog.v-dialog-prompt(ref='dialog', @close="fireCloseEvent('cancel')")
-  v-dialog-title(v-if='vTitle') {{ vTitle }}
-  v-dialog-content(v-if='vContentHtml', v-html='vContentHtml')
-  v-dialog-content(v-if='vContent') {{ vContent }}
+  v-dialog-title(v-if='title') {{ title }}
+  v-dialog-content(v-if='contentHtml', v-html='contentHtml')
+  v-dialog-content(v-if='content') {{ content }}
   v-dialog-content
     v-input-container
-      v-input(ref='input', :id='vInputId', :name='vInputName', :maxlength='vInputMaxlength', :placeholder='vInputPlaceholder', :value='value', @keydown.enter.native='confirmValue')
+      v-input(ref='input', :id='inputId', :name='inputName', :maxlength='inputMaxlength', :placeholder='inputPlaceholder', :value='value', @keydown.enter.native='confirmValue')
   v-dialog-actions
-    v-button.v-primary(@click.native="close('cancel')") {{ vCancelText }}
-    v-button.v-primary(@click.native='confirmValue') {{ vOkText }}
+    v-button.v-primary(@click.native="close('cancel')") {{ cancelText }}
+    v-button.v-primary(@click.native='confirmValue') {{ okText }}
 
 </template>
 
@@ -19,19 +19,19 @@ component =
     value:
       type: [String, Number]
       required: true
-    vTitle: String
-    vContent: String
-    vContentHtml: String
-    vOkText:
+    title: String
+    content: String
+    contentHtml: String
+    okText:
       type: String
       default: 'Ok'
-    vCancelText:
+    cancelText:
       type: String
       default: 'Cancel'
-    vInputId: String
-    vInputName: String
-    vInputMaxlength: [String, Number]
-    vInputPlaceholder: String
+    inputId: String
+    inputName: String
+    inputMaxlength: [String, Number]
+    inputPlaceholder: String
   data: ->
     debounce: false
   methods:
@@ -39,12 +39,11 @@ component =
       if !@debounce
         @$emit 'close', type
     open: ->
-      _this = this
       @$emit 'open'
       @debounce = false
       @$refs.dialog.open()
-      window.setTimeout ->
-        _this.$refs.input.$el.focus()
+      window.setTimeout =>
+        @$refs.input.$el.focus()
     close: (type) ->
       @fireCloseEvent type
       @debounce = true

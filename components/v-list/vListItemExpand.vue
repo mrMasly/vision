@@ -13,7 +13,7 @@ component =
   name: 'v-list-item'
   props:
     disabled: Boolean
-    vExpandMultiple: Boolean
+    expandMultiple: Boolean
   data: ->
     parentList: false
     active: false
@@ -41,7 +41,7 @@ component =
         setTimeout =>
           @transitionOff = false
     toggleExpandList: ->
-      if !@vExpandMultiple
+      if !@expandMultiple
         @resetSiblings()
       @calculatePadding()
       @active = !@active

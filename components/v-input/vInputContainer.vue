@@ -2,7 +2,7 @@
 .v-input-container(:class='[themeClass, classes]')
   slot
   span.v-count(v-if='enableCounter') {{ inputLength }} / {{ counterLength }}
-  v-button.v-icon-button.v-toggle-password(@click.native='togglePasswordType', v-if='vHasPassword')
+  v-button.v-icon-button.v-toggle-password(@click.native='togglePasswordType', v-if='hasPassword')
     v-icon {{ showPassword ? &apos;visibility_off&apos; : &apos;visibility&apos; }}
 </template>
 
@@ -12,8 +12,8 @@ import {isArray} from 'lodash'
 component =
   name: 'v-input-container'
   props:
-    vInline: Boolean
-    vHasPassword: Boolean
+    inline: Boolean
+    hasPassword: Boolean
   mixins: [ theme ]
   data: ->
     value: ''
@@ -34,8 +34,8 @@ component =
         return @value.length > 0
       Boolean @value
     classes: ->
-      'v-input-inline': @vInline
-      'v-has-password': @vHasPassword
+      'v-input-inline': @inline
+      'v-has-password': @hasPassword
       'v-has-select': @hasSelect
       'v-has-file': @hasFile
       'v-has-value': @hasValue

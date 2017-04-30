@@ -11,9 +11,9 @@ transitionClass = 'v-transition-off'
 component =
   name: 'v-table-row'
   props:
-    vAutoSelect: Boolean
-    vSelection: Boolean
-    vItem: Object
+    autoSelect: Boolean
+    selection: Boolean
+    item: Object
   data: ->
     parentTable: {}
     headRow: false
@@ -21,14 +21,14 @@ component =
     index: 0
   computed:
     isDisabled: ->
-      !@vSelection and !@headRow
+      !@selection and !@headRow
     hasSelection: ->
-      @vSelection or @headRow and @parentTable.hasRowSelection
+      @selection or @headRow and @parentTable.hasRowSelection
     classes: ->
       'v-selected': @checkbox
   watch:
-    vItem: (newValue, oldValue) ->
-      @parentTable.data[@index] = @vItem
+    item: (newValue, oldValue) ->
+      @parentTable.data[@index] = @item
       @handleMultipleSelection newValue == oldValue
   methods:
     setSelectedRow: (value, index) ->
@@ -63,7 +63,7 @@ component =
           @handleSingleSelection value
         @parentTable.emitSelection()
     autoSelect: ->
-      if @vAutoSelect and @hasSelection
+      if @autoSelect and @hasSelection
         @checkbox = !@checkbox
         @handleSingleSelection @checkbox
         @parentTable.emitSelection()
@@ -74,10 +74,10 @@ component =
     else
       @parentTable.numberOfRows++
       @index = @parentTable.numberOfRows
-      if @vSelection
+      if @selection
         @parentTable.hasRowSelection = true
-      if @vItem
-        @parentTable.data.push @vItem
+      if @item
+        @parentTable.data.push @item
 
 return component
 </script>

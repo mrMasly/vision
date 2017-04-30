@@ -1,9 +1,9 @@
 <template lang="jade">
 .v-table-pagination
   span.v-table-pagination-label {{ vLabel }}:
-  v-select(v-model='currentSize', v-menu-class='v-pagination-select', @change='changeSize', v-if='vPageOptions')
-    v-option(v-for='amount in vPageOptions', :value='amount') {{ amount }}
-  span {{ ((currentPage - 1) * currentSize) + 1 }}-{{ subTotal }} {{ vSeparator }} {{ vTotal }}
+  v-select(v-model='currentSize', v-menu-class='v-pagination-select', @change='changeSize', v-if='pageOptions')
+    v-option(v-for='amount in pageOptions', :value='amount') {{ amount }}
+  span {{ ((currentPage - 1) * currentSize) + 1 }}-{{ subTotal }} {{ separator }} {{ total }}
   v-button.v-icon-button.v-table-pagination-previous(@click.native='previousPage', :disabled='currentPage === 1')
     v-icon keyboard_arrow_left
   v-button.v-icon-button.v-table-pagination-next(@click.native='nextPage', :disabled='shouldDisable')
@@ -14,20 +14,20 @@
 component =
   name: 'v-table-pagination'
   props:
-    vSize:
+    size:
       type: [Number, String]
       default: 10
-    vPageOptions: [Array, Boolean]
-    vPage:
+    pageOptions: [Array, Boolean]
+    page:
       type: [Number, String]
       default: 1
-    vTotal:
+    total:
       type: [Number, String]
       default: 'Many'
-    vLabel:
+    label:
       type: String
       default: 'Rows per page'
-    vSeparator:
+    separator:
       type: String
       default: 'of'
   data: ->
@@ -36,11 +36,11 @@ component =
     currentPage: 1
     currentSize: 0
   watch:
-    vTotal: (val) ->
+    total: (val) ->
       @totalItems = if isNaN(val) then Number.MAX_SAFE_INTEGER else parseInt(val, 10)
-    vSize: (val) ->
+    size: (val) ->
       @currentSize = parseInt(val, 10)
-    vPage: (val) ->
+    page: (val) ->
       @currentPage = parseInt(val, 10)
   computed:
     lastPage: ->
@@ -51,7 +51,7 @@ component =
     emitPaginationEvent: ->
       if @canFireEvents
         sub = @currentPage * @currentSize
-        @subTotal = if sub > @vTotal then @vTotal else sub
+        @subTotal = if sub > @total then @total else sub
         @$emit 'pagination',
           size: @currentSize
           page: @currentPage
@@ -72,8 +72,8 @@ component =
   mounted: ->
     @$nextTick ->
       @subTotal = @currentPage * @currentSize
-      @vPageOptions = @vPageOptions or [10,25,50,100]
-      @currentSize = @vPageOptions[0]
+      @pageOptions = @pageOptions or [10,25,50,100]
+      @currentSize = @pageOptions[0]
       @canFireEvents = true
 
 return component

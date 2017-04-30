@@ -7,10 +7,10 @@
 component =
   name: 'v-card-area'
   props:
-    vInset: [Boolean, String]
+    inset: [Boolean, String]
   computed:
     classes: ->
-      'v-inset': @vInset
+      'v-inset': @inset
 
 return component
 </script>

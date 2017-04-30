@@ -15,19 +15,19 @@ component =
     name: String
     id: String
     value: [String, Boolean, Number]
-    vValue:
+    value:
       type: [String, Boolean, Number]
       required: true
     disabled: Boolean
   mixins: [ theme ]
   computed:
     classes: ->
-      'v-checked': typeof @value != 'undefined' and @vValue.toString() == @value.toString()
+      'v-checked': typeof @value != 'undefined' and @value.toString() == @value.toString()
       'v-disabled': @disabled
   methods: toggleCheck: ($event) ->
     if !@disabled
-      @$emit 'change', @vValue, $event
-      @$emit 'input', @vValue, $event
+      @$emit 'change', @value, $event
+      @$emit 'input', @value, $event
 
 return component
 </script>

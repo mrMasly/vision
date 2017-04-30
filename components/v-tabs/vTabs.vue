@@ -1,6 +1,6 @@
 <template lang="jade">
 .v-tabs(:class='[themeClass, tabClasses]')
-  nav.v-shadow.v-tabs-navigation(:class='navigationClasses', ref='tabNavigation')
+  nav.v-tabs-navigation(:class='navigationClasses', ref='tabNavigation')
     button.v-tab-header(v-for='header in tabList', :key='header.id', type='button', :class='getHeaderClass(header)', :disabled='header.disabled', @click='setActiveTab(header)', ref='tabHeader')
       v-ripple(:v-disabled='header.disabled')
       .v-tab-header-container
@@ -21,13 +21,13 @@ import theme from '../../theme/mixin.js'
 component =
   name: 'v-tabs'
   props:
-    vFixed: Boolean
-    vCentered: Boolean
-    vRight: Boolean
-    vDynamicHeight:
+    fixed: Boolean
+    centered: Boolean
+    right: Boolean
+    dynamicHeight:
       type: Boolean
       default: true
-    vElevation:
+    elevation:
       type: [String, Number]
       default: 0
   mixins: [ theme ]
@@ -43,14 +43,14 @@ component =
     contentWidth: '0px'
   computed:
     tabClasses: ->
-      'v-dynamic-height': @vDynamicHeight
+      'v-dynamic-height': @dynamicHeight
       'v-transition-off': @transitionOff
     navigationClasses: ->
       'v-has-icon': @hasIcons
       'v-has-label': @hasLabel
-      'v-fixed': @vFixed
-      'v-right': !@vCentered and @vRight
-      'v-centered': @vCentered or @vFixed
+      'v-fixed': @fixed
+      'v-right': !@centered and @right
+      'v-centered': @centered or @fixed
     indicatorClasses: ->
       toLeft = @lastIndicatorNumber > @activeTabNumber
       @lastIndicatorNumber = @activeTabNumber

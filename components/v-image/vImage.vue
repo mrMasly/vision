@@ -1,5 +1,5 @@
 <template lang="jade">
-img.v-image(:src="vSrc", :class="classes")
+img.v-image(:src="src", :class="classes")
 </template>
 
 <script lang="coffee">
@@ -9,13 +9,13 @@ import getImageLightness from '../../utils/getImageLightness.js';
 component =
   name: 'v-image'
   props:
-    vSrc: String
+    src: String
   data: ->
     loaded: false
     applyBlack: true
     imageElement: null
   watch:
-    vSrc: ->
+    src: ->
       @createImage()
   computed:
     classes: ->
@@ -41,10 +41,10 @@ component =
       @loaded = false
       @applyBlack = false
       @imageElement = null
-      if @vSrc
+      if @src
         @imageElement = document.createElement('img')
         @imageElement.crossOrigin = ''
-        @imageElement.src = @vSrc
+        @imageElement.src = @src
         @analyzeLightness @imageElement
 
   created: ->

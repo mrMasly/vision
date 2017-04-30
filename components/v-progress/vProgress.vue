@@ -9,17 +9,17 @@ import theme from '../../theme/mixin.js'
 component =
   name: 'v-progress'
   props:
-    vIndeterminate: Boolean
-    vProgress:
+    indeterminate: Boolean
+    progress:
       type: Number
       default: 0
   mixins: [ theme ]
   computed:
     classes: ->
-      'v-indeterminate': @vIndeterminate
+      'v-indeterminate': @indeterminate
     styles: ->
-      if !@vIndeterminate
-        return { width: @vProgress + '%' }
+      if !@indeterminate
+        return { width: @progress + '%' }
 
 return component
 </script>

@@ -15,10 +15,10 @@ component =
   name: 'v-snackbar'
   props:
     id: [String, Number]
-    vPosition:
+    position:
       type: String
       default: 'bottom center'
-    vDuration:
+    duration:
       type: [String, Number]
       default: 4000
   mixins: [ theme ]
@@ -32,7 +32,7 @@ component =
     mounted: no
   computed: classes: ->
     cssClasses = 'v-active': @active
-    @directionClass = @vPosition.replace(RegExp(' ', 'g'), '-')
+    @directionClass = @position.replace(RegExp(' ', 'g'), '-')
     cssClasses['v-position-' + @directionClass] = true
     cssClasses
   watch:
@@ -60,7 +60,7 @@ component =
       window.getComputedStyle(@$refs.container).backgroundColor
       @active = true
       @$emit 'open'
-      @closeTimeout = window.setTimeout(@close, @vDuration)
+      @closeTimeout = window.setTimeout(@close, @duration)
       @timeoutStartedAt = Date.now()
     close: ->
       _this = this
@@ -76,7 +76,7 @@ component =
         @$refs.container.removeEventListener transitionEndEventName, removeElement
         @$refs.container.addEventListener transitionEndEventName, removeElement
         window.clearTimeout @closeTimeout
-        @pendingDuration = @vDuration
+        @pendingDuration = @duration
     pauseTimeout: ->
       @pendingDuration = @pendingDuration - (Date.now() - (@timeoutStartedAt))
       @timeoutStartedAt = 0
@@ -90,7 +90,7 @@ component =
       @snackbarElement = @$el
       @snackbarElement.parentNode.removeChild @snackbarElement
       @timeoutStartedAt = 0
-      @pendingDuration = @vDuration
+      @pendingDuration = @duration
 
   beforeDestroy: ->
     window.clearTimeout @closeTimeout

@@ -2,10 +2,10 @@
 th.v-table-head(:class='classes', @click='changeSort')
   .v-table-head-container
     .v-table-head-text.v-test
-      v-icon.v-sortable-icon(v-if='vSortBy') arrow_upward
+      v-icon.v-sortable-icon(v-if='sortBy') arrow_upward
       slot
-      v-tooltip(v-if='vTooltip') {{ vTooltip }}
-    v-ripple(:v-disabled='!vSortBy')
+      v-tooltip(v-if='tooltip') {{ tooltip }}
+    v-ripple(:v-disabled='!sortBy')
 </template>
 
 <script lang="coffee">
@@ -13,9 +13,9 @@ import getClosestVueParent from '../../utils/getClosestVueParent.js'
 component =
   name: 'v-table-head'
   props:
-    vNumeric: Boolean
-    vSortBy: String
-    vTooltip: String
+    numeric: Boolean
+    sortBy: String
+    tooltip: String
   data: ->
     sortType: null
     sorted: false
@@ -25,23 +25,23 @@ component =
     if !matchSort
       @sorted = false
     return {
-      'v-numeric': @vNumeric
-      'v-sortable': @vSortBy
+      'v-numeric': @numeric
+      'v-sortable': @sortBy
       'v-sorted': matchSort and @sorted
       'v-sorted-descending': matchSort and @sortType == 'desc'
     }
   methods:
     hasMatchSort: ->
-      @parentTable.sortBy == @vSortBy
+      @parentTable.sortBy == @sortBy
     changeSort: ->
-      if @vSortBy
+      if @sortBy
         if @sortType == 'asc' and @sorted
           @sortType = 'desc'
         else
           @sortType = 'asc'
         @sorted = true
         @parentTable.sortType = @sortType
-        @parentTable.emitSort @vSortBy
+        @parentTable.emitSort @sortBy
   mounted: ->
     @parentTable = getClosestVueParent(@$parent, 'v-table')
     if @hasMatchSort()

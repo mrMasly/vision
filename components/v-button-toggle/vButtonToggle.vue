@@ -11,7 +11,7 @@ onClickButton = null
 component =
   name: 'v-button-toggle'
   props:
-    vSingle: Boolean
+    single: Boolean
   mixins: [ theme ]
   mounted: ->
     _this = this
@@ -20,7 +20,7 @@ component =
       toggleClass = 'v-toggle'
 
       onClickButton = ->
-        if _this.vSingle
+        if _this.single
           _this.$children.forEach (child) ->
             child.$el.classList.remove toggleClass
 

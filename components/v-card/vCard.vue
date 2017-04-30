@@ -8,11 +8,11 @@ import theme from '../../theme/mixin.js'
 component =
   name: 'v-card'
   props:
-    vWithHover: Boolean
+    withHover: Boolean
   mixins: [ theme ]
   computed:
     classes: ->
-      'v-with-hover': @vWithHover
+      'v-with-hover': @withHover
 
 
 return component

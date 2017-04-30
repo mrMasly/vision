@@ -8,12 +8,12 @@ td.v-table-cell(:class='classes')
 component =
   name: 'v-table-cell'
   props:
-    vNumeric: Boolean
+    numeric: Boolean
   data: ->
     hasAction: false
   computed:
     classes: ->
-      'v-numeric': @vNumeric
+      'v-numeric': @numeric
       'v-has-action': @hasAction
   mounted: ->
     if @$children.length > 0

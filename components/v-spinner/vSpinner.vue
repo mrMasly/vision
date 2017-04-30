@@ -2,7 +2,7 @@
 transition(name='v-spinner', appear='')
   .v-spinner(:class='[themeClass, classes]', :style='styles')
     svg.v-spinner-draw(viewbox='25 25 50 50')
-      circle.v-spinner-path(cx='50', cy='50', r='20', :stroke-width='vStroke', :stroke-dasharray='dashProgress')
+      circle.v-spinner-path(cx='50', cy='50', r='20', :stroke-width='stroke', :stroke-dasharray='dashProgress')
 </template>
 
 <script lang="coffee">
@@ -12,28 +12,28 @@ import theme from '../../theme/mixin.js'
 component =
   name: 'v-spinner'
   props:
-    vSize:
+    size:
       type: Number
       default: 50
-    vStroke:
+    stroke:
       type: Number
       default: 3.5
-    vIndeterminate: Boolean
-    vProgress:
+    indeterminate: Boolean
+    progress:
       type: Number
       default: 0
   mixins: [ theme ]
   computed:
     classes: ->
-      'v-indeterminate': @vIndeterminate
+      'v-indeterminate': @indeterminate
     styles: ->
-      newSize = @vSize + 'px'
+      newSize = @size + 'px'
 
       width: newSize
       height: newSize
     dashProgress: ->
-      progress = @vProgress * 125 / 100
-      if @vIndeterminate
+      progress = @progress * 125 / 100
+      if @indeterminate
         return false
       if progress >= 125
         progress = 130

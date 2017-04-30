@@ -10,12 +10,12 @@ import getClosestVueParent from '../../utils/getClosestVueParent.js';
 component =
   name: 'v-table'
   props:
-    vSortType: String
-    vSort: String
+    sortType: String
+    sort: String
   mixins: [ theme ]
   data: ->
-    sortType: @vSortType
-    sortBy: @vSort
+    sortType: @sortType
+    sortBy: @sort
     hasRowSelection: false
     data: []
     numberOfRows: 0

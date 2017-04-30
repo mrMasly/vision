@@ -9,10 +9,10 @@ import {findIndex} from 'lodash'
 component =
   name: 'v-bottom-bar'
   props:
-    vShift: Boolean
+    shift: Boolean
   mixins: [theme]
   computed:
-    classes: -> if @vShift then 'v-shift' else 'v-fixed'
+    classes: -> if @shift then 'v-shift' else 'v-fixed'
   methods:
     setActive: (item) ->
       for child in @$children

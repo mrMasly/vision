@@ -20,7 +20,8 @@ removeEvent = (target, type, handler) ->
   target.removeEventListener getEventName(type), handler
   return
 component =
-  props: vDisabled: Boolean
+  props:
+    disabled: Boolean
   data: ->
     mounted: false
     rippleElement: null
@@ -44,7 +45,7 @@ component =
       top: @parentDimensions.top
       left: @parentDimensions.left
     disabled: ->
-      @vDisabled or !@$material.inkRipple
+      @disabled or !@$material.inkRipple
   watch: disabled: (_disabled) ->
     if !_disabled
       @init()

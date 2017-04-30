@@ -10,35 +10,35 @@ import transitionEndEventName from '../../utils/transitionEndEventName.js'
 component =
   name: 'v-menu'
   props:
-    vSize:
+    size:
       type: [Number, String]
       default: 0
-    vDirection:
+    direction:
       type: String
       default: 'bottom right'
-    vAlignTrigger:
+    alignTrigger:
       type: Boolean
       default: false
-    vOffsetX:
+    offsetX:
       type: [Number, String]
       default: 0
-    vOffsetY:
+    offsetY:
       type: [Number, String]
       default: 0
-    vCloseOnSelect:
+    closeOnSelect:
       type: Boolean
       default: true
   data: ->
     active: false
   watch:
-    vSize: (current, previous) ->
+    size: (current, previous) ->
       if current >= 1 and current <= 7
         @removeLastSizeMenuContentClass previous
         @addNewSizeMenuContentClass current
-    vDirection: (current, previous) ->
+    direction: (current, previous) ->
       @removeLastDirectionMenuContentClass previous
       @addNewDirectionMenuContentClass current
-    vAlignTrigger: (trigger) ->
+    alignTrigger: (trigger) ->
       @handleAlignTriggerClass trigger
   methods:
     validateMenu: ->
@@ -63,9 +63,9 @@ component =
       menuTriggerRect = @menuTrigger.getBoundingClientRect()
       top = if vertical == 'top' then menuTriggerRect.top + menuTriggerRect.height - (@menuContent.offsetHeight) else menuTriggerRect.top
       left = if horizontal == 'left' then menuTriggerRect.left - (@menuContent.offsetWidth) + menuTriggerRect.width else menuTriggerRect.left
-      top += parseInt(@vOffsetY, 10)
-      left += parseInt(@vOffsetX, 10)
-      if @vAlignTrigger
+      top += parseInt(@offsetY, 10)
+      left += parseInt(@offsetX, 10)
+      if @alignTrigger
         if vertical == 'top'
           top -= menuTriggerRect.height + 11
         else
@@ -76,10 +76,10 @@ component =
       }
     calculateMenuContentPos: ->
       position = undefined
-      if !@vDirection
+      if !@direction
         position = @getPosition('bottom', 'right')
       else
-        position = @getPosition.apply(this, @vDirection.trim().split(' '))
+        position = @getPosition.apply(this, @direction.trim().split(' '))
       position = getInViewPosition(@menuContent, position)
       @menuContent.style.top = position.top + window.pageYOffset + 'px'
       @menuContent.style.left = position.left + window.pageXOffset + 'px'
@@ -124,9 +124,9 @@ component =
       @menuContent = @$el.querySelector('.v-menu-content')
       @backdropElement = @$refs.backdrop.$el
       @validateMenu()
-      @handleAlignTriggerClass @vAlignTrigger
-      @addNewSizeMenuContentClass @vSize
-      @addNewDirectionMenuContentClass @vDirection
+      @handleAlignTriggerClass @alignTrigger
+      @addNewSizeMenuContentClass @size
+      @addNewDirectionMenuContentClass @direction
       @$el.removeChild @$refs.backdrop.$el
       @menuContent.parentNode.removeChild @menuContent
       @menuTrigger.addEventListener 'click', @toggle

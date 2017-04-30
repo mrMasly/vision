@@ -8,13 +8,13 @@ import theme from '../../theme/mixin.js'
 component =
   name: 'v-speed-dial'
   props:
-    vOpen:
+    open:
       type: String
       default: 'click'
-    vMode:
+    mode:
       type: String
       default: 'fling'
-    vDirection:
+    direction:
       type: String
       default: 'top'
   mixins: [ theme ]
@@ -23,8 +23,8 @@ component =
     active: false
   computed: classes: ->
     classes = 'v-active': @active
-    classes['v-mode-' + @vMode] = true
-    classes['v-direction-' + @vDirection] = true
+    classes['v-mode-' + @mode] = true
+    classes['v-direction-' + @direction] = true
     classes
   methods:
     closeSpeedDial: (event) ->
@@ -39,7 +39,7 @@ component =
   mounted: ->
     @$nextTick ->
       @fabTrigger = @$el.querySelector('[v-fab-trigger]')
-      if @vOpen == 'click'
+      if @open == 'click'
         @fabTrigger.addEventListener 'click', @toggleSpeedDial
       else
         @$el.addEventListener 'mouseenter', @toggleSpeedDial
