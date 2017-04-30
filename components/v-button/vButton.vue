@@ -29,6 +29,3 @@ component =
 
 return component
 </script>
-
-<style lang="stylus">
-</style>
