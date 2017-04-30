@@ -1,0 +1,321 @@
+@import '../../styles/variables.styl'
+
+.v-table
+  display flex
+  flex-flow column wrap
+  overflow-x auto
+
+  &.v-transition-off
+    .v-table-cell,
+    .v-checkbox .v-checkbox-container,
+    .v-checkbox .v-checkbox-container:after
+      transition none !important
+
+  table
+    width 100%
+    border-spacing 0
+    border-collapse collapse
+    overflow hidden
+
+  tbody .v-table-row
+    border-top 1px solid #e0e0e0
+
+    &.v-selected .v-table-cell
+      background-color #f5f5f5
+
+    &:hover .v-table-cell
+      background-color #eee
+
+  .v-table-head
+    padding 0
+    position relative
+    color rgba(#000, .54)
+    font-size 12px
+    line-height 16px
+    text-align left
+
+    &:last-child .v-table-head-container .v-table-head-text
+      padding-right 24px
+
+    &.v-numeric
+      text-align right
+
+    .v-icon
+      size = 16px
+
+      width size
+      min-width size
+      height size
+      min-height size
+      font-size size
+      color rgba(#000, .54)
+
+      &:not(.v-sortable-icon)
+        margin 0 4px
+
+      &:first-child
+        margin-left 0
+
+      &:last-child
+        margin-right 0
+
+  .v-table-head-container
+    height 56px
+    padding 14px 0
+    transition swift-ease-out
+
+  .v-table-head-text
+    height 28px
+    padding-right 32px
+    padding-left 24px
+    display inline-block
+    position relative
+    overflow hidden
+    line-height 28px
+    text-overflow ellipsis
+    white-space nowrap
+
+  .v-sortable
+    cursor pointer
+
+    &:first-of-type
+      .v-sortable-icon
+        left auto
+        right 10px
+
+    &:hover,
+    &.v-sorted
+      color rgba(#000, .87)
+
+      .v-sortable-icon
+        opacity 1
+
+    &.v-sorted
+      .v-sortable-icon
+        color rgba(#000, .87)
+
+    &.v-sorted-descending
+      .v-sortable-icon
+        transform translateY(-50%) rotate(180deg)
+
+    .v-sortable-icon
+      position absolute
+      top 50%
+      left 2px
+      transition swift-ease-out
+      transform translateY(-50%)
+      opacity 0
+      color rgba(#000, .38)
+
+    .v-ink-ripple
+      color rgba(#000, .87)
+
+  .v-table-cell
+    height 48px
+    position relative
+    transition swift-ease-out
+    color rgba(#000, .87)
+    font-size 13px
+    line-height 18px
+
+    &:last-child .v-table-cell-container
+      padding-right 24px
+
+    &.v-numeric
+      text-align right
+
+      .v-table-cell-container
+        justify-content flex-end
+
+    &.v-has-action
+      .v-table-cell-container
+        display flex
+        align-items center
+        justify-content space-between
+
+    .v-table-cell-container
+      padding 6px 32px 6px 24px
+
+    .v-button
+      size 36px
+
+      width size
+      min-width size
+      height size
+      min-height size
+
+      &:last-child
+        margin 0 -10px 0 0
+
+      .v-icon
+        size 18px
+
+        width size
+        min-width size
+        height size
+        min-height size
+        margin 0
+        color rgba(#000, .54)
+        font-size size
+
+  .v-table-selection
+    width 60px
+    position relative
+    vertical-align middle
+
+    +
+      .v-table-cell .v-table-cell-container,
+      .v-table-head .v-table-head-container .v-table-head-text
+        padding-left 8px
+
+    .v-table-cell-container
+      padding-right 16px
+      padding-left 24px
+
+    .v-checkbox
+      margin 0
+
+    .v-checkbox-container
+      width 18px
+      height 18px
+      margin-top 1px
+
+      &:after
+        top -1px
+        left 4px
+
+  .v-select
+    min-width 84px
+
+  .v-select-value,
+  .v-option
+    font-size 13px
+
+.v-table-edit-trigger
+  display inline-block
+  cursor pointer
+  color rgba(#000, .38)
+
+  &.v-edited
+    color rgba(#000, .87)
+
+.v-table-dialog
+  max-height 0
+  margin 0
+  padding 0 24px 2px
+  position absolute
+  top 0
+  right 0
+  left 24px
+  z-index 60
+  overflow hidden
+  pointer-events none
+  border-radius 2px
+  box-shadow material-shadow-2dp
+  background-color #fff
+  opacity 0
+  transition swift-ease-out,
+              max-height 0s .5s
+  transition-duration .3s
+  transform translate3D(0, -8px, 0)
+
+  &.v-active
+    max-height 400px
+    pointer-events auto
+    transform translate3D(#000)
+    opacity 1
+    transition swift-ease-out
+    transition-duration .3s
+
+  &.v-large
+    padding 12px 24px 2px
+
+  .v-input-container
+    margin-top 0
+    margin-bottom 16px
+
+    &.v-input-placeholder input
+      font-size 13px
+
+      &::-webkit-input-placeholder
+        font-size 13px
+
+  .v-char-counter
+    font-size 13.5px
+    color rgba(#000, .54)
+
+  .v-button
+    min-width 64px
+
+.v-table-card
+  overflow visible
+
+  .v-toolbar
+    padding-left 16px
+    background-color #fff
+
+  .v-title
+    flex 1
+    font-size 20px
+
+  .v-table-pagination
+    height 56px
+    display flex
+    flex 1
+    align-items center
+    justify-content flex-end
+    border-top 1px solid #e0e0e0
+    color rgba(#000, .54)
+    font-size 12px
+
+    .v-table-pagination-previous
+      margin-right 2px
+      margin-left 18px
+
+    .v-select
+      width auto
+      min-width 36px
+      margin 0 32px
+
+      &:after
+        margin-top 0
+
+      .v-select-value
+        padding 0
+        border none
+        font-size 13px
+
+    .v-button
+      &:not([disabled])
+        color rgba(#000, .87)
+
+      &[disabled]
+        .v-icon
+          color rgba(#000, .26)
+
+.v-pagination-select
+  &.v-direction-bottom-right
+    margin-top -16px
+
+  .v-list-item-holder
+    font-size 13px
+
+.v-table-alternate-header
+  position absolute
+  top 0
+  right 0
+  left 0
+  z-index 10
+  pointer-events none
+  opacity 0
+  transition swift-ease-out
+  transition-duration .3s
+
+  &.v-active
+    pointer-events auto
+    opacity 1
+    transform translate3D(#000)
+
+  .v-counter
+    margin-left 8px
+    flex 1
