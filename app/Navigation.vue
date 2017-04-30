@@ -1,9 +1,9 @@
 <template lang="jade">
 v-bottom-bar
   v-bottom-bar-item(
-    v-for="tab in tabs" key="tab.name"
-    v-bind:v-icon="tab.icon"
-    v-bind:v-active="tab.active"
+    v-for="tab in tabs" key="tab.name",
+    :icon="tab.icon",
+    :active="tab.active"
     @click.native="click(tab)") {{tab.title}}
 
 </template>

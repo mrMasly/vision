@@ -1,7 +1,7 @@
 <template lang="jade">
 .v-chips(:class='[themeClass, classes]')
   v-input-container(@click.native='applyInputFocus')
-    v-chip(v-for='chip in selectedChips', :v-deletable='!static', :disabled='disabled', @delete='deleteChip(chip)')
+    v-chip(v-for='chip in selectedChips', :deletable='!static', :disabled='disabled', @delete='deleteChip(chip)')
       slot(:value='chip')
     v-input(v-show='!static', v-model='currentChip', :type='inputType', :placeholder='inputPlaceholder', :id='inputId', :name='inputName', :disabled='disabled', @keydown.native.delete='deleteLastChip', @keydown.native.prevent.enter='addChip', @keydown.native.prevent.186='addChip', tabindex='0', ref='input')
 </template>

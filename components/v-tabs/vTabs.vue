@@ -2,11 +2,11 @@
 .v-tabs(:class='[themeClass, tabClasses]')
   nav.v-tabs-navigation(:class='navigationClasses', ref='tabNavigation')
     button.v-tab-header(v-for='header in tabList', :key='header.id', type='button', :class='getHeaderClass(header)', :disabled='header.disabled', @click='setActiveTab(header)', ref='tabHeader')
-      v-ripple(:v-disabled='header.disabled')
+      v-ripple(:disabled='header.disabled')
       .v-tab-header-container
         v-icon(v-if='header.icon') {{ header.icon }}
         span(v-if='header.label') {{ header.label }}
-        v-tooltip(v-if='header.tooltip', :direction='header.tooltipDirection', :v-delay='header.tooltipDelay') {{ header.tooltip }}
+        v-tooltip(v-if='header.tooltip', :direction='header.tooltipDirection', :delay='header.tooltipDelay') {{ header.tooltip }}
     span.v-tab-indicator(:class='indicatorClasses', ref='indicator')
   .v-tabs-content(ref='tabContent', :style='{ height: contentHeight }')
     .v-tabs-wrapper(:style='{ transform: `translate3D(-${contentWidth}, 0, 0)` }')

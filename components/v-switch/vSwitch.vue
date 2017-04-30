@@ -4,7 +4,7 @@
     .v-switch-thumb(:style='styles')
       input(type='checkbox', :name='name', :id='id', :disabled='disabled', :value='value')
       button.v-switch-holder(:type='type')
-      v-ink-ripple(:v-disabled='disabled')
+      v-ink-ripple(:disabled='disabled')
   label.v-switch-label(:for='id || name', v-if='$slots.default')
     slot
 </template>

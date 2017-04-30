@@ -16,7 +16,7 @@ component =
   methods:
     setActive: (item) ->
       for child in @$children
-        child.active = child is item
+        child.localActive = child is item
       @$emit 'change', findIndex @$children, (i) => i is item
 
 return component

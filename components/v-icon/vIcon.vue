@@ -1,6 +1,6 @@
 <template lang="jade">
 i.v-icon(:class='[themeClass]', v-html='svgContent', v-if='svgContent')
-v-image.v-icon(:class='[themeClass]', :v-src='imageSrc', v-else-if='imageSrc')
+v-image.v-icon(:class='[themeClass]', :src='imageSrc', v-else-if='imageSrc')
 i.v-icon(:class='[themeClass, iconset]', :aria-hidden='!!iconset', v-else)
   slot
 

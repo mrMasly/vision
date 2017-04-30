@@ -44,14 +44,14 @@ component =
       height: @parentDimensions.height
       top: @parentDimensions.top
       left: @parentDimensions.left
-    disabled: ->
-      @disabled or !@$material.inkRipple
-  watch: disabled: (_disabled) ->
-    if !_disabled
-      @init()
-    else
-      @destroy()
-    return
+    # disabled: ->
+    #   @disabled or !@$material.inkRipple
+  watch:
+    disabled: (_disabled) ->
+      if !_disabled
+        @init()
+      else
+        @destroy()
   methods:
     checkAvailablePositions: (element) ->
       availablePositions = [

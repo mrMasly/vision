@@ -1,25 +1,25 @@
 <template lang="jade">
 .absolute
   v-dialog-confirm(
-    v-bind:v-title="confirm.title"
-    v-bind:v-content-html="confirm.content"
-    v-bind:v-ok-text="confirm.ok"
-    v-bind:v-cancel-text="confirm.cancel"
+    :title="confirm.title",
+    :content-html="confirm.content",
+    :ok-text="confirm.ok",
+    :cancel-text="confirm.cancel",
     @close="onCloseConfirm"
     ref="confirm")
   v-dialog-alert(
-    v-bind:v-title="alert.title"
-    v-bind:v-content="alert.content"
-    v-bind:v-ok-text="alert.ok"
+    :title="alert.title",
+    :content="alert.content",
+    :ok-text="alert.ok",
     @close="onCloseAlert"
     ref="alert")
   v-dialog-prompt(
-    v-bind:v-content="prompt.content"
-    v-bind:v-title="prompt.title"
-    v-bind:v-ok-text="prompt.ok"
-    v-bind:v-cancel-text="prompt.cancel"
-    v-bind:value="prompt.value"
-    v-bind:v-input-maxlength="prompt.max"
+    :content="prompt.content",
+    :title="prompt.title",
+    :ok-text="prompt.ok",
+    :cancel-text="prompt.cancel",
+    :value="prompt.value",
+    :input-maxlength="prompt.max",
     @close="onClosePrompt"
     @input="setVal"
     ref="prompt")

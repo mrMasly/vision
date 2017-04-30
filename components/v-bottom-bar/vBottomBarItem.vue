@@ -1,32 +1,34 @@
 <template lang="jade">
 a.v-bottom-bar-item(:href='href', :class='classes', :disabled='disabled', @click='setActive', v-if='href')
-  v-icon(v-if='icon || iconSrc || iconset', :v-icon-src='iconSrc', :v-iconset='iconset') {{ icon }}
-  v-ripple(:v-disabled='disabled')
-  span.v-text
+  v-icon(v-if='icon || iconSrc || iconset', :icon-src='iconSrc', :iconset='iconset') {{ icon }}
+  v-ripple(:disabled='disabled')
+  span.text
     slot
 
-button.v-bottom-bar-item(type='button', :class='classes', :disabled='disabled', @click='setActive', v-else='')
-  v-icon(v-if='icon || iconSrc || iconset', :v-src='iconSrc', :v-iconset='iconset') {{ icon }}
-  v-ripple(:v-disabled='disabled')
-  span.v-text
+button.v-bottom-bar-item(type='button', :class='classes', :disabled='disabled', @click='setActive', v-else)
+  v-icon(v-if='icon || iconSrc || iconset', :src='iconSrc', :iconset='iconset') {{ icon }}
+  v-ripple(:disabled='disabled')
+  span.text
     slot
 </template>
 
 <script lang="coffee">
 component =
-  name: 'v-bottom-bar'
+  name: 'v-bottom-bar-item'
   props:
     icon: String
     iconSrc: String
     iconset: String
-    active: Boolean
+    active:
+      type: Boolean
+      default: false
     disabled: String
     href: String
   data: ->
-    active: false
+    localActive: false
   computed:
     classes: ->
-      'v-active': @active
+      'v-active': @localActive
   watch:
     active: (active) ->
       @setActive active
@@ -40,10 +42,7 @@ component =
       @$destroy()
       throw new Error('You should wrap the v-bottom-bar-item in a v-bottom-bar')
     if @active
-      @active = true
+      @localActive = true
 
 return component
 </script>
-
-<style lang="stylus" scoped>
-</style>

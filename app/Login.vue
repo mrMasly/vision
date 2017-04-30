@@ -7,7 +7,7 @@
       v-input-container
         label Имя
         v-input(v-model="username")
-      v-input-container(v-has-password v-bind:class="{ 'v-input-invalid': error }")
+      v-input-container(has-password, :class="{ 'v-input-invalid': error }")
         label Пароль
         v-input(type="password" v-model="password" @change="error=''")
         .v-error(v-if="error") {{error}}

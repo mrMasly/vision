@@ -1,9 +1,9 @@
 <template lang="jade">
 button.v-button(:class='[themeClass]', :type='type', :disabled='disabled', v-if='!href')
-  v-ripple(:v-disabled='disabled')
+  v-ripple(:disabled='disabled')
   slot
 a.v-button(:class='[themeClass]', :href='href', :disabled='disabled', :target='target', :rel='newRel', v-else='')
-  v-ripple(:v-disabled='disabled')
+  v-ripple(:disabled='disabled')
   slot
 </template>
 

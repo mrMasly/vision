@@ -2,7 +2,7 @@
 .v-radio(:class='[themeClass, classes]')
   .v-radio-container(@click='toggleCheck')
     input(type='radio', :name='name', :id='id', :disabled='disabled', :value='value')
-    v-ripple(:v-disabled='disabled')
+    v-ripple(:disabled='disabled')
   label.v-radio-label(:for='id || name', v-if='$slots.default')
     slot
 </template>

@@ -16,10 +16,13 @@ component =
   data: ->
     parentContent: {}
     index: 0
+    mounted: no
   computed:
     classes: ->
+      return unless @mounted
       'v-highlighted': @highlighted
     highlighted: ->
+      return unless @mounted
       if @index == @parentContent.highlighted
         if @disabled
           if @parentContent.oldHighlight > @parentContent.highlighted
@@ -41,6 +44,7 @@ component =
           @parentContent.close()
         @$emit 'selected', $event
   mounted: ->
+    @mounted = yes
     @parentContent = getClosestVueParent(@$parent, 'v-menu-content')
     @parentMenu = getClosestVueParent(@$parent, 'v-menu')
     if !@parentContent

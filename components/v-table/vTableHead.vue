@@ -5,7 +5,7 @@ th.v-table-head(:class='classes', @click='changeSort')
       v-icon.v-sortable-icon(v-if='sortBy') arrow_upward
       slot
       v-tooltip(v-if='tooltip') {{ tooltip }}
-    v-ripple(:v-disabled='!sortBy')
+    v-ripple(:disabled='!sortBy')
 </template>
 
 <script lang="coffee">

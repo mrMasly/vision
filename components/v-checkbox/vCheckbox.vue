@@ -2,7 +2,7 @@
 .v-checkbox(:class='[themeClass, classes]')
   .v-checkbox-container(@click.stop='toggleCheck', tabindex='0')
     input(type='checkbox', :name='name', :id='id', :disabled='disabled', :value='value', :checked='checked', tabindex='-1')
-    v-ripple(:v-disabled='disabled')
+    v-ripple(:disabled='disabled')
   label.v-checkbox-label(:for='id || name', v-if='$slots.default')
     slot
 </template>

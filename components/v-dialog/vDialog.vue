@@ -7,6 +7,7 @@
 
 <script lang="coffee">
 import theme from '../../theme/mixin.js';
+import transitionEndEventName from '../../utils/transitionEndEventName.js'
 component =
   name: 'v-dialog'
   props:

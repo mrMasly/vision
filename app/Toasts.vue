@@ -1,6 +1,6 @@
 <template lang="jade">
 .toasts
-  v-snackbar(:v-position="toast.position" ref="toast", :v-duration="toast.duration"
+  v-snackbar(:position="toast.position" ref="toast", :duration="toast.duration"
     @click.native="click" @close="onClose")
     v-button.v-icon-button.close(@click.native.prevent.stop="close")
       v-icon close

@@ -29,16 +29,20 @@ component =
       type: Boolean
       default: true
   data: ->
-    active: false
+    active: no
+    mounted: no
   watch:
     size: (current, previous) ->
+      return unless @mounted
       if current >= 1 and current <= 7
         @removeLastSizeMenuContentClass previous
         @addNewSizeMenuContentClass current
     direction: (current, previous) ->
+      return unless @mounted
       @removeLastDirectionMenuContentClass previous
       @addNewDirectionMenuContentClass current
     alignTrigger: (trigger) ->
+      return unless @mounted
       @handleAlignTriggerClass trigger
   methods:
     validateMenu: ->
@@ -47,7 +51,7 @@ component =
         throw new Error('You must have a v-menu-content inside your menu.')
       if !@menuTrigger
         @$destroy()
-        throw new Error('You must have an element with a v-menu-trigger attribute inside your menu.')
+        throw new Error('You must have an element with a menu-trigger attribute inside your menu.')
     removeLastSizeMenuContentClass: (size) ->
       @menuContent.classList.remove 'v-size-' + size
     removeLastDirectionMenuContentClass: (direction) ->
@@ -120,7 +124,8 @@ component =
       else @open()
   mounted: ->
     @$nextTick ->
-      @menuTrigger = @$el.querySelector('[v-menu-trigger]')
+      @mounted = yes
+      @menuTrigger = @$el.querySelector('[menu-trigger]')
       @menuContent = @$el.querySelector('.v-menu-content')
       @backdropElement = @$refs.backdrop.$el
       @validateMenu()
