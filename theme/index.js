@@ -166,7 +166,7 @@ const changeHtmlMetaColor = (color) => {
           document.body.classList.remove('v-theme-' + this.currentTheme);
           document.body.classList.add('v-theme-' + themeName);
         } else {
-          console.log('change', themeName);
+          // console.log('change', themeName);
         }
         this.currentTheme = themeName;
       },

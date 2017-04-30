@@ -1,5 +1,5 @@
 <template lang="jade">
-v-toolbar.v-whiteframe.v-whiteframe-2dp
+v-toolbar.v-shadow-2
   h1.v-title {{title}}
 </template>
 
