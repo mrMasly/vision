@@ -1,0 +1,35 @@
+.THEME_NAME
+  &.v-switch
+    &.v-checked
+      .v-switch-container
+        background-color: ACCENT-COLOR-500-0.5
+      .v-switch-thumb
+        background-color: ACCENT-COLOR
+      .v-ink-ripple
+        color: ACCENT-COLOR
+      .v-ripple
+        opacity: .38
+
+    &.v-checked.v-primary
+      .v-switch-container
+        background-color: PRIMARY-COLOR-500-0.5
+      .v-switch-thumb
+        background-color: PRIMARY-COLOR
+      .v-ink-ripple
+        color: PRIMARY-COLOR
+
+
+    &.v-checked.v-warn
+      .v-switch-container
+        background-color: WARN-COLOR-500-0.5
+      .v-switch-thumb
+        background-color: WARN-COLOR
+      .v-ink-ripple
+        color: WARN-COLOR
+
+    &.v-disabled
+    &.v-disabled.v-checked
+      .v-switch-container
+        background-color: rgba(#000, .12)
+      .v-switch-thumb
+        background-color: #bdbdbd
