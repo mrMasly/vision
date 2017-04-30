@@ -1,0 +1,65 @@
+@import '../../styles/variables.styl'
+
+chip-height = 32px
+chip-icon-size = 24px
+chip-icon-font = chip-icon-size - 4px
+
+.v-chip
+  height chip-height
+  padding 8px 12px
+  display inline-block
+  border-radius chip-height
+  transition swift-ease-out
+  font-size 13px
+  line-height 16px
+  white-space nowrap
+  &.v-deletable
+    position relative
+    padding-right 32px
+  &:focus
+  &:active
+    outline none
+    &:not(.v-disabled)
+      cursor pointer
+      box-shadow material-shadow-2dp
+
+  &.v-disabled
+    .v-button
+      pointer-events none
+      cursor default
+
+  .v-button.v-delete
+    width chip-icon-size
+    min-width chip-icon-size
+    height chip-icon-size
+    min-height chip-icon-size
+    margin 0
+    padding 0
+    position absolute
+    top 4px
+    right 4px
+    border-radius chip-icon-size
+    transition swift-ease-out
+    .v-icon
+      width chip-icon-font
+      min-width chip-icon-font
+      height chip-icon-font
+      min-height chip-icon-font
+      margin 0
+      font-size chip-icon-font
+    .v-ink-ripple
+      border-radius chip-height
+    .v-ripple
+      opacity .54
+
+.v-chips
+  .v-chip
+    margin-right 8px
+    margin-bottom 4px
+  .v-input-container
+    min-height 54px
+    display flex
+    flex-wrap wrap
+  .v-input
+    width 128px
+    flex 1

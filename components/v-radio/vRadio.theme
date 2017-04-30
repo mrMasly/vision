@@ -1,0 +1,47 @@
+.THEME_NAME
+  &.v-radio
+    .v-radio-container:after
+      background-color: ACCENT-COLOR
+
+    &.v-checked
+      .v-radio-container
+        border-color: ACCENT-COLOR
+
+      .v-ink-ripple
+        color: ACCENT-COLOR
+
+      .v-ripple
+        opacity: .38
+
+    &.v-primary
+      .v-radio-container:after
+        background-color: PRIMARY-COLOR
+
+      &.v-checked
+        .v-radio-container
+          border-color: PRIMARY-COLOR
+
+        .v-ink-ripple
+          color: PRIMARY-COLOR
+
+    &.v-warn
+      .v-radio-container:after
+        background-color: WARN-COLOR
+
+      &.v-checked
+        .v-radio-container
+          border-color: WARN-COLOR
+
+        .v-ink-ripple
+          color: WARN-COLOR
+
+    &.v-disabled
+      .v-radio-container
+        border-color: rgba(#000, .26)
+
+        &:after
+          background-color: rgba(#000, .26)
+
+      &.v-checked
+        .v-radio-container
+          border-color: rgba(#000, .26)

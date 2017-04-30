@@ -1,0 +1,17 @@
+.THEME_NAME
+  &.v-chip
+    background-color: BACKGROUND-CONTRAST-0.12
+
+    &.v-deletable
+      &:hover
+      &:focus
+        background-color: BACKGROUND-CONTRAST-0.54
+        color: BACKGROUND-COLOR
+
+        .v-delete
+          color: BACKGROUND-COLOR
+
+    .v-delete
+      color: BACKGROUND-CONTRAST-0.38
+      .v-ripple
+        color: BACKGROUND-COLOR
