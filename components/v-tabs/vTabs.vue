@@ -1,7 +1,7 @@
 <template lang="jade">
 .v-tabs(:class='[themeClass, tabClasses]')
   nav.v-tabs-navigation(:class='navigationClasses', ref='tabNavigation')
-    button.v-tab-header(v-for='header in tabList', :key='header.id', type='button', :class='getHeaderClass(header)', :disabled='header.disabled', @click='setActiveTab(header)', ref='tabHeader')
+    button.v-tab-header(v-for='header in tabList', :key='header.id', type='button', :class='getHeaderClass(header)', :disabled='header.disabled', @click='noTriggerParam=true; setActiveTab(header)', ref='tabHeader')
       v-ripple(:disabled='header.disabled')
       .v-tab-header-container
         v-icon(v-if='header.icon') {{ header.icon }}
@@ -15,6 +15,7 @@
 
 <script lang="coffee">
 
+import _ from 'lodash'
 import { throttle } from 'lodash'
 import theme from '../../theme/mixin.js'
 
@@ -30,6 +31,7 @@ component =
     elevation:
       type: [String, Number]
       default: 0
+    routeParam: String
   mixins: [ theme ]
   data: ->
     tabList: {}
@@ -41,6 +43,7 @@ component =
     transitionOff: false
     contentHeight: '0px'
     contentWidth: '0px'
+    noTriggerParam: no
   computed:
     tabClasses: ->
       'v-dynamic-height': @dynamicHeight
@@ -135,6 +138,31 @@ component =
       @activeTabNumber = @getTabIndex(@activeTab)
       @calculatePosition()
       @$emit 'change', @activeTabNumber
+      if @routeParam
+        params = _.clone @$route.params
+        params[@routeParam] = tabData.name
+        @$router.push params: params
+
+    triggerRouteParam: ->
+      if @noTriggerParam
+        @noTriggerParam = no
+        return
+      return unless @routeParam
+      name = @$route.params[@routeParam]
+      # если табы уже монтированы - делаем нужный таб выбранным
+      unless _.isEmpty @tabList
+        tab = _.find @tabList, name: name
+        @setActiveTab(tab) if tab?
+      # если табы еще не монтированы, у нужного таба вставляем active:true в props
+      else if not _.isEmpty @$slots.default
+        for slot in @$slots.default
+          if name is _.get slot, 'componentOptions.propsData.name'
+            _.set slot, 'componentOptions.propsData.active', yes
+
+  created: ->
+    if @routeParam
+      @$watch "$route.params.#{@routeParam}", @triggerRouteParam
+    do @triggerRouteParam
   mounted: ->
     @$nextTick ->
       @observeElementChanges()

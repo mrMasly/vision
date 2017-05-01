@@ -40,7 +40,7 @@ component =
   methods:
     close: ($event) ->
       if !@disabled
-        if @parentMenu.vCloseOnSelect
+        if @parentMenu.closeOnSelect
           @parentContent.close()
         @$emit 'selected', $event
   mounted: ->

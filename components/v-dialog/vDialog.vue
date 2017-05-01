@@ -6,6 +6,7 @@
 </template>
 
 <script lang="coffee">
+import _ from 'lodash'
 import theme from '../../theme/mixin.js';
 import transitionEndEventName from '../../utils/transitionEndEventName.js'
 component =
@@ -25,6 +26,9 @@ component =
     fullscreen:
       type: Boolean
       default: false
+    routeParam:
+      type: [String, Boolean]
+      default: no
   mixins: [ theme ]
   data: ->
     active: false
@@ -91,14 +95,34 @@ component =
             @active = false
             @dialogInnerElement.addEventListener transitionEndEventName, cleanElement
           @$emit 'close'
-
+      # после закрытие изменяем параметр роутера если он указан в props
+      setTimeout =>
+        if @routeParam and @$route.params[@routeParam]?
+          route =
+            name: @$route.name
+            params: _.omit @$route.params, @routeParam
+          @$router.push route
+      , 300
+    triggerRouteParam: ->
+      return unless @routeParam
+      param = @$route.params[@routeParam]
+      if param and not @active
+        do @open
+      else if not param and @active
+        do @close
   mounted: ->
     @$nextTick ->
       @dialogElement = @$el
       @dialogInnerElement = @$refs.dialog
       @removeDialog()
+      do @triggerRouteParam
   beforeDestroy: ->
     @removeDialog()
+  created: ->
+    if @routeParam
+      @$watch "$route.params.#{@routeParam}", @triggerRouteParam
+
+
 
 return component
 </script>

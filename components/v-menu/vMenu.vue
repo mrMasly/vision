@@ -102,19 +102,17 @@ component =
       @active = true
       @$emit 'open'
     close: ->
-      _this = this
-
-      close = (event) ->
-        if _this.menuContent and event.target == _this.menuContent
-          activeRipple = _this.menuContent.querySelector('.v-ripple.v-active')
-          _this.menuContent.removeEventListener transitionEndEventName, close
-          _this.menuTrigger.focus()
-          _this.active = false
+      close = (event) =>
+        if @menuContent and event.target == @menuContent
+          activeRipple = @menuContent.querySelector('.v-ripple.v-active')
+          @menuContent.removeEventListener transitionEndEventName, close
+          @menuTrigger.focus()
+          @active = false
           if activeRipple
             activeRipple.classList.remove 'v-active'
-          document.body.removeChild _this.menuContent
-          document.body.removeChild _this.backdropElement
-          window.removeEventListener 'resize', _this.recalculateOnResize
+          document.body.removeChild @menuContent
+          document.body.removeChild @backdropElement
+          window.removeEventListener 'resize', @recalculateOnResize
 
       @menuContent.addEventListener transitionEndEventName, close
       @menuContent.classList.remove 'v-active'

@@ -22,6 +22,7 @@ component =
     tooltipDirection:
       type: String
       default: 'bottom'
+    name: String
   data: ->
     mounted: false
     tabId: @id or 'tab-' + Random.id()
@@ -57,6 +58,7 @@ component =
       tooltipDelay: @tooltipDelay
       tooltipDirection: @tooltipDirection
       ref: this
+      name: @name
     updateTabData: ->
       @parentTabs.updateTab @getTabData()
   mounted: ->
