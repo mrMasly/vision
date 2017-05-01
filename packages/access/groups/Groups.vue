@@ -1,6 +1,6 @@
 <template lang="jade">
 .l-fill.l-row.l-wrap
-  Group(v-for="group in groups" v-bind:group="group")
+  Group(v-for="group in groups", :group="group")
 </template>
 
 <script lang="coffee">

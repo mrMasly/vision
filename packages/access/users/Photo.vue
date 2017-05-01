@@ -1,18 +1,17 @@
 <template lang="jade">
 .l-fill.l-column.photo
-  md-toolbar.l-row
-    .md-title.l-flex Фото пользователя {{user.profile.name}}
-    //- h2.md-title.l-flex
+  v-toolbar.l-row
+    .v-title.l-flex Фото пользователя {{user.profile.name}}
+    //- h2.v-title.l-flex
     //-   span(v-if="user" v-once) Фото пользователя {{user.profile.name}}
-    md-button.md-icon-button(@click.native="close")
-      md-icon close
-  md-dialog-content.l-flex
+    slot(name="close")
+  v-dialog-content.l-flex
     .l-absolute.content
-      dropzone(url="https://httpbin.org/post" v-on:add="add" v-if="!file")
-      croppie(ref="croppie" v-bind:file="file" type="circle" v-else)
-  md-dialog-actions
-    md-button.md-primary(@click.native="close") Отмена
-    md-button.md-primary(@click.native="save") Сохранить
+      dropzone(url="https://httpbin.org/post" @add="add" v-if="!file")
+      croppie(ref="croppie", :file="file" type="circle" v-else)
+  v-dialog-actions
+    v-button.v-primary(@click.native="close") Отмена
+    v-button.v-primary(@click.native="save") Сохранить
 
 
 </template>
@@ -49,7 +48,7 @@ return component
   max-width 100%
   height 500px
   max-height 100%
-.md-dialog-content
+.v-dialog-content
   padding 10px
 img
   height 100%

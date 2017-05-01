@@ -1,24 +1,23 @@
 <template lang="jade">
 .l-fill.l-column.user
-  md-toolbar
-    h2.md-title.l-flex(v-once) {{title || user.profile.name}}
-    md-button.md-icon-button(@click.native="close")
-      md-icon close
-  md-dialog-content.l-flex.overflow
-    md-input-container
+  v-toolbar
+    h2.v-title.l-flex(v-once) {{title || user.profile.name}}
+    slot(name="close")
+  v-dialog-content.l-flex.overflow
+    v-input-container
       label Имя пользователя
-      md-input(type="text" v-model="user.username")
-    md-input-container
+      v-input(type="text" v-model="user.username")
+    v-input-container
       label Имя на русском
-      md-input(type="text" v-model="user.profile.name")
-    md-input-container
+      v-input(type="text" v-model="user.profile.name")
+    v-input-container
       label Пароль
-      md-input(type="text" v-model="user.password")
+      v-input(type="text" v-model="user.password")
     v-select(v-model="user.groups" multiple search label="Группы")
       v-option(:value="group._id" v-for="group in groups", :key="group._id") {{group.name}}
-  md-dialog-actions
-    md-button.md-primary(@click.native="close") Отмена
-    md-button.md-primary(@click.native="save") Сохранить
+  v-dialog-actions
+    v-button.v-primary(@click.native="close") Отмена
+    v-button.v-primary(@click.native="save") Сохранить
 
 </template>
 

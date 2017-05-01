@@ -1,26 +1,26 @@
 <template lang="jade">
-.l-padding.l-25.md-33.sm-50.xs-100
-  md-card
-    md-card-header
-      md-avatar
-        img(v-bind:src="user.photo.xs" v-if="user.photo")
-      md-card-header-text
-        .md-subheading {{user.profile.name}}
-        .md-caption {{user.username}}
-      md-menu(md-size="4")
-        md-button.md-icon-button(md-menu-trigger)
-          md-icon more_vert
-        md-menu-content
-          md-menu-item(@selected="edit")
-            md-icon edit
+.l-padding.l-25.v-33.sm-50.xs-100
+  v-card
+    v-card-header
+      v-avatar
+        img(:src="user.photo.xs" v-if="user.photo")
+      v-card-header-text
+        .v-subheading {{user.profile.name}}
+        .v-caption {{user.username}}
+      v-menu(size="4" v-if="mounted")
+        v-button.v-icon-button(menu-trigger)
+          v-icon more_vert
+        v-menu-content
+          v-menu-item(@selected="edit")
+            v-icon edit
             span Редактировать
-          md-menu-item(@selected="photo")
-            md-icon photo
+          v-menu-item(@selected="photo")
+            v-icon photo
             span Фото
-          md-menu-item(@selected="remove")
-            md-icon delete
+          v-menu-item(@selected="remove")
+            v-icon delete
             span Удалить
-    md-card-content
+    v-card-content
       span.group(v-for="group in groups") {{group.name}}
 
 </template>
@@ -31,6 +31,10 @@
 component =
   module: module
   name: 'user'
+  data: ->
+    mounted: no
+  mounted: ->
+    @mounted = yes
   methods:
     edit: ->
       @$router.push
@@ -62,14 +66,15 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-card
+.v-card
   height 150px
-.md-card-content
+  background-color #fff
+.v-card-content
   padding-bottom 10px !important
 .group:not(:last-child):after
   content: ', '
-.md-card-header
+.v-card-header
   padding 6px !important
-.md-subheading
+.v-subheading
   word-wrap nowrap
 </style>

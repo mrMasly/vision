@@ -1,6 +1,6 @@
 <template lang="jade">
 .l-fill.l-row.l-wrap(v-if="ready")
-  User(v-for="user in users" v-bind:user="user" v-bind:groups="groups")
+  User(v-for="user in users", :user="user", :groups="groups")
 </template>
 
 <script lang="coffee">

@@ -1,22 +1,21 @@
 <template lang="jade">
 .l-fill.l-column.group
-  md-toolbar
-    h2.md-title.l-flex(v-once) {{title || group.name}}
-    md-button.md-icon-button(@click.native="close")
-      md-icon close
-  md-dialog-content.l-flex.overflow
-    md-input-container
+  v-toolbar
+    h2.v-title.l-flex(v-once) {{title || group.name}}
+    slot(name="close")
+  v-dialog-content.l-flex.overflow
+    v-input-container
       label id группы
-      md-input(type="text" v-model="group._id" v-bind:disabled="id!=='new'")
-    md-input-container
+      v-input(type="text" v-model="group._id", :disabled="id!=='new'")
+    v-input-container
       label Название группы
-      md-input(type="text" v-model="group.name")
-    md-input-container
+      v-input(type="text" v-model="group.name")
+    v-input-container
       label Описание
-      md-textarea(v-model="group.description")
-  md-dialog-actions
-    md-button.md-primary(@click.native="close") Отмена
-    md-button.md-primary(@click.native="save") Сохранить
+      v-textarea(v-model="group.description")
+  v-dialog-actions
+    v-button.v-primary(@click.native="close") Отмена
+    v-button.v-primary(@click.native="save") Сохранить
 
 </template>
 

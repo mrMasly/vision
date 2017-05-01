@@ -1,22 +1,28 @@
 <template lang="jade">
-.l-fill.relative
-  md-tabs.md-transparent.l-fill.l-absolute(md-right ref="tabs")
-    md-tab(md-label="Пользователи")
+.access
+  v-tabs.v-transparent.l-fill.l-absolute(right ref="tabs" route-param="tab")
+    v-tab(label="Пользователи" name="users")
       Users
-    md-tab(md-label="Группы")
+    v-tab(label="Группы" name="groups")
       Groups
 
-  md-dialog.fullscreen(ref="dialog")
+  v-dialog.fullscreen(ref="dialog" route-param="id")
     template(v-if="$route.params.id")
       template(v-if="$route.params.tab=='users'")
-        PhotoUser(v-bind:id="$route.params.id" @close="close" v-if="$route.query.photo===null")
-        EditUser(v-bind:id="$route.params.id" @close="close" v-else)
+        PhotoUser(:id="$route.params.id" @close="close" v-if="$route.query.photo===null")
+          v-button.v-icon-button(slot="close" @click.native="$refs.dialog.close()")
+            v-icon close
+        EditUser(:id="$route.params.id" @close="close" v-else)
+          v-button.v-icon-button(slot="close" @click.native="$refs.dialog.close()")
+            v-icon close
 
-      EditGroup(v-bind:id="$route.params.id" v-if="$route.params.tab=='groups'" @close="close")
-
-  md-button.md-fab.md-fab-bottom-right(@click.native="add")
-    md-tooltip(md-direction="left") Создать {{createType}}
-    md-icon add
+      EditGroup(:id="$route.params.id" v-if="$route.params.tab=='groups'" @close="close")
+        v-button.v-icon-button(slot="close" @click.native="$refs.dialog.close()")
+          v-icon close
+  //-
+  v-button.v-fab.v-fab-bottom-right(@click.native="add")
+    v-tooltip(direction="left") Создать {{createType}}
+    v-icon add
 
 </template>
 
@@ -55,15 +61,6 @@ component =
       name: 'access'
       icon: 'verified_user'
       title: 'Доступ'
-    params:
-      tab:
-        type: 'tabs'
-        ref: 'tabs'
-        data: ['users', 'groups']
-        default: 'users'
-      id:
-        type: 'dialog'
-        ref: 'dialog'
 
 return component
 
@@ -71,8 +68,6 @@ return component
 
 
 <style lang="stylus" scoped>
-.access
-  position relative
 .search
   position absolute
   top 3px
