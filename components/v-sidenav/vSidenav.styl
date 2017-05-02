@@ -24,7 +24,7 @@
     pointer-events none
     overflow auto
     -webkit-overflow-scrolling touch
-    transition $swift-ease-out
+    transition swift-ease-out
     transition-property transform
     will-change transform
 
@@ -38,16 +38,32 @@
     pointer-events none
     background-color rgba(#000, .54)
     opacity 0
-    transition $swift-ease-in-out
+    transition swift-ease-in-out
     transition-property opacity
     will-change opacity
 
 .v-sidenav.v-active
   .v-sidenav-content
-    box-shadow $material-shadow-16dp
+    box-shadow material-shadow-16dp
     pointer-events auto
     transform translate3D(0, 0, 0)
 
   .v-sidenav-backdrop
     opacity 1
     pointer-events auto
+
+.v-sidenav.v-block
+  position relative
+  display block
+  overflow hidden
+  transform none
+  outline none
+  .v-backdrop
+    display none
+  .v-sidenav-content
+    position relative
+    width 100%
+    height 100%
+    transform none
+    box-shadow none
+    z-index 1

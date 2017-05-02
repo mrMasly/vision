@@ -20,9 +20,19 @@ component =
     swipeDistance:
       type: Number
       default: 100
+    left: Boolean
+    right: Boolean
+    fixed: Boolean
+    block: Boolean
+  created: ->
+    # @left = yes if not @left and not @right
   computed:
     classes: ->
-      @visible and 'v-active'
+      'v-active': @visible
+      'v-left': not @right
+      'v-right': @right
+      'v-fixed': @fixed
+      'v-block': @block
   methods:
     show: -> @open()
     open: ->
@@ -62,8 +72,7 @@ component =
       if difference > @swipeDistance
         @[action]()
   mounted: ->
-    if !@swipeable
-      return
+    return unless @swipeable
     @mountedRect = @$refs.backdrop.$el.getBoundingClientRect()
     @initialTouchPosition = null
     @canMove = false
@@ -71,8 +80,7 @@ component =
     document.addEventListener 'touchend', @handleTouchEnd
     document.addEventListener 'touchmove', @handleTouchMove
   beforeDestroy: ->
-    if !@swipeable
-      return
+    return unless @swipeable
     document.removeEventListener 'touchstart', @handleTouchStart
     document.removeEventListener 'touchend', @handleTouchEnd
     document.removeEventListener 'touchmove', @handleTouchMove
