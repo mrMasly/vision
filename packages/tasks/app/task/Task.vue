@@ -5,16 +5,16 @@ main.l-fill(@keydown.meta="keydown")
     Heading(:task="task")
     Subs(:task="task")
   .loading.l-fill.l-row.l-center-center(v-else)
-    md-spinner(md-indeterminate)
+    v-spinner(v-indeterminate)
 
-  md-speed-dial.md-fab-bottom-right(md-open="hover" md-direction="top")
-    md-button.md-fab(md-fab-trigger @click.native="save")
-      md-tooltip(md-direction="left") Сохранить (ctrl+s)
-      md-icon(md-icon-morph) save
-      md-icon menu
-    md-button.md-fab(@click.native="remove")
-      md-tooltip(md-direction="left") Удалить (ctrl+d)
-      md-icon delete_forever
+  v-speed-dial.v-fab-bottom-right(v-open="hover" v-direction="top")
+    v-button.v-fab(v-fab-trigger @click.native="save")
+      v-tooltip(v-direction="left") Сохранить (ctrl+s)
+      v-icon(v-icon-morph) save
+      v-icon menu
+    v-button.v-fab(@click.native="remove")
+      v-tooltip(v-direction="left") Удалить (ctrl+d)
+      v-icon delete_forever
 </template>
 
 <script lang="coffee">

@@ -1,10 +1,10 @@
 <template lang="jade">
 div
-  md-tabs.md-transparent(md-centered @change="change")
-    md-tab(md-label="День", :md-active="task.repeat.type === 'day'")
-    md-tab(md-label="Неделя", :md-active="task.repeat.type === 'week'")
+  v-tabs.v-transparent(v-centered @change="change")
+    v-tab(v-label="День", :active="task.repeat.type === 'day'")
+    v-tab(v-label="Неделя", :active="task.repeat.type === 'week'")
       Week(:task="task")
-    md-tab(md-label="Месяц", :md-active="task.repeat.type === 'month'")
+    v-tab(v-label="Месяц", :active="task.repeat.type === 'month'")
       Month(:task="task")
   Dates(:task="task")
 
@@ -35,8 +35,8 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-tab
+.v-tab
   padding 0
-.md-input-container
+.v-input-container
   margin 0 0 8px
 </style>

@@ -1,8 +1,8 @@
 <template lang="jade">
 .l-column.l-padding
-  .md-caption Заголовок
+  .v-caption Заголовок
   textarea(v-model="task.title" ref="title")
-  .md-caption Описание
+  .v-caption Описание
   textarea(v-model="task.description" ref="description" rows="1")
 
 </template>

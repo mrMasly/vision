@@ -5,8 +5,8 @@
     Priority(:task="task")
     Users(:task="task")
   .l-row.actions.l-end
-    md-button.md-primary(@click.native="close") Отмена
-    md-button.md-primary(@click.native="save") Сохранить
+    v-button.v-primary(@click.native="close") Отмена
+    v-button.v-primary(@click.native="save") Сохранить
 </template>
 
 <script lang="coffee">
@@ -34,6 +34,6 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-divider
+.v-divider
   margin 8px 0
 </style>

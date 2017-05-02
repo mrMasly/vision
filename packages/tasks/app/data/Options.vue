@@ -1,10 +1,10 @@
 <template lang="jade">
 .l-row.l-end.l-padding
-  md-button.md-primary.md-icon-button(
+  v-button.v-primary.v-icon-button(
     v-for="option in options",
     :class="[{active: ($store.state.vision.tasks.options.indexOf(option.name)+1)}]",
     @click.native="toggle(option)")
-    md-icon {{option.icon}}
+    v-icon {{option.icon}}
 </template>
 
 <script lang="coffee">
@@ -25,7 +25,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-button
+.v-button
   opacity .3
   &.active
     opacity 1

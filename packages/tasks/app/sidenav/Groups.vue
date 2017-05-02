@@ -1,12 +1,12 @@
 <template lang="jade">
-md-list
-  md-list-item.has-ripple(v-for="group in groups"
+v-list
+  v-list-item.has-ripple(v-for="group in groups"
   @click.native="select(group)",
   :class="[($route.params.tab === group.name) ? 'active': '']")
-    md-ink-ripple
-    md-icon {{group.icon}}
+    v-ripple
+    v-icon {{group.icon}}
     span {{group.title}}
-    md-divider
+    v-divider
 </template>
 
 <script lang="coffee">
@@ -37,13 +37,13 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-list-item
+.v-list-item
   &:last-child
-    .md-divider
+    .v-divider
       display none
   &.active
     color #03a9f4 !important
     background-color rgba(2,168,244,0.1) !important
-    .md-icon
+    .v-icon
       color #03a9f4 !important
 </style>

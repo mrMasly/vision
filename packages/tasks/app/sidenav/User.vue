@@ -1,10 +1,7 @@
 <template lang="jade">
 .l-padding
-  md-input-container
-    label Пользователь
-    md-select(v-model="$store.state.vision.tasks.user")
-      md-select-search(v-model="search")
-      md-option(v-for="user in users", :value="user._id") {{user.profile.name}}
+  v-select(v-model="$store.state.vision.tasks.user" label="Пользователь" search)
+    v-option(v-for="user in users", :value="user._id", :key="user._id") {{user.profile.name}}
 
 </template>
 
@@ -14,13 +11,8 @@ component =
   name: 'user'
   methods:
     customLabel: (data) -> data.profile.name
-
   data: ->
     user: Meteor.userId()
-    search: ''
-  computed:
-    users: ->
-      _.filter @_users, (user) => user.profile.name.toLowerCase().indexOf(@search.toLowerCase())+1
   meteor:
     server:
       publish:
@@ -30,7 +22,7 @@ component =
     subscribe:
       users: []
     data:
-      _users: -> Mongo.Users.find()
+      users: -> Mongo.Users.find()
 return component
 </script>
 

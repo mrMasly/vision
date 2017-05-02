@@ -1,10 +1,10 @@
 <template lang="jade">
 .l-relative
   .l-column.l-absolute.l-fill
-    .toolbar.md-transparent.md-whiteframe-1dp.l-row.l-start-center
+    .toolbar.v-transparent.v-whiteframe-1dp.l-row.l-start-center
       slot(name="sidenav-toggle")
       Add.l-flex
-    .md-content.l-flex.l-column
+    .v-content.l-flex.l-column
       Options.options
       Groups.l-flex(:groups="groups")
 

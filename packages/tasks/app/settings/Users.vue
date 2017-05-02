@@ -1,10 +1,10 @@
 <template lang="jade">
 .l-column
-  md-input-container
+  v-input-container
     label Исполнитель
-    md-select(v-model="task.users" multiple='')
-      md-select-search(v-model="search")
-      md-option(v-for="user in users", :value="user._id") {{user.profile.name}}
+    v-select(v-model="task.users" multiple='')
+      v-select-search(v-model="search")
+      v-option(v-for="user in users", :value="user._id") {{user.profile.name}}
 </template>
 
 <script lang="coffee">

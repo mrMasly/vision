@@ -1,9 +1,9 @@
 <template lang="jade">
 .l-row
-  md-button.md-primary.l-flex(
+  v-button.v-primary.l-flex(
   v-for="(day, index) in days"
   @click.native="add(index)",
-  :class="[{'md-raised': (task.repeat.week.indexOf(index)+1)}]")
+  :class="[{'v-raised': (task.repeat.week.indexOf(index)+1)}]")
     | {{ day }}
 </template>
 
@@ -26,7 +26,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-button
+.v-button
   width auto
   min-width 30px
   margin 2px

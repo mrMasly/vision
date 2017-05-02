@@ -1,14 +1,14 @@
 <template lang="jade">
 .sub.l-row.l-start-start
-  md-checkbox(v-model="sub.done")
+  v-checkbox(v-model="sub.done")
   textarea.l-flex(v-model="sub.title"
   @keydown="$emit('keydown', index, $event)"
   rows="1" ref="text")
-  //- md-button.md-icon-button.md-mini
+  //- v-button.v-icon-button.v-mini
 
   .remove.has-ripple.l-relative(@click="remove")
-    md-ink-ripple
-    md-icon close
+    v-ripple
+    v-icon close
 </template>
 
 <script lang="coffee">
@@ -29,12 +29,12 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-checkbox
+.v-checkbox
   margin 2px
   overflow hidden
 .title
   margin-left 4px
-.md-input-container
+.v-input-container
   min-height 30px !important
   margin 0
   padding-top 0

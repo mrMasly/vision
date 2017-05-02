@@ -1,12 +1,12 @@
 <template lang="jade">
-.toolbar.l-row.l-start-center.md-whiteframe-1dp(ref="toolbar")
-  md-checkbox(v-model="task.done")
+.toolbar.l-row.l-start-center.v-whiteframe-1dp(ref="toolbar")
+  v-checkbox(v-model="task.done")
   .l-flex
-  md-button.md-icon-button.md-primary(@click.native="$refs.panel.open")
-    md-icon settings
+  v-button.v-icon-button.v-primary(@click.native="$refs.panel.open")
+    v-icon settings
 
-  md-button.md-icon-button.md-primary(@click.native="close")
-    md-icon close
+  v-button.v-icon-button.v-primary(@click.native="close")
+    v-icon close
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive)
     Settings.settings(@close="$refs.panel.close()", :task="task")
@@ -27,7 +27,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-checkbox
+.v-checkbox
   margin-left 14px
 .toolbar
   height 48px

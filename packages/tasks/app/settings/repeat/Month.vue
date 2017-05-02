@@ -1,22 +1,22 @@
 <template lang="jade">
-md-tabs.md-transparent(md-centered @change="change")
-  md-tab(md-label="Дни месяца", :md-active="task.repeat.month.type === 'month'")
+v-tabs.v-transparent(v-centered @change="change")
+  v-tab(v-label="Дни месяца", :active="task.repeat.month.type === 'month'")
     .l-column(style="padding-top:8px")
       .l-row.l-start(v-for="one in month")
-        md-button.md-primary(v-for="day in one",
-          :class="[{'l-flex': (day=='last'), 'md-raised': task.repeat.month.monthDays.indexOf(day)+1}]"
+        v-button.v-primary(v-for="day in one",
+          :class="[{'l-flex': (day=='last'), 'v-raised': task.repeat.month.monthDays.indexOf(day)+1}]"
           @click.native="addMonthDay(day)")
           span(v-if="day=='last'") Последний
           span(v-else) {{day}}
-  md-tab(md-label="Дни недели", :md-active="task.repeat.month.type === 'week'")
+  v-tab(v-label="Дни недели", :active="task.repeat.month.type === 'week'")
     .l-row.l-space-between
-      md-input-container.l-45
+      v-input-container.l-45
         label Каждый
-        md-select(v-model="task.repeat.month.index")
-          md-option(v-for="(rus, name) in weekIndexes", :value="name") {{rus}}
-      md-input-container.l-50
-        md-select(v-model="task.repeat.month.weekDay")
-          md-option(v-for="(name, index) in weekDays", :value="index") {{name}}
+        v-select(v-model="task.repeat.month.index")
+          v-option(v-for="(rus, name) in weekIndexes", :value="name") {{rus}}
+      v-input-container.l-50
+        v-select(v-model="task.repeat.month.weekDay")
+          v-option(v-for="(name, index) in weekDays", :value="index") {{name}}
 </template>
 
 <script lang="coffee">
@@ -61,7 +61,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-button
+.v-button
   width 40px
   min-width 30px
   margin 2px
@@ -69,7 +69,7 @@ return component
   min-height 26px
   line-height 26px
   height 26px
-.md-tab
+.v-tab
   padding 0
 .last
   flex-grow 999

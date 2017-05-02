@@ -1,25 +1,25 @@
 <template lang="jade">
 div
   .l-row
-    md-button.md-icon-button.l-flex(v-for="button in buttons"
+    v-button.v-icon-button.l-flex(v-for="button in buttons"
     @click.native="select(button.name)",
-    :class="[{'md-primary': (button.name == selected)}]")
-      md-icon {{button.icon}}
-      md-tooltip {{button.name}}
+    :class="[{'v-primary': (button.name == selected)}]")
+      v-icon {{button.icon}}
+      v-tooltip {{button.name}}
 
   Repeat(v-if="repeat", :task="task")
   .date(v-else)
-    md-input-container(v-if="chose")
-      md-input(type="date" v-model="date" @change="change")
+    v-input-container(v-if="chose")
+      v-input(type="date" v-model="date" @change="change")
     div(v-else-if="selected==='Входящие'") Входящие
     div(v-else-if="selected==='Когда-нибудь'") Когда-нибудь
     div(v-else) {{selected}}, {{date | moment('D MMM YYYY')}}
   .time.l-column(v-if="needTime")
     template(v-if="time==null")
-      md-button(@click.native="time='00:00'") Указать время
-    md-input-container(v-else)
+      v-button(@click.native="time='00:00'") Указать время
+    v-input-container(v-else)
       label Время
-      md-input(type="time" v-model="time" @change="change")
+      v-input(type="time" v-model="time" @change="change")
 
 
 </template>
@@ -93,7 +93,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-button
+.v-button
   margin 1px
   min-width 34px
   min-height 34px
@@ -102,11 +102,11 @@ return component
   text-align center
   margin 8px 0
   height 32px
-  .md-input-container
+  .v-input-container
     padding-top 0
     height 32px
     min-height 32px
 .actions
-  .md-button
+  .v-button
     margin 8px
 </style>

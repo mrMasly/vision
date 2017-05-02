@@ -2,12 +2,8 @@
 
 .l-row.l-relative.task.l-start-center.has-ripple(@click="open"
   @contextmenu.prevent="settings")
-  md-checkbox(v-model="task.done")
-  md-ink-ripple
-  //- md-button.done(@click.native.stop="done")
-
-  //- .link.l-flex.has-ripple()
-    //- md-ink-ripple
+  v-checkbox(v-model="task.done")
+  v-ripple
   .title.l-flex {{task.title}}
   .time(:style="{color: time.color}") {{time.text}}
 
@@ -83,7 +79,7 @@ h = 30px
   cursor pointer
   position relative
   height 100%
-.md-checkbox
+.v-checkbox
   margin 2px 8px
 .time
   font-size .75em

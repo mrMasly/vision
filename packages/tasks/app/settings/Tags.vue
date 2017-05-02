@@ -1,7 +1,7 @@
 <template lang="jade">
 .l-column
-  .md-caption Теги
-  md-chips(v-model="task.tags" md-input-name="tags")
+  .v-caption Теги
+  v-chips(v-model="task.tags" v-input-name="tags")
     template(scope="tag") {{tag.value}}
 </template>
 
@@ -15,7 +15,7 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-chips
+.v-chips
   position relative
   margin-top -16px
 </style>

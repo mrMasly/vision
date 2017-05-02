@@ -1,9 +1,9 @@
 <template lang="jade">
 div
-  md-button.md-primary.add(@click.native="createSubs"
+  v-button.v-primary.add(@click.native="createSubs"
   v-if="addButton") Добавить подзадачи
   .l-padding(ref="subs" v-else)
-    .md-caption Подзадачи
+    .v-caption Подзадачи
     Subb(v-for="(sub, index) in task.subs",
     :key="sub.id", :sub="sub", :index="index",
     @keydown="keydown", @remove="remove")

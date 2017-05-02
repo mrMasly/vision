@@ -4,11 +4,11 @@
   v-model="task.title"
   @keydown.enter="save")
 
-  md-button.md-icon-button.md-primary(@click.native="$refs.panel.open")
-    md-icon settings
+  v-button.v-icon-button.v-primary(@click.native="$refs.panel.open")
+    v-icon settings
 
-  md-button.md-icon-button.md-primary(@click.native="save")
-    md-icon check
+  v-button.v-icon-button.v-primary(@click.native="save")
+    v-icon check
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive)
     Settings.settings(@close="$refs.panel.close()", :task="task", @save="save")
@@ -60,7 +60,7 @@ input
   border none
   outline none
   box-shadow none
-.md-speed-dial
+.v-speed-dial
   position relative
   top 5px
 </style>

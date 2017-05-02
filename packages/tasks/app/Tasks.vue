@@ -1,18 +1,18 @@
 <template lang="jade">
 div.l-fill.l-row.l-absolute
   Sidenav(v-if="$layout.gsm")
-  md-sidenav.md-left.md-fixed(v-else ref="left")
+  v-sidenav.v-left.v-fixed(v-else ref="left")
     Sidenav
-  md-divider
+  v-divider
   DataTasks.l-flex
-    md-button.md-icon-button(slot="sidenav-toggle" v-if="!$layout.gsm"
+    v-button.v-icon-button(slot="sidenav-toggle" v-if="!$layout.gsm"
     @click.native="$refs.left.open")
-      md-icon menu
-  md-divider
+      v-icon menu
+  v-divider
   //- template(v-if="$route.params.id")
   .task(v-if="$layout.gmd")
     Task(v-if="$route.params.id", :id="$route.params.id" @close="close")
-  md-sidenav.md-right.md-fixed(v-else ref="right")
+  v-sidenav.v-right.v-fixed(v-else ref="right")
     Task(v-if="$route.params.id", :id="$route.params.id" @close="close();$refs.right.close()")
 
 </template>

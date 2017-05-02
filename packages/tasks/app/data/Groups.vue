@@ -1,10 +1,10 @@
 <template lang="jade">
 div.l-scroll
   div(v-for="group in groups" v-show="group.size > 0")
-    md-subheader.has-ripple.md-primary.l-relative(@click.native="toggle(group)")
-      md-icon(v-if="group.open") arrow_drop_down
-      md-icon(v-else) arrow_drop_up
-      md-ink-ripple
+    v-subheader.has-ripple.v-primary.l-relative(@click.native="toggle(group)")
+      v-icon(v-if="group.open") arrow_drop_down
+      v-icon(v-else) arrow_drop_up
+      v-ripple
       .l-flex.l-relative
         span {{group.name}} ({{group.size}})
     Group(:group="group" v-show="group.open")
@@ -25,6 +25,6 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-subheader
+.v-subheader
   cursor pointer
 </style>

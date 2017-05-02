@@ -1,13 +1,13 @@
 <template lang="jade">
 .l-column
-  .md-caption Приоритет
+  .v-caption Приоритет
   .l-row.l-center
-    md-button.l-25.md-raised(
+    v-button.l-25.v-raised(
     v-for="type in types",
-    :class="[{'md-primary': task.priority === type.value}]",
+    :class="[{'v-primary': task.priority === type.value}]",
     @click.native="task.priority = type.value")
-      md-icon(:style="{color: type.color}") priority_high
-      md-tooltip {{type.name}}
+      v-icon(:style="{color: type.color}") priority_high
+      v-tooltip {{type.name}}
 </template>
 
 <script lang="coffee">
@@ -26,6 +26,6 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.md-button
+.v-button
   min-width 40px
 </style>

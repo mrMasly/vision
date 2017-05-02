@@ -1,7 +1,7 @@
 <template lang="jade">
 main.l-hidden.l-column
-  md-toolbar.md-transparent.md-whiteframe-1dp.md-dense
-    .md-title Поиск
+  v-toolbar.v-transparent.v-whiteframe-1dp.v-dense
+    .v-title Поиск
   Groups.l-flex
   User
 
@@ -21,6 +21,6 @@ return component
 <style lang="stylus" scoped>
 main
   width 270px
-.md-toolbar
+.v-toolbar
   z-index 2
 </style>
