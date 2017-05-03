@@ -4,17 +4,17 @@
     h2.v-title.l-flex(v-once) {{title || user.profile.name}}
     slot(name="close")
   v-dialog-content.l-flex.overflow
-    v-input-container
-      label Имя пользователя
-      v-input(type="text" v-model="user.username")
-    v-input-container
-      label Имя на русском
-      v-input(type="text" v-model="user.profile.name")
-    v-input-container
-      label Пароль
-      v-input(type="text" v-model="user.password")
-    v-select(v-model="user.groups" multiple search label="Группы")
-      v-option(:value="group._id" v-for="group in groups", :key="group._id") {{group.name}}
+
+    v-picker(label="Имя пользователя" type="text" v-model="user.username")
+
+    v-picker(label="Имя на русском" type="text" v-model="user.profile.name")
+
+    v-picker(label="Пароль" type="text" v-model="user.password")
+
+    v-picker(label="Группы" type="select" v-model="user.groups" multiple search)
+      v-option(:value="group._id" v-for="group in groups", :key="group._id")
+        | {{group.name}}
+
   v-dialog-actions
     v-button.v-primary(@click.native="close") Отмена
     v-button.v-primary(@click.native="save") Сохранить

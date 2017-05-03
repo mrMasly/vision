@@ -4,15 +4,13 @@
     h2.v-title.l-flex(v-once) {{title || group.name}}
     slot(name="close")
   v-dialog-content.l-flex.overflow
-    v-input-container
-      label id группы
-      v-input(type="text" v-model="group._id", :disabled="id!=='new'")
-    v-input-container
-      label Название группы
-      v-input(type="text" v-model="group.name")
-    v-input-container
-      label Описание
-      v-textarea(v-model="group.description")
+
+    v-picker(label="id группы" type="text" v-model="group._id", :disabled="id!=='new'")
+
+    v-picker(label="Название группы" type="text" v-model="group.name")
+
+    v-picker(label="Описание" type="text" v-model="group.description")
+    
   v-dialog-actions
     v-button.v-primary(@click.native="close") Отмена
     v-button.v-primary(@click.native="save") Сохранить
