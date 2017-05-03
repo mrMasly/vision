@@ -25,7 +25,7 @@ component =
       height: 'auto'
     interval: null
   mounted: ->
-    $(@$el).appendTo 'body'
+    # $(@$el).appendTo 'body'
     # @interval = setInterval (=> do @position), 1000
   methods:
     opacity: (val) ->
