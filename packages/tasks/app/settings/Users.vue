@@ -2,8 +2,7 @@
 .l-column
   v-input-container
     label Исполнитель
-    v-select(v-model="task.users" multiple='')
-      v-select-search(v-model="search")
+    v-select(v-model="task.users" multiple search)
       v-option(v-for="user in users", :value="user._id") {{user.profile.name}}
 </template>
 

@@ -1,5 +1,5 @@
 <template lang="jade">
-.toolbar.l-row.l-start-center.v-whiteframe-1dp(ref="toolbar")
+.toolbar.l-row.l-start-center.v-shadow(ref="toolbar")
   v-checkbox(v-model="task.done")
   .l-flex
   v-button.v-icon-button.v-primary(@click.native="$refs.panel.open")

@@ -1,7 +1,10 @@
 <template lang="jade">
 .l-padding
-  v-select(v-model="$store.state.vision.tasks.user" label="Пользователь" search)
-    v-option(v-for="user in users", :value="user._id", :key="user._id") {{user.profile.name}}
+  v-input-container
+    label Пользователь
+    v-select(v-model="$store.state.vision.tasks.user" search)
+      v-option(v-for="user in users", :value="user._id", :key="user._id")
+        | {{user.profile.name}}
 
 </template>
 

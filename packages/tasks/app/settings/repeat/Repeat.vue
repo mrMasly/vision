@@ -1,10 +1,10 @@
 <template lang="jade">
 div
   v-tabs.v-transparent(v-centered @change="change")
-    v-tab(v-label="День", :active="task.repeat.type === 'day'")
-    v-tab(v-label="Неделя", :active="task.repeat.type === 'week'")
+    v-tab(label="День", :active="task.repeat.type === 'day'")
+    v-tab(label="Неделя", :active="task.repeat.type === 'week'")
       Week(:task="task")
-    v-tab(v-label="Месяц", :active="task.repeat.type === 'month'")
+    v-tab(label="Месяц", :active="task.repeat.type === 'month'")
       Month(:task="task")
   Dates(:task="task")
 

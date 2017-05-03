@@ -1,7 +1,7 @@
 <template lang="jade">
 .l-relative
   .l-column.l-absolute.l-fill
-    .toolbar.v-transparent.v-whiteframe-1dp.l-row.l-start-center
+    .toolbar.v-transparent.v-shadow-1.l-row.l-start-center
       slot(name="sidenav-toggle")
       Add.l-flex
     .v-content.l-flex.l-column

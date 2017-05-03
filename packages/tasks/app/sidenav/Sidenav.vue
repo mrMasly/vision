@@ -1,6 +1,6 @@
 <template lang="jade">
 main.l-hidden.l-column
-  v-toolbar.v-transparent.v-whiteframe-1dp.v-dense
+  v-toolbar.v-transparent.v-shadow.v-dense
     .v-title Поиск
   Groups.l-flex
   User

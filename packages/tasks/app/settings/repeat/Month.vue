@@ -1,6 +1,6 @@
 <template lang="jade">
 v-tabs.v-transparent(v-centered @change="change")
-  v-tab(v-label="Дни месяца", :active="task.repeat.month.type === 'month'")
+  v-tab(label="Дни месяца", :active="task.repeat.month.type === 'month'")
     .l-column(style="padding-top:8px")
       .l-row.l-start(v-for="one in month")
         v-button.v-primary(v-for="day in one",
@@ -8,7 +8,7 @@ v-tabs.v-transparent(v-centered @change="change")
           @click.native="addMonthDay(day)")
           span(v-if="day=='last'") Последний
           span(v-else) {{day}}
-  v-tab(v-label="Дни недели", :active="task.repeat.month.type === 'week'")
+  v-tab(label="Дни недели", :active="task.repeat.month.type === 'week'")
     .l-row.l-space-between
       v-input-container.l-45
         label Каждый
