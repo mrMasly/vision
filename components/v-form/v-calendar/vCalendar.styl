@@ -1,34 +1,26 @@
+@import '../../../styles/variables.styl'
+
 .v-calendar
   cursor pointer
   width 100%
   position relative
   height auto
   box-sizing border-box
-  padding-top 20px
-  margin 8px 0
+.v-calendar-fill
+  position absolute
+  width 100%
+  height 100%
+  left 0
+  top 0
+  z-index 2
 .v-calendar-value
-  white-space nowrap
+  margin-top 8px
+  display block
   width 100%
   position relative
-  min-height 25px
-  line-height 20px
   font-size 16px
-  border-bottom solid 1px rgba(0, 0, 0, .15)
   box-sizing border-box
 
-  &:hover
-    &:after
-      color rgba(0, 0, 0, .54)
-  &:after
-    color rgba(0, 0, 0, .38)
-    margin-top 2px
-    position absolute
-    top 50%
-    right 0
-    transform translateY(-50%) scaleY(.45) scaleX(.85)
-    transition all .15s linear
-    content "\25BC"
-    box-sizing inherit
 .v-calendar-label
   position absolute
   &.v-placeholder
@@ -40,6 +32,10 @@
 
 
 .v-calendar-panel
+  .inputs
+    height 35px
+  .arrows
+    z-index 2
   .month
     margin 8px
   .month-button

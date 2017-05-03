@@ -1,0 +1,6 @@
+import './v-calendar/index.coffee'
+import './v-input/index.coffee'
+import './v-input-container/index.coffee'
+import './v-select/index.coffee'
+import './v-textarea/index.coffee'
+import './v-picker/index.coffee'

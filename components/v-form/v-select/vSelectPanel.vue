@@ -125,8 +125,6 @@ component =
         @$refs.scroller.onScroll yes
         setTimeout =>
           @focus 0
-
-
     select: (value) ->
       if @multiple
         if value in @val

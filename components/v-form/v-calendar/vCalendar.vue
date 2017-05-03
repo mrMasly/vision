@@ -1,25 +1,32 @@
 <template lang="jade">
 div.v-calendar(ref="calendar" @click="open")
-  .v-calendar-label(:class="[labelClass]") {{label}}
+
   template(v-if="period2")
     .v-calendar-value(v-if="value[0] || value[1]")
       span(v-if="value[0]") с {{value[0] | moment('D MMM YYYY')}}&nbsp;
       span(v-if="value[1]") по {{value[1] | moment('D MMM YYYY')}}
     .v-calendar-value(v-else) Всегда
   template(v-else)
-    .v-calendar-value {{value | moment('D MMM YYYY')}}
+    .v-calendar-value
+      span(v-if="value") {{value | moment('D MMM YYYY')}}
+
+  .v-calendar-fill
+
   v-panel(ref="panel" align="calendar" x="start" y="start" alive v-if="display")
     v-calendar-panel(:value="value", :period="period2" @change="change" ref="cPanel")
-      //- .switch(slot="period")
+      .switch(slot="period")
         v-switch(v-model="period2") Период
 </template>
 
 <script lang="coffee">
 import _ from 'lodash'
 import vCalendarPanel from './vCalendarPanel.vue'
+import getClosestVueParent from '../../../utils/getClosestVueParent.js'
+import common from '../common.js'
 component =
   name: 'v-calendar'
   components: { vCalendarPanel }
+  mixins: [ common ]
   data: ->
     period2: !!@period
     display: no
@@ -40,6 +47,10 @@ component =
       @$emit 'change', value
   mounted: ->
     @display = yes
+    @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
+    if !@parentContainer
+      @$destroy()
+      throw new Error('You should wrap the v-input in a v-input-container')
   methods:
     open: ->
       @$refs.panel.open()

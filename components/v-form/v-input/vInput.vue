@@ -3,14 +3,15 @@ input.v-input(:type='type', :value='value', :disabled='disabled', :required='req
 </template>
 
 <script lang="coffee">
-import getClosestVueParent from '../../utils/getClosestVueParent.js'
-import common from './common.js'
+import getClosestVueParent from '../../../utils/getClosestVueParent.js'
+import common from '../common.js'
 component =
   name: 'v-input'
   mixins: [ common ]
-  props: type:
-    type: String
-    default: 'text'
+  props:
+    type:
+      type: String
+      default: 'text'
   mounted: ->
     @$nextTick ->
       @parentContainer = getClosestVueParent(@$parent, 'v-input-container')

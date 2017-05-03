@@ -4,8 +4,8 @@ textarea.v-input(:value='value', :disabled='disabled', :required='required', :pl
 
 <script lang="coffee">
 import autosize from 'autosize'
-import common from './common.js'
-import getClosestVueParent from '../../utils/getClosestVueParent.js'
+import common from '../common.js'
+import getClosestVueParent from '../../../utils/getClosestVueParent.js'
 component =
   name: 'v-textarea'
   mixins: [ common ]

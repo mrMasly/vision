@@ -1,11 +1,10 @@
 <template lang="jade">
-.v-select(ref="select" @click="open")
-  .v-select-label(:class="[labelClass]") {{label}}
+.v-select(ref="select")
+  select
   .v-select-value(v-if="!multiple") {{title}}
   .v-select-value(v-else)
     div(v-for="one in title") {{one}}
-  //- .v-select-value
-  //-   slot(name="selected")
+  .v-select-fill(@click="open")
   v-panel(ref="panel" align="select" x="start" y="start" @close="close")
     v-select-panel(ref="selectPanel" @change="change",
     :style="{minWidth: style.width, maxHeight: style.height}",
@@ -16,15 +15,19 @@
 <script lang="coffee">
 import _ from 'lodash'
 import vSelectPanel from './vSelectPanel.vue'
+import getClosestVueParent from '../../../utils/getClosestVueParent.js'
+import common from '../common.js'
 component =
   name: 'v-select'
   components: { vSelectPanel }
+  mixins: [ common ]
   data: ->
     style:
       width: null
       height: null
     title: null
     searching: !!@search
+    parentContainer: null
   computed:
     labelClass: ->
       value = if _.isNumber(@value) then String(@value) else @value
@@ -33,6 +36,10 @@ component =
   watch:
     value: -> do @update
   mounted: ->
+    @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
+    if !@parentContainer
+      @$destroy()
+      throw new Error('You should wrap the v-input in a v-input-container')
     @$nextTick ->
       do @update
   created: ->
@@ -55,9 +62,10 @@ component =
     value:
       required: yes
     multiple: [String, Boolean]
-    label: String
     search: [String, Boolean]
-    height: [String, Number]
+    height:
+      type: [String, Number]
+      default: 400
     width: [String, Number]
   methods:
     open: ->
@@ -74,6 +82,7 @@ component =
       @$emit 'input', value
       @$emit 'change', value
     update: ->
+      # return unless @active
       return unless @$slots.default?
       getText = (children) ->
         return null unless children?
@@ -85,21 +94,16 @@ component =
           text += child.text if child.text?
         return text
 
-      # slots = []
       @title = if @multiple then [] else null
       for option in @$slots.default
         val = _.get option, 'componentOptions.propsData.value'
         if @multiple
           if val in @value
             @title.push getText option.componentOptions.children
-            # console.log text
-            # slots.push option
         else
           if val is @value
-            # slots.push option
             @title = getText option.componentOptions.children
-      # @$slots.selected = slots
-      do @$forceUpdate
+      # do @$forceUpdate
     change: (value) ->
       @$emit 'input', value
       @$emit 'change', value

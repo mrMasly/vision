@@ -9,7 +9,7 @@
       span.span по
       input(type="date" v-model="selected[1]")
 
-  .l-row.l-center
+  .l-row.l-center.arrows
     v-button.v-primary(@click.native="subYear")
       v-icon fast_rewind
     v-button.v-primary(@click.native="subMonth")

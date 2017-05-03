@@ -1,4 +1,4 @@
-@import '../../styles/variables.styl'
+@import '../../../styles/variables.styl'
 
 input-size = 32px
 
@@ -9,7 +9,17 @@ input-size = 32px
   padding-top 16px
   display flex
   position relative
-
+  &.has-triangle
+    &:before
+      color rgba(0, 0, 0, .38)
+      margin-top 9px
+      position absolute
+      top 50%
+      right 0
+      transform translateY(-50%) scaleY(.45) scaleX(.85)
+      transition all .15s linear
+      content "\25BC"
+      box-sizing inherit
   &:after
     height 1px
     position absolute
@@ -19,8 +29,7 @@ input-size = 32px
     background-color rgba(#000, .12)
     transition swift-ease-out
     content " "
-
-  label
+  > label
     position absolute
     top 23px
     left 0
@@ -31,8 +40,8 @@ input-size = 32px
     font-size 16px
     line-height 20px
 
-  input,
-  textarea
+  > input
+  > textarea
     width 100%
     height input-size
     padding 0
@@ -63,7 +72,7 @@ input-size = 32px
         right 0
         left auto
 
-  textarea
+  > textarea
     min-height 32px
     max-height 230px
     padding 5px 0
@@ -112,44 +121,44 @@ input-size = 32px
 
 .v-input-container
   &.v-input-placeholder
-    label
+    > label
       pointer-events auto
       top 10px
       opacity 0
       font-size 12px
 
-    input,
-    textarea
+    > input
+    > textarea
       font-size 16px
 
   &.v-input-focused,
   &.v-has-value
-    label
+    > label
       pointer-events auto
       top 0
       opacity 1
       font-size 12px
 
-    input,
-    textarea
+    > input,
+    > textarea
       font-size 16px
 
   &.v-has-value
-    input,
-    textarea
+    > input,
+    > textarea
       color rgba(#000, .87)
 
   &.v-input-inline
-    label
+    > label
       pointer-events none
 
     &.v-input-focused
-      label
+      > label
         top 23px
         font-size 16px
 
     &.v-has-value
-      label
+      > label
         opacity 0
 
   &.v-input-disabled
@@ -158,9 +167,9 @@ input-size = 32px
       background-image linear-gradient(to right, rgba(#000, .38) 0%, rgba(#000, .38) 33%, transparent 0%)
       background-size 4px 1px
 
-    label,
-    input,
-    textarea
+    > label,
+    > input,
+    > textarea
       color rgba(#000, .38)
 
   &.v-has-password
@@ -183,7 +192,7 @@ input-size = 32px
       transform translate3d(0, 0, 0)
 
   &.v-input-required
-    label:after
+    > label:after
       position absolute
       top 2px
       right 0

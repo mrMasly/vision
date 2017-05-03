@@ -7,7 +7,7 @@
 </template>
 
 <script lang="coffee">
-import theme from '../../theme/mixin.js'
+import theme from '../../../theme/mixin.js'
 import {isArray} from 'lodash'
 component =
   name: 'v-input-container'
@@ -28,6 +28,7 @@ component =
     isFocused: false
     counterLength: 0
     inputLength: 0
+    hasTriangle: no
   computed:
     hasValue: ->
       if isArray(@value)
@@ -43,6 +44,7 @@ component =
       'v-input-disabled': @isDisabled
       'v-input-required': @isRequired
       'v-input-focused': @isFocused
+      'has-triangle': @hasTriangle
   methods:
     isInput: ->
       @input and @input.tagName.toLowerCase() == 'input'
@@ -59,10 +61,13 @@ component =
     setValue: (value) ->
       @value = value
   mounted: ->
-    @input = @$el.querySelectorAll('input, textarea, select, .v-file')[0]
+    @input = @$el.querySelectorAll('input, textarea, select, .v-calendar')[0]
     if !@input
       @$destroy()
       throw new Error('Missing input/select/textarea inside v-input-container')
+    else
+      unless $(@input).prop("tagName") in ['INPUT', 'TEXTAREA']
+        @hasTriangle = yes
 
 return component
 </script>
