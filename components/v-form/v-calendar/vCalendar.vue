@@ -47,10 +47,16 @@ component =
       @$emit 'change', value
   mounted: ->
     @display = yes
-    @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
-    if !@parentContainer
-      @$destroy()
-      throw new Error('You should wrap the v-input in a v-input-container')
+    @$nextTick ->
+      @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
+      if !@parentContainer
+        @$destroy()
+        throw new Error('You should wrap the v-calendar in a v-input-container')
+      @setParentDisabled()
+      @setParentRequired()
+      @setParentPlaceholder()
+      @handleMaxLength()
+      @updateValues()
   methods:
     open: ->
       @$refs.panel.open()

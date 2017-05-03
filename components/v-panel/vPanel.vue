@@ -18,6 +18,7 @@ component =
   data: ->
     isOpen: no
     e: null
+    element: null
     style:
       top: 0
       left: 0
@@ -25,18 +26,24 @@ component =
       height: 'auto'
     interval: null
   mounted: ->
-    # $(@$el).appendTo 'body'
-    # @interval = setInterval (=> do @position), 1000
+    @$nextTick ->
+      @element = @$el
+      do @removeElement
   methods:
+    removeElement: ->
+      if document.body.contains(@element)
+        @$el.parentNode.removeChild @$el
     opacity: (val) ->
       $(@$refs.container).css opacity: val
     close: ->
       @opacity 0
       setTimeout =>
         @isOpen = no
+        do @removeElement
       , 200
       @$emit 'close'
     open: (e) ->
+      document.body.appendChild @element
       @isOpen = yes
       @e = e
       @$nextTick =>

@@ -36,12 +36,20 @@ component =
   watch:
     value: -> do @update
   mounted: ->
-    @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
-    if !@parentContainer
-      @$destroy()
-      throw new Error('You should wrap the v-input in a v-input-container')
     @$nextTick ->
+      @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
+      if !@parentContainer
+        @$destroy()
+        throw new Error('You should wrap the v-select in a v-input-container')
       do @update
+      @setParentDisabled()
+      @setParentRequired()
+      @setParentPlaceholder()
+      @handleMaxLength()
+      @updateValues()
+
+
+
   created: ->
     if @height
       @style.height = _.toString @height
