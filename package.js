@@ -32,7 +32,7 @@ Package.onUse(function(api) {
   api.use('webapp@1.3.14');
   api.use('mongo@1.1.16', ['client', 'server']);
   api.use('tmeasday:check-npm-versions@0.3.1');
-  api.use('stylus@2.513.9', ['client', 'server']);
+  api.use('stylus');
   api.use('meteorhacks:async@1.0.0');
   api.use('zimme:collection-behaviours@1.1.3');
   api.use('random@1.0.10');
@@ -40,7 +40,7 @@ Package.onUse(function(api) {
   api.use('accounts-base@1.2.15');
   api.use('accounts-password@1.3.4');
 
-  api.use('mrmasly:vue@0.2.0');
+  api.use('mrmasly:vue@0.2.1');
   api.use('mrmasly:files@0.0.3');
 
   api.addAssets([
