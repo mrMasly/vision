@@ -1,5 +1,5 @@
 <template lang="jade">
-tr.v-table-row(:class='classes', @click='autoSelect')
+tr.v-table-row(:class='classes', @click='getAutoSelect')
   v-table-row.v-table-selection(v-if='hasSelection')
     v-checkbox(v-model='checkbox', :disabled='isDisabled', @change='select')
   slot
@@ -62,7 +62,7 @@ component =
         else
           @handleSingleSelection value
         @parentTable.emitSelection()
-    autoSelect: ->
+    getAutoSelect: ->
       if @autoSelect and @hasSelection
         @checkbox = !@checkbox
         @handleSingleSelection @checkbox

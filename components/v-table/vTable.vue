@@ -14,7 +14,7 @@ component =
     sort: String
   mixins: [ theme ]
   data: ->
-    sortType: @sortType
+    localSortType: @sortType
     sortBy: @sort
     hasRowSelection: false
     data: []
@@ -26,7 +26,7 @@ component =
       @sortBy = name
       @$emit 'sort',
         name: name
-        type: @sortType
+        type: @localSortType
     emitSelection: ->
       @$emit 'select', @selectedRows
   watch:
