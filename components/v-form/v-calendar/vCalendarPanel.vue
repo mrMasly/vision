@@ -20,7 +20,7 @@
       v-icon fast_forward
   Monthes(:date="date" @select="select", :period="period", :selected="selected", :value="value", @getDate="getDate")
 
-  slot.switch(name="period")
+  //- slot.switch(name="period")
 
 
 
@@ -34,15 +34,15 @@ component =
   components: { Monthes }
   data: ->
     date: null
-    selected: null
+    selected: do =>
+      if _.isArray @value
+        return [
+          moment(@value[0]).format('YYYY-MM-DD')
+          moment(@value[1]).format('YYYY-MM-DD')
+        ]
+      else
+        return moment(@value).format('YYYY-MM-DD')
   created: ->
-    if _.isArray @value
-      @selected = [
-        moment(@value[0]).format('YYYY-MM-DD')
-        moment(@value[1]).format('YYYY-MM-DD')
-      ]
-    else
-      @selected = moment(@value).format('YYYY-MM-DD')
     do @getDate
   props: ['value', 'period']
   watch:

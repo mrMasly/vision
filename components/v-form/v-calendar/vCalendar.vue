@@ -1,7 +1,9 @@
 <template lang="jade">
 div.v-calendar(ref="calendar" @click="open")
 
-  template(v-if="period2")
+  template(v-if="value == null")
+    .v-calendar-value
+  template(v-else-if="period")
     .v-calendar-value(v-if="value[0] || value[1]")
       span(v-if="value[0]") с {{value[0] | moment('D MMM YYYY')}}&nbsp;
       span(v-if="value[1]") по {{value[1] | moment('D MMM YYYY')}}
@@ -13,9 +15,9 @@ div.v-calendar(ref="calendar" @click="open")
   .v-calendar-fill
 
   v-panel(ref="panel" align="calendar" x="start" y="start" alive v-if="display")
-    v-calendar-panel(:value="value", :period="period2" @change="change" ref="cPanel")
-      .switch(slot="period")
-        v-switch(v-model="period2") Период
+    v-calendar-panel(:value="value", :period="period" @change="change" ref="cPanel")
+      //- .switch(slot="period")
+      //-   v-switch(v-model="switchPeriod") Период
 </template>
 
 <script lang="coffee">
@@ -28,25 +30,13 @@ component =
   components: { vCalendarPanel }
   mixins: [ common ]
   data: ->
-    period2: !!@period
     display: no
   props:
     period:
       default: no
     value: [Date, Array]
     label: String
-  created: ->
-    unless @value?
-      value = moment().toDate()
-      value = [value, value] if @period
-      @$emit 'input', value
-      @$emit 'change', value
-    else if @period and not _.isArray @value
-      value = [@value, @value]
-      @$emit 'input', value
-      @$emit 'change', value
   mounted: ->
-    @display = yes
     @$nextTick ->
       @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
       if !@parentContainer
@@ -57,6 +47,8 @@ component =
       @setParentPlaceholder()
       @handleMaxLength()
       @updateValues()
+      @initValue()
+      @display = yes
   methods:
     open: ->
       @$refs.panel.open()
@@ -65,10 +57,16 @@ component =
     change: (value) ->
       @$emit 'input', value
       @$emit 'change', value
-  computed:
-    labelClass: ->
-      if @period then 'v-caption'
-      else if @value? then 'v-caption'
-      else 'v-placeholder'
+    initValue: ->
+      if @period
+        unless _.isArray @value
+          value = [@value, @value]
+      else if not @period
+        if _.isArray @value
+          value = @value[0]
+      if value?
+        @$emit 'input', value
+        @$emit 'change', value
+
 return component
 </script>

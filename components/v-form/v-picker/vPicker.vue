@@ -8,7 +8,7 @@ v-input-container
       slot
   template(v-else-if="type=='calendar'")
     v-calendar(v-model="val" @input="input" @change="change",
-    :disabled="disabled")
+    :disabled="disabled" period="period")
   template(v-else-if="type=='textarea'")
     v-textarea(v-model="val" @input="input" @change="change",
     :disabled="disabled")
@@ -36,6 +36,8 @@ component =
     search: [String, Boolean]
     height: [String, Number]
     width: [String, Number]
+    # calendar
+    period: Boolean
 
 
 

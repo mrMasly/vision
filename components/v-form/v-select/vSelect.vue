@@ -48,8 +48,6 @@ component =
       @handleMaxLength()
       @updateValues()
 
-
-
   created: ->
     if @height
       @style.height = _.toString @height
@@ -89,9 +87,13 @@ component =
       value = @$refs.selectPanel.val
       @$emit 'input', value
       @$emit 'change', value
-    update: ->
-      # return unless @active
-      return unless @$slots.default?
+    update: (dooble=yes) ->
+      unless @$slots.default?
+        if dooble
+          setTimeout =>
+            @update no
+          , 1000
+        return
       getText = (children) ->
         return null unless children?
         text = ''
