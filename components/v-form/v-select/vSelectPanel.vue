@@ -1,14 +1,18 @@
 <template lang="jade">
 .v-select-panel.l-column(@click="click")
-  .search.l-row.l-padding(v-if="searching")
+  .search.l-row.l-padding(v-if="search")
     v-button.v-icon-button.v-mini(@click.native="deselect")
       v-icon clear_all
-    input.l-flex(ref="search" placeholder="Поиск" v-model="search")
+    input.l-flex(ref="search" placeholder="Поиск" v-model="text")
     v-button.v-icon-button.v-mini(@click.native="clear")
       v-icon close
   v-divider
   v-scroller.content.l-flex(ref="scroller")
     slot(name="visible")
+  template(v-if="add && text")
+    v-option.l-row(value="__add__" key="__add__")
+      span.l-flex Создать "{{text}}"
+      span(style="float:right;color:rgba(0,0,0,.54);font-size:.8em") shift + enter
 
 </template>
 
@@ -17,7 +21,7 @@ import _ from 'lodash'
 component =
   name: 'v-select-panel'
   data: ->
-    search: ''
+    text: ''
     options: []
     focused: null
     val: null
@@ -29,18 +33,29 @@ component =
         @val = []
     else
       @val = _.clone @value
-  props: [ 'multiple', 'value', 'searching' ]
+  props: [ 'multiple', 'value', 'search', 'add' ]
   watch:
-    search: -> do @filter
+    text: ->
+      if _.isFunction @search
+        @search @text, =>
+          @$nextTick => do @filter
+      else do @filter
   mounted: ->
     do @filter
     @$nextTick ->
       @options = @$refs.scroller.$children
   methods:
+    onAdd: ->
+      return unless @add
+      if _.isFunction @add
+        @add @text, (value) =>
+          @text = ''
+          @select(value) if value
     click: -> @$nextTick ->
       @$refs.search.focus() if @$refs.search?
     focus: (index, scroll=no) ->
       return unless _.get @$slots, 'default.length'
+      return if _.isEmpty @$slots.visible
       @focused = index
       key = @$slots.visible[index]?.key
       for option in @$refs.scroller.$children
@@ -63,11 +78,13 @@ component =
         @$emit 'close'; do e.preventDefault
       else if e.key is 'Enter'
         do e.preventDefault
-        if @focused?
+        if e.shiftKey
+          do @onAdd
+        else if @focused?
           option = _.find @options, focus: yes
           do option.select if option?
     next: ->
-      if @$slots.visible.length
+      if @$slots.visible? && @$slots.visible.length
         unless @focused?
           index = 0
         else if @focused is @$slots.visible.length
@@ -78,7 +95,7 @@ component =
         index = null
       @focus index, yes
     prev: ->
-      if @$slots.visible.length
+      if @$slots.visible? && @$slots.visible.length
         unless @focused?
           index = @$slots.visible.length-1
         else if @focused is 0
@@ -89,7 +106,7 @@ component =
       @focus index, yes
     filter: ->
       return unless _.get @$slots, 'default.length'
-      if _.isEmpty @search
+      if _.isFunction(@search) or _.isEmpty @text
         @$slots.visible = _.clone @$slots.default
         do @$forceUpdate
         @$nextTick ->
@@ -110,13 +127,13 @@ component =
         return text
 
       slots = []
-      find = @search.toLowerCase()
+      find = @text.toLowerCase()
       for option in @$slots.default
-        search = _.get option, 'componentOptions.propsData.search'
-        unless search?
-          search = getText _.get option, 'componentOptions.children'
-        search = _.toLower _.toString search
-        if search.indexOf(find)+1
+        text = _.get option, 'componentOptions.propsData.search'
+        unless text?
+          text = getText _.get option, 'componentOptions.children'
+        text = _.toLower _.toString text
+        if text.indexOf(find)+1
           slots.push option
 
       @$slots.visible = slots
@@ -126,6 +143,7 @@ component =
         setTimeout =>
           @focus 0
     select: (value) ->
+      return do @onAdd if value is '__add__'
       if @multiple
         if value in @val
           @val = _.without @val, value
@@ -135,7 +153,7 @@ component =
         @val = value
         @$emit 'close'
     clear: ->
-      @search = ''
+      @text = ''
       @filter()
     deselect: ->
       if @multiple

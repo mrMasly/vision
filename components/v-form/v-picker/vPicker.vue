@@ -4,7 +4,7 @@ v-input-container
   template(v-if="type=='select'")
     v-select(v-model="val" @input="input" @change="change",
     :multiple="multiple", :search="search", :height="height", :width="width",
-    :disabled="disabled")
+    :disabled="disabled", :add="add")
       slot
   template(v-else-if="type=='calendar'")
     v-calendar(v-model="val" @input="input" @change="change",
@@ -32,10 +32,11 @@ component =
       required: yes
     disabled: Boolean
     # select
-    multiple: [String, Boolean]
-    search: [String, Boolean]
+    multiple: [Boolean]
+    search: [Boolean, Function]
     height: [String, Number]
     width: [String, Number]
+    add: [Boolean, Function]
     # calendar
     period: Boolean
 

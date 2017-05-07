@@ -1,14 +1,17 @@
 <template lang="jade">
 .v-select(ref="select")
   select
-  .v-select-value(v-if="!multiple") {{title}}
+  .v-select-value(v-if="$slots.value")
+    slot(name="value")
+  .v-select-value(v-else-if="!multiple") {{title}}
   .v-select-value(v-else)
     div(v-for="one in title") {{one}}
   .v-select-fill(@click="open")
   v-panel(ref="panel" align="select" x="start" y="start" @close="close")
     v-select-panel(ref="selectPanel" @change="change",
     :style="{minWidth: style.width, maxHeight: style.height}",
-    :multiple="multiple", :value="value", :searching="searching", @close="$refs.panel.close()")
+    :multiple="multiple", :value="value", :search="search", :add="add"
+    @close="$refs.panel.close()")
       slot
 </template>
 
@@ -21,12 +24,22 @@ component =
   name: 'v-select'
   components: { vSelectPanel }
   mixins: [ common ]
+  props:
+    value:
+      required: yes
+    multiple: [Boolean]
+    search:
+      default: [Boolean, Function]
+    height:
+      type: [String, Number]
+      default: 400
+    width: [String, Number]
+    add: [Boolean, Function]
   data: ->
     style:
       width: null
       height: null
     title: null
-    searching: !!@search
     parentContainer: null
   computed:
     labelClass: ->
@@ -48,31 +61,22 @@ component =
       @handleMaxLength()
       @updateValues()
 
+      if @multiple
+        unless @value?
+          value = []
+        else if not _.isArray @value
+          value = [@value]
+      else
+        if _.isArray @value
+          value = @value[0]
+      if value
+        @$emit 'input', value
+        @$emit 'change', value
   created: ->
     if @height
       @style.height = _.toString @height
       @style.height = @style.height+'px' if @style.height.indexOf('px') is -1
 
-    if @multiple
-      unless @value?
-        value = []
-      else if not _.isArray @value
-        value = [@value]
-    else
-      if _.isArray @value
-        value = @value[0]
-    if value
-      @$emit 'input', value
-      @$emit 'change', value
-  props:
-    value:
-      required: yes
-    multiple: [String, Boolean]
-    search: [String, Boolean]
-    height:
-      type: [String, Number]
-      default: 400
-    width: [String, Number]
   methods:
     open: ->
       if @width?
@@ -88,6 +92,9 @@ component =
       @$emit 'input', value
       @$emit 'change', value
     update: (dooble=yes) ->
+      if _.isEmpty @value
+        @title = null
+        return
       unless @$slots.default?
         if dooble
           setTimeout =>
