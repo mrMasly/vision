@@ -1,6 +1,6 @@
 <template lang="jade">
-th.v-table-head(:class='classes', @click='changeSort')
-  .v-table-head-container
+th.v-table-head(:class='classes', @click='changeSort', :style="style")
+  .v-table-head-container()
     .v-table-head-text.v-test
       v-icon.v-sortable-icon(v-if='sortBy') arrow_upward
       slot
@@ -16,20 +16,25 @@ component =
     numeric: Boolean
     sortBy: String
     tooltip: String
+    width: [Number, String]
   data: ->
     sortType: null
     sorted: false
     parentTable: {}
-  computed: classes: ->
-    matchSort = @hasMatchSort()
-    if !matchSort
-      @sorted = false
-    return {
-      'v-numeric': @numeric
-      'v-sortable': @sortBy
-      'v-sorted': matchSort and @sorted
-      'v-sorted-descending': matchSort and @sortType == 'desc'
-    }
+  computed:
+    style: ->
+      if @width
+        width: @width+'px'
+    classes: ->
+      matchSort = @hasMatchSort()
+      if !matchSort
+        @sorted = false
+      return {
+        'v-numeric': @numeric
+        'v-sortable': @sortBy
+        'v-sorted': matchSort and @sorted
+        'v-sorted-descending': matchSort and @sortType == 'desc'
+      }
   methods:
     hasMatchSort: ->
       @parentTable.sortBy == @sortBy

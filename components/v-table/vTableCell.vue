@@ -1,5 +1,5 @@
 <template lang="jade">
-td.v-table-cell(:class='classes')
+td.v-table-cell(:class='classes', :style="style")
   .v-table-cell-container
     slot
 </template>
@@ -9,9 +9,13 @@ component =
   name: 'v-table-cell'
   props:
     numeric: Boolean
+    width: [Number, String]
   data: ->
     hasAction: false
   computed:
+    style: ->
+      if @width
+        width: @width+'px'
     classes: ->
       'v-numeric': @numeric
       'v-has-action': @hasAction
