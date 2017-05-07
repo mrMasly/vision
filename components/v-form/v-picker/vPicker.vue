@@ -14,7 +14,7 @@ v-input-container
     :disabled="disabled")
   template(v-else)
     v-input(v-model="val" @input="input" @change="change",
-    :disabled="disabled")
+    :disabled="disabled", :type="type")
 
 </template>
 

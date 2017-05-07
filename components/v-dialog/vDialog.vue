@@ -1,7 +1,7 @@
 <template lang="jade">
 .v-dialog-container(:class='[themeClass, classes]', @keyup.esc.stop='closeOnEsc', tabindex='0')
   .v-dialog(ref='dialog', :style='styles', :class='dialogClasses')
-    slot
+    slot(v-if="mounted")
   v-backdrop.v-dialog-backdrop(:class='classes', v-if='backdrop', ref='backdrop', @close='clickOutsideToClose && close()')
 </template>
 
@@ -34,6 +34,7 @@ component =
     active: false
     transitionOff: false
     dialogTransform: ''
+    mounted: no
   computed:
     classes: ->
       'v-active': @active
@@ -111,6 +112,7 @@ component =
       else if not param and @active
         do @close
   mounted: ->
+    @mounted = yes
     @$nextTick ->
       @dialogElement = @$el
       @dialogInnerElement = @$refs.dialog
