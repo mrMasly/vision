@@ -4,8 +4,8 @@
   template(v-else-if="$subReady.user")
     Toolbar.no-print
     .l-flex.l-relative
-      keep-alive(v-bind:include="/-alive/")
-        router-view.l-fill.l-absolute
+      keep-alive(:include="/-alive/")
+        router-view.l-fill.l-absolute#vision-router-view
     Navigation.no-print
     Dialogs
     Toasts
@@ -50,20 +50,9 @@ return {
 
 </script>
 
-<style lang="stylus">
-html
-body
-  width 100%
-  height 100%
-  overflow hidden
-</style>
 <style lang="stylus" scoped>
 #vision
   width 100%
   height 100%
   overflow hidden
-
-@media print
-  .no-print
-    display none
 </style>
