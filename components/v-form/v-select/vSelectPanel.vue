@@ -7,8 +7,13 @@
     v-button.v-icon-button.v-mini(@click.native="clear")
       v-icon close
   v-divider
-  v-scroller.content.l-flex(ref="scroller")
+
+  .l-row.l-center-center(v-if="searching", :style="{height:searchingHeight+'px'}")
+    v-spinner(indeterminate)
+
+  v-scroller.content.l-flex(ref="scroller" v-else)
     slot(name="visible")
+
   template(v-if="add && text")
     v-option.l-row(value="__add__" key="__add__")
       span.l-flex Создать "{{text}}"
@@ -25,6 +30,8 @@ component =
     options: []
     focused: null
     val: null
+    searching: no
+    searchingHeight: 100
   created: ->
     if @multiple
       if _.isArray @value
@@ -37,7 +44,15 @@ component =
   watch:
     text: ->
       if _.isFunction @search
+        scroller = @$refs.scroller?.$el
+        if scroller
+          @searchingHeight = $(@$refs.scroller.$el).height()
+        else
+          @searchingHeight = 100
+        @searchingHeight = 100 if @searchingHeight < 100
+        @searching = yes
         @search @text, =>
+          @searching = no
           @$nextTick => do @filter
       else do @filter
   mounted: ->

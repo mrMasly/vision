@@ -14,8 +14,6 @@ Meteor.Store = new Vuex.Store
         linkComponent: (state, data) ->
           state.components[data.id] = data.component
 
-
-
 Meteor.Store.register = (name, params) ->
   unless _.isArray name
     name = name.split '.'

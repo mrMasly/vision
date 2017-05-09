@@ -22,7 +22,7 @@ Package.onUse(function(api) {
   api.use('accounts-base@1.2.15');
   api.use('accounts-password@1.3.4');
 
-  api.use('mrmasly:vue@0.2.2');
+  api.use('mrmasly:vue@0.2.3');
 
 
   api.addFiles('index.coffee', ['client', 'server']);

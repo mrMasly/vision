@@ -1,6 +1,8 @@
 <template lang="jade">
 v-toolbar.v-shadow-2
-  h1.v-title {{title}}
+  h1.v-title.l-flex {{title}}
+  .components
+    component(:is="one" v-for="one in components")
 </template>
 
 <script lang="coffee">
@@ -11,7 +13,11 @@ component =
   name: 'Toolbar'
   data: ->
     title: null
+    components: null
   created: ->
+
+    @components = _.filter Meteor.Components, nav: yes
+    
     @getTitle @$route
     @$router.beforeEach (to, from, next) =>
       @getTitle to
