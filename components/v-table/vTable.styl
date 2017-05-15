@@ -27,6 +27,7 @@
     padding 0
     position relative
     color rgba(#000, .54)
+    transition swift-ease-out
     font-size 12px
     line-height 16px
     text-align left
@@ -214,8 +215,10 @@
 
 .v-table.v-hover
   tbody .v-table-row
-    &:hover .v-table-cell
-      background-color #eee
+    &:hover
+      .v-table-cell
+      .v-table-head
+        background-color #eee
 
 .v-table-edit-trigger
   display inline-block
