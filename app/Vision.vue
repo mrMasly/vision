@@ -9,6 +9,7 @@
     Navigation.no-print
     Dialogs
     Toasts
+    component(:is="component" v-for="component in dialogs")
 </template>
 
 <script lang="coffee">
@@ -20,7 +21,7 @@ import Login from './Login.vue'
 import _ from 'lodash'
 module.access = -> yes
 
-return {
+component =
   components: { Navigation, Toolbar, Dialogs, Login }
   name: 'Vision'
   root: yes
@@ -35,6 +36,7 @@ return {
     name: 'vision'
     userId: Meteor.userId()
     ready: no
+    dialogs: null
   meteor:
     server:
       publish:
@@ -46,8 +48,8 @@ return {
     login: -> @userId = Meteor.userId()
   created: ->
     do @login
-}
-
+    @dialogs = _.filter Meteor.Components, dialog: yes
+return component
 </script>
 
 <style lang="stylus" scoped>
