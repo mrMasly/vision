@@ -29,6 +29,9 @@ component =
     routeParam:
       type: [String, Boolean]
       default: no
+    queryParam:
+      type: [String, Boolean]
+      default: no
   mixins: [ theme ]
   data: ->
     active: false
@@ -103,10 +106,24 @@ component =
             name: @$route.name
             params: _.omit @$route.params, @routeParam
           @$router.push route
+        else if @queryParam and @$route.query[@queryParam]?
+          route =
+            name: @$route.name
+            params: @$route.params
+            query: _.omit @$route.query, @queryParam
+          @$router.push route
+
       , 300
     triggerRouteParam: ->
       return unless @routeParam
       param = @$route.params[@routeParam]
+      if param and not @active
+        do @open
+      else if not param and @active
+        do @close
+    triggerQueryParam: ->
+      return unless @queryParam
+      param = @$route.query[@queryParam]
       if param and not @active
         do @open
       else if not param and @active
@@ -118,11 +135,14 @@ component =
       @dialogInnerElement = @$refs.dialog
       @removeDialog()
       do @triggerRouteParam
+      do @triggerQueryParam
   beforeDestroy: ->
     @removeDialog()
   created: ->
     if @routeParam
       @$watch "$route.params.#{@routeParam}", @triggerRouteParam
+    else if @queryParam
+      @$watch "$route.query.#{@queryParam}", @triggerQueryParam
 
 
 
