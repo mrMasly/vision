@@ -1,7 +1,7 @@
 <template lang="jade">
 v-toolbar.v-shadow-2
   h1.v-title.l-flex {{title}}
-  .components
+  .components.l-row
     component(:is="one" v-for="one in components")
 </template>
 
