@@ -13,7 +13,7 @@ v-bottom-bar
 import _ from 'lodash'
 
 component =
-  name: 'Sidenav'
+  name: 'Navigation'
   data: ->
     tabs: []
   methods:

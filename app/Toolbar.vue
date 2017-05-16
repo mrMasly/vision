@@ -6,18 +6,13 @@ v-toolbar.v-shadow-2
 </template>
 
 <script lang="coffee">
-
 import _ from 'lodash'
-
 component =
   name: 'Toolbar'
   data: ->
     title: null
-    components: null
+    components: _.filter Meteor.Components, nav: yes
   created: ->
-
-    @components = _.filter Meteor.Components, nav: yes
-    
     @getTitle @$route
     @$router.beforeEach (to, from, next) =>
       @getTitle to
@@ -27,7 +22,6 @@ component =
     getTitle: (route) ->
       route = _.find @$router.options.routes, name: route.name
       @title = route?.title ? null
-
 
 return component
 </script>
