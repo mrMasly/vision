@@ -38,6 +38,7 @@ component =
     transitionOff: false
     dialogTransform: ''
     mounted: no
+    activeElement: null
   computed:
     classes: ->
       'v-active': @active
@@ -68,6 +69,7 @@ component =
         @dialogTransform = 'translate3D(' + distance.left + 'px, ' + distance.top + 'px, 0) scale(' + widthInScale + ', ' + heightInScale + ')'
       return
     open: ->
+      @activeElement = document.activeElement
       document.body.appendChild @dialogElement
       @transitionOff = true
       @calculateDialogPos @openFrom
@@ -77,11 +79,15 @@ component =
         @active = true
       @$emit 'open'
     closeOnEsc: ->
-      if @vEscToClose
+      if @escToClose
         @close()
     close: ->
       if document.body.contains(@dialogElement)
         @$nextTick ->
+
+          if @activeElement?
+            @activeElement.focus()
+            @activeElement = ''
 
           cleanElement = =>
             activeRipple = @dialogElement.querySelector('.v-ripple.v-active')
