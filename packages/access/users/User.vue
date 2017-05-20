@@ -26,11 +26,12 @@
 </template>
 
 <script lang="coffee">
-
-
 component =
-  module: module
   name: 'user'
+  props:
+    user:
+      type: Object
+      required: yes
   data: ->
     mounted: no
   mounted: ->
@@ -55,12 +56,11 @@ component =
           photo: null
   meteor:
     server: '../server'
-    data:
-      groups: -> Mongo.Users.Groups.find _id: $in: @user.groups
-  props:
-    user:
-      type: Object
-      required: yes
+    groups:
+      params: -> @user.groups
+      update: (groups) ->
+        if _.isEmpty groups then return []
+        else return Mongo.Users.Groups.find _id: $in: groups
 
 return component
 </script>
