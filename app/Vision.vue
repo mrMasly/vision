@@ -9,7 +9,7 @@
     Navigation.no-print
     Dialogs
     Toasts
-    component(:is="component" v-for="component in dialogs")
+    component(:is="component" v-for="component in dialogs", :key="component.name")
 </template>
 
 <script lang="coffee">

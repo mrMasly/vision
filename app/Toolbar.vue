@@ -2,7 +2,7 @@
 v-toolbar.v-shadow-2
   h1.v-title.l-flex {{title}}
   .components.l-row
-    component(:is="one" v-for="one in components")
+    component(:is="one" v-for="one in components", :key="one.module.id")
 </template>
 
 <script lang="coffee">
