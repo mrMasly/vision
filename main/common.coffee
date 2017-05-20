@@ -3,9 +3,9 @@ import '../collections/index.coffee'
 
 import Vue from 'vue'
 
-
 import '../theme/index.js'
 import './store.coffee'
 import '../plugins/index.coffee'
 import '../components/index.coffee'
 import '../filters/index.coffee'
+import '../directives/index.coffee'
