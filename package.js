@@ -28,6 +28,8 @@ Package.onUse(function(api) {
   api.use('akryum:npm-check@0.0.2');
   api.use('coffeescript@1.12.3_1');
 
+  api.use('mrmasly:barcode@0.0.1');
+
   api.use('ecmascript@0.6.3');
   api.use('webapp@1.3.14');
   api.use('mongo@1.1.16', ['client', 'server']);
