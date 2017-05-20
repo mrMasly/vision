@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mrmasly:vision',
-  version: '0.5.0',
+  version: '0.5.1',
   summary: 'Vision app',
   git: 'https://github.com/mrMasly/vision',
   documentation: 'README.md'
@@ -8,7 +8,10 @@ Package.describe({
 
 Package.registerBuildPlugin({
   name: 'theme-compiler',
-  use: ['ecmascript', 'caching-compiler'],
+  use: [
+    'ecmascript@0.6.3',
+    'caching-compiler@1.1.9',
+  ],
   sources: [
     'build/theme.js'
   ],
@@ -42,7 +45,7 @@ Package.onUse(function(api) {
   api.use('accounts-base@1.2.15');
   api.use('accounts-password@1.3.4');
 
-  api.use('mrmasly:vue@0.2.6');
+  api.use('mrmasly:vue@0.2.8');
   api.use('mrmasly:files@0.0.3');
 
   api.addAssets([
