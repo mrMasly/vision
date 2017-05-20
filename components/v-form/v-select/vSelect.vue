@@ -28,8 +28,7 @@ component =
     value:
       required: yes
     multiple: [Boolean]
-    search:
-      default: [Boolean, Function]
+    search: [Boolean, Function]
     height:
       type: [String, Number]
       default: 400
@@ -51,15 +50,17 @@ component =
   mounted: ->
     @$nextTick ->
       @parentContainer = getClosestVueParent(@$parent, 'v-input-container')
-      if !@parentContainer
+      unless @parentContainer
+        @parentContainer = getClosestVueParent(@$parent, 'v-table-select')
+      unless @parentContainer
         @$destroy()
         throw new Error('You should wrap the v-select in a v-input-container')
-      do @update
       @setParentDisabled()
       @setParentRequired()
       @setParentPlaceholder()
       @handleMaxLength()
       @updateValues()
+      do @update
 
       if @multiple
         unless @value?
