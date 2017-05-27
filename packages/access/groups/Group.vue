@@ -1,5 +1,5 @@
 <template lang="jade">
-.l-padding.l-25.v-33.sm-50.xs-100
+.l-padding.l-25.l-33.sm-50.xs-100
   v-card
     v-card-header
       v-avatar

@@ -7,8 +7,8 @@
     slot(name="close")
   v-dialog-content.l-flex
     .l-absolute.content
-      dropzone(url="https://httpbin.org/post" @add="add" v-if="!file")
-      croppie(ref="croppie", :file="file" type="circle" v-else)
+      v-dropzone(url="https://httpbin.org/post" @add="add" v-if="!file")
+      v-croppie(ref="croppie", :file="file" type="circle" v-else)
   v-dialog-actions
     v-button.v-primary(@click.native="close") Отмена
     v-button.v-primary(@click.native="save") Сохранить
@@ -19,7 +19,6 @@
 <script lang="coffee">
 
 component =
-  module: module
   name: 'photo'
   props:
     id: String
