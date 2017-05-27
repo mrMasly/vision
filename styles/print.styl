@@ -10,3 +10,13 @@
   #vision-router-view
     height auto !important
     position relative !important
+
+
+
+body > .v-print-prepend-body
+  display none
+@media print
+  body > .v-print-prepend-body:first-child
+    display block
+    & ~ *
+      display none
