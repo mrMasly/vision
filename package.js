@@ -46,7 +46,9 @@ Package.onUse(function(api) {
   api.use('accounts-password@1.3.4');
 
   api.use('mrmasly:vue@0.2.8');
+  api.use('mrmasly:moment@0.0.1');
   api.use('mrmasly:files@0.0.3');
+  api.use('mrmasly:barcode@0.0.1');
 
   api.addAssets([
     'files/audio/applause.mp3',
