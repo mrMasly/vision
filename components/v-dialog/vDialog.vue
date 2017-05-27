@@ -1,5 +1,5 @@
 <template lang="jade">
-.v-dialog-container(:class='[themeClass, classes]', @keyup.esc.stop='closeOnEsc', tabindex='0')
+.v-dialog-container.no-print(:class='[themeClass, classes]', @keyup.esc.stop='closeOnEsc', tabindex='0')
   .v-dialog(ref='dialog', :style='styles', :class='dialogClasses')
     slot(v-if="mounted")
   v-backdrop.v-dialog-backdrop(:class='classes', v-if='backdrop', ref='backdrop', @close='clickOutsideToClose && close()')
@@ -69,6 +69,7 @@ component =
         @dialogTransform = 'translate3D(' + distance.left + 'px, ' + distance.top + 'px, 0) scale(' + widthInScale + ', ' + heightInScale + ')'
       return
     open: ->
+      @mounted = yes
       @activeElement = document.activeElement
       document.body.appendChild @dialogElement
       @transitionOff = true
@@ -96,6 +97,7 @@ component =
             @dialogInnerElement.removeEventListener transitionEndEventName, cleanElement
             document.body.removeChild @dialogElement
             @dialogTransform = ''
+            @mounted = no
 
           @transitionOff = true
           @dialogTransform = ''
@@ -135,7 +137,7 @@ component =
       else if not param and @active
         do @close
   mounted: ->
-    @mounted = yes
+    # @mounted = yes
     @$nextTick ->
       @dialogElement = @$el
       @dialogInnerElement = @$refs.dialog
