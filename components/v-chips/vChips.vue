@@ -13,7 +13,6 @@ component =
   props:
     value: Array
     disabled: Boolean
-    inputId: String
     inputName: String
     inputPlaceholder: String
     inputType:

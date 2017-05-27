@@ -1,6 +1,6 @@
 <template lang="jade">
-div.layout-fill(v-bind:class="{ hidden: !display }" ref="div")
-  img(v-bind:src="src" ref="img")
+div.l-fill(:class="{ 'l-hidden': !display }" ref="div")
+  img(:src="src" ref="img")
 </template>
 
 <script lang="coffee">
@@ -19,8 +19,7 @@ dataURLtoFile = (dataurl, filename) ->
   new File([ u8arr ], filename, type: mime)
 
 component =
-  module: module
-  name: 'croppie'
+  name: 'vCroppie'
   mounted: ->
     if @file
       @name ?= @file.name
@@ -85,13 +84,3 @@ component =
 
 return component
 </script>
-
-<style lang="stylus">
-.croppie-container .cr-boundary
-  height calc(100% - 40px)
-</style>
-
-<style lang="stylus" scoped>
-.hidden
-  visibility hidden
-</style>
