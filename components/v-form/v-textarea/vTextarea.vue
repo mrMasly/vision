@@ -26,6 +26,9 @@ component =
       if !@$el.getAttribute('rows')
         @$el.setAttribute 'rows', '1'
       autosize @$el
+      setTimeout =>
+        autosize.update @$el
+      , 500
   beforeDestroy: ->
     autosize.destroy @$el
 

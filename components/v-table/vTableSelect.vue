@@ -2,7 +2,7 @@
 td.v-table-select
   v-select(v-model="val" @change="change" @input="input")
     slot
-    div(slot="value" style="text-align:center" v-if="!value") ...
+    div(slot="value" v-if="!value") ...
 </template>
 
 <script lang="coffee">

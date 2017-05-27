@@ -34,6 +34,7 @@ component =
   props:
     period:
       default: no
+      type: Boolean
     value: [Date, Array]
     label: String
   mounted: ->
