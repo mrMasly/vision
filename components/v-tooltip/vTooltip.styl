@@ -3,8 +3,8 @@
 tooltip-height = 20px
 
 .v-tooltip
-  height tooltip-height
-  padding 0 8px
+  min-height tooltip-height
+  padding 4px 8px
   position fixed
   z-index 200
   pointer-events none
@@ -18,10 +18,11 @@ tooltip-height = 20px
   color #fff
   font-family font-roboto
   font-size 10px
-  line-height tooltip-height
+  line-height 14px
   text-transform none
-  white-space nowrap
-
+  // white-space nowrap
+  max-width 300px
+  height auto
   &.v-active
     opacity 1
     transition swift-ease-in

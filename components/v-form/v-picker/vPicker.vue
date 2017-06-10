@@ -14,7 +14,7 @@ v-input-container
     :disabled="disabled")
   template(v-else)
     v-input(v-model="val" @input="input" @change="change",
-    :disabled="disabled", :type="type")
+    :disabled="disabled", :type="type", :max="max", :min="min")
 
 </template>
 
@@ -39,6 +39,9 @@ component =
     add: [Boolean, Function]
     # calendar
     period: Boolean
+    # number
+    max: [Number, String]
+    min: [Number, String]
 
 
 
