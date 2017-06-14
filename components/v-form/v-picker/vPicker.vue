@@ -42,9 +42,8 @@ component =
     # number
     max: [Number, String]
     min: [Number, String]
-
-
-
+  watch:
+    value: (@val) ->
   methods:
     input: (val) -> @$emit 'input', val
     change: (val) -> @$emit 'change', val
