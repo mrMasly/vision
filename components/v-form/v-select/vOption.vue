@@ -2,9 +2,10 @@
 .v-option(:class="[{focus: focus}]" v-show="show" @click="select" @mousemove="mousemove")
   //- .l-relative
   v-ripple(v-if="panel")
-  .l-row.l-start-center(v-if="panel && panel.multiple")
+  .l-row.l-start-center.l-relative(v-if="panel && panel.multiple")
     v-checkbox(v-model="checked")
     slot.l-flex
+    .hover
   div(v-else, :class="[{checked: checked}]")
     slot
 </template>
