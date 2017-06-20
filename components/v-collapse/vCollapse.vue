@@ -3,27 +3,28 @@
   .l-relative
     v-ripple
     v-subheader.v-primary.toggle(
-    @click.native="data[prop]=!data[prop]")
+    @click.native="change")
       .l-row.l-start-center
-        v-icon(v-if="data[prop]") keyboard_arrow_down
+        v-icon(v-if="value") keyboard_arrow_down
         v-icon(v-else) chevron_right
         .l-flex {{label}}
-  slot(v-if="data[prop]")
+  slot(v-if="value")
 </template>
 
 <script lang="coffee">
 component =
   name: 'Toggle'
   props:
-    data:
-      type: Object
+    value:
+      type: Boolean
       required: yes
     label:
       type: String
       required: yes
-    prop:
-      type: String
-      default: 'toggle'
-
+  methods:
+    change: ->
+      @$emit 'change', !@value
+      @$emit 'input', !@value
+  
 return component
 </script>
