@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mrmasly:vision',
-  version: '0.5.2',
+  version: '0.5.3',
   summary: 'Vision app',
   git: 'https://github.com/mrMasly/vision',
   documentation: 'README.md'
@@ -45,7 +45,7 @@ Package.onUse(function(api) {
   api.use('accounts-base@1.2.15');
   api.use('accounts-password@1.3.4');
 
-  api.use('mrmasly:vue@0.3.0');
+  api.use('mrmasly:vue@0.3.1');
   api.use('mrmasly:moment@0.0.1');
   api.use('mrmasly:files@0.0.3');
   api.use('mrmasly:barcode@0.0.1');
