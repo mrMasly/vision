@@ -1,5 +1,5 @@
 <template lang="jade">
-.v-collapse
+.v-collapse.v-shadow
   .l-relative
     v-ripple
     v-subheader.v-primary.toggle(
@@ -8,7 +8,8 @@
         v-icon(v-if="value") keyboard_arrow_down
         v-icon(v-else) chevron_right
         .l-flex {{label}}
-  slot(v-if="value")
+  .l-padding(v-if="value")
+    slot
 </template>
 
 <script lang="coffee">
