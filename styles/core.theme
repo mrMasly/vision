@@ -2,7 +2,7 @@
   :not(input):not(textarea)::selection
     background: ACCENT-COLOR
     color: ACCENT-CONTRAST
-  a:not(.md-button)
+  a:not(.v-button)
     color: ACCENT-COLOR
     &:hover
       color: ACCENT-COLOR-800
@@ -14,11 +14,11 @@ body.THEME_NAME
 /* Typography */
 
 .THEME_NAME
-  .md-caption,
-  .md-display-1,
-  .md-display-2,
-  .md-display-3,
-  .md-display-4
+  .v-caption,
+  .v-display-1,
+  .v-display-2,
+  .v-display-3,
+  .v-display-4
     color: BACKGROUND-CONTRAST-0.57
 
   code:not(.hljs)

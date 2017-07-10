@@ -80,6 +80,7 @@ component =
 
   methods:
     open: ->
+      return if @disabled
       if @width?
         @style.width = @width+'px'
       else

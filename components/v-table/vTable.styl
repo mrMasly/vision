@@ -1,9 +1,16 @@
 @import '../../styles/variables.styl'
 
+
+
 .v-table
   display flex
   flex-flow column wrap
   overflow-x auto
+
+  &.v-border
+    .v-table-cell:not(:last-child)
+    .v-table-head:not(:last-child)
+      border-right 1px solid #e0e0e0
 
   &.v-transition-off
     .v-table-cell,

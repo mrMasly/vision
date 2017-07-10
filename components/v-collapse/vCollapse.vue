@@ -7,7 +7,9 @@
       .l-row.l-start-center
         v-icon(v-if="value") keyboard_arrow_down
         v-icon(v-else) chevron_right
-        .l-flex {{label}}
+        .l-flex
+          slot(name="label" v-if="$slots.label")
+          div(v-else) {{label}}
   .l-padding(v-if="value")
     slot
 </template>
@@ -19,9 +21,8 @@ component =
     value:
       type: Boolean
       required: yes
-    label:
-      type: String
-      required: yes
+    label: String
+      
   methods:
     change: ->
       @$emit 'change', !@value

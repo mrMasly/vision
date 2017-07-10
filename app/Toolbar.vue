@@ -10,8 +10,13 @@ import _ from 'lodash'
 component =
   name: 'Toolbar'
   data: ->
+    components = _.filter Meteor.Components, (one) ->
+      return no unless one.nav
+      return no unless one.module.access()
+      return yes
     title: null
-    components: _.filter Meteor.Components, nav: yes
+    components: components
+    
   created: ->
     @getTitle @$route
     @$router.beforeEach (to, from, next) =>
