@@ -4,7 +4,7 @@ Meteor.Store.registerModule ['vision', 'tasks'],
   namespaced: yes
   state:
     group: null
-    user: do -> Meteor.userId() if Meteor.isClent
+    user: null
     options: [ 'group' ]
   mutations:
     setGroup: (state, group) ->

@@ -28,6 +28,9 @@ component =
   components: { Sidenav, DataTasks, Task }
   methods:
     close: -> @$router.push params: { id: null }
+  created: ->
+    if Meteor.isClient
+      @$store.state.vision.tasks.user ?= Meteor.userId()
   watch:
     '$route.params.id': (id) ->
       return unless @$refs.right?

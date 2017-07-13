@@ -22,8 +22,9 @@ component =
         tasks: (match) -> Mongo.Tasks.find match
     subscribe:
       tasks: -> [@group.match]
-    data:
-      tasks: -> Mongo.Tasks.find @group.match, transform: (doc) =>
+    tasks:
+      params: -> @group.match
+      update: (match) -> Mongo.Tasks.find match, transform: (doc) =>
         do @update; return doc
 return component
 </script>

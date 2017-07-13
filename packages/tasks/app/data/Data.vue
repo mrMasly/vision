@@ -1,5 +1,5 @@
 <template lang="jade">
-.l-relative
+.l-relative(v-if="mounted")
   .l-column.l-absolute.l-fill
     .toolbar.v-transparent.v-shadow-1.l-row.l-start-center
       slot(name="sidenav-toggle")
@@ -24,6 +24,9 @@ component =
   data: ->
     groups: []
     task: null
+    mounted: no
+  mounted: ->
+    @mounted = yes
   created: ->
     do @update
   methods:
