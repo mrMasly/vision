@@ -2,8 +2,8 @@
 
 .l-row.l-relative.task.l-start-center.has-ripple(@click="open"
   @contextmenu.prevent="settings")
-  v-checkbox(v-model="task.done")
   v-ripple
+  Done(:task="task")
   Priority(:task="task")
   .title.l-flex {{task.title}}
   .time(:style="{color: time.color}") {{time.text}}
@@ -13,9 +13,10 @@
 <script lang="coffee">
 import Settings from '../settings/Settings.vue'
 import Priority from '../helpers/Priority.vue'
+import Done from '../helpers/Done.vue'
 component =
   name: 'task'
-  components: { Settings, Priority }
+  components: { Settings, Priority, Done }
   data: ->
     time: { color: null, text: null }
   props:
@@ -82,19 +83,8 @@ h = 30px
   cursor pointer
   position relative
   height 100%
-.v-checkbox
-  margin 2px 8px
 .time
   font-size .75em
-.done
-  position absolute
-  top 0
-  left 0
-  height 100%
-  background-color #000
-  min-width 40px
-  width 45px
-  margin 0
 .title
   overflow hidden
   white-space nowrap

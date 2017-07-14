@@ -3,27 +3,19 @@ main.l-relative(@keydown.meta="keydown")
   v-loading(:value="$subReady.task && task")
     .task
       Toolbar(:task="task" @close="close")
-      Heading(:task="task")
-      Subs(:task="task")
+      .saving(style="height:4px")
+        v-progress(indeterminate v-if="saving")
+      Heading(:task="task" @save="save")
+      Subs(:task="task" @save="save")
 
-  v-speed-dial.v-fab-bottom-right(open="hover" direction="top")
-    v-button.v-fab(fab-trigger @click.native="save")
-      v-tooltip(direction="left") Сохранить (ctrl+s)
-      v-icon(icon-morph) save
-      v-icon menu
-    v-button.v-fab.v-mini(@click.native="remove")
-      v-tooltip(direction="left") Удалить (ctrl+d)
-      v-icon delete_forever
+  v-button.v-fab.v-fab-bottom-right.v-mini(@click.native="remove")
+    v-tooltip(direction="left") Удалить (ctrl+d)
+    v-icon delete_forever
   
-  .saving.l-fill.l-absolute(v-if="status")
-    v-loading(:value="status != 'saving'")
-      .l-absolute.l-row.l-center-center.l-fill
-        v-icon(style="font-size:3em; color:green") done
-
 </template>
 
 <script lang="coffee">
-
+import _ from 'lodash'
 import Heading from './Heading.vue'
 import Toolbar from './Toolbar.vue'
 import Subs from './Subs.vue'
@@ -35,6 +27,7 @@ component =
     ddd: yes
     mounted: no
     status: null
+    saving: no
   props:
     id: String
   mounted: ->
@@ -42,6 +35,8 @@ component =
     setTimeout =>
       @ddd = no
     , 5000
+  created: ->
+    @save = _.debounce @save, 1000
   methods:
     close: -> @$emit 'close'
     keydown: (e) ->
@@ -50,16 +45,16 @@ component =
       else if e.code is 'KeyD'
         do @remove; do e.preventDefault
     save: (e) ->
-      @status = 'saving'
+      @saving = yes
+      # @status = 'saving'
       Mongo.Tasks.update @task._id, $set:
         title: @task.title
         description: @task.description
         subs: @task.subs
       , (err, res) =>
         if err then @toast 'Ошибка при сохранении задачи'
-        else
-          @status = 'saved'
-          setTimeout (=> @status = null), 1000
+        else @saving = no
+          # setTimeout (=> @status = null), 1000
     remove: (e) ->
       @$confirm
         title: 'Удалить задачу?'

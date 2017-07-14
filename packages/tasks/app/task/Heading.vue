@@ -1,9 +1,9 @@
 <template lang="jade">
 .l-column.l-padding
   .v-caption Заголовок
-  textarea(v-model="task.title" ref="title")
+  textarea(v-model="task.title" ref="title" @input="$emit('save')")
   .v-caption Описание
-  textarea(v-model="task.description" ref="description" rows="1")
+  textarea(v-model="task.description" ref="description" rows="1" @input="$emit('save')")
 
 </template>
 

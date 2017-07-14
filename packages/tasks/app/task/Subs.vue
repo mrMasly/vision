@@ -6,7 +6,7 @@ div
     .v-caption Подзадачи
     Subb(v-for="(sub, index) in task.subs",
     :key="sub.id", :sub="sub", :index="index",
-    @keydown="keydown", @remove="remove")
+    @keydown="keydown", @remove="remove" @save="save")
 
 </template>
 
@@ -24,6 +24,7 @@ component =
       size = _.get @task, 'subs.length'
       unless size then yes else no
   methods:
+    save: -> @$emit 'save'
     remove: (index) ->
       parts = [
         @task.subs.slice(0,index)
@@ -33,6 +34,7 @@ component =
       focus = index-1
       setTimeout =>
         $(@$refs.subs).find(".sub:eq(#{focus})").find('textarea').focus()
+        do @save
     keydown: (index, e) ->
       if e.keyCode is 13
         e.preventDefault()
@@ -43,6 +45,7 @@ component =
         one = [{done: no, title: '', id: Random.id()}]
         @task.subs = _.union parts[0], one, parts[1]
         focus = index+1
+        do @save
 
 
       # при нажатии на backspace убираем пустую задачу
@@ -67,10 +70,11 @@ component =
       if focus?
         setTimeout =>
           $(@$refs.subs).find(".sub:eq(#{focus})").find('textarea').focus()
-          # do @save
+          do @save
     createSubs: ->
       @$set @task, 'subs', [{done: no, title: '', id: Random.id()}]
       setTimeout => $(@$refs.subs).find('textarea').focus()
+      do @save
 return component
 </script>
 

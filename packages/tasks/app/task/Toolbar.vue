@@ -1,6 +1,6 @@
 <template lang="jade">
 .toolbar.l-row.l-start-center.v-shadow(ref="toolbar")
-  v-checkbox(v-model="task.done")
+  Done(:task="task")
   Priority(:task="task")
   .l-flex
   v-button.v-icon-button.v-primary(@click.native="$refs.panel.open")
@@ -16,9 +16,10 @@
 <script lang="coffee">
 import Settings from '../settings/Settings.vue'
 import Priority from '../helpers/Priority.vue'
+import Done from '../helpers/Done.vue'
 component =
   name: 'toolbar'
-  components: { Settings, Priority }
+  components: { Settings, Priority, Done }
   props:
     task: Object
   methods:
@@ -29,9 +30,9 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-.v-checkbox
-  margin-left 14px
-  margin-top 4px
+.done
+  margin-left 12px
+  margin-right 12px
 .toolbar
   height 48px
   padding-right 0

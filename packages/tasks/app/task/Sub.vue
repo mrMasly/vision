@@ -1,9 +1,9 @@
 <template lang="jade">
 .sub.l-row.l-start-start
-  v-checkbox(v-model="sub.done")
+  v-checkbox(v-model="sub.done" @change="save")
   textarea.l-flex(v-model="sub.title"
   @keydown="$emit('keydown', index, $event)"
-  rows="1" ref="text")
+  rows="1" ref="text" @input="save" @change="save")
   //- v-button.v-icon-button.v-mini
 
   .remove.has-ripple.l-relative(@click="remove")
@@ -23,6 +23,7 @@ component =
   beforeDestroy: ->
     autosize.destroy @$refs.text
   methods:
+    save: -> @$emit 'save'
     remove: -> @$emit 'remove', @index
 
 return component
