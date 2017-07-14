@@ -1,7 +1,7 @@
 <template lang="jade">
 div.l-fill.l-row.l-absolute
   Sidenav(v-if="$layout.gsm")
-  v-sidenav.v-left.v-fixed(v-else ref="left")
+  v-sidenav(v-else ref="left" fixed)
     Sidenav
   v-divider
   DataTasks.l-flex
@@ -10,10 +10,10 @@ div.l-fill.l-row.l-absolute
       v-icon menu
   v-divider
   //- template(v-if="$route.params.id")
-  .task(v-if="$layout.gmd")
+  .task(v-if="$layout.gmd && mounted")
     Task(v-if="$route.params.id", :id="$route.params.id" @close="close")
-  v-sidenav.v-right.v-fixed(v-else ref="right")
-    Task(v-if="$route.params.id", :id="$route.params.id" @close="close();$refs.right.close()")
+  v-sidenav(v-else-if="mounted" ref="right" fixed right @close="close")
+    Task(v-if="$route.params.id", :id="$route.params.id" @close="$refs.right.close()")
 
 </template>
 
@@ -26,11 +26,18 @@ import Task from './task/Task.vue'
 component =
   name: 'tasks'
   components: { Sidenav, DataTasks, Task }
+  data: ->
+    mounted: no
   methods:
     close: -> @$router.push params: { id: null }
   created: ->
     if Meteor.isClient
       @$store.state.vision.tasks.user ?= Meteor.userId()
+  mounted: ->
+    @mounted = yes
+    @$nextTick ->
+      if @$route.params.id? and @$refs.right?
+        @$refs.right.open()
   watch:
     '$route.params.id': (id) ->
       return unless @$refs.right?

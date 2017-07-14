@@ -7,20 +7,20 @@
 
   &.v-direction-top
     &.v-mode-fling
-      [v-fab-trigger] ~ .v-button
+      [fab-trigger] ~ .v-button
         transform scale(.95) translate3D(0, 80%, 0)
-    [v-fab-trigger]
+    [fab-trigger]
       margin-top 8px
       ~ .v-button
-        margin-bottom 16px
+        margin-bottom 8px
 
   &.v-direction-right
     flex-direction row
     justify-content center
     &.v-mode-fling
-      [v-fab-trigger] ~ .v-button
+      [fab-trigger] ~ .v-button
         transform scale(.95) translate3D(-80%, 0, 0)
-    [v-fab-trigger]
+    [fab-trigger]
       margin-right 8px
       ~ .v-button
         margin-left 16px
@@ -28,9 +28,9 @@
   &.v-direction-bottom
     flex-direction column
     &.v-mode-fling
-      [v-fab-trigger] ~ .v-button
+      [fab-trigger] ~ .v-button
         transform scale(.95) translate3D(0, -80%, 0)
-    [v-fab-trigger]
+    [fab-trigger]
       margin-bottom 8px
       ~ .v-button
         margin-top 16px
@@ -39,19 +39,19 @@
     flex-direction row-reverse
     justify-content center
     &.v-mode-fling
-      [v-fab-trigger] ~ .v-button
+      [fab-trigger] ~ .v-button
         transform scale(.95) translate3D(80%, 0, 0)
-    [v-fab-trigger]
+    [fab-trigger]
       margin-left 8px
       ~ .v-button
         margin-right 16px
 
   &.v-mode-scale
-    [v-fab-trigger] ~ .v-button
+    [fab-trigger] ~ .v-button
       transform scale(.6)
 
   &.v-active
-    [v-fab-trigger]
+    [fab-trigger]
       ~ .v-button
         opacity 1
         pointer-events auto
@@ -60,7 +60,7 @@
         for i in (1..10)
           &:nth-child(i + 1)
             transition-delay i * .05s
-      [v-icon-morph]
+      [icon-morph]
         transform rotateZ(0)
         opacity 1
         + .v-icon
@@ -69,7 +69,7 @@
 
   .v-button
     margin 0
-  [v-fab-trigger]
+  [fab-trigger]
     position relative
     z-index 2
     ~ .v-button
@@ -82,10 +82,10 @@
         &:nth-last-child(i + 1)
           transition-delay i * .05s
 
-  [v-icon-morph] + .v-icon
-  [v-icon-morph]
+  [icon-morph] + .v-icon
+  [icon-morph]
     transition swift-ease-out
 
-  [v-icon-morph]
+  [icon-morph]
     opacity 0
     transform rotateZ(-90deg) scale(.8)

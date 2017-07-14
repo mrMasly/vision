@@ -38,7 +38,7 @@ component =
       , 50
   mounted: ->
     @$nextTick ->
-      @fabTrigger = @$el.querySelector('[v-fab-trigger]')
+      @fabTrigger = @$el.querySelector('[fab-trigger]')
       if @open == 'click'
         @fabTrigger.addEventListener 'click', @toggleSpeedDial
       else
