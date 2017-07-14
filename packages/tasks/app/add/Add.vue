@@ -28,7 +28,7 @@ component =
       title: ''
       date: moment().toDate()
       priority: 1
-      users: [Meteor.userId()]
+      users: []
       tags: []
       repeat:
         type: 'week'

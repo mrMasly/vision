@@ -18,11 +18,9 @@ component =
   watch:
     'task.done': (@done) ->
   methods:
-    change: ->
-      console.log arguments
+    change: (val) ->
+      Mongo.Tasks.update @task._id, $set: done: val
   computed:
-    disabled: ->
-
     type: ->
       if @task.repeat.toggle then return 'repeat'
       else if not _.isEmpty @task.subs then return 'subs'

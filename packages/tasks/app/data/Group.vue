@@ -24,8 +24,9 @@ component =
       tasks: -> [@group.match]
     tasks:
       params: -> @group.match
-      update: (match) -> Mongo.Tasks.find match, transform: (doc) =>
-        do @update; return doc
+      update: (match) ->
+        setTimeout (=> do @update), 100
+        return Mongo.Tasks.find match
 return component
 </script>
 

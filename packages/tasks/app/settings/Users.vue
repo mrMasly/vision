@@ -14,10 +14,6 @@ component =
     search: ''
   props:
     task: Object
-  computed:
-    users: ->
-      _.filter @_users, (i) =>
-        i.profile.name.toLowerCase().indexOf(@search.toLowerCase())+1
   meteor:
     server:
       publish:
@@ -27,7 +23,8 @@ component =
     subscribe:
       users: []
     data:
-      _users: -> Mongo.Users.find()
+      users: -> Mongo.Users.find
+        _id: $ne: Meteor.userId()
 return component
 </script>
 
