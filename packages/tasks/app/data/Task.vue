@@ -4,6 +4,7 @@
   @contextmenu.prevent="settings")
   v-checkbox(v-model="task.done")
   v-ripple
+  .priority(v-if="task.priority != 1", :style="{color: priorityColor}") {{priority}}
   .title.l-flex {{task.title}}
   .time(:style="{color: time.color}") {{time.text}}
 
@@ -21,6 +22,17 @@ component =
     do @getTime
   watch:
     'task.date': -> do @getTime
+  computed:
+    priority: ->
+      switch @task.priority
+        when 0 then '!'
+        when 2 then '!!'
+        when 3 then '!!!'
+    priorityColor: ->
+      switch @task.priority
+        when 0 then '#0f0'
+        when 2 then '#e4b900'
+        when 3 then '#f00'
   methods:
     getTime: ->
       if @task.date?
@@ -100,4 +112,6 @@ h = 30px
   margin-left 10px
   white-space nowrap
   text-align right
+.priority
+  margin-right 4px
 </style>
