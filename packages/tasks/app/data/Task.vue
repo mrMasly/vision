@@ -13,13 +13,12 @@
 </template>
 
 <script lang="coffee">
-import Settings from '../settings/Settings.vue'
 import Priority from '../helpers/Priority.vue'
 import Done from '../helpers/Done.vue'
 import Users from '../helpers/Users.vue'
 component =
   name: 'task'
-  components: { Settings, Priority, Done, Users }
+  components: { Priority, Done, Users }
   props:
     task: Object
   created: ->
