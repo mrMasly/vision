@@ -26,7 +26,11 @@ component =
     classes['v-mode-' + @mode] = true
     classes['v-direction-' + @direction] = true
     classes
+  watch:
+    active: (val) -> @$emit 'trigger', val
   methods:
+    on: -> @active = yes
+    off: -> @active = no
     closeSpeedDial: (event) ->
       if !event.target == @fabTrigger or !@fabTrigger.contains(event.target)
         @active = false
@@ -42,8 +46,8 @@ component =
       if @open == 'click'
         @fabTrigger.addEventListener 'click', @toggleSpeedDial
       else
-        @$el.addEventListener 'mouseenter', @toggleSpeedDial
-        @$el.addEventListener 'mouseleave', @toggleSpeedDial
+        @$el.addEventListener 'mouseenter', @on
+        @$el.addEventListener 'mouseleave', @off
   beforeDestroy: ->
     @fabTrigger.removeEventListener 'click', @toggleSpeedDial
     document.body.removeEventListener 'click', @closeSpeedDial
