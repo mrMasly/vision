@@ -27,4 +27,5 @@ return component
 <style lang="stylus" scoped>
 .v-subheader
   cursor pointer
+  user-select none
 </style>

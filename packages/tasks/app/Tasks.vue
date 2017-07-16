@@ -18,11 +18,9 @@ div.l-fill.l-row.l-absolute
 </template>
 
 <script lang="coffee">
-
 import Sidenav from './sidenav/Sidenav.vue'
 import DataTasks from './data/Data.vue'
-import Task from './task/Task.vue'
-# import Add from './add/Add.vue'
+import Task from './Task.vue'
 component =
   name: 'tasks'
   components: { Sidenav, DataTasks, Task }
@@ -43,6 +41,12 @@ component =
       return unless @$refs.right?
       if id then @$refs.right.open()
       else @$refs.right.close()
+  meteor:
+    server:
+      publish:
+        users: -> Meteor.users.find {}, fields: username: 1, "profile.name": 1, "photo": 1
+    subscribe:
+      users: []
   route:
     path: '/tasks/:tab?/:id?'
     name: 'tasks'

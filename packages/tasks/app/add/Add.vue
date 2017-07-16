@@ -10,16 +10,17 @@
   v-button.v-icon-button.v-primary(@click.native="save")
     v-icon check
 
-  v-panel(ref="panel" align="toolbar" x="end" y="after" alive)
-    Settings.settings(@close="$refs.panel.close()", :task="task", @save="save")
-
+  v-panel(ref="panel" align="toolbar" x="end" y="after" alive v-if="task")
+    Edit.settings(:actions="true", :texts="false", :fabs="false"
+      @close="$refs.panel.close()", v-model="task", @save="save")
 </template>
 
 <script lang="coffee">
-import Settings from '../settings/Settings.vue'
+import _ from 'lodash'
+import Edit from '../edit/Edit.vue'
 component =
   name: 'add'
-  components: { Settings }
+  components: { Edit }
   created: ->
     @_task = _.clone @task
   data: ->
@@ -27,8 +28,10 @@ component =
     task:
       title: ''
       date: moment().toDate()
+      time: no
       priority: 1
       users: []
+      disables: []
       tags: []
       repeat:
         type: 'week'

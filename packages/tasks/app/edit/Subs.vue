@@ -5,7 +5,7 @@ div
   .l-padding(ref="subs" v-else)
     .v-caption Подзадачи
     Subb(v-for="(sub, index) in task.subs",
-    :key="sub.id", :sub="sub", :index="index",
+    :key="sub.id", :sub="sub", :index="index", :task="task"
     @keydown="keydown", @remove="remove" @save="save")
 
 </template>

@@ -3,7 +3,7 @@
   v-checkbox(v-model="done" v-if="type == 'checkbox'" @change="change")
   v-checkbox(v-model="done" v-else-if="done" disabled)
   v-icon(v-else-if="type == 'subs'") list
-  v-icon(v-else-if="type == 'delegate'") people
+  v-icon(v-else-if="type == 'delegate'") send
   v-icon(v-else-if="type == 'repeat'") autorenew
 </template>
 
@@ -23,8 +23,8 @@ component =
   computed:
     type: ->
       if @task.repeat.toggle then return 'repeat'
-      else if not _.isEmpty @task.subs then return 'subs'
       else if not _.isEmpty @task.users then return 'delegate'
+      else if not _.isEmpty @task.subs then return 'subs'
       else return 'checkbox'
 
 return component

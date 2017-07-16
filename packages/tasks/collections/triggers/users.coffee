@@ -44,7 +44,8 @@ make = (userId, doc) ->
 create = (userId, doc) ->
   _doc = _.omit _.clone(doc), ['_id', 'createdAt', 'createdBy', 'updateAt', 'updateBy', 'repeatBy']
   _doc.parent = doc._id
-  _doc.fromUser = Mongo.Users.findOne(userId)?.profile?.name
+  # _doc.fromUser = Mongo.Users.findOne(userId)?.profile?.name
+  _doc.from = userId
   for user in doc.users
     # console.log user
     _doc.for = user

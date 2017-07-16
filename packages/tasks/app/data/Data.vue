@@ -9,7 +9,7 @@
       Groups.l-flex(:groups="groups")
 
   v-panel(ref="panel")
-    Settings(@close="$refs.panel.close()", :task="task")
+    div context
 
 </template>
 
@@ -17,10 +17,9 @@
 import Add from '../add/Add.vue'
 import Options from './Options.vue'
 import getGroups from './group.coffee'
-import Settings from '../settings/Settings.vue'
 component =
   name: 'data-tasks'
-  components: { Add, Options, Settings }
+  components: { Add, Options }
   data: ->
     groups: []
     task: null

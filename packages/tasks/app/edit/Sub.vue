@@ -1,6 +1,6 @@
 <template lang="jade">
 .sub.l-row.l-start-start
-  v-checkbox(v-model="sub.done" @change="save")
+  v-checkbox(v-model="sub.done" @change="save", :disabled="disabledCheckbox")
   textarea.l-flex(v-model="sub.title"
   @keydown="$emit('keydown', index, $event)"
   rows="1" ref="text" @input="save" @change="save")
@@ -16,6 +16,7 @@ import autosize from 'autosize'
 component =
   name: 'subb'
   props:
+    task: Object
     sub: Object
     index: Number
   mounted: -> @$nextTick ->
@@ -25,7 +26,10 @@ component =
   methods:
     save: -> @$emit 'save'
     remove: -> @$emit 'remove', @index
-
+  computed:
+    disabledCheckbox: ->
+      return yes if @task.users.length
+      return no
 return component
 </script>
 
