@@ -1,6 +1,7 @@
 <template lang="jade">
 .l-relative(v-if="mounted")
-  .l-column.l-absolute.l-fill
+  Doned.l-absolute.l-fill(v-if="$route.params.tab == 'done'")
+  .l-column.l-absolute.l-fill(v-else)
     .toolbar.v-transparent.v-shadow-1.l-row.l-start-center
       slot(name="sidenav-toggle")
       Add.l-flex
@@ -17,9 +18,10 @@
 import Add from '../add/Add.vue'
 import Options from './Options.vue'
 import getGroups from './group.coffee'
+import Doned from './Doned.vue'
 component =
   name: 'data-tasks'
-  components: { Add, Options }
+  components: { Add, Options, Doned }
   data: ->
     groups: []
     task: null
