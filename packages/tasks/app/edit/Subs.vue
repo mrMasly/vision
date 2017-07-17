@@ -1,13 +1,16 @@
 <template lang="jade">
-div
+.subs
   v-button.v-primary.add(@click.native="createSubs"
   v-if="addButton") Добавить подзадачи
-  .l-padding(ref="subs" v-else)
+  div(ref="subs" v-else)
     .v-caption Подзадачи
     Subb(v-for="(sub, index) in task.subs",
     :key="sub.id", :sub="sub", :index="index", :task="task"
     @keydown="keydown", @remove="remove" @save="save")
-
+    .plus(@click="add()")
+      v-icon add
+      
+      
 </template>
 
 <script lang="coffee">
@@ -35,42 +38,41 @@ component =
       setTimeout =>
         $(@$refs.subs).find(".sub:eq(#{focus})").find('textarea').focus()
         do @save
+    add: (index) ->
+      index ?= @task.subs.length-1
+      parts = [
+        @task.subs.slice(0,index+1)
+        @task.subs.slice(index+1)
+      ]
+      one = [{done: no, title: '', id: Random.id()}]
+      @task.subs = _.union parts[0], one, parts[1]
+      @focus index+1
+    remove: (index) ->
+      parts = [
+        @task.subs.slice(0,index)
+        @task.subs.slice(index+1)
+      ]
+      @task.subs = _.union parts[0], parts[1]
+      @focus index-1
+    focus: (index) ->
+      setTimeout =>
+        $(@$refs.subs).find(".sub:eq(#{index})").find('textarea').focus()
     keydown: (index, e) ->
       if e.keyCode is 13
         e.preventDefault()
-        parts = [
-          @task.subs.slice(0,index+1)
-          @task.subs.slice(index+1)
-        ]
-        one = [{done: no, title: '', id: Random.id()}]
-        @task.subs = _.union parts[0], one, parts[1]
-        focus = index+1
-        do @save
-
-
+        @add index
       # при нажатии на backspace убираем пустую задачу
       else if e.keyCode is 8 and _.isEmpty e.target.value
-        parts = [
-          @task.subs.slice(0,index)
-          @task.subs.slice(index+1)
-        ]
-        @task.subs = _.union parts[0], parts[1]
-        focus = index-1
-
+        @remove index
       # при нажатии на стрелку вниз выбираем следующую задачу
       else if e.keyCode is 40
         if index < @task.subs.length
-          focus = index+1
-
+          @focus(index+1)
       # при нажатии на стрелку вверх выбираем предыдущую задачу
       else if e.keyCode is 38
         if index isnt 0
-          focus = index-1
+          @focus index-1
 
-      if focus?
-        setTimeout =>
-          $(@$refs.subs).find(".sub:eq(#{focus})").find('textarea').focus()
-          do @save
     createSubs: ->
       @$set @task, 'subs', [{done: no, title: '', id: Random.id()}]
       setTimeout => $(@$refs.subs).find('textarea').focus()
@@ -79,9 +81,19 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-
+.subs
+  margin-top 12px
 .add
   width 100%
   width calc(100% - 16px)
   text-align center
+.plus
+  height 28px
+  transition background-color .2s
+  cursor pointer
+  &:hover
+    background-color rgba(0,0,0,0.1)
+  .v-icon
+    margin 1px
+    color rgba(0,0,0,0.54)
 </style>

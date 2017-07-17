@@ -1,7 +1,8 @@
 <template lang="jade">
 .sub.l-row.l-start-start
   v-checkbox(v-model="sub.done" @change="save", :disabled="disabledCheckbox")
-  textarea.l-flex(v-model="sub.title"
+  .title.l-flex(v-if="task.disables.subs") {{sub.title}}
+  textarea.l-flex(v-model="sub.title" v-else
   @keydown="$emit('keydown', index, $event)"
   rows="1" ref="text" @input="save" @change="save")
   //- v-button.v-icon-button.v-mini

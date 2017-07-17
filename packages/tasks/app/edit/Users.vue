@@ -7,13 +7,13 @@
   v-picker(type="select" v-model="task.disables" label="Запретить менять" v-if="task.users.length" multiple)
     v-option(v-for="dis in disables", :key="dis.id", :value="dis.id") {{dis.name}}
   
-  template(v-if="task.createdAt")
-    .l-margin
+  .complete(v-if="task.createdAt && usersTasks")
     v-caption Выполнение:
-    .user.l-row(v-for="t in usersTasks")
+    .user.l-row.l-start-center(v-for="t in usersTasks")
       v-checkbox(disabled v-model="t.done")
       .l-flex {{ t.userName }}
       .subs(v-if="t._subs") {{t._subs.completed}}/{{t._subs.all}}
+
 </template>
 
 <script lang="coffee">
@@ -59,5 +59,8 @@ return component
 
 <style lang="stylus" scoped>
 .v-checkbox
-  margin 0 4px !important
+  margin 2px
+  overflow hidden
+.complete
+  margin-top 12px
 </style>

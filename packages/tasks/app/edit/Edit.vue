@@ -10,6 +10,8 @@
     Dates(:task="task" v-if="dates")
     Texts(:task="task" v-if="texts")
     Users(:task="task" v-if="users")
+    Subs(:task="task" v-if="subs")
+
   .l-row.actions.l-end(v-if="actions")
     v-button.v-primary(@click.native="close") Отмена
     v-button.v-primary(@click.native="save") Сохранить
@@ -32,10 +34,11 @@ import Priority from './Priority.vue'
 import Users from './Users.vue'
 import Texts from './Texts.vue'
 import Tags from './Tags.vue'
+import Subs from './Subs.vue'
 import Done from '../helpers/Done.vue'
 component =
   name: 'edit'
-  components: { Dates, Priority, Users, Tags, Done, Texts }
+  components: { Dates, Priority, Users, Tags, Done, Texts, Subs }
   props:
     value: Object
     actions: type: Boolean, default: no
@@ -43,6 +46,7 @@ component =
     texts:   type: Boolean, default: yes
     dates:   type: Boolean, default: yes
     users:   type: Boolean, default: yes
+    subs:    type: Boolean, default: yes
     hotkeys: type: Boolean, default: no
   data: ->
     task: null
