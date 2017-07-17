@@ -1,18 +1,21 @@
 <template lang="jade">
-.toolbar.l-row.l-fill.l-start-center(ref="toolbar")
+.toolbar.l-row.l-fill.l-start-center.l-relative(ref="toolbar")
   input.l-flex(placeholder="Добавить задачу"
   v-model="task.title"
-  @keydown.enter="save")
+  @keydown.enter="save(task)")
 
-  v-button.v-icon-button.v-primary(@click.native="$refs.panel.open")
+  v-button.v-icon-button.v-primary.settings(@click.native="$refs.panel.open")
     v-icon settings
 
-  v-button.v-icon-button.v-primary(@click.native="save")
+  v-button.v-icon-button.v-primary.ok(@click.native="save(task)")
     v-icon check
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive v-if="task")
-    Edit.settings(:actions="true", :texts="false", :fabs="false"
+    Edit(:actions="true", :texts="false", :fabs="false"
       @close="$refs.panel.close()", v-model="task", @save="save")
+  
+  .saving(v-if="saving")
+    v-progress(indeterminate)
 </template>
 
 <script lang="coffee">
@@ -24,6 +27,7 @@ component =
   created: ->
     @_task = _.clone @task
   data: ->
+    saving: no
     _task: null
     task:
       title: ''
@@ -47,9 +51,15 @@ component =
           monthDays: []
     display: yes
   methods:
-    save: ->
-      Mongo.Tasks.insert @task, (err, res) =>
-        @task = _.clone @_task
+    save: (task) ->
+      if _.isEmpty task.title
+        @$toast 'Введите название задачи'
+      else
+        @saving = yes
+        Mongo.Tasks.insert task, (err, res) =>
+          @saving = no
+          if err then @$toast 'Ошибка при сохранении задачи'
+          else @task = _.clone @_task
 
 return component
 </script>
@@ -66,4 +76,15 @@ input
 .v-speed-dial
   position relative
   top 5px
+.saving
+  position absolute
+  bottom 0
+  left 0
+  width 100%
+  height 4px
+  z-index 2
+.settings
+  margin-right 0
+.ok
+  margin-left 0
 </style>

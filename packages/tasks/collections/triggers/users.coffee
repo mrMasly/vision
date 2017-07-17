@@ -34,7 +34,6 @@ update = (userId, doc, fields, mod) ->
 
 
 make = (userId, doc) ->
-  console.log moment(doc.date).format 'L'
   remove doc._id # удаляем все подчиненные задачи
   # не создаем задачи если эта задача - повторяющаяся
   return null if doc.repeat?.toggle

@@ -45,9 +45,8 @@ module.exports = () ->
         done: no, for: user
 
   else if group is 'someday'
-    # console.log 'someday'
     lists.push name: 'Когда-нибудь', match:
-      date: new Date 8640000000000000
+      date: no
 
   else if group is 'wait'
 

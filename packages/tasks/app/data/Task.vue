@@ -43,12 +43,12 @@ return component
 
 <style lang="stylus" scoped>
 
-h = 34px
+h = 30px
 
 .task
   cursor pointer
   height h
-  padding 2px 10px
+  padding 1px 10px
   overflow hidden
   &:hover
     background-color rgba(0, 0, 0, 0.05)
