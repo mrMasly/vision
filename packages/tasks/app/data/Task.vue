@@ -24,13 +24,22 @@ component =
   created: ->
   computed:
     time: ->
-      text = require('../fromnow.coffee')(@task.date, no, no)
-      if text is 'Сегодня' and @task.time
-        text = moment(@task.date).format('HH:mm')
-      if moment(@task.date).format('X') < moment().format('X')
-        color = 'rgba(210, 0, 0, 0.67)'
+      color = 'rgba(0, 0, 0, 0.8)'
+      text  = ''
+      if @task.done
+        doneAt = @task.doneAt ? new Date()
+        text = moment(doneAt).format('HH:mm')
       else
-        color = 'rgba(0, 0, 0, 0.8)'
+        text = require('../fromnow.coffee')(@task.date, no, @task.time)
+        text = text
+          .replace 'Сегодня', ''
+          .replace ', в ', ''
+        if @task.date and @task.time
+          if moment(@task.date).format('X') < moment().format('X')
+            color = 'rgba(210, 0, 0, 0.67)'
+        else if @task.date
+          if moment(@task.date).format('X') < moment().startOf('day').format('X')
+            color = 'rgba(210, 0, 0, 0.67)'
       return { color, text }
   methods:
     open: ->
