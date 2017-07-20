@@ -18,11 +18,14 @@ component =
   props:
     groups: Array
   created: ->
-    for group in @groups
-      unless group.size? then @$set group, 'size', 0
-      unless group.index? then @$set group, 'index', 0
-      unless group.open? then @$set group, 'open', yes
+    do @update
+  watch: groups: -> do @update
   methods:
+    update: ->
+      for group in @groups
+        unless group.size? then @$set group, 'size', 0
+        unless group.index? then @$set group, 'index', 0
+        unless group.open? then @$set group, 'open', yes
     toggle: (group) ->
       group.open = not group.open
 
