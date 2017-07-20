@@ -25,6 +25,7 @@ component =
       if @task.repeat.toggle then return 'repeat'
       else if not _.isEmpty @task.users then return 'delegate'
       else if not _.isEmpty @task.subs then return 'subs'
+      else if @task.done and @task.doneAt < moment().startOf('day').toDate() then return 'done'
       else return 'checkbox'
 
 return component
