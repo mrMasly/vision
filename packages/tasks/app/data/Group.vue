@@ -1,6 +1,6 @@
 <template lang="jade">
 div
-  Task(v-for="task in tasks", :task="task" v-if="$subReady.tasks")
+  Task(v-for="task in tasks", :task="task" v-if="$subReady.tasks", :key="task._id")
 </template>
 
 <script lang="coffee">
@@ -26,7 +26,12 @@ component =
       params: -> @group.match
       update: (match) ->
         setTimeout (=> do @update), 100
-        return Mongo.Tasks.find match
+        return Mongo.Tasks.find match,
+          sort:
+            doneAt: 1
+            priority: -1
+            time: -1
+            date: 1
 return component
 </script>
 

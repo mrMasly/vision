@@ -33,6 +33,8 @@ getTask = (date) ->
   users: []
   disables: []
   tags: []
+  done: no
+  doneAt: null
   repeat:
     type: 'week'
     date:
