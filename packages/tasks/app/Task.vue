@@ -1,7 +1,7 @@
 <template lang="jade">
 .task.l-fill.l-relative
   v-loading(:value="$subReady.task && task")
-    Edit(v-model="task" @save="save" @close="close")
+    Edit(v-model="task" @save="save" @close="close", remove-on-meta, save-on-meta)
 </template>
 
 <script lang="coffee">

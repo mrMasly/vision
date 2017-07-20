@@ -47,19 +47,33 @@ component =
     dates:   type: Boolean, default: yes
     users:   type: Boolean, default: yes
     subs:    type: Boolean, default: yes
-    hotkeys: type: Boolean, default: no
+    saveOnEnter: Boolean
+    saveOnMeta: Boolean
+    removeOnMeta: Boolean
+    # hotkeys: type: Boolean, default: no
   data: ->
     task: null
   created: ->
     do @update
     @$watch "value", (-> do @update), deep: yes
   mounted: ->
-    $(window).on 'keypress', @keypress
+    $(document).on 'keydown', @keypress
   beforeDestroy: ->
-    $(window).off 'keypress', @keypress
+    $(document).off 'keydown', @keypress
   methods:
     keypress: (e) ->
-      console.log e
+      if e.keyCode is 13 and @saveOnEnter
+        do @save
+        do e.preventDefault
+        do e.stopPropagation
+      else if e.key is 's' and (e.metaKey or e.ctrlKey) and @saveOnMeta
+        do @save
+        do e.preventDefault
+        do e.stopPropagation
+      else if e.key is 'd' and (e.metaKey or e.ctrlKey) and @removeOnMeta
+        do @remove
+        do e.preventDefault
+        do e.stopPropagation
     close: -> @$emit 'close'
     save: ->
       if @task._id
@@ -67,6 +81,7 @@ component =
       @$emit 'save', @task
       do @close
     remove: ->
+      return unless @task._id
       @$confirm { title: 'Удалить задачу?', content: @task.title }, =>
         Mongo.Tasks.remove @task._id
         do @close

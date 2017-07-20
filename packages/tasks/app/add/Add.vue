@@ -7,7 +7,7 @@
 
   v-caption.date(v-if="displayDate") {{dateFormat}}
 
-  v-button.v-icon-button.v-primary.settings(@click.native="$refs.panel.open" v-if="settings")
+  v-button.v-icon-button.v-primary.settings(@click.native="$refs.panel.open();saveOnEnter=true" v-if="settings")
     v-icon settings
 
   v-button.v-icon-button.v-primary.ok(@click.native="save(task)" v-if="ok")
@@ -15,7 +15,8 @@
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive v-if="task")
     Edit(:actions="true", :texts="false", :fabs="false" ref="edit"
-      @close="$refs.panel.close()", v-model="task", @save="save")
+      @close="$refs.panel.close();saveOnEnter=false", v-model="task", @save="save",
+      :save-on-enter="saveOnEnter")
   
   .saving(v-if="saving")
     v-progress(indeterminate)
@@ -72,6 +73,7 @@ component =
     saving: no
     task: getTask(@date)
     display: yes
+    saveOnEnter: no
   methods:
     save: (task) ->
       if _.isEmpty task.title
