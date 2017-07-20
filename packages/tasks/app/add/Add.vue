@@ -5,6 +5,8 @@
   @keydown.enter="save(task)"
   ref="input")
 
+  v-caption.date(v-if="displayDate") {{dateFormat}}
+
   v-button.v-icon-button.v-primary.settings(@click.native="$refs.panel.open" v-if="settings")
     v-icon settings
 
@@ -12,7 +14,7 @@
     v-icon check
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive v-if="task")
-    Edit(:actions="true", :texts="false", :fabs="false"
+    Edit(:actions="true", :texts="false", :fabs="false" ref="edit"
       @close="$refs.panel.close()", v-model="task", @save="save")
   
   .saving(v-if="saving")
@@ -22,6 +24,26 @@
 <script lang="coffee">
 import _ from 'lodash'
 import Edit from '../edit/Edit.vue'
+getTask = (date) ->
+  title: ''
+  date: date
+  time: no
+  priority: 1
+  users: []
+  disables: []
+  tags: []
+  repeat:
+    type: 'week'
+    date:
+      start: null
+      end: null
+    toggle: no
+    week: []
+    month:
+      type: 'month'
+      index: 'first'
+      weekDay: 0
+      monthDays: []
 component =
   name: 'add'
   components: { Edit }
@@ -32,39 +54,23 @@ component =
     ok:
       type: Boolean
       default: yes
-    date: Date
+    date: [Date, Boolean]
     focus:
       type: Boolean
       default: no
   created: ->
-    @_task = _.clone @task
+    @resize = _.debounce @resize, 300
   mounted: ->
+    $(window).on 'resize', @resize
+    do @resize
     if @focus then @$nextTick ->
       @$refs.input.focus()
-
+  destroy: ->
+    $(window).off 'resize', @resize
   data: ->
+    displayDate: no
     saving: no
-    _task: null
-    task:
-      title: ''
-      date: @date ? moment().toDate()
-      time: no
-      priority: 1
-      users: []
-      disables: []
-      tags: []
-      repeat:
-        type: 'week'
-        date:
-          start: null
-          end: null
-        toggle: no
-        week: []
-        month:
-          type: 'month'
-          index: 'first'
-          weekDay: 0
-          monthDays: []
+    task: getTask(@date)
     display: yes
   methods:
     save: (task) ->
@@ -76,9 +82,18 @@ component =
           @saving = no
           if err then @$toast 'Ошибка при сохранении задачи'
           else
-            @task = _.clone @_task
+            @task = getTask @date
             @$emit 'save'
-
+    resize: ->
+      width = $(@$el).width()
+      @displayDate = width > 600
+  computed:
+    dateFormat: ->
+      date = @$refs.edit.task.date
+      require('../fromnow.coffee')(date, no, no)
+  watch:
+    date: ->
+      @task = getTask @date
 return component
 </script>
 
