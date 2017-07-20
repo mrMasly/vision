@@ -2,12 +2,13 @@
 .toolbar.l-row.l-fill.l-start-center.l-relative(ref="toolbar")
   input.l-flex(placeholder="Добавить задачу"
   v-model="task.title"
-  @keydown.enter="save(task)")
+  @keydown.enter="save(task)"
+  ref="input")
 
-  v-button.v-icon-button.v-primary.settings(@click.native="$refs.panel.open")
+  v-button.v-icon-button.v-primary.settings(@click.native="$refs.panel.open" v-if="settings")
     v-icon settings
 
-  v-button.v-icon-button.v-primary.ok(@click.native="save(task)")
+  v-button.v-icon-button.v-primary.ok(@click.native="save(task)" v-if="ok")
     v-icon check
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive v-if="task")
@@ -24,14 +25,29 @@ import Edit from '../edit/Edit.vue'
 component =
   name: 'add'
   components: { Edit }
+  props:
+    settings:
+      type: Boolean
+      default: yes
+    ok:
+      type: Boolean
+      default: yes
+    date: Date
+    focus:
+      type: Boolean
+      default: no
   created: ->
     @_task = _.clone @task
+  mounted: ->
+    if @focus then @$nextTick ->
+      @$refs.input.focus()
+
   data: ->
     saving: no
     _task: null
     task:
       title: ''
-      date: moment().toDate()
+      date: @date ? moment().toDate()
       time: no
       priority: 1
       users: []
@@ -59,7 +75,9 @@ component =
         Mongo.Tasks.insert task, (err, res) =>
           @saving = no
           if err then @$toast 'Ошибка при сохранении задачи'
-          else @task = _.clone @_task
+          else
+            @task = _.clone @_task
+            @$emit 'save'
 
 return component
 </script>
