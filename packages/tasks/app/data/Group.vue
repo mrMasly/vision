@@ -1,6 +1,6 @@
 <template lang="jade">
 div
-  Task(v-for="task in tasks", :task="task")
+  Task(v-for="task in tasks", :task="task" v-if="$subReady.tasks")
 </template>
 
 <script lang="coffee">

@@ -8,7 +8,7 @@
       Add.l-flex
     .v-content.l-flex.l-column
       Options.options
-      Groups.l-flex(:groups="groups")
+      Groups.l-flex.l-scroll.groups(:groups="groups")
 
   v-panel(ref="panel")
     div context
@@ -53,4 +53,6 @@ return component
 .options
   height 56px
   min-height 56px
+.groups
+  padding-bottom 20px
 </style>
