@@ -1,13 +1,13 @@
 <template lang="jade">
 .sub.l-row.l-start-start
   v-checkbox(v-model="sub.done" @change="save", :disabled="disabledCheckbox")
-  .title.l-flex(v-if="task.disables.subs") {{sub.title}}
+  .title.l-flex(v-if="task.disabled.subs" v-html="title")
   textarea.l-flex(v-model="sub.title" v-else
   @keydown="$emit('keydown', index, $event)"
   rows="1" ref="text" @input="save" @change="save")
   //- v-button.v-icon-button.v-mini
 
-  .remove.has-ripple.l-relative(@click="remove")
+  .remove.has-ripple.l-relative(@click="remove" v-if="!task.disabled.subs")
     v-ripple
     v-icon close
 </template>
@@ -31,6 +31,9 @@ component =
     disabledCheckbox: ->
       return yes if @task.users.length
       return no
+    title: ->
+      @sub.title.replace /\n/g, '<br>'
+
 return component
 </script>
 

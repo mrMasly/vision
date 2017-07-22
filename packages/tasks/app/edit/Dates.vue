@@ -32,11 +32,7 @@ component =
   name: 'date'
   components: { Repeat }
   data: ->
-    date: if @task.date then moment(@task.date).format('YYYY-MM-DD') else @task.date
-    time: if @task.time then moment(@task.date).format('HH:mm:ss') else null
-    chose: no
-    repeat: no
-    types: [
+    types = [
       {id: 'inbox', name: 'Входящие', icon: 'inbox', date: null}
       {id: 'today', name: 'Сегодня', icon: 'today', date: moment().format('YYYY-MM-DD')}
       {id: 'tomorrow', name: 'Завтра', icon: 'filter_1', date: moment().add(1, 'day').format('YYYY-MM-DD')}
@@ -50,6 +46,13 @@ component =
         @repeat = yes
       }
     ]
+    if @task.parent then types = _.dropRight types
+
+    date: if @task.date then moment(@task.date).format('YYYY-MM-DD') else @task.date
+    time: if @task.time then moment(@task.date).format('HH:mm:ss') else null
+    chose: no
+    repeat: no
+    types: types
   props:
     task: Object
   created: ->

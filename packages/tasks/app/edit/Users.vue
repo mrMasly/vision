@@ -16,7 +16,7 @@
         v-checkbox(disabled v-model="t.done")
         .l-flex {{ t.userName }}
         .subs(v-if="t._subs") {{t._subs.completed}}/{{t._subs.all}}
-    
+      v-caption Исполнителям запрещено изменять: {{userDisables}}
     v-button(@click.native="edit=true") Изменить исполнителей
   
   template(v-else)
@@ -43,6 +43,12 @@ component =
       { id: 'title', name: 'Название' }
       { id: 'description', name: 'Описание' }
     ]
+  computed:
+    userDisables: ->
+      disables = _.filter @disables, (one) => one.id in @task.disables
+      disables = _.map disables, 'name'
+      return disables.join(', ')
+
   meteor:
     server:
       publish:

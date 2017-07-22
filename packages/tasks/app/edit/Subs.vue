@@ -7,7 +7,7 @@
     Subb(v-for="(sub, index) in task.subs",
     :key="sub.id", :sub="sub", :index="index", :task="task"
     @keydown="keydown", @remove="remove" @save="save")
-    .plus(@click="add()")
+    .plus(@click="add()" v-if="!task.disabled.subs")
       v-icon add
       
       
@@ -16,19 +16,25 @@
 <script lang="coffee">
 import _ from 'lodash'
 import Subb from './Sub.vue'
-
 component =
   name: 'Subs'
   components: { Subb }
   props:
     task: Object
+  created: ->
+    @save = _.debounce @save, 300
   computed:
     addButton: ->
       size = _.get @task, 'subs.length'
       unless size then yes else no
   methods:
-    save: -> @$emit 'save'
+    save: ->
+      Mongo.Tasks.update @task._id, $set:
+        subs: @task.subs
+      , (err, res) =>
+        console.log err
     remove: (index) ->
+      return if @task.disabled.subs
       parts = [
         @task.subs.slice(0,index)
         @task.subs.slice(index+1)
@@ -39,6 +45,7 @@ component =
         $(@$refs.subs).find(".sub:eq(#{focus})").find('textarea').focus()
         do @save
     add: (index) ->
+      return if @task.disabled.subs
       index ?= @task.subs.length-1
       parts = [
         @task.subs.slice(0,index+1)
@@ -48,6 +55,7 @@ component =
       @task.subs = _.union parts[0], one, parts[1]
       @focus index+1
     remove: (index) ->
+      return if @task.disabled.subs
       parts = [
         @task.subs.slice(0,index)
         @task.subs.slice(index+1)
@@ -58,7 +66,7 @@ component =
       setTimeout =>
         $(@$refs.subs).find(".sub:eq(#{index})").find('textarea').focus()
     keydown: (index, e) ->
-      if e.keyCode is 13
+      if e.keyCode is 13 and not e.shiftKey
         e.preventDefault()
         @add index
       # при нажатии на backspace убираем пустую задачу
