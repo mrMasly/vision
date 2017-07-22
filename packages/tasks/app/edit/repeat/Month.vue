@@ -1,5 +1,5 @@
 <template lang="jade">
-v-tabs.v-transparent(v-centered @change="change")
+v-tabs.v-transparent(centered @change="change")
   v-tab(label="Дни месяца", :active="task.repeat.month.type === 'month'")
     .l-column(style="padding-top:8px")
       .l-row.l-start(v-for="one in month")

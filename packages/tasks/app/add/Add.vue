@@ -38,8 +38,9 @@ getTask = (date) ->
   repeat:
     type: 'week'
     date:
-      start: null
+      start: moment().format('YYYY-MM-DD')
       end: null
+      time: null
     toggle: no
     week: []
     month:

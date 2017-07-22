@@ -2,6 +2,18 @@ import Fiber from 'fibers'
 import _ from 'lodash'
 
 module.exports = (userId, doc, fields, mod) ->
+  
+  data = _.assign doc, mod?.$set
+  # если это не повторяющаяся задача
+  return unless data.repeat.toggle
+  # если ничего не меняется
+  return if _.isEmpty _.get mod, '$set'
+
+  # если задача была повторяющаяся, а теперь - нет
+  if doc.repeat.toggle and _.get(mod, '$set.repeat.toggle') is no
+    remove doc._id
+    return
+
   # console.log doc
   # console.log mod
   unless fields?

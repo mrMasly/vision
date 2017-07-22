@@ -43,6 +43,7 @@ component =
         @date = moment().format('YYYY-MM-DD') if _.isEmpty @date
       }
       {id: 'repeat', name: 'Повторять', icon: 'autorenew', select: =>
+        @date = null
         @repeat = yes
       }
     ]

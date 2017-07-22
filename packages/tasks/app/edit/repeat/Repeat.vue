@@ -1,6 +1,6 @@
 <template lang="jade">
 div
-  v-tabs.v-transparent(v-centered @change="change")
+  v-tabs.v-transparent(centered @change="change")
     v-tab(label="День", :active="task.repeat.type === 'day'")
     v-tab(label="Неделя", :active="task.repeat.type === 'week'")
       Week(:task="task")
@@ -21,6 +21,10 @@ component =
   components: { Week, Month, Dates }
   props:
     task: Object
+  created: ->
+    @task.repeat.toggle = yes
+  destroyed: ->
+    @task.repeat.toggle = no
   methods:
     change: (index) ->
       @task.repeat.type = switch index

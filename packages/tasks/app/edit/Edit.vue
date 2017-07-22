@@ -100,7 +100,13 @@ component =
           @task.disabled[type] = yes if type in @task.disables
   computed:
     date: ->
-      require('../fromnow.coffee')(@task.date)
+      if @task.repeat.toggle
+        date = ["Повторяется c"]
+        date.push moment(@task.repeat.date.start).format('D MMM YYYY')
+        date.push "в "+@task.repeat.date.time if @task.repeat.date.time
+        return date.join ' '
+      else
+        return require('../fromnow.coffee')(@task.date)
       
 return component
 </script>

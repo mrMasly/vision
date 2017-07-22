@@ -1,6 +1,6 @@
 module.exports = (task) ->
 
-  today = moment().startOf('day').toDate()
+  today = moment().format('YYYY-MM-DD')
 
   task.repeat.every ?= 1
 
@@ -22,14 +22,17 @@ module.exports = (task) ->
   add = (date) ->
     start = task.repeat.date.start
     start = today if today > start
-    toDate = date.toDate()
+    toDate = date.format('YYYY-MM-DD')
     if toDate >= start
       if task.repeat.date.end is null or toDate <= task.repeat.date.end
-        days.push date.format('YYYY-MM-DD')
+        days.push toDate
+      else
+        console.log 2
+    else
+      console.log 1
 
   # проверяет подходит ли день
   check = ->
-
     switch task.repeat?.type
       when 'day'
         day = date.format('YYYY-MM-DD')
