@@ -10,10 +10,10 @@ div.l-fill.l-row.l-absolute
       v-icon menu
   v-divider
   //- template(v-if="$route.params.id")
-  .task(v-if="$layout.gmd && mounted")
-    Task(v-if="$route.params.id", :id="$route.params.id" @close="close")
-  v-sidenav(v-else-if="mounted" ref="right" fixed right @close="close")
-    Task(v-if="$route.params.id", :id="$route.params.id" @close="$refs.right.close()")
+  //- .task(v-if="$layout.gmd && mounted")
+  //-   Task(v-if="$route.params.id", :id="$route.params.id" @close="close")
+  v-sidenav(v-if="mounted" ref="right" fixed right @close="close", :block="$layout.gmd")
+    Task(:id="$route.params.id" @close="$refs.right.close()")
 
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="jade">
 .task.l-fill.l-relative
-  v-loading(:value="$subReady.task && task")
+  v-loading(:value="$subReady.task && task" v-if="id")
     Edit(v-model="task" @save="save" @close="close", remove-on-meta, save-on-meta)
 </template>
 
@@ -12,7 +12,9 @@ component =
   props:
     id: String
   methods:
-    save: -> @$emit 'save'
+    save: ->
+      @$emit 'save'
+      do @close unless @$layout.gmd
     close: -> @$emit 'close'
   meteor:
     server:

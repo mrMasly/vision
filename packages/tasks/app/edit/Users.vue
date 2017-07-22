@@ -1,18 +1,27 @@
 <template lang="jade">
 .l-column(v-if="!task.from")
-  v-input-container
-    label Исполнитель
-    v-select(v-model="task.users" multiple search)
-      v-option(v-for="user in users", :value="user._id") {{user.profile.name}}
-  v-picker(type="select" v-model="task.disables" label="Запретить менять" v-if="task.users.length" multiple)
-    v-option(v-for="dis in disables", :key="dis.id", :value="dis.id") {{dis.name}}
+
+  template(v-if="edit")
+    v-input-container
+      label Исполнитель
+      v-select(v-model="task.users" multiple search)
+        v-option(v-for="user in users", :value="user._id") {{user.profile.name}}
+    v-picker(type="select" v-model="task.disables" label="Запретить менять" v-if="task.users.length" multiple search)
+      v-option(v-for="dis in disables", :key="dis.id", :value="dis.id") {{dis.name}}
   
-  .complete(v-if="task.createdAt && usersTasks")
-    v-caption Выполнение:
-    .user.l-row.l-start-center(v-for="t in usersTasks")
-      v-checkbox(disabled v-model="t.done")
-      .l-flex {{ t.userName }}
-      .subs(v-if="t._subs") {{t._subs.completed}}/{{t._subs.all}}
+  template(v-else-if="task.createdAt && usersTasks.length")
+    .complete
+      v-caption Выполнение:
+      .user.l-row.l-start-center(v-for="t in usersTasks")
+        v-checkbox(disabled v-model="t.done")
+        .l-flex {{ t.userName }}
+        .subs(v-if="t._subs") {{t._subs.completed}}/{{t._subs.all}}
+    
+    v-button(@click.native="edit=true") Изменить исполнителей
+  
+  template(v-else)
+    v-button(@click.native="edit=true") Указать испольнителей
+
 
 </template>
 
@@ -20,11 +29,12 @@
 import _ from 'lodash'
 component =
   name: 'users'
-  data: ->
-    search: ''
   props:
     task: Object
+  watch:
+    "task.updatedAt": -> @edit = no
   data: ->
+    edit: if @task._id then no else yes
     disables: [
       { id: 'date', name: 'Дату' }
       { id: 'time', name: 'Время' }

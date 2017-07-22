@@ -1,12 +1,12 @@
 <template lang="jade">
-.l-column
+.l-absolute.l-fill.l-column
   v-toolbar.v-transparent.v-dense.v-shadow.l-relative
     Done(:task="task" v-if="task.createdAt")
     Priority(:task="task")
     .l-flex {{date}}
     v-button.v-icon-button(@click.native="close")
       v-icon close
-  .l-padding
+  .l-padding.l-scroll.l-flex
     Dates(:task="task" v-if="dates")
     Texts(:task="task" v-if="texts")
     Users(:task="task" v-if="users")
@@ -25,6 +25,7 @@
       v-button.v-fab.v-mini(@click.native="remove")
         v-icon delete_forever
         v-tooltip(direction="left") (ctrl+d) Удалить
+  v-progress(indeterminate v-if="saving")
 </template>
 
 <script lang="coffee">
@@ -53,6 +54,7 @@ component =
     # hotkeys: type: Boolean, default: no
   data: ->
     task: null
+    saving: no
   created: ->
     do @update
     @$watch "value", (-> do @update), deep: yes
@@ -77,13 +79,18 @@ component =
     close: -> @$emit 'close'
     save: ->
       if @task._id
-        Mongo.Tasks.update @task._id, $set: _.omit(@task, '_id')
+        @saving = yes
+        Mongo.Tasks.update @task._id, {$set: _.omit(@task, '_id')}, (err, res) =>
+          @saving = no
+          if err? then @$toast position: "bottom right", text: "Ошибка при сохранении задачи"
+          else @$toast position: "bottom right", text: "Сохранено"
       @$emit 'save', @task
-      do @close
     remove: ->
       return unless @task._id
+      @saving = yes
       @$confirm { title: 'Удалить задачу?', content: @task.title }, =>
         Mongo.Tasks.remove @task._id
+        @saving = no
         do @close
     update: ->
       @task = _.cloneDeep @value
