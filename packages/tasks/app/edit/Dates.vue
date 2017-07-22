@@ -32,7 +32,7 @@ component =
   name: 'date'
   components: { Repeat }
   data: ->
-    date: moment(@task.date).format('YYYY-MM-DD')
+    date: if @task.date then moment(@task.date).format('YYYY-MM-DD') else @task.date
     time: if @task.time then moment(@task.date).format('HH:mm:ss') else null
     chose: no
     repeat: no
@@ -57,6 +57,8 @@ component =
       @select _.find @types, id: 'repeat'
     else if not _.find(@types, date: @date)
       @select _.find @types, id: 'chose'
+    else 
+      @select _.find @types, date: @date
   methods:
     select: (type) ->
       @chose = no
