@@ -32,6 +32,7 @@ component =
     select: (group) ->
       @$store.commit 'vision/tasks/setGroup', group.name
       @$router.push params: tab: group.name
+      @$emit 'select'
 
 return component
 </script>

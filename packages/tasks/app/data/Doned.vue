@@ -1,6 +1,8 @@
 <template lang="jade">
 .l-column
   date-toolbar(v-model="date")
+    div(slot="left")
+      slot
   .l-flex.l-relative
     .l-fill.l-absolute
       Groups(:groups="groups")

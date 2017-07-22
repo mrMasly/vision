@@ -1,6 +1,8 @@
 <template lang="jade">
 .l-column
   date-toolbar(type="month" v-model="date")
+    div(slot="left")
+      slot
   .l-flex.l-relative
     v-loading(:value="$subReady.tasks")
       .table-container

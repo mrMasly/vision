@@ -1,7 +1,9 @@
 <template lang="jade">
 .l-relative(v-if="mounted")
   Doned.l-absolute.l-fill(v-if="$route.params.tab == 'done'")
+    slot(name="sidenav-toggle")
   Month.l-absolute.l-fill(v-else-if="$route.params.tab == 'month'")
+    slot(name="sidenav-toggle")
   .l-column.l-absolute.l-fill(v-else)
     .toolbar.v-transparent.v-shadow-1.l-row.l-start-center
       slot(name="sidenav-toggle")

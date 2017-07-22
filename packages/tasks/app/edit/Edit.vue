@@ -1,5 +1,5 @@
 <template lang="jade">
-.l-absolute.l-fill.l-column
+.l-fill.l-column
   v-toolbar.v-transparent.v-dense.v-shadow.l-relative
     Done(:task="task" v-if="task.createdAt")
     Priority(:task="task")

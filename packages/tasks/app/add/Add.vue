@@ -14,7 +14,7 @@
     v-icon check
 
   v-panel(ref="panel" align="toolbar" x="end" y="after" alive v-if="task")
-    Edit(:actions="true", :texts="false", :fabs="false" ref="edit"
+    Edit.edit(:actions="true", :texts="false", :fabs="false" ref="edit"
       @close="$refs.panel.close();saveOnEnter=false", v-model="task", @save="save",
       :save-on-enter="saveOnEnter")
   
@@ -124,4 +124,6 @@ input
   margin-right 0
 .ok
   margin-left 0
+.edit
+  position relative !important
 </style>

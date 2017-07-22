@@ -1,7 +1,7 @@
 <template lang="jade">
 .task.l-fill.l-relative
   v-loading(:value="$subReady.task && task" v-if="id")
-    Edit(v-model="task" @save="save" @close="close", remove-on-meta, save-on-meta)
+    Edit.edit(v-model="task" @save="save" @close="close", remove-on-meta, save-on-meta)
 </template>
 
 <script lang="coffee">
@@ -33,4 +33,6 @@ return component
 .task
   max-width 100%
   width 350px
+.edit
+  position absolute !important
 </style>
