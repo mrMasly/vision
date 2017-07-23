@@ -46,7 +46,7 @@ component =
       return { color, text }
   methods:
     open: ->
-      @$router.push params: { id: @task._id }
+      @$router.push query: { task: @task._id }
     settings: (e) ->
       @$parent.$parent.$parent.settings @task, e
 

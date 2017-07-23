@@ -1,5 +1,5 @@
 <template lang="jade">
-.l-relative(v-if="mounted")
+.data.l-relative(v-if="mounted")
   Doned.l-absolute.l-fill(v-if="$route.params.tab == 'done'")
     slot(name="sidenav-toggle")
   Month.l-absolute.l-fill(v-else-if="$route.params.tab == 'month'")
@@ -58,6 +58,8 @@ return component
 </script>
 
 <style lang="stylus" scoped>
+.data
+  user-select none
 .toolbar
   z-index 2
   height 48px

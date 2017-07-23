@@ -9,7 +9,7 @@ div.l-fill.l-row.l-absolute
       v-icon menu
   v-divider
   v-sidenav(v-if="mounted" ref="right" fixed right @close="close", :block="$layout.gmd")
-    Task(:id="$route.params.id" @close="$refs.right.close()")
+    Task(:id="$route.query.task" @close="$refs.right.close()")
 
 </template>
 
@@ -23,17 +23,17 @@ component =
   data: ->
     mounted: no
   methods:
-    close: -> @$router.push params: { id: null }
+    close: -> @$router.push query: {}
   created: ->
     if Meteor.isClient
       @$store.state.vision.tasks.user ?= Meteor.userId()
   mounted: ->
     @mounted = yes
     @$nextTick ->
-      if @$route.params.id? and @$refs.right?
+      if @$route.query.task? and @$refs.right?
         @$refs.right.open()
   watch:
-    '$route.params.id': (id) ->
+    '$route.query.task': (id) ->
       return unless @$refs.right?
       if id then @$refs.right.open()
       else @$refs.right.close()
@@ -44,7 +44,7 @@ component =
     subscribe:
       users: []
   route:
-    path: '/tasks/:tab?/:id?'
+    path: '/tasks/:tab?'
     name: 'tasks'
     title: 'Задачи'
     tab:
