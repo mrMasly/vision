@@ -4,7 +4,7 @@
     div(slot="left")
       slot
   .l-flex.l-relative
-    v-loading(:value="$subReady.tasks")
+    v-loading(:value="$subReady.tasks" @load="resize")
       .table-container
         table
           thead

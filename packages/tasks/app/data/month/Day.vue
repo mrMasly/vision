@@ -15,7 +15,7 @@
   v-button.v-fab.v-fab-bottom-right.v-mini(v-show="hover" @click.native="add")
     v-icon add
   v-panel(ref="panel" align="day" x="start" y="end")
-    Add(:date="date" focus @keydown.native.esc="$refs.panel.close()"
+    Add(:params="{date: date}" focus @keydown.native.esc="$refs.panel.close()"
     @save="$refs.panel.close()")
 </template>
 

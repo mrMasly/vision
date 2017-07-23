@@ -24,7 +24,9 @@ component =
     @check = _.throttle @check, 500
     do @check
   methods:
-    check: -> @loading = !@value
+    check: ->
+      @loading = !@value
+      if @value then @$emit 'load'
   computed:
     styles: ->
       backgroundColor: @color
