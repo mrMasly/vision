@@ -29,11 +29,14 @@ component =
       if @task.done
         doneAt = @task.doneAt ? new Date()
         text = moment(doneAt).format('HH:mm')
+      else if @task.repeat.toggle
+        text = 'Повторяющаяся'
+      else if @task.date is no
+        text = 'Когда-нибудь'
+      else if @task.date is null
+        text = 'Без даты'
       else
         text = require('../fromnow.coffee')(@task.date, no, @task.time)
-        text = text
-          .replace 'Сегодня', ''
-          .replace ', в ', ''
         if @task.date and @task.time
           if moment(@task.date).format('X') < moment().format('X')
             color = 'rgba(210, 0, 0, 0.67)'

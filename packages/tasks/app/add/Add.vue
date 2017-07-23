@@ -91,7 +91,7 @@ component =
           @saving = no
           if err then @$toast 'Ошибка при сохранении задачи'
           else
-            @task = getTask @date
+            @task = getTask @params
             @$emit 'save'
     resize: ->
       width = $(@$el).width()
