@@ -7,8 +7,8 @@ div.l-fill.l-row.l-absolute
     v-button.v-icon-button(slot="sidenav-toggle" v-if="!$layout.gsm"
     @click.native="$refs.left.open()")
       v-icon menu
-  v-divider
-  v-sidenav(v-if="mounted" ref="right" fixed right @close="close", :block="$layout.gmd")
+  v-divider(v-if="block")
+  v-sidenav(v-if="mounted" ref="right" fixed right @close="close", :block="block")
     Task(:id="$route.query.task" @close="$refs.right.close()")
 
 </template>
@@ -32,6 +32,14 @@ component =
     @$nextTick ->
       if @$route.query.task? and @$refs.right?
         @$refs.right.open()
+  computed:
+    block: ->
+      if @$route.params.tab is 'сalendar'
+        if @$store.state.vision.tasks.calendar.type is 'day'
+          return @$layout.gmd
+        else
+          return @$layout.xl
+      else @$layout.gmd
   watch:
     '$route.query.task': (id) ->
       return unless @$refs.right?

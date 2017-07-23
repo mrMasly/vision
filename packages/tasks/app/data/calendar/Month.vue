@@ -1,42 +1,35 @@
 <template lang="jade">
-.l-column
-  date-toolbar(type="month" v-model="date")
-    div(slot="left")
-      slot
-  .l-flex.l-relative
-    v-loading(:value="$subReady.tasks" @load="resize")
-      .table-container
-        table
-          thead
-            tr
-              th ПН
-              th ВТ
-              th СР
-              th ЧТ
-              th ПН
-              th СБ
-              th ВС
-          tbody
-            tr(v-for="week in weeks")
-              td(v-for="day in week", :style="{height: (100/weeks.length)+'%'}")
-                Day(:date="day", :size="size" @open="open", :key="day.date")
-  v-dialog(ref="dialog" @close="full = null")
-    FullDay(:date="full" v-if="full" @close="$refs.dialog.close()")
+v-loading(:value="$subReady.tasks" @load="resize")
+  .table-container
+    table
+      thead
+        tr
+          th ПН
+          th ВТ
+          th СР
+          th ЧТ
+          th ПН
+          th СБ
+          th ВС
+      tbody
+        tr(v-for="week in weeks")
+          td(v-for="day in week", :style="{height: (100/weeks.length)+'%'}")
+            Subday(:date="day", :size="size" @open="open", :key="day.date")
 </template>
 
 <script lang="coffee">
 import _ from 'lodash'
-import Day from './Day.vue'
-import FullDay from './FullDay.vue'
+import Subday from './Subday.vue'
 component =
   name: 'Month'
-  components: { Day, FullDay }
+  components: { Subday }
+  props:
+    date: Date
   data: ->
-    date: new Date()
     min: null
     max: null
     size: 0
-    full: null
+    day: null
   mounted: ->
     $(window).on 'resize', @resize
     @$nextTick -> @resize()
@@ -49,7 +42,7 @@ component =
       size = height / 16
       @size = _.floor size
     open: (date) ->
-      @full = date
+      @day = date
       @$refs.dialog.open()
   created: ->
     @resize = _.debounce @resize, 300

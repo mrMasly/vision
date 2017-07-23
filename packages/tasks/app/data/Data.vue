@@ -2,7 +2,7 @@
 .data.l-relative(v-if="mounted")
   Doned.l-absolute.l-fill(v-if="$route.params.tab == 'done'")
     slot(name="sidenav-toggle")
-  Month.l-absolute.l-fill(v-else-if="$route.params.tab == 'month'")
+  Calendar.l-absolute.l-fill(v-else-if="$route.params.tab == 'сalendar'")
     slot(name="sidenav-toggle")
   .l-column.l-absolute.l-fill(v-else)
     .toolbar.v-transparent.v-shadow-1.l-row.l-start-center
@@ -22,10 +22,10 @@ import Add from '../add/Add.vue'
 import Options from './Options.vue'
 import getGroups from './group.coffee'
 import Doned from './Doned.vue'
-import Month from './month/Month.vue'
+import Calendar from './calendar/Calendar.vue'
 component =
   name: 'data-tasks'
-  components: { Add, Options, Doned, Month }
+  components: { Add, Options, Doned, Calendar }
   data: ->
     groups: []
     task: null

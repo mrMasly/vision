@@ -1,7 +1,7 @@
 <template lang="jade">
-.day.l-column(@mouseover="hover=true" @mouseleave="hover=false" ref="day")
-  v-caption {{date | moment("D MMMM")}}
-  v-icon.showAll(v-if="hover" @click.native="showAll") open_in_new
+.day.l-column(@mouseover="hover=true" @mouseleave="hover=false" ref="day", :class="{dense: dense}")
+  v-caption(v-if="dense") {{date | moment("D MMMM")}}
+  v-icon.showAll(v-if="dense && hover" @click.native="showAll") open_in_new
   .l-flex.tasks
     .task(v-for="task in data", :class="{done: task.done}" @click="open(task)")
       v-tooltip {{task.title}}
@@ -28,15 +28,18 @@ component =
   props:
     date: Date
     size: Number
+    dense: type: Boolean, default: yes
+
   data: ->
     hover: no
   methods:
     add: ->
       @$refs.panel.open()
     open: (task) ->
-      @$router.push params: id: task._id
+      @$router.push query: task: task._id
     showAll: ->
-      @$emit 'open', @date
+      @$store.state.vision.tasks.calendar.type = 'day'
+      @$store.state.vision.tasks.calendar.date = @date
   meteor:
     tasks: ->
       Mongo.Tasks.find
@@ -72,20 +75,20 @@ return component
   top 2px
   right -2px
 .v-fab
-  right 3px
-  bottom 3px
-  height 30px !important
-  width 30px !important
-  min-height 30px !important
-  min-width 30px !important
-  line-height 30px !important
+  right 10px
+  bottom 10px
+  height 40px !important
+  width 40px !important
+  min-height 40px !important
+  min-width 40px !important
+  line-height 40px !important
 .tasks
   overflow hidden
 .task
-  font-size 12px
+  font-size 13px
   line-height 12px
-  height 14px
-  padding 2px
+  height 18px
+  padding 4px
   width 100%
   width calc(100% - 2px)
   overflow hidden
@@ -107,4 +110,20 @@ return component
   font-size .9em
 .title
   display inline-block
+.dense
+  .v-fab
+    right 3px
+    bottom 3px
+    height 30px !important
+    width 30px !important
+    min-height 30px !important
+    min-width 30px !important
+    line-height 30px !important
+  .task
+    font-size 12px
+    line-height 12px
+    height 14px
+    padding 2px
+    width 100%
+    width calc(100% - 2px)
 </style>

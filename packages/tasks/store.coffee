@@ -16,3 +16,5 @@ Meteor.Store.registerModule ['vision', 'tasks'],
         state.options = _.without state.options, option
       else
         state.options.push option
+
+require './app/data/calendar/store.coffee'

@@ -17,7 +17,7 @@ component =
       {icon: 'inbox', title: 'Входящие', name: 'inbox'}
       {icon: 'today', title: 'Сегодня', name: 'today'}
       {icon: 'filter_7', title: 'Следующие 7 дней', name: 'week'}
-      {icon: 'date_range', title: 'Месяц', name: 'month'}
+      {icon: 'date_range', title: 'Календарь', name: 'сalendar'}
       {icon: 'cloud', title: 'Когда-нибудь', name: 'someday'}
       {icon: 'perm_contact_calendar', title: 'Ожидание', name: 'wait'}
       {icon: 'repeat', title: 'Повторяющиеся', name: 'repeat'}
