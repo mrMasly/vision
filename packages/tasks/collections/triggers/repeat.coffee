@@ -6,8 +6,9 @@ module.exports = (userId, doc, fields, mod) ->
   data = _.assign doc, mod?.$set
   # если это не повторяющаяся задача
   return unless data.repeat.toggle
+  
   # если ничего не меняется
-  return if _.isEmpty _.get mod, '$set'
+  # return if _.isEmpty _.get mod, '$set'
 
   # если задача была повторяющаяся, а теперь - нет
   if doc.repeat.toggle and _.get(mod, '$set.repeat.toggle') is no
@@ -57,8 +58,9 @@ create = (userId, doc, date) ->
   _doc = _.omit _.clone(doc), ['_id', 'createdAt', 'createdBy', 'updateAt', 'updateBy', 'repeat']
   _doc.repeatBy = doc._id
   _doc.repeat = toggle: no
-  if doc.time
-    time = moment(doc.time).format('HH:mm:ss')
+  if doc.repeat.date.time
+    time = moment(doc.repeat.date.time, 'HH:mm').format('HH:mm:ss')
+    _doc.time = yes
   else
     time = '00:00:00'
   _doc.date = moment(date+' '+time).toDate()

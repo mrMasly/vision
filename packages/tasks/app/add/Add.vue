@@ -25,29 +25,33 @@
 <script lang="coffee">
 import _ from 'lodash'
 import Edit from '../edit/Edit.vue'
-getTask = (date) ->
-  title: ''
-  date: date
-  time: no
-  priority: 1
-  users: []
-  disables: []
-  tags: []
-  done: no
-  doneAt: null
-  repeat:
-    type: 'week'
-    date:
-      start: moment().format('YYYY-MM-DD')
-      end: null
-      time: null
-    toggle: no
-    week: []
-    month:
-      type: 'month'
-      index: 'first'
-      weekDay: 0
-      monthDays: []
+getTask = (params) ->
+  task = 
+    title: ''
+    date: null
+    time: no
+    priority: 1
+    users: []
+    disables: []
+    tags: []
+    done: no
+    doneAt: null
+    repeat:
+      type: 'day'
+      date:
+        start: moment().format('YYYY-MM-DD')
+        end: null
+        time: null
+      toggle: no
+      week: []
+      month:
+        type: 'month'
+        index: 'first'
+        weekDay: 0
+        monthDays: []
+  for key, val of params
+    _.set task, key, val
+  return task
 component =
   name: 'add'
   components: { Edit }
@@ -58,7 +62,7 @@ component =
     ok:
       type: Boolean
       default: yes
-    date: [Date, Boolean]
+    params: Object
     focus:
       type: Boolean
       default: no
@@ -74,7 +78,7 @@ component =
   data: ->
     displayDate: no
     saving: no
-    task: getTask(@date)
+    task: getTask(@params)
     display: yes
     saveOnEnter: no
   methods:
@@ -94,11 +98,12 @@ component =
       @displayDate = width > 600
   computed:
     dateFormat: ->
+      if @task.repeat.toggle
+        return "Повторяется"
       date = @$refs.edit.task.date
       require('../fromnow.coffee')(date, no, no)
   watch:
-    date: ->
-      @task = getTask @date
+    params: -> @task = getTask @params
 return component
 </script>
 

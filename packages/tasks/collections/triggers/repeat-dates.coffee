@@ -26,10 +26,6 @@ module.exports = (task) ->
     if toDate >= start
       if task.repeat.date.end is null or toDate <= task.repeat.date.end
         days.push toDate
-      else
-        console.log 2
-    else
-      console.log 1
 
   # проверяет подходит ли день
   check = ->

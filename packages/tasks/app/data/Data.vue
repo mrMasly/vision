@@ -7,7 +7,7 @@
   .l-column.l-absolute.l-fill(v-else)
     .toolbar.v-transparent.v-shadow-1.l-row.l-start-center
       slot(name="sidenav-toggle")
-      Add.l-flex(:date="date")
+      Add.l-flex(:params="params")
     .v-content.l-flex.l-column
       Options.options
       Groups.l-flex.l-scroll.groups(:groups="groups")
@@ -30,28 +30,29 @@ component =
     groups: []
     task: null
     mounted: no
-    date: null
+    params: null
   mounted: ->
     @mounted = yes
   created: ->
     do @update
-    do @updateDate
+    do @updateParams
   methods:
     update: ->
       @groups = getGroups()
     settings: (task, e) ->
       @task = task
       @$refs.panel.open e
-    updateDate: ->
-      @date = switch @$route.params.tab
-        when 'today' then moment().toDate()
-        when 'week' then moment().add(1,'day').toDate()
-        when 'someday' then no
+    updateParams: ->
+      @params = switch @$route.params.tab
+        when 'today' then date: moment().toDate()
+        when 'week' then date: moment().add(1,'day').toDate()
+        when 'someday' then date: no
+        when 'repeat' then date: null, "repeat.toggle": yes
         else null
   watch:
     '$store.state.vision.tasks.options': -> do @update
     '$store.state.vision.tasks.group': -> do @update
-    '$route.params.tab': -> do @updateDate
+    '$route.params.tab': -> do @updateParams
 
 return component
 </script>

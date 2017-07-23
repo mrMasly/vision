@@ -49,26 +49,34 @@ component =
     ]
     if @task.parent then types = _.dropRight types
 
-    date: if @task.date then moment(@task.date).format('YYYY-MM-DD') else @task.date
-    time: if @task.time then moment(@task.date).format('HH:mm:ss') else null
+    date: null
+    time: null
     chose: no
     repeat: no
     types: types
   props:
     task: Object
   created: ->
-    if @task.repeat.toggle
-      @select _.find @types, id: 'repeat'
-    else if not _.find(@types, date: @date)
-      @select _.find @types, id: 'chose'
-    else 
-      @select _.find @types, date: @date
+    do @init
   methods:
+    init: ->
+      @date = if @task.date then moment(@task.date).format('YYYY-MM-DD') else @task.date
+      @time = if @task.time then moment(@task.date).format('HH:mm:ss') else null
+      do @select
     select: (type) ->
       @chose = no
       @repeat = no
+      unless type?
+        if @task.repeat.toggle
+          type = _.find @types, id: 'repeat'
+        else if not _.find(@types, date: @date)
+          type = _.find @types, id: 'chose'
+        else 
+          type = _.find @types, date: @date
+      
       if type.select? then do type.select
       else @date = type.date
+        
     setTime: ->
       @time = '09:00'
       @$nextTick => @$refs.time.$el.focus()
@@ -98,6 +106,7 @@ component =
   watch:
     date: -> do @update
     time: -> do @update
+    task: -> do @init
 return component
 </script>
 
