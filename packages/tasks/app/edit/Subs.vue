@@ -44,7 +44,6 @@ component =
       focus = index-1
       setTimeout =>
         $(@$refs.subs).find(".sub:eq(#{focus})").find('textarea').focus()
-        do @save
     add: (index) ->
       return if @task.disabled.subs
       index ?= @task.subs.length-1
@@ -85,7 +84,6 @@ component =
     createSubs: ->
       @$set @task, 'subs', [{done: no, title: '', id: Random.id()}]
       setTimeout => $(@$refs.subs).find('textarea').focus()
-      do @save
 return component
 </script>
 

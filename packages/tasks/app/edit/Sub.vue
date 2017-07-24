@@ -4,7 +4,7 @@
   .title.l-flex(v-if="task.disabled.subs" v-html="title")
   textarea.l-flex(v-model="sub.title" v-else
   @keydown="$emit('keydown', index, $event)"
-  rows="1" ref="text" @input="save" @change="save")
+  rows="1" ref="text")
   //- v-button.v-icon-button.v-mini
 
   .remove.has-ripple.l-relative(@click="remove" v-if="!task.disabled.subs")

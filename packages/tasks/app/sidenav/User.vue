@@ -17,6 +17,8 @@ component =
   data: ->
     user: Meteor.userId()
   meteor:
+    created: ->
+      @$store.state.vision.tasks.user = @user
     server:
       publish:
         users: -> Mongo.Users.find {}, fields:
