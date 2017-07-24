@@ -8,8 +8,7 @@
     .toolbar.v-transparent.v-shadow-1.l-row.l-start-center
       slot(name="sidenav-toggle")
       Add.l-flex(:params="params")
-    .v-content.l-flex.l-column
-      Options.options
+    .v-content.l-flex.l-scroll.l-relative
       Groups.l-flex.l-scroll.groups(:groups="groups")
 
   v-panel(ref="panel")

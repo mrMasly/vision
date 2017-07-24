@@ -1,8 +1,8 @@
 <template lang="jade">
-.l-column
+.l-column.l-fill.l-absolute
   v-toolbar.v-transparent.v-dense.v-shadow
     Add(:params="params")
-  .l-flex.content
+  .l-flex.content.l-scroll
     Groups(:groups="groups")
 </template>
 
