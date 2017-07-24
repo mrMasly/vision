@@ -12,14 +12,17 @@ component =
   name: 'Just'
   props:
     task: Object
-  # data: ->
-  #   user: Meteor.userId()
+  data: ->
+    user: Meteor.userId()
   methods:
     toggle: ->
-      Mongo.Tasks.update @task._id, $set: just: !@task.just
+      @task.just = !@task.just
+      if @task._id?
+        Mongo.Tasks.update @task._id, $set: just: @task.just
   computed:
     disabled: ->
-      return yes if @$store.state.vision.tasks.user isnt @task.for
+      return no unless @task._id
+      return yes if @user isnt @task.for
       return yes if @task.done
       return no
 

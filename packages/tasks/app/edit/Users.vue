@@ -56,7 +56,8 @@ component =
           'profile.name': 1
           'username': 1
         usersTasks: (parentId) ->
-          Mongo.Tasks.find parent: parentId
+          if parentId
+            Mongo.Tasks.find parent: parentId
     subscribe:
       users: []
       usersTasks: -> [@task._id]

@@ -1,7 +1,7 @@
 <template lang="jade">
 v-dialog(ref="dialog" query-param="task" v-if="$route.name!='tasks'")
   Edit.edit(v-model="task" save-on-enter, :fabs="false", :actions="true"
-    @close="close" @save="close")
+    @close="close" @save="close" v-if="task")
 </template>
 
 <script lang="coffee">
@@ -16,10 +16,13 @@ component =
     server:
       publish:
         task: (id) -> Mongo.Tasks.find _id: id
-    subscribe: -> [@$route.query.task]
+    subscribe:
+      task: -> [@$route.query.task]
     task:
       params: -> @$route.query.task
-      update: (id) -> Mongo.Tasks.findOne _id: id
+      update: (id) ->
+        task = Mongo.Tasks.findOne _id: id
+        return task
 
 return component
 </script>

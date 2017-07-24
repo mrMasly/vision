@@ -97,7 +97,7 @@ component =
             @$emit 'save'
     resize: ->
       width = $(@$el).width()
-      @displayDate = width > 600
+      @displayDate = width > 480
   computed:
     dateFormat: ->
       if @task.repeat.toggle
