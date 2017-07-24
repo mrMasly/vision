@@ -1,7 +1,7 @@
 <template lang="jade">
 .l-column
   v-toolbar.v-transparent.v-dense.v-shadow
-    Add(:params="{date: date}")
+    Add(:params="params")
   .l-flex.content
     Groups(:groups="groups")
 </template>
@@ -17,10 +17,19 @@ component =
     date: Date
   data: ->
     groups: null
+    user: Meteor.userId()
   created: ->
     do @update
   watch:
     date: -> do @update
+    "$store.state.vision.tasks.user": -> do @update
+  computed:
+    params: ->
+      params =
+        date: @date
+      if @user isnt @$store.state.vision.tasks.user
+        params.users = [@$store.state.vision.tasks.user]
+      return params
   methods:
     close: -> @$emit 'close'
     update: ->
@@ -34,6 +43,7 @@ component =
         match:
           date: date
           done: no
+          for: @$store.state.vision.tasks.user
       # выполненные
       groups.push
         name: "Выполненные"
@@ -44,6 +54,7 @@ component =
             {doneAt: date}
           ]
           done: yes
+          for: @$store.state.vision.tasks.user
       @groups = groups
 return component
 </script>

@@ -1,6 +1,7 @@
 <template lang="jade">
 .done
   v-checkbox(v-model="done" v-if="type == 'checkbox'" @change="change")
+  v-checkbox(v-model="done" v-if="type == 'done'" disabled)
   v-checkbox(v-model="done" v-else-if="done" disabled)
   v-icon(v-else-if="type == 'subs'") list
   v-icon(v-else-if="type == 'delegate'") send
@@ -26,6 +27,7 @@ component =
       else if not _.isEmpty @task.users then return 'delegate'
       else if not _.isEmpty @task.subs then return 'subs'
       else if @task.done and @task.doneAt < moment().startOf('day').toDate() then return 'done'
+      else if @$store.state.vision.tasks.user isnt Meteor.userId() then return 'done'
       else return 'checkbox'
 
 return component

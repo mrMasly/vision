@@ -31,6 +31,7 @@ component =
     task: null
     mounted: no
     params: null
+    user: Meteor.userId()
   mounted: ->
     @mounted = yes
   created: ->
@@ -49,9 +50,12 @@ component =
         when 'someday' then date: no
         when 'repeat' then date: null, "repeat.toggle": yes
         else null
+      if @user isnt @$store.state.vision.tasks.user
+        @params.users = [@$store.state.vision.tasks.user]
   watch:
     '$store.state.vision.tasks.options': -> do @update
     '$store.state.vision.tasks.group': -> do @update
+    '$store.state.vision.tasks.user': -> do @update
     '$route.params.tab': -> do @updateParams
 
 return component

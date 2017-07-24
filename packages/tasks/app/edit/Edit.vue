@@ -97,7 +97,9 @@ component =
       @task.disabled ?= {}
       if @task.from? and @task.from isnt @task.for
         for type in ['date','time','priority','subs','title','description']
-          @task.disabled[type] = yes if type in @task.disables
+          if Meteor.userId() isnt @$store.state.vision.tasks.user or
+          type in @task.disables
+            @task.disabled[type] = yes 
   computed:
     date: ->
       if @task.repeat.toggle

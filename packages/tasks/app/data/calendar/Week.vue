@@ -23,7 +23,7 @@ component =
   data: ->
     min: null
     max: null
-    size: 0  
+    size: 0
   mounted: ->
     $(window).on 'resize', @resize
     @$nextTick -> @resize()
@@ -49,8 +49,9 @@ component =
   meteor:
     server:
       publish:
-        tasks: (min, max) ->
+        tasks: (min, max, user) ->
           Mongo.Tasks.find
+            for: user
             date:
               $gte: moment(min).startOf('day').toDate()
               $lte: moment(max).endOf('day').toDate()
@@ -63,7 +64,7 @@ component =
               priority: 1
               done: 1
     subscribe:
-      tasks: -> [@min, @max]
+      tasks: -> [@min, @max, @$store.state.vision.tasks.user]
 
 
 return component

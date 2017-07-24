@@ -12,10 +12,10 @@
       .time(v-if="task.time") {{task.date | moment('HH:mm')}}
       .title {{task.title}}
     .task(v-if="data.length < tasks.length" @click="showAll") + еще {{tasks.length - data.length}}
-  v-button.v-fab.v-fab-bottom-right.v-mini(v-show="hover" @click.native="add")
+  v-button.v-fab.v-fab-bottom-right.v-mini(v-show="hover && user" @click.native="add")
     v-icon add
   v-panel(ref="panel" align="day" x="start" y="end")
-    Add(:params="{date: date}" focus @keydown.native.esc="$refs.panel.close()"
+    Add(:params="params" focus @keydown.native.esc="$refs.panel.close()"
     @save="$refs.panel.close()")
 </template>
 
@@ -29,9 +29,9 @@ component =
     date: Date
     size: Number
     dense: type: Boolean, default: yes
-
   data: ->
     hover: no
+    user: Meteor.userId()
   methods:
     add: ->
       @$refs.panel.open()
@@ -46,7 +46,7 @@ component =
         date:
           $gte: moment(@date).startOf('day').toDate()
           $lte: moment(@date).endOf('day').toDate()
-        for: Meteor.userId()
+        for: @$store.state.vision.tasks.user
       ,
         fields: title: 1, time: 1, date: 1, priority: 1, done: 1
         sort: priority: -1, time: -1, date: 1
@@ -54,6 +54,12 @@ component =
     data: ->
       return null unless @tasks
       return @tasks[0...@size]
+    params: ->
+      params =
+        date: @date
+      if @user isnt @$store.state.vision.tasks.user
+        params.users = [@$store.state.vision.tasks.user]
+      return params
 
 return component
 </script>

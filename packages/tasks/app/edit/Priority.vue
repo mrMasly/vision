@@ -1,7 +1,7 @@
 <template lang="jade">
 .priority(:class="{hover: hover}")
   template(v-if="task.disabled.priority")
-    v-button.v-icon-button.v-mini(fab-trigger @click.native="select(1)")
+    v-button.v-icon-button.v-mini
       .v-icon(style="font-size:1.3em", :style="{color: priority.color}") {{priority.text}}
   .absolute(v-else)
     v-speed-dial.v-button-icon.v-mini(open='hover' direction="right" ref="dial" @trigger="hover=arguments[0]")

@@ -1,8 +1,8 @@
 <template lang="jade">
-.subs
-  v-button.v-primary.add(@click.native="createSubs"
+div
+  v-button.add(@click.native="createSubs"
   v-if="addButton") Добавить подзадачи
-  div(ref="subs" v-else)
+  div.subs(ref="subs" v-else-if="task.subs && task.subs.length")
     .v-caption Подзадачи
     Subb(v-for="(sub, index) in task.subs",
     :key="sub.id", :sub="sub", :index="index", :task="task"
@@ -25,6 +25,7 @@ component =
     @save = _.debounce @save, 300
   computed:
     addButton: ->
+      return no if @task.disabled.subs
       size = _.get @task, 'subs.length'
       unless size then yes else no
   methods:

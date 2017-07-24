@@ -8,7 +8,7 @@ module.exports = () ->
 
   if group is 'inbox'
     lists.push name: 'Входящие', index: 1, match:
-      date: null
+      date: null, "repeat.toggle": no
       done: no, for: user, users: $size: 0
 
   else if group is 'today'

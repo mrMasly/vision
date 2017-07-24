@@ -60,8 +60,9 @@ component =
   meteor:
     server:
       publish:
-        tasks: (min, max) ->
+        tasks: (min, max, user) ->
           Mongo.Tasks.find
+            for: user
             date:
               $gte: moment(min).startOf('day').toDate()
               $lte: moment(max).endOf('day').toDate()
@@ -74,7 +75,7 @@ component =
               priority: 1
               done: 1
     subscribe:
-      tasks: -> [@min, @max]
+      tasks: -> [@min, @max, @$store.state.vision.tasks.user]
 
   
 
