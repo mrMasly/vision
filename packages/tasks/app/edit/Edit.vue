@@ -2,6 +2,7 @@
 .l-fill.l-column
   v-toolbar.v-transparent.v-dense.v-shadow.l-relative
     Done(:task="task" v-if="task.createdAt")
+    Just(:task="task")
     Priority(:task="task")
     .l-flex {{date}}
     v-button.v-icon-button(@click.native="close")
@@ -36,6 +37,7 @@ import Users from './Users.vue'
 import Texts from './Texts.vue'
 import Tags from './Tags.vue'
 import Subs from './Subs.vue'
+import Just from './Just.vue'
 import Done from '../helpers/Done.vue'
 component =
   name: 'edit'

@@ -52,6 +52,7 @@ return component
   position relative
   width 40px
   height 40px
+  margin-left -15px
   &.hover
     overflow visible
 .absolute

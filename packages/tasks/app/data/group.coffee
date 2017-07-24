@@ -23,21 +23,21 @@ module.exports = () ->
 
   else if group is 'today'
     lists.push name: 'Сделать прямо сейчас', index: -999, match:
-      done: no, for: user, justNow: yes
+      done: no, for: user, just: yes
     lists.push name: 'Сегодня', index: 1, match:
       date:
         $gte: moment().startOf('day').toDate()
         $lte: moment().endOf('day').toDate()
       done: no, for: user, users: $size: 0
-      justNow: $ne: yes
+      just: $ne: yes
     lists.push name: 'Просроченные', index: 2, match:
       date: $lt: moment().startOf('day').toDate()
       done: no, for: user, users: $size: 0
-      justNow: $ne: yes
+      just: $ne: yes
     lists.push name: 'Ожидание', index: 2, match:
       date: $lte: moment().endOf('day').toDate()
       done: no, for: user, users: $not: $size: 0
-      justNow: $ne: yes
+      just: $ne: yes
     lists.push name: 'Выполненные', index: 999, match:
       doneAt:
         $gte: moment().startOf('day').toDate()
@@ -123,7 +123,7 @@ module.exports = () ->
   if 'users' in options
     $or = []
     for list in lists
-      continue if list.match.done or list.match.justNow is yes
+      continue if list.match.done or list.match.just is yes
       match = _.clone list.match
       match.fromUser = $exists: yes
       $or.push match
@@ -135,7 +135,7 @@ module.exports = () ->
   if 'priority' in options
     $or = []
     for list in lists
-      continue if list.match.done or list.match.justNow is yes
+      continue if list.match.done or list.match.just is yes
       match = _.clone list.match
       match.priority = 3
       $or.push match

@@ -37,6 +37,7 @@ getTask = (params) ->
     done: no
     doneAt: null
     viewed: yes
+    just: no
     repeat:
       type: 'day'
       date:
