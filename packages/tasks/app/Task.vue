@@ -9,6 +9,8 @@ import Edit from './edit/Edit.vue'
 component =
   name: 'Task'
   components: { Edit }
+  data: ->
+    checkTask: null
   props:
     id: String
   methods:
@@ -16,6 +18,15 @@ component =
       @$emit 'save'
       do @close unless @$layout.gmd
     close: -> @$emit 'close'
+    check: (task) ->
+      if @checkTask? and not task?
+        do @close
+      else
+        @checkTask = task
+  watch:
+    '$store.state.vision.tasks.user': (user) ->
+      if @task? and @task.for isnt user
+        do @close
   meteor:
     server:
       publish:
@@ -24,7 +35,10 @@ component =
       task: -> [@id]
     task:
       params: -> @id
-      update: (id) -> Mongo.Tasks.findOne id
+      update: (id) ->
+        task = Mongo.Tasks.findOne id
+        @check task
+        return task
 
 return component
 </script>
