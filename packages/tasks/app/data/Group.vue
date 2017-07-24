@@ -1,5 +1,5 @@
 <template lang="jade">
-div
+transition-group(name="list")
   Task(v-for="task in tasks", :task="task" v-if="$subReady.tasks", :key="task._id")
 </template>
 
@@ -36,5 +36,12 @@ return component
 </script>
 
 <style lang="stylus" scoped>
-
+.list-enter-active
+.list-leave-active
+  transition all .5s
+.list-enter,
+.list-leave-to
+  opacity 0
+.list-move
+  transition transform .5s
 </style>
