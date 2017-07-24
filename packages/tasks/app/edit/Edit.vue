@@ -55,14 +55,19 @@ component =
   data: ->
     task: null
     saving: no
+    user: Meteor.userId()
   created: ->
     do @update
     @$watch "value", (-> do @update), deep: yes
+    do @viewed
   mounted: ->
     $(document).on 'keydown', @keypress
   beforeDestroy: ->
     $(document).off 'keydown', @keypress
   methods:
+    viewed: ->
+      if @task.viewed is no and @user is @task.for
+        Mongo.Tasks.update @task._id, $set: viewed: yes
     keypress: (e) ->
       if e.keyCode is 13 and @saveOnEnter
         do @save

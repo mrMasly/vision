@@ -49,6 +49,7 @@ create = (userId, doc) ->
     # console.log user
     _doc.for = user
     _doc.users = []
+    _doc.viewed = no
     Mongo.Tasks.insert _doc
 
 # удаляет все старые задачи

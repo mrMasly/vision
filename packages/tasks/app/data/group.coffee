@@ -7,9 +7,19 @@ module.exports = () ->
   options = Meteor.Store.state.vision.tasks.options
 
   if group is 'inbox'
-    lists.push name: 'Входящие', index: 1, match:
+    lists.push name: 'Для себя', index: 2, match:
       date: null, "repeat.toggle": no
       done: no, for: user, users: $size: 0
+      parent: $exists: no
+    lists.push name: 'Новые', index: 1, match:
+      done: no, for: user
+      parent: $exists: yes
+      viewed: no
+    lists.push name: 'От других пользователей', index: 3, match:
+      done: no, for: user
+      parent: $exists: yes
+      viewed: yes
+
 
   else if group is 'today'
     lists.push name: 'Сделать прямо сейчас', index: -999, match:
