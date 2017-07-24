@@ -9,7 +9,8 @@
       slot(name="sidenav-toggle")
       Add.l-flex(:params="params")
     .v-content.l-flex.l-scroll.l-relative
-      Groups.l-flex.l-scroll.groups(:groups="groups")
+      Description
+      Groups.groups(:groups="groups")
 
   v-panel(ref="panel")
     div context
@@ -22,9 +23,10 @@ import Options from './Options.vue'
 import getGroups from './group.coffee'
 import Doned from './Doned.vue'
 import Calendar from './calendar/Calendar.vue'
+import Description from './Description.vue'
 component =
   name: 'data-tasks'
-  components: { Add, Options, Doned, Calendar }
+  components: { Add, Options, Doned, Calendar, Description }
   data: ->
     groups: []
     task: null

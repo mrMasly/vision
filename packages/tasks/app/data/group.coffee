@@ -4,7 +4,7 @@ module.exports = () ->
 
   group = Meteor.Store.state.vision.tasks.group
   user = Meteor.Store.state.vision.tasks.user
-  options = Meteor.Store.state.vision.tasks.options
+  # options = Meteor.Store.state.vision.tasks.options
 
   if group is 'inbox'
     lists.push name: 'Для себя', index: 2, match:
@@ -110,38 +110,38 @@ module.exports = () ->
         {tags: $regex: query, $options: 'i'}
       ]
   # если не разделять по группам
-  unless 'group' in options
-    $or = []
-    for list in lists
-      $or.push list.match
-    done = _.find lists, name: 'Выполненные'
-    lists = []
-    lists.push name: 'Все', index: 1, match: $or: $or, done: no
-    lists.push done if done?
+  # unless 'group' in options
+  #   $or = []
+  #   for list in lists
+  #     $or.push list.match
+  #   done = _.find lists, name: 'Выполненные'
+  #   lists = []
+  #   lists.push name: 'Все', index: 1, match: $or: $or, done: no
+  #   lists.push done if done?
 
   # если выделить отдельно задачи от других пользователей
-  if 'users' in options
-    $or = []
-    for list in lists
-      continue if list.match.done or list.match.just is yes
-      match = _.clone list.match
-      match.fromUser = $exists: yes
-      $or.push match
-      list.match.fromUser = $exists: no
-    unless _.isEmpty $or
-      lists.push name: 'От других пользователей', index: 0, open: yes, match: $or: $or
+  # if 'users' in options
+  #   $or = []
+  #   for list in lists
+  #     continue if list.match.done or list.match.just is yes
+  #     match = _.clone list.match
+  #     match.fromUser = $exists: yes
+  #     $or.push match
+  #     list.match.fromUser = $exists: no
+  #   unless _.isEmpty $or
+  #     lists.push name: 'От других пользователей', index: 0, open: yes, match: $or: $or
 
   # если нужно отдельно выделить важные
-  if 'priority' in options
-    $or = []
-    for list in lists
-      continue if list.match.done or list.match.just is yes
-      match = _.clone list.match
-      match.priority = 3
-      $or.push match
-      list.match.priority = $ne: 3
-    unless _.isEmpty $or
-      lists.push name: 'Важные', index: -1, open: yes, match: $or: $or
+  # if 'priority' in options
+  #   $or = []
+  #   for list in lists
+  #     continue if list.match.done or list.match.just is yes
+  #     match = _.clone list.match
+  #     match.priority = 3
+  #     $or.push match
+  #     list.match.priority = $ne: 3
+  #   unless _.isEmpty $or
+  #     lists.push name: 'Важные', index: -1, open: yes, match: $or: $or
 
   # if options.tags
   #   for list in lists

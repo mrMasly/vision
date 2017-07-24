@@ -1,11 +1,11 @@
 import _ from 'lodash'
 
-Meteor.Store.registerModule ['vision', 'tasks'],
-  namespaced: yes
+Meteor.Store.register 'vision.tasks',
+  localStorage:
+    description: yes
   state:
     group: null
     user: null
-    options: [ 'group' ]
   mutations:
     setGroup: (state, group) ->
       state.group = group
