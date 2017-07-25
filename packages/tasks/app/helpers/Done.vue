@@ -1,7 +1,7 @@
 <template lang="jade">
 .done
   v-checkbox(v-model="done" v-if="type == 'checkbox'" @change="change")
-  v-checkbox(v-model="done" v-if="type == 'done'" disabled)
+  v-checkbox(v-model="done" v-else-if="type == 'done'" disabled)
   v-checkbox(v-model="done" v-else-if="done" disabled)
   v-icon(v-else-if="type == 'subs'") list
   v-icon(v-else-if="type == 'delegate'") send

@@ -63,14 +63,14 @@ component =
     @$watch "value", (-> do @update), deep: yes
     do @viewed
   mounted: ->
-    $(document).on 'keydown', @keypress
+    $(document).on 'keydown', @keydown
   beforeDestroy: ->
-    $(document).off 'keydown', @keypress
+    $(document).off 'keydown', @keydown
   methods:
     viewed: ->
       if @task.viewed is no and @user is @task.for
         Mongo.Tasks.update @task._id, $set: viewed: yes
-    keypress: (e) ->
+    keydown: (e) ->
       if e.keyCode is 13 and @saveOnEnter
         do @save
         do e.preventDefault

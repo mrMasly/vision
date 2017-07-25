@@ -2,7 +2,7 @@
 .toolbar.l-row.l-fill.l-start-center.l-relative(ref="toolbar")
   input.l-flex(placeholder="Добавить задачу"
   v-model="task.title"
-  @keydown.enter="save(task)"
+  @keydown.enter.prevent.stop="save(task)"
   ref="input")
 
   v-caption.date(v-if="displayDate") {{dateFormat}}
@@ -95,6 +95,7 @@ component =
           else
             @task = getTask @params
             @$emit 'save'
+      @$refs.panel.close()
     resize: ->
       width = $(@$el).width()
       @displayDate = width > 480
