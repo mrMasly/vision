@@ -36,6 +36,7 @@ component =
     opacity: (val) ->
       $(@$refs.container).css opacity: val
     close: ->
+      $(document).off 'keydown', @keydown
       @opacity 0
       setTimeout =>
         @isOpen = no
@@ -43,6 +44,7 @@ component =
       , 200
       @$emit 'close'
     open: (e) ->
+      $(document).on 'keydown', @keydown
       document.body.appendChild @element
       @isOpen = yes
       @e = e
@@ -50,6 +52,12 @@ component =
         do @position
         @opacity 1
       @$emit 'open'
+    keydown: (e) ->
+      if e.keyCode is 27
+        do e.preventDefault
+        do e.stopPropagation
+        do @close
+
 
     position: position
   beforeDestroy: ->
