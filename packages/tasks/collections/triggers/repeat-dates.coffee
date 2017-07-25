@@ -1,3 +1,4 @@
+import _ from 'lodash'
 module.exports = (task) ->
 
   today = moment().format('YYYY-MM-DD')
@@ -59,18 +60,17 @@ module.exports = (task) ->
             # console.log task.repeat.month.weekDay
             day = _.toNumber date.format('e')
             # проверим что это тот день недели что нужен
-            if day is task.repeat.month.weekDay
-              switch task.repeat.month.index
-                when 'first'
-                  add date if moment(date.toDate()).subtract(1, 'week').startOf('month').format('L') isnt month
-                when 'second'
-                  add date if moment(date.toDate()).subtract(2, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(1, 'week').startOf('month').format('L') is month
-                when 'third'
-                  add date if moment(date.toDate()).subtract(3, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(2, 'week').startOf('month').format('L') is month
-                when 'fourth'
-                  add date if moment(date.toDate()).subtract(4, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(3, 'week').startOf('month').format('L') is month
-                when 'last'
-                  add date if moment(date.toDate()).add(1, 'week').startOf('month').format('L') isnt month
+            if day in task.repeat.month.weekDay
+              if 'first' in task.repeat.month.index
+                add date if moment(date.toDate()).subtract(1, 'week').startOf('month').format('L') isnt month
+              if 'second' in task.repeat.month.index
+                add date if moment(date.toDate()).subtract(2, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(1, 'week').startOf('month').format('L') is month
+              if 'third' in task.repeat.month.index
+                add date if moment(date.toDate()).subtract(3, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(2, 'week').startOf('month').format('L') is month
+              if 'fourth' in task.repeat.month.index
+                add date if moment(date.toDate()).subtract(4, 'week').startOf('month').format('L') isnt month and moment(date.toDate()).subtract(3, 'week').startOf('month').format('L') is month
+              if 'last' in task.repeat.month.index
+                add date if moment(date.toDate()).add(1, 'week').startOf('month').format('L') isnt month
 
 
   do check

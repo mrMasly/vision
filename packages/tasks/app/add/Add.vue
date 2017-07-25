@@ -48,8 +48,8 @@ getTask = (params) ->
       week: []
       month:
         type: 'month'
-        index: 'first'
-        weekDay: 0
+        index: ['first']
+        weekDay: [0]
         monthDays: []
   for key, val of params
     _.set task, key, val

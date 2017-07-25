@@ -12,10 +12,10 @@ v-tabs.v-transparent(centered @change="change")
     .l-row.l-space-between
       v-input-container.l-45
         label Каждый
-        v-select(v-model="task.repeat.month.index")
+        v-select(v-model="task.repeat.month.index" multiple)
           v-option(v-for="(rus, name) in weekIndexes", :value="name") {{rus}}
       v-input-container.l-50
-        v-select(v-model="task.repeat.month.weekDay")
+        v-select(v-model="task.repeat.month.weekDay" multiple)
           v-option(v-for="(name, index) in weekDays", :value="index") {{name}}
 </template>
 
