@@ -1,7 +1,7 @@
 <template lang="jade">
 .panel.l-column
   Add
-  Groups(:groups="groups")
+  Groups.l-flex.l-scroll(:groups="groups")
 </template>
 
 <script lang="coffee">
@@ -28,4 +28,5 @@ return component
 .panel
   width 500px
   max-width 100%
+  max-height 100%
 </style>

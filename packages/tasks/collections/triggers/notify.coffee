@@ -8,8 +8,6 @@ getUser = (id) ->
   return _users[id]
 setInterval (=> _users = {}), 60000
 
-repeated =
-
 # создание задачи
 insert = (userId, doc) ->
 
@@ -17,22 +15,19 @@ insert = (userId, doc) ->
   # return null if doc.for is userId
 
   # если не нужно уведомлять
-  return null if doc.notification is no
+  return null if doc.notify is no
+
 
   # если это делегированная задача
   if doc.parent
-    Mongo.Notifications.insert
+    Mongo.Vision.Notify.insert
       title: getUser(userId)
       text: "Новая задача: #{doc.title}"
-      sref: name: 'app.task', params: id: doc._id
+      route: query: task: doc._id
       for: doc.for
-      audio: 'notif.mp3'
 
 
 update = (userId, doc, fields, mod) ->
-
-  # если не нужно уведомлять
-  return null if doc.notification is no
 
   # обновляем значения doc
   doc = _.clone doc
@@ -45,24 +40,20 @@ update = (userId, doc, fields, mod) ->
   if doc.parent?
 
     # если обновилась
-    if doc.for isnt userId
-      Mongo.Notifications.insert
+    if doc.for isnt userId and doc.notify isnt no
+      Mongo.Vision.Notify.insert
         title: getUser(userId)
         text: "Обновлена задача: #{doc.title}"
-        sref: name: 'app.task', params: id: doc._id
+        route: query: task: doc._id
         for: doc.for
-        audio: 'notif.mp3'
 
     # если была выполнена
     else if 'done' in fields and doc.done is yes
-      Mongo.Notifications.insert
+      Mongo.Vision.Notify.insert
         title: getUser(userId)
         text: "Выполнена задача: #{doc.title}"
-        sref: name: 'app.task', params: id: doc._id
+        route: query: task: doc.parent
         for: doc.createdBy
-        audio: 'notif.mp3'
-
-
 
 module.exports =
   insert: insert

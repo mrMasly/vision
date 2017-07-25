@@ -26,7 +26,7 @@ component =
       return unless route.name?
       path = route.path
       route = _.find @$router.options.routes, name: route.name
-      return unless route.tab?
+      return unless route?.tab?
       tabName = if _.isObject route.tab then route.tab.name else route.tab
       tab = _.find @tabs, name: tabName
       return unless tab?
@@ -34,7 +34,7 @@ component =
     # сделать нужный таб выбранным
     selectTab: (route) ->
       route = _.find @$router.options.routes, name: route.name
-      return unless route.tab?
+      return unless route?.tab?
       tabName = if _.isObject route.tab then route.tab.name else route.tab
       for tab in @tabs
         if tab.name is tabName

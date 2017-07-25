@@ -27,6 +27,8 @@ component =
       update: (match) ->
         setTimeout (=> do @update), 100
         return Mongo.Tasks.find match,
+          fields:
+            description: 0
           sort:
             doneAt: 1
             priority: -1

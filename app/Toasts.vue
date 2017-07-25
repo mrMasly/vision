@@ -23,6 +23,7 @@ component =
       id: 'toasts'
     @default = _.clone @toast
   data: ->
+    mounted: no
     audios:
       applause: '/packages/mrmasly_vision/files/audio/applause.mp3'
       fanfar: '/packages/mrmasly_vision/files/audio/fanfar.mp3'
@@ -40,14 +41,17 @@ component =
       title: null
       cb: null
     click: =>
-      if @toast.cb?
-        do @toast.cb
-      else
-        do @close
-    close: (e) => do @$refs.toast.close
+      if @toast.cb? then do @toast.cb
+      else do @close
+    close: (e) =>
+      if @toast.close? then do @toast.close
+      do @$refs.toast.close
+  mounted: ->
+    @mounted = yes
   methods:
     # добавить уведомление в очередь
     add: (data, cb) ->
+      return unless @mounted
       data = text: data unless _.isObject data
       type = data.type ? 'top'
       data.position ?= "#{type} right"

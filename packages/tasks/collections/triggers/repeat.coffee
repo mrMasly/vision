@@ -47,7 +47,7 @@ make = (userId, doc) ->
   x = 0
   for date in dates
     x++
-    doc.notification = x is 1
+    doc.notify = x is 1
     create userId, doc, date
 
 
@@ -64,6 +64,7 @@ create = (userId, doc, date) ->
   else
     time = '00:00:00'
   _doc.date = moment(date+' '+time).toDate()
+  _doc.viewed = yes
   # console.log _doc
   Mongo.Tasks.insert _doc, (err, res) -> do fiber.run
   do Fiber.yield

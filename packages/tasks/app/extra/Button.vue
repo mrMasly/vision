@@ -5,7 +5,7 @@ div(ref="div")
     v-tooltip(direction="bottom") Создать задачу
     v-badge(:value="newTasks")
   v-panel(ref="panel" align="div" x="end" y="start" alive)
-    Panel(@close="$refs.panel.close()" ref="panell")
+    Panel(@close="$refs.panel.close()" ref="panell" v-if="mounted")
 </template>
 
 <script lang="coffee">
@@ -13,9 +13,12 @@ import Panel from './Panel.vue'
 component =
   name: 'ToolbarButton'
   components: { Panel }
-  nav: yes
   data: ->
+    mounted: no
     user: Meteor.userId()
+  mounted: ->
+    @mounted = yes
+  nav: yes
   methods:
     open: ->
       @$refs.panel.open()

@@ -115,10 +115,10 @@ component =
             params: _.omit @$route.params, @routeParam
           @$router.push route
         else if @queryParam and @$route.query[@queryParam]?
-          route =
-            name: @$route.name
-            params: @$route.params
-            query: _.omit @$route.query, @queryParam
+          route = {}
+          route.name = @$route.name unless _.isEmpty @$route.name
+          route.name = @$route.params unless _.isEmpty @$route.params
+          route.query = _.omit @$route.query, @queryParam
           @$router.push route
 
       , 300

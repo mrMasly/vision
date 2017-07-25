@@ -44,6 +44,10 @@ Package.onUse(function(api) {
 
   api.use('accounts-base@1.2.15');
   api.use('accounts-password@1.3.4');
+  api.use('zimme:collection-timestampable@1.0.9');
+  // api.use('peerlibrary:reactive-publish@0.5.0');
+  // api.use('reactive-var@1.0.11');
+
 
   api.use('mrmasly:vue@0.3.1');
   api.use('mrmasly:moment@0.0.1');
