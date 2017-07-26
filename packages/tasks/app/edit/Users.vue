@@ -5,7 +5,7 @@
     v-input-container
       label Исполнитель
       v-select(v-model="task.users" multiple search)
-        v-option(v-for="user in users", :value="user._id") {{user.profile.name}}
+        v-option(v-for="user in users", :value="user._id", :key="user._id") {{user.profile.name}}
     v-picker(type="select" v-model="task.disables" label="Запретить менять" v-if="task.users.length" multiple search)
       v-option(v-for="dis in disables", :key="dis.id", :value="dis.id") {{dis.name}}
   
@@ -16,7 +16,7 @@
         v-checkbox(disabled v-model="t.done")
         .l-flex {{ t.userName }}
         .subs(v-if="t._subs") {{t._subs.completed}}/{{t._subs.all}}
-      v-caption Исполнителям запрещено изменять: {{userDisables}}
+      v-caption(v-if="userDisables.length") Исполнителям запрещено менять: {{userDisables}}
     v-button(@click.native="edit=true") Изменить исполнителей
   
   template(v-else)
