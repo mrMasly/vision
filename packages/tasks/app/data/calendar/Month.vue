@@ -38,9 +38,12 @@ component =
   methods:
     resize: ->
       td = $(@$el).find('td').first()
-      height = td.height() - 30
-      size = height / 16
-      @size = _.floor size
+      unless td.length
+        setTimeout (=> do @resize), 300
+      else
+        height = td.height() - 30
+        size = height / 16
+        @size = _.floor size
     open: (date) ->
       @day = date
       @$refs.dialog.open()
