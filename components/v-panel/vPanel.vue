@@ -46,7 +46,6 @@ component =
       , 200
       @$emit 'close'
     open: (e) ->
-      console.log 'open'
       $(document).on 'keydown', @keydown
       document.body.appendChild @element
       @isOpen = yes
