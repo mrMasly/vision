@@ -104,6 +104,8 @@ return component
   transition background-color .2s
   &.done
     text-decoration line-through
+    .title
+      text-decoration line-through
   &:hover
     background-color rgba(0,0,0,.1)
 .priority
