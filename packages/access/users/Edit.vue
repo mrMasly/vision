@@ -14,11 +14,12 @@
     v-picker(label="Группы" type="select" v-model="user.groups" multiple search)
       v-option(:value="group._id" v-for="group in groups", :key="group._id")
         | {{group.name}}
-
+  
   v-dialog-actions
     v-button.v-primary(@click.native="close") Отмена
     v-button.v-primary(@click.native="save") Сохранить
-
+  
+  v-progress(indeterminate v-if="saving")
 </template>
 
 
@@ -40,12 +41,16 @@ component =
     user: profile: null
     groups: []
     title: null
+    saving: no
   methods:
     close: ->
       @$emit 'close'
     save: ->
+      @saving = yes
       @$call 'saveUser', @user, (err, res) =>
-        unless err then do @close
+        @saving = no
+        if err then @$toast err.error
+        else do @close
   meteor:
     server: '../server'
     subscribe:

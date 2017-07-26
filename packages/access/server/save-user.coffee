@@ -13,11 +13,10 @@ export default (user) ->
 update = (user, done) ->
   # меняем пароль
   if user.password
-    if /(?=^.{7,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test user.password
-      Accounts.setPassword user._id, user.password
+    if user.password.length < 6
+      throw new Meteor.Error 'Пароль слишком короткий'
     else
-      error = password: 'Неподходящий пароль'
-      return done null, error
+      Accounts.setPassword user._id, user.password
   # _user = Accounts.users.findOne _id: user._id
   data = {}
   data['username'] = user.username
