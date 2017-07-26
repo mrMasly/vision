@@ -18,11 +18,11 @@ component =
       @$emit 'save'
       do @close unless @$layout.gmd
     close: -> @$emit 'close'
-    check: (task) ->
-      if @checkTask? and not task?
-        do @close
-      else
-        @checkTask = task
+    # check: (task) ->
+    #   if @checkTask? and not task?
+    #     do @close
+    #   else
+    #     @checkTask = task
   watch:
     '$store.state.vision.tasks.user': (user) ->
       if @task? and @task.for isnt user
@@ -37,7 +37,7 @@ component =
       params: -> @id
       update: (id) ->
         task = Mongo.Tasks.findOne id
-        @check task
+        # @check task
         return task
 
 return component

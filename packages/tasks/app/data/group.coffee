@@ -110,6 +110,9 @@ module.exports = () ->
         {title: $regex: query, $options: 'i'}
         {tags: $regex: query, $options: 'i'}
       ]
+  
+  for list in lists
+    list.match['repeat.toggle'] ?= no
   # если не разделять по группам
   # unless 'group' in options
   #   $or = []

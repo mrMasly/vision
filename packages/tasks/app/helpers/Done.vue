@@ -16,6 +16,7 @@ component =
     task: Object
   data: ->
     done: @task.done
+    user: Meteor.userId()
   watch:
     'task.done': (@done) ->
   methods:
@@ -27,7 +28,7 @@ component =
       else if not _.isEmpty @task.users then return 'delegate'
       else if not _.isEmpty @task.subs then return 'subs'
       else if @task.done and @task.doneAt < moment().startOf('day').toDate() then return 'done'
-      else if @$store.state.vision.tasks.user isnt Meteor.userId() then return 'done'
+      else if @task.for isnt @user then return 'done'
       else return 'checkbox'
 
 return component

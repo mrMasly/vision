@@ -41,6 +41,9 @@ update = (userId, doc, fields, mod) ->
 
     # если обновилась
     if doc.for isnt userId and doc.notify isnt no
+      # если есть дата и она не сегодня - то не создаем уведомление
+      if doc.date and moment(doc.date).format('YYYY-MM-DD') isnt moment().format('YYYY-MM-DD')
+        return
       Mongo.Vision.Notify.insert
         title: getUser(userId)
         text: "Обновлена задача: #{doc.title}"

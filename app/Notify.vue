@@ -6,11 +6,11 @@ div(ref="div")
     v-tooltip Уведомления
   v-panel(ref="panel" align="div" x="end" y="start" alive v-if="mounted")
     v-list.v-dense
-      v-list-item.item(v-for="notify in notifys", :key="notify._id")
+      v-list-item.item(v-for="notify in notifys", :key="notify._id" @click.native="openNotify(notify);closeNotify(notify)")
         .v-list-text-container
           span {{notify.title}}
           span {{notify.text}}
-        v-button.v-icon-button(@click.native="closeNotify(notify)")
+        v-button.v-icon-button(@click.native.stop="closeNotify(notify)")
           v-icon close
         v-divider
       v-list-item(v-if="!notifys.length") Уведомлений нет
@@ -26,6 +26,9 @@ component =
   mounted: ->
     @mounted = yes
   methods:
+    openNotify: (notify) ->
+      if notify.route?
+        @$router.push notify.route
     closeNotify: (notify) ->
       Mongo.Vision.Notify.update notify._id, $set: viewed: yes
     test: (doc) ->
