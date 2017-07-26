@@ -25,7 +25,7 @@ component =
     tasks:
       params: -> @group.match
       update: (match) ->
-        setTimeout (=> do @update), 100
+        do @update
         return Mongo.Tasks.find match,
           fields:
             description: 0

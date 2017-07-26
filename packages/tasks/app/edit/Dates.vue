@@ -48,6 +48,7 @@ component =
       }
     ]
     if @task.parent then types = _.dropRight types
+    else if @task.repeatBy then types = _.dropRight types
 
     date: null
     time: null

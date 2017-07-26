@@ -68,6 +68,7 @@ component =
     keydown: (index, e) ->
       if e.keyCode is 13 and not e.shiftKey
         e.preventDefault()
+        e.stopPropagation()
         @add index
       # при нажатии на backspace убираем пустую задачу
       else if e.keyCode is 8 and _.isEmpty e.target.value

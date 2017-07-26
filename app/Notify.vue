@@ -17,6 +17,7 @@ div(ref="div")
 </template>
 
 <script lang="coffee">
+module.access = -> yes
 component =
   name: 'Notify'
   nav: yes

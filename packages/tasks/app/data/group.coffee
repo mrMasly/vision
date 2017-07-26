@@ -2,8 +2,9 @@ module.exports = () ->
 
   lists = []
 
-  group = Meteor.Store.state.vision.tasks.group
-  user = Meteor.Store.state.vision.tasks.user
+  group = Meteor.Store.state.vision.tasks.group ? 'today'
+  user = Meteor.Store.state.vision.tasks.user ?  Meteor.userId()
+
   # options = Meteor.Store.state.vision.tasks.options
 
   if group is 'inbox'

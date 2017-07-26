@@ -115,7 +115,7 @@ component =
         date.push "в "+@task.repeat.date.time if @task.repeat.date.time
         return date.join ' '
       else
-        return require('../fromnow.coffee')(@task.date)
+        return require('../fromnow.coffee')(@task.date, yes, @task.time)
       
 return component
 </script>

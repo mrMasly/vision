@@ -44,7 +44,7 @@ return component
   margin-right 4px
 .user
   display inline-block
-  margin-left -10px
+  margin-left -8px
   &:first-child
     margin-left 0
 
