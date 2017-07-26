@@ -1,5 +1,5 @@
 <template lang="jade">
-span.v-tooltip(:class='classes', :style='style')
+span.v-tooltip(:class='classes', :style='style' ref="tooltip")
   slot
 </template>
 
@@ -71,32 +71,33 @@ component =
           classes.push cssClass + '-tooltip'
       @parentClass = classes.join(' ')
     open: ->
-      _this = this
       @removeTooltips()
       @$nextTick ->
-        document.body.appendChild _this.tooltipElement
-        getComputedStyle(_this.tooltipElement).top
-        _this.transitionOff = true
-        _this.generateTooltipClasses()
-        _this.calculateTooltipPosition()
-        window.setTimeout (->
-          _this.transitionOff = false
-          _this.active = true
+        document.body.appendChild @tooltipElement
+        getComputedStyle(@tooltipElement).top
+        @transitionOff = true
+        @generateTooltipClasses()
+        @calculateTooltipPosition()
+        window.setTimeout (=>
+          @transitionOff = false
+          @active = true
         ), 10
     close: ->
       @active = false
       @tooltipElement.removeEventListener transitionEndEventName, @removeTooltips
       @tooltipElement.addEventListener transitionEndEventName, @removeTooltips
+      window.setTimeout (=>
+        @active = false
+      ), 20
   mounted: ->
-    _this2 = this
     @$nextTick ->
-      _this2.tooltipElement = _this2.$el
-      _this2.parentElement = _this2.tooltipElement.parentNode
-      _this2.$el.parentNode.removeChild _this2.$el
-      _this2.parentElement.addEventListener 'mouseenter', _this2.open
-      _this2.parentElement.addEventListener 'focus', _this2.open
-      _this2.parentElement.addEventListener 'mouseleave', _this2.close
-      _this2.parentElement.addEventListener 'blur', _this2.close
+      @tooltipElement = @$el
+      @parentElement = @tooltipElement.parentNode
+      @$el.parentNode.removeChild @$el
+      @parentElement.addEventListener 'mouseenter', @open
+      @parentElement.addEventListener 'focus', @open
+      @parentElement.addEventListener 'mouseleave', @close
+      @parentElement.addEventListener 'blur', @close
   beforeDestroy: ->
     @active = false
     @removeTooltips()
