@@ -58,6 +58,7 @@ create = (userId, doc, date) ->
   _doc = _.omit _.clone(doc), ['_id', 'createdAt', 'createdBy', 'updateAt', 'updateBy', 'repeat']
   _doc.repeatBy = doc._id
   _doc.repeat = toggle: no
+  _doc.repeating = yes
   if doc.repeat.date.time
     time = moment(doc.repeat.date.time, 'HH:mm').format('HH:mm:ss')
     _doc.time = yes

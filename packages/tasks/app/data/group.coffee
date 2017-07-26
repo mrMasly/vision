@@ -19,6 +19,7 @@ module.exports = () ->
       done: no, for: user
       parent: $exists: yes
       viewed: yes
+      repeating: $exists: no
 
 
   else if group is 'today'

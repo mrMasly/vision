@@ -43,13 +43,16 @@ make = (userId, doc) ->
 create = (userId, doc) ->
   _doc = _.omit _.clone(doc), ['_id', 'createdAt', 'createdBy', 'updateAt', 'updateBy', 'repeatBy']
   _doc.parent = doc._id
+  if doc.repeatBy
+    _doc.parentRepeatBy = doc.repeatBy
+    _doc.repeating = yes
   # _doc.fromUser = Mongo.Users.findOne(userId)?.profile?.name
   _doc.from = userId
   for user in doc.users
     # console.log user
     _doc.for = user
     _doc.users = []
-    _doc.viewed = no
+    _doc.viewed = !!doc.repeatBy
     Mongo.Tasks.insert _doc
 
 # удаляет все старые задачи
