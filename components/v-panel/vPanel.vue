@@ -12,6 +12,8 @@
 
 <script lang="coffee">
 import position from './position.coffee'
+import _ from 'lodash'
+
 component =
   name: 'Panel'
   props: ['align', 'x', 'y', 'alive']
@@ -44,6 +46,7 @@ component =
       , 200
       @$emit 'close'
     open: (e) ->
+      console.log 'open'
       $(document).on 'keydown', @keydown
       document.body.appendChild @element
       @isOpen = yes
@@ -52,11 +55,13 @@ component =
         do @position
         @opacity 1
       @$emit 'open'
-    keydown: (e) ->
+    keydown: _.debounce (e) ->
       if e.keyCode is 27
         do e.preventDefault
         do e.stopPropagation
         do @close
+        return
+    , 50
 
 
     position: position
