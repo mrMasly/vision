@@ -4,7 +4,7 @@
   v-checkbox(v-model="done" v-else-if="type == 'done'" disabled)
   v-checkbox(v-model="done" v-else-if="done" disabled)
   v-icon(v-else-if="type == 'subs'") list
-  v-icon(v-else-if="type == 'delegate'") send
+  v-icon(v-else-if="type == 'delegate'") perm_contact_calendar
   v-icon(v-else-if="type == 'repeat'") autorenew
 </template>
 
