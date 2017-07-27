@@ -1,6 +1,6 @@
 <template lang="jade">
 div.l-fill.l-row.l-absolute
-  v-sidenav(ref="left" fixed, :block="$layout.gsm")
+  v-sidenav(ref="left" fixed, :block="($layout.gsm) ? 270 : false")
     Sidenav(@select="$refs.left.close()")
   v-divider
   DataTasks.l-flex

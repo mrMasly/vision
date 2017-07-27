@@ -67,4 +67,5 @@ return component
 .user
   width 700px
   max-width 100%
+  min-height 400px
 </style>

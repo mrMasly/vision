@@ -14,6 +14,10 @@ component =
       return no unless one.nav
       return no unless one.module.access()
       return yes
+    
+    component.navIndex ?= 0 for component in components
+    components = _.sortBy components, 'navIndex'
+
     title: null
     components: components
     

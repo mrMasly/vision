@@ -1,5 +1,5 @@
 <template lang="jade">
-.v-sidenav(:class='[themeClass, classes]', @keyup.esc='close', tabindex='0')
+.v-sidenav(:class='[themeClass, classes]', :style="styles" , @keyup.esc='close', tabindex='0')
   .v-sidenav-content
     slot
   v-backdrop.v-sidenav-backdrop(@close='close', ref='backdrop')
@@ -23,7 +23,7 @@ component =
     left: Boolean
     right: Boolean
     fixed: Boolean
-    block: Boolean
+    block: [Boolean, Number]
   created: ->
     # @left = yes if not @left and not @right
   computed:
@@ -33,6 +33,12 @@ component =
       'v-right': @right
       'v-fixed': @fixed
       'v-block': @block
+    styles: ->
+      if @block is yes
+        width: "300px"
+      else if @block
+        width: "#{@block}px"
+      else {}
   methods:
     show: -> @open()
     open: ->

@@ -55,4 +55,5 @@ return component
 .group
   width 700px
   max-width 100%
+  min-height 400px
 </style>
