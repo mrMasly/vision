@@ -58,7 +58,7 @@ module.exports = () ->
 
   else if group is 'someday'
     lists.push name: 'Когда-нибудь', match:
-      date: no
+      date: no, for: user
 
   else if group is 'wait'
 

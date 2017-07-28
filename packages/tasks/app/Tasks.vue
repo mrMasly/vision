@@ -36,10 +36,10 @@ component =
     block: ->
       if @$route.params.tab is 'сalendar'
         if @$store.state.vision.tasks.calendar.type is 'day'
-          return @$layout.gmd
+          return if @$layout.gmd then 350 else no
         else
-          return @$layout.xl
-      else @$layout.gmd
+          return if @$layout.xl then 350 else no
+      else return if @$layout.gmd then 350 else no
   watch:
     '$route.query.task': (id) ->
       return unless @$refs.right?
