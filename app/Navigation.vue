@@ -71,4 +71,6 @@ return component
 .v-bottom-bar
   z-index 2
   position relative !important
+  overflow-x auto
+  justify-content flex-start
 </style>
