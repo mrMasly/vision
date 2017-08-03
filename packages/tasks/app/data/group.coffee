@@ -16,11 +16,11 @@ module.exports = () ->
       done: no, for: user
       parent: $exists: yes
       viewed: no
-    lists.push name: 'От других пользователей', index: 3, match:
-      done: no, for: user
-      parent: $exists: yes
-      viewed: yes
-      repeating: $exists: no
+    # lists.push name: 'От других пользователей', index: 3, match:
+    #   done: no, for: user
+    #   parent: $exists: yes
+    #   viewed: yes
+    #   repeating: $exists: no
 
 
   else if group is 'today'
