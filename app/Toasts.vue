@@ -40,6 +40,7 @@ component =
       text: null
       title: null
       cb: null
+      say: null
     click: =>
       if @toast.cb? then do @toast.cb
       else do @close
@@ -74,8 +75,36 @@ component =
       toast = queue.shift()
       @toast = toast
       @queue = queue
-      do @$refs.toast.open
-      do toast.audio.play if toast.audio?
+      setTimeout =>
+        do @$refs.toast.open
+        do toast.audio.play if toast.audio?
+        if toast.say?
+          if window.speechSynthesis and window.SpeechSynthesisUtterance
+            text = new window.SpeechSynthesisUtterance toast.say
+            text.onend = =>
+              if toast.audio?
+                setTimeout (=> toast.audio.volume = 0.3), 100
+                setTimeout (=> toast.audio.volume = 0.4), 200
+                setTimeout (=> toast.audio.volume = 0.5), 300
+                setTimeout (=> toast.audio.volume = 0.6), 400
+                setTimeout (=> toast.audio.volume = 0.7), 500
+                setTimeout (=> toast.audio.volume = 0.8), 600
+                setTimeout (=> toast.audio.volume = 0.9), 700
+                setTimeout (=> toast.audio.volume = 1.0), 800
+            if toast.audio?
+              setTimeout (=> toast.audio.volume = 0.9), 2100
+              setTimeout (=> toast.audio.volume = 0.8), 2200
+              setTimeout (=> toast.audio.volume = 0.7), 2300
+              setTimeout (=> toast.audio.volume = 0.6), 2400
+              setTimeout (=> toast.audio.volume = 0.5), 2500
+              setTimeout (=> toast.audio.volume = 0.4), 2600
+              setTimeout (=> toast.audio.volume = 0.3), 2700
+              setTimeout (=> toast.audio.volume = 0.2), 2800
+              setTimeout (=> window.speechSynthesis.speak text), 2900
+
+              
+            
+      , 300
     # при закрытии
     onClose: ->
       @_opened = no
@@ -84,7 +113,7 @@ component =
         @toast.audio.currentTime = 0
       setTimeout =>
         do @tick
-      , 300
+      , 1000
 
 
 return component
