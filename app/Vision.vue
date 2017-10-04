@@ -5,7 +5,7 @@
     Toolbar.no-print
     .l-flex.l-relative
       keep-alive(:include="/-alive/")
-        router-view.l-fill.l-absolute#vision-router-view
+        router-view.l-fill.l-absolute#vision-router-view(v-if="mounted")
     Navigation.no-print
     Dialogs
     Toasts
@@ -37,6 +37,7 @@ component =
     userId: Meteor.userId()
     ready: no
     dialogs: null
+    mounted: no
   meteor:
     server:
       publish:
@@ -49,6 +50,8 @@ component =
   created: ->
     do @login
     @dialogs = _.filter Meteor.Components, dialog: yes
+  mounted: ->
+    @mounted = yes
 return component
 </script>
 

@@ -53,6 +53,10 @@ component =
       @$nextTick =>
         do @position
         @opacity 1
+        setTimeout =>
+          do @position
+        , 300
+
       @$emit 'open'
     keydown: _.debounce (e) ->
       if e.keyCode is 27

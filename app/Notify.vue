@@ -24,6 +24,7 @@ component =
   data: ->
     mounted: no
     user: Meteor.userId()
+    docs: []
   mounted: ->
     @mounted = yes
   methods:
@@ -34,6 +35,8 @@ component =
       Mongo.Vision.Notify.update notify._id, $set: viewed: yes
     test: (doc) ->
       return unless @mounted
+      return if doc._id in @docs
+      @docs.push doc._id
       if doc.for is @user and not doc.viewed and doc.alert
         @$toast
           title: doc.title
